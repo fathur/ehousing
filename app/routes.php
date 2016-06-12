@@ -26,3 +26,4 @@ Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword
 // Provinsi routes
 Route::get('{provinsi}', ['uses' => 'Front\ProvinsiController@getDashboard','as'=>'front.provinsi.dashboard']);
 Route::get('{provinsi}/profile', ['uses' => 'Front\ProvinsiController@getProfile','as'=>'front.provinsi.profile']);
+Route::get('{provinsi}/statistik', ['uses' => 'Front\ProvinsiController@getStatistik','as'=>'front.provinsi.statistik']);

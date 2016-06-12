@@ -78,86 +78,8 @@
                         <div class="panel-body">
                             <div class="tab-content">
                                 <div class="tab-pane active gray-bg p-md" id="tab-2">
-                                    <div class="row">
 
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
-                                                    <span class="label label-info pull-right hidden">Annual</span>
-                                                    <h5>Alokasi Anggaran Pusat</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    @if(! is_null($totalAnggaran))
-                                                    <h1 class='no-margins'>
-                                                        {{{ bytesConvert($totalAnggaran->jumlah) }}}
-                                                    </h1>
-                                                    <small>Rp. {{{ number_format($totalAnggaran->jumlah) }}}</small>
-                                                    @else
-                                                    Tidak ada data
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
-                                                    <span class="label label-success pull-right hidden">Monthly</span>
-                                                    <h5>Backlog Rumah</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    @if(! is_null($totalBackLog))
-                                                        <h1 class='no-margins'>
-                                                            {{{ bytesConvert($totalBackLog->jumlah) }}}
-                                                        </h1>
-                                                        <small>Rp. {{{ number_format($totalBackLog->jumlah) }}}</small>
-                                                    @else
-                                                        Tidak ada data
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
-                                                    <span class="label label-info pull-right hidden">Annual</span>
-                                                    <h5>Jumlah Rumah</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    @if(! is_null($totalJumlahRumah))
-                                                        <h1 class='no-margins'>
-                                                            {{{ bytesConvert($totalJumlahRumah->jumlah) }}}
-                                                        </h1>
-                                                        <small>Rp. {{{ number_format($totalJumlahRumah->jumlah) }}}</small>
-                                                    @else
-                                                        Tidak ada data
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-3">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
-                                                    <span class="label label-info pull-right hidden">Annual</span>
-                                                    <h5>APBD Provinsi</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    @if(! is_null($totalAPBD))
-                                                        <h1 class='no-margins'>
-                                                            {{{ bytesConvert($totalAPBD->jumlah) }}}
-                                                        </h1>
-                                                        <small>Rp. {{{ number_format($totalAPBD->jumlah) }}}</small>
-                                                    @else
-                                                        Tidak ada data
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @include('front.provinsi.statistic')
+                                    @include('front.provinsi.chart')
 
                                 </div>
 

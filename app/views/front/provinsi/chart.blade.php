@@ -1,4 +1,83 @@
 <div class="row">
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right hidden">Annual</span>
+                <h5>Alokasi Anggaran Pusat</h5>
+            </div>
+            <div class="ibox-content">
+                @if(! is_null($totalAnggaran))
+                    <h1 class='no-margins'>
+                        {{{ bytesConvert($totalAnggaran->jumlah) }}}
+                    </h1>
+                    <small>Rp. {{{ number_format($totalAnggaran->jumlah) }}}</small>
+                @else
+                    Tidak ada data
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right hidden">Monthly</span>
+                <h5>Backlog Rumah</h5>
+            </div>
+            <div class="ibox-content">
+                @if(! is_null($totalBackLog))
+                    <h1 class='no-margins'>
+                        {{{ bytesConvert($totalBackLog->jumlah) }}}
+                    </h1>
+                    <small>Rp. {{{ number_format($totalBackLog->jumlah) }}}</small>
+                @else
+                    Tidak ada data
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right hidden">Annual</span>
+                <h5>Jumlah Rumah</h5>
+            </div>
+            <div class="ibox-content">
+                @if(! is_null($totalJumlahRumah))
+                    <h1 class='no-margins'>
+                        {{{ bytesConvert($totalJumlahRumah->jumlah) }}}
+                    </h1>
+                    <small>Rp. {{{ number_format($totalJumlahRumah->jumlah) }}}</small>
+                @else
+                    Tidak ada data
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right hidden">Annual</span>
+                <h5>APBD Provinsi</h5>
+            </div>
+            <div class="ibox-content">
+                @if(! is_null($totalAPBD))
+                    <h1 class='no-margins'>
+                        {{{ bytesConvert($totalAPBD->jumlah) }}}
+                    </h1>
+                    <small>Rp. {{{ number_format($totalAPBD->jumlah) }}}</small>
+                @else
+                    Tidak ada data
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-lg-6">
         <div class="ibox">
 
@@ -27,16 +106,13 @@
     <div class="col-lg-12">
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Statistik Total APBD Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h5>
+                <h5>Statistik {{{ $fields[$kolom] }}} Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h5>
             </div>
             <div class="ibox-content">
                 <div class="row m-b">
                     <div class="col-sm-8">
-                        <form method="POST" action="http://ehousing.id/home/statistik/provinsi">
-                            <select class="form-control hidden" name="Provinsi" id="Provinsi" style="width:200px;float:left;margin-right:5px;">
-                                <option value="11">ACEH</option><option value="51">BALI</option><option value="36">BANTEN</option><option value="17">BENGKULU</option><option value="34">DI YOGYAKARTA</option><option value="31">DKI JAKARTA</option><option value="75">GORONTALO</option><option value="15">JAMBI</option><option value="32">JAWA BARAT</option><option value="33">JAWA TENGAH</option><option value="35">JAWA TIMUR</option><option value="61">KALIMANTAN BARAT</option><option value="63">KALIMANTAN SELATAN</option><option value="62">KALIMANTAN TENGAH</option><option value="64">KALIMANTAN TIMUR</option><option value="65">KALIMANTAN UTARA</option><option value="19">KEPULAUAN BANGKA BELITUNG</option><option value="21">KEPULAUAN RIAU</option><option value="18">LAMPUNG</option><option value="81">MALUKU</option><option value="82">MALUKU UTARA</option><option value="52">NUSA TENGGARA BARAT</option><option value="53">NUSA TENGGARA TIMUR</option><option value="94">PAPUA</option><option value="91">PAPUA BARAT</option><option value="14">RIAU</option><option value="76">SULAWESI BARAT</option><option value="73">SULAWESI SELATAN</option><option value="72">SULAWESI TENGAH</option><option value="74">SULAWESI TENGGARA</option><option value="71">SULAWESI UTARA</option><option value="13">SUMATERA BARAT</option><option value="16">SUMATERA SELATAN</option><option value="12">SUMATERA UTARA</option>							</select>
-                            <select class="form-control" name="kolom" id="kolom" style="width:250px;float:left;margin-right:5px;">
-                                <option value="TotalPenduduk">TotalPenduduk</option><option value="TotalPria">TotalPria</option><option value="TotalWanita">TotalWanita</option><option value="PctPertumbuhanPenduduk">PctPertumbuhanPenduduk</option><option value="KepadatanPenduduk">KepadatanPenduduk</option><option value="TotalPendudukMiskinKota">TotalPendudukMiskinKota</option><option value="TotalPendudukMiskinDesa">TotalPendudukMiskinDesa</option><option selected="selected" value="TotalAPBDProv">TotalAPBDProv</option><option value="TotalPADProv">TotalPADProv</option><option value="PajakDaerah">PajakDaerah</option><option value="RetribusiDaerah">RetribusiDaerah</option><option value="KekayaanDaerahYgDipisah">KekayaanDaerahYgDipisah</option><option value="LainLainPADYgSah">LainLainPADYgSah</option><option value="BacklogRumah">BacklogRumah</option><option value="JumlahRT">JumlahRT</option><option value="AnggaranKemenpera">AnggaranKemenpera</option>							</select>
+                        <form method="GET" action="{{route('front.provinsi.statistik', array($provinsi->slug))}}">
+                            {{ Form::select('kolom', $fields, Input::get('kolom','TotalPenduduk'), array('id'=>'kolom','class'=> 'form-control','style' => 'width:250px;float:left;margin-right:5px;')) }}
                             <button type="submit" class="btn btn-success"><i class="fa fa-filter"></i> Filter</button>
                         </form>
                     </div>
@@ -57,21 +133,21 @@
                             <tr>
                                 <th></th>
                                 <th>Tahun</th>
-                                <th class="text-right">Total APBD Prov</th>
+                                <th class="text-right">Jumlah</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
-                            @for($i = 0; $i < count($statistikAPBD->showResults()); $i++)
+                            @for($i = 0; $i < count($filterStatistic->showResults()); $i++)
                             <tr>
                                 <td>{{ $i+1 }}</td>
-                                <td>{{{ $statistikAPBD->showResults()[$i]->TahunBerlaku }}}</td>
+                                <td>{{{ $filterStatistic->showResults()[$i]->TahunBerlaku }}}</td>
                                 <td class="text-right">
-                                    @if(is_null($statistikAPBD->showResults()[$i]->jumlah))
+                                    @if(is_null($filterStatistic->showResults()[$i]->jumlah))
                                         0
                                     @else
-                                    {{{ number_format($statistikAPBD->showResults()[$i]->jumlah) }}}
+                                    {{{ number_format($filterStatistic->showResults()[$i]->jumlah) }}}
                                     @endif
                                 </td>
                             </tr>
@@ -82,7 +158,7 @@
                 </div>
 
                 <div id="data-chart">
-                    <div id="apbd-statistic"></div>
+                    <div id="filter-statistic"></div>
                 </div>
                 <h6 class="no-margins">Sumber : <strong>BPS (Badan Pusat Statistik)</strong></h6>
             </div>
@@ -139,12 +215,12 @@
             }]
         });
 
-        $('#apbd-statistic').highcharts({
+        $('#filter-statistic').highcharts({
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Statistik Total APBD Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}'
+                text: 'Statistik {{{ $fields[$kolom] }}} Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}'
             },
             xAxis: {
                 type: 'category',
@@ -156,7 +232,7 @@
                 enabled: false
             },
             series: [{
-                data: {{ $statistikAPBD->toHighcharts() }}
+                data: {{ $filterStatistic->toHighcharts() }}
             }]
         });
 

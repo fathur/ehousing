@@ -18,7 +18,13 @@ class ProvinsiController extends \BaseController
 {
     protected $title = 'Home';
 
-
+    /**
+     * @param $provinsiSlug
+     * @return $this|\Illuminate\Http\Response|string
+     * @throws \Exception
+     * @throws \Repositories\DataProvider\FileNotFoundException
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getDashboard($provinsiSlug)
     {
         try {
@@ -86,6 +92,11 @@ class ProvinsiController extends \BaseController
         // return \Response::json($provinsi->toArray());
     }
 
+    /**
+     * @param $provinsiSlug
+     * @return $this|\Illuminate\Http\Response
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getProfile($provinsiSlug)
     {
         try {
@@ -109,20 +120,25 @@ class ProvinsiController extends \BaseController
             $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikBacklog();
+
             $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikAnggaran();
-            $statistikAPBD      = ProvinsiDataProvider::create($provinsi->id)
+
+            $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikAPBD();
+
+
 
 
             // return \Response::json(ProvinsiDataProvider::getStatistik($provinsi->id, 'TotalAPBDProv')->showResults());
 
             return \View::make('front.provinsi.profile', compact(
                     'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
-                    'statistikAnggaran','statistikBackLog','statistikAPBD'
+                    'statistikAnggaran','statistikBackLog','filterStatistic'
                 ))
+                ->with('fields', \ProfilProvinsi::$fields)
                 ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
                 ->with('provinsi', $provinsiDetail);
 
@@ -134,5 +150,48 @@ class ProvinsiController extends \BaseController
             ), 404);
         }
 
+    }
+
+    public function getStatistik($provinsiSlug)
+    {
+        $tahun = \Input::get('tahun', Carbon::now()->subYear()->year);
+        $kolom = \Input::get('kolom','TotalPenduduk');
+
+        $provinsi = Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            return \Response::view('errors.404', array(), 404);
+
+        $data = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun);
+
+        $provinsiDetail     = $data->getDetail();
+        $totalAnggaran      = $data->getTotalAnggaran();
+        $totalBackLog       = $data->getTotalBacklog();
+        $totalJumlahRumah   = $data->getTotalJumlahRumah();
+        $totalAPBD          = $data->getTotalAPBD();
+
+        // Weird
+        $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistikBacklog();
+
+        $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistikAnggaran();
+
+        $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistik($kolom);
+
+        return \View::make('front.provinsi.statistik', compact(
+            'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
+            'statistikAnggaran','statistikBackLog','filterStatistic','fields',
+            'kolom'
+        ))
+
+            ->with('fields', \ProfilProvinsi::$fields)
+            ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
+            ->with('provinsi', $provinsiDetail);
     }
 }
