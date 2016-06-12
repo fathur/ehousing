@@ -76,6 +76,7 @@ Route::get('{provinsi}/hunian/condotel', array('uses' => 'Front\Provinsi\HunianC
 Route::get('{provinsi}/hunian/apertemen', array('uses' => 'Front\Provinsi\HunianController@getApartemen', 'as' => 'front.provinsi.hunian.apartemen'));
 Route::get('{provinsi}/hunian/hotel', array('uses' => 'Front\Provinsi\HunianController@getHotel', 'as' => 'front.provinsi.hunian.hotel'));
 Route::get('{provinsi}/hunian/data', array('uses' => 'Front\Provinsi\HunianController@data', 'as' => 'front.provinsi.hunian.data'));
+Route::get('{provinsi}/hunian/{hunian}', array('uses' => 'Front\Provinsi\HunianController@show', 'as' => 'front.provinsi.hunian.show'));
 
 // Kontak routes
 Route::get('{provinsi}/kontak/developer', array('uses' => 'Front\Provinsi\KontakController@getDeveloper','as' => 'front.provinsi.kontak.developer'));
@@ -84,6 +85,8 @@ Route::get('{provinsi}/kontak/supplier', array('uses' => 'Front\Provinsi\KontakC
 Route::get('{provinsi}/kontak/tukang', array('uses' => 'Front\Provinsi\KontakController@getTukang','as' => 'front.provinsi.kontak.tukang'));
 Route::get('{provinsi}/kontak/desain-arsitek', array('uses' => 'Front\Provinsi\KontakController@getArsitek','as' => 'front.provinsi.kontak.arsitek'));
 Route::get('{provinsi}/kontak/data', array('uses' => 'Front\Provinsi\KontakController@data', 'as' => 'front.provinsi.kontak.data'));
+Route::get('{provinsi}/kontak/{kontak}', array('uses' => 'Front\Provinsi\KontakController@show', 'as' => 'front.provinsi.kontak.show'));
+
 
 
 // Post routes

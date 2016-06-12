@@ -16,35 +16,35 @@ class KontakController extends \BaseController
     public function getDeveloper($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.kontak', compact('provinsi'))
+        return \View::make('front.kontak.index', compact('provinsi'))
             ->with('jenis',\Kontak::DEVELOPER);
     }
 
     public function getKontraktor($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.kontak', compact('provinsi'))
+        return \View::make('front.kontak.index', compact('provinsi'))
             ->with('jenis',\Kontak::KONTRAKTOR);
     }
 
     public function getSupplier($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.kontak', compact('provinsi'))
+        return \View::make('front.kontak.index', compact('provinsi'))
             ->with('jenis',\Kontak::SUPPLIER);
     }
 
     public function getTukang($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.kontak', compact('provinsi'))
+        return \View::make('front.kontak.index', compact('provinsi'))
             ->with('jenis',\Kontak::TUKANG);
     }
 
     public function getArsitek($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.kontak', compact('provinsi'))
+        return \View::make('front.kontak.index', compact('provinsi'))
             ->with('jenis',\Kontak::ARSITEK);
     }
 

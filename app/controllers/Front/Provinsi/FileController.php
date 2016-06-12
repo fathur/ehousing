@@ -25,7 +25,7 @@ class FileController extends \BaseController
     public function getKebijakan($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.file', compact('provinsi'))
+        return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::KEBIJAKAN);
 
     }
@@ -38,7 +38,7 @@ class FileController extends \BaseController
     public function getPenelitian($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.file', compact('provinsi'))
+        return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::PENELITIAN);
     }
 
@@ -50,7 +50,7 @@ class FileController extends \BaseController
     public function getInformasi($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.file', compact('provinsi'))
+        return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::INFORMASI);
     }
 
@@ -62,7 +62,7 @@ class FileController extends \BaseController
     public function getStandarHargaMaterial($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.file', compact('provinsi'))
+        return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL);
     }
 

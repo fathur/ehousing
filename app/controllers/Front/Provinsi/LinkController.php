@@ -17,7 +17,7 @@ class LinkController extends \BaseController
     public function getImb($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.link', compact('provinsi'))
+        return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::IMB);
 
     }
@@ -25,21 +25,21 @@ class LinkController extends \BaseController
     public function getPbb($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.link', compact('provinsi'))
+        return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::PBB);
     }
 
     public function getTataRuang($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.link', compact('provinsi'))
+        return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::TATA_RUANG);
     }
 
     public function getBpn($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
-        return \View::make('front.link', compact('provinsi'))
+        return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::BPN);
     }
 
