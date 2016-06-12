@@ -7,6 +7,14 @@
  */
 class Hunian extends EhousingModel
 {
+    const RUSUN_SEWA = 'RS';
+    const RUSUNAMI = 'RN';
+    const RUSUNAMI_SUBSIDI = 'RNS';
+    const RUMAH_SUBSIDI = 'RMS';
+    const CONDOTEL = 'CDT';
+    const APERTEMEN = 'APT';
+    const HOTEL = 'HTL';
+
     protected $table = 'hunian';
     protected $primaryKey = 'HunianId';
     protected $fillable = [

@@ -22,6 +22,7 @@
     "bootstrap": "~3.3.6",
     "font-awesome": "fontawesome#~4.6.3",
     "animate.css": "~3.5.2",
-    "highcharts": "~4.2.5"
+    "highcharts": "~4.2.5",
+    "datatables": "~1.10.12"
   }
 }
