@@ -8,30 +8,93 @@
 namespace Front\Provinsi;
 
 
+use Carbon\Carbon;
+use Datatables;
+
 class KontakController extends \BaseController
 {
-    public function getDeveloper()
+    public function getDeveloper($provinsiSlug)
     {
-
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+        return \View::make('front.kontak', compact('provinsi'))
+            ->with('jenis',\Kontak::DEVELOPER);
     }
 
-    public function getKontraktor()
+    public function getKontraktor($provinsiSlug)
     {
-
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+        return \View::make('front.kontak', compact('provinsi'))
+            ->with('jenis',\Kontak::KONTRAKTOR);
     }
 
-    public function getSupplier()
+    public function getSupplier($provinsiSlug)
     {
-
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+        return \View::make('front.kontak', compact('provinsi'))
+            ->with('jenis',\Kontak::SUPPLIER);
     }
 
-    public function getTukang()
+    public function getTukang($provinsiSlug)
     {
-
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+        return \View::make('front.kontak', compact('provinsi'))
+            ->with('jenis',\Kontak::TUKANG);
     }
 
-    public function getArsitek()
+    public function getArsitek($provinsiSlug)
     {
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+        return \View::make('front.kontak', compact('provinsi'))
+            ->with('jenis',\Kontak::ARSITEK);
+    }
 
+    public function data()
+    {
+        $jenisKontak = \Input::get('jenis');
+        $provinsiId = \Input::get('provinsi');
+
+        $kontak= \Kontak::select(array(
+            'kontak.*'
+        ))
+            ->where('kontak.ExpiryDate','>',Carbon::now());
+
+        if(\Input::has('jenis') || $jenisKontak != '' || !is_null($jenisKontak))
+        {
+            $kontak->where('kontak.JenisKontak', $jenisKontak);
+        }
+
+        if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
+        {
+            $kontak->where('kontak.KodeProvinsi', $provinsiId);
+        }
+
+        $datatables = Datatables::of($kontak)
+            ->editColumn('Nama', function($data) {
+                $html = "<div><a href='#'>{$data->Nama}</a></div>";
+                $html .= "<small>{$data->Alamat}</small>";
+                return $html;
+            })
+            ->editColumn('Email', function($data) {
+                if($data->Email == '' || is_null($data->Email))
+                    $email = '-';
+                else
+                    $email = "<a href='mailto:{$data->Email}'>{$data->Email}</a>";
+
+                if($data->Website == '' || is_null($data->Website))
+                    $web = '-';
+                else
+                    $web = $data->Website;
+
+                return "<div>{$email}</div><small>{$web}</small>";
+            })
+            ->editColumn('TglVerifikasi', function($data) {
+                if(is_null($data->TglVerifikasi) || $data->TglVerifikasi == '')
+                    return "<span class='label label-danger'>Belum terverifikasi</span>";
+                else
+                    return "<span class='label label-success'>Terverifikasi</span>";
+            })
+            ->make(true);
+
+        return $datatables;
     }
 }

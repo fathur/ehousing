@@ -83,6 +83,8 @@ Route::get('{provinsi}/kontak/kontraktor', array('uses' => 'Front\Provinsi\Konta
 Route::get('{provinsi}/kontak/supplier', array('uses' => 'Front\Provinsi\KontakController@getSupplier','as' => 'front.provinsi.kontak.supplier'));
 Route::get('{provinsi}/kontak/tukang', array('uses' => 'Front\Provinsi\KontakController@getTukang','as' => 'front.provinsi.kontak.tukang'));
 Route::get('{provinsi}/kontak/desain-arsitek', array('uses' => 'Front\Provinsi\KontakController@getArsitek','as' => 'front.provinsi.kontak.arsitek'));
+Route::get('{provinsi}/kontak/data', array('uses' => 'Front\Provinsi\KontakController@data', 'as' => 'front.provinsi.kontak.data'));
+
 
 // Post routes
 Route::get('{provinsi}/program', array('uses' => 'Front\Provinsi\PostController@getProgram','as' => 'front.provinsi.program.list'));

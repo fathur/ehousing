@@ -7,6 +7,12 @@
  */
 class Kontak extends EhousingModel
 {
+    const DEVELOPER = 'dev';
+    const KONTRAKTOR = 'kon';
+    const SUPPLIER = 'sup';
+    const TUKANG = 'tuk';
+    const ARSITEK = 'ars';
+
     protected $table = 'kontak';
     protected $primaryKey = 'KontakId';
     protected $fillable = [
