@@ -95,6 +95,7 @@ Route::get('{provinsi}/link/imb', array('uses' => 'Front\Provinsi\LinkController
 Route::get('{provinsi}/link/pbb', array('uses' => 'Front\Provinsi\LinkController@getPbb', 'as' => 'front.provinsi.link.pbb'));
 Route::get('{provinsi}/link/tata-ruang', array('uses' => 'Front\Provinsi\LinkController@getTataRuang', 'as' => 'front.provinsi.link.tataruang'));
 Route::get('{provinsi}/link/bpn', array('uses' => 'Front\Provinsi\LinkController@getBpn', 'as' => 'front.provinsi.link.bpn'));
+Route::get('{provinsi}/link/data', array('uses' => 'Front\Provinsi\LinkController@data', 'as' => 'front.provinsi.link.data'));
 
 // File routes
 Route::get('{provinsi}/file/kebijakan', array('uses' => 'Front\Provinsi\FileController@getKebijakan', 'as '=> 'front.provinsi.file.kebijakan'));

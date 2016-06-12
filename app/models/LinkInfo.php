@@ -7,6 +7,11 @@
  */
 class LinkInfo extends EhousingModel
 {
+    const IMB = 'IMB';
+    const PBB = 'PBB';
+    const TATA_RUANG = 'TR';
+    const BPN = 'BPN';
+
     protected $table = 'linkinfo';
     protected $primaryKey = 'LinkInfoId';
     protected $fillable = [
