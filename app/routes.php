@@ -102,3 +102,4 @@ Route::get('{provinsi}/file/kebijakan', array('uses' => 'Front\Provinsi\FileCont
 Route::get('{provinsi}/file/penelitian', array('uses' => 'Front\Provinsi\FileController@getPenelitian', 'as '=> 'front.provinsi.file.penelitian'));
 Route::get('{provinsi}/file/informasi', array('uses' => 'Front\Provinsi\FileController@getInformasi', 'as '=> 'front.provinsi.file.informasi'));
 Route::get('{provinsi}/file/shm', array('uses' => 'Front\Provinsi\FileController@getStandarHargaMaterial', 'as '=> 'front.provinsi.file.shm'));
+Route::get('{provinsi}/file/data', array('uses' => 'Front\Provinsi\FileController@data', 'as' => 'front.provinsi.file.data'));

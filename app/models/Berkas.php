@@ -7,6 +7,11 @@
  */
 class Berkas extends EhousingModel
 {
+    const KEBIJAKAN = 'PK';
+    const PENELITIAN = 'HPK';
+    const INFORMASI = 'INF';
+    const STANDAR_HARGA_MATERIAL = 'SHM';
+
     protected $table = 'file';
     protected $primaryKey = 'fileid';
     protected $fillable = [
