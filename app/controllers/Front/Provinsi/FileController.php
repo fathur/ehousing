@@ -11,8 +11,17 @@ namespace Front\Provinsi;
 use Carbon\Carbon;
 use Datatables;
 
+/**
+ * Class FileController
+ * @package Front\Provinsi
+ */
 class FileController extends \BaseController
 {
+    /**
+     * @param $provinsiSlug
+     * @return $this
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getKebijakan($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
@@ -21,6 +30,11 @@ class FileController extends \BaseController
 
     }
 
+    /**
+     * @param $provinsiSlug
+     * @return $this
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getPenelitian($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
@@ -28,6 +42,11 @@ class FileController extends \BaseController
             ->with('jenis',\Berkas::PENELITIAN);
     }
 
+    /**
+     * @param $provinsiSlug
+     * @return $this
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getInformasi($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
@@ -35,6 +54,11 @@ class FileController extends \BaseController
             ->with('jenis',\Berkas::INFORMASI);
     }
 
+    /**
+     * @param $provinsiSlug
+     * @return $this
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function getStandarHargaMaterial($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
@@ -42,6 +66,10 @@ class FileController extends \BaseController
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL);
     }
 
+    /**
+     * @return null
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function data()
     {
         $jenisBerkas = \Input::get('jenis');
@@ -54,12 +82,12 @@ class FileController extends \BaseController
 
         if(\Input::has('jenis') || $jenisBerkas != '' || !is_null($jenisBerkas))
         {
-            // $berkas->where('file.categoryfile', $jenisBerkas);
+            $berkas->where('file.categoryfile', $jenisBerkas);
         }
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
-            // $berkas->where('file.KodeProvinsi', $provinsiId);
+            $berkas->where('file.KodeProvinsi', $provinsiId);
         }
 
         $datatables = Datatables::of($berkas)
