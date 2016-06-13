@@ -124,6 +124,7 @@ return array(
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 		'yajra\Datatables\DatatablesServiceProvider',
+		'Intervention\Image\ImageServiceProvider'
 
 	),
 
@@ -193,6 +194,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Datatables'      => 'yajra\Datatables\Datatables',
+		'Image' 		  => 'Intervention\Image\Facades\Image'
 
 	),
 

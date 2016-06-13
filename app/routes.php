@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('test', function(){
-   return \Repositories\Navigasi\Builder::render();
-});
-
 Route::get('/', array('uses' => 'Front\NasionalController@getDashboard','as'=>'front.nasional.dashboard'));
 
 // Route::get('/', ['uses' => 'Front\HomeController@index', 'as' => 'front.home']);
@@ -68,6 +64,9 @@ Route::get('file/penelitian', array('uses' => 'Front\Nasional\FileController@get
 Route::get('file/informasi', array('uses' => 'Front\Nasional\FileController@getInformasi', 'as '=> 'front.nasional.file.informasi'));
 Route::get('file/shm', array('uses' => 'Front\Nasional\FileController@getStandarHargaMaterial', 'as '=> 'front.nasional.file.shm'));
 Route::get('file/data', array('uses' => 'Front\Nasional\FileController@data', 'as' => 'front.nasional.file.data'));
+
+Route::get('file/download/{url}', array('uses' => 'Front\Nasional\FileController@download', 'as' => 'front.file.download'));
+Route::get('file/{type}/{url}', array('uses' => 'Front\Nasional\FileController@show', 'as' => 'front.file.show'));
 
 
 // ============================================//

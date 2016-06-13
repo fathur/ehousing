@@ -45,7 +45,7 @@
 
                                             <p>
                                                 @if(!is_null($item->Foto) || ('' != $item->Foto))
-                                                    <img class="img-responsive" src="{{ url('media/uploads/' . $item->Foto) }}" />
+                                                    <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
                                                     {{{ Str::limit($item->IsiPost, 200) }}}
                                                 @endif
@@ -95,7 +95,7 @@
 
                                             <p>
                                                 @if(!is_null($item->Foto) || ('' != $item->Foto))
-                                                    <img class="img-responsive" src="{{ url('media/uploads/' . $item->Foto) }}" />
+                                                    <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
                                                     {{{ Str::limit($item->IsiPost, 200) }}}
                                                 @endif
@@ -155,7 +155,7 @@
                         <div class="ibox-content">
                             @foreach($files as $item)
                                 <h3>
-                                    <a title="{{$item->Judul}}" href="{{ url('media/files/' . $item->url) }}" target="_blank">{{{ Str::limit($item->Judul, 50, '...') }}}</a>
+                                    <a title="{{$item->Judul}}" href="{{ route('front.file.download', array($item->url)) }}">{{{ Str::limit($item->Judul, 50, '...') }}}</a>
                                 </h3>
 
                                 <div class="hr-line-dashed"></div>
@@ -295,7 +295,7 @@
                 </div>
                 <div class="panel-body list-group no-margins no-padding">
                     @foreach($files as $item)
-                        <a title="{{{ $item->Judul }}}" href="http://ehousing.id/file/download/{{{ $item->url }}}" target="_blank" class="list-group-item">
+                        <a title="{{{ $item->Judul }}}" href="{{route('front.file.download', $item->url)}}" class="list-group-item">
                         <span class="pull-right">
                             <small>{{{ $item->downloadcounter }}} <i class="fa fa-download"></i></small>
                         </span>{{{ Str::limit($item->Judul, 15) }}}.{{{ $item->fileext }}}

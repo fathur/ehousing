@@ -8,7 +8,8 @@
 		"barryvdh/laravel-ide-helper": "~1.11",
 		"cviebrock/eloquent-sluggable": "2.0.*",
 		"simplepie/simplepie": "dev-master",
-		"yajra/laravel-datatables-oracle": "~3.0"
+		"yajra/laravel-datatables-oracle": "~3.0",
+		"intervention/image": "^2.3"
 	},
 	"autoload": {
 		"classmap": [

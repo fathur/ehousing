@@ -12,6 +12,8 @@ class Berkas extends EhousingModel
     const INFORMASI = 'INF';
     const STANDAR_HARGA_MATERIAL = 'SHM';
 
+    const UPDATED_AT = 'modifieddate';
+
     protected $table = 'file';
     protected $primaryKey = 'fileid';
     protected $fillable = [

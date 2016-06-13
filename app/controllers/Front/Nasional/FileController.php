@@ -98,4 +98,40 @@ class FileController extends \BaseController
 
         return $datatables;
     }
+
+    /**
+     * @param $type
+     * @param $url
+     * @return mixed
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
+    public function show($type, $url)
+    {
+        switch ($type) {
+            case 'post':
+                $location = 'post/' . $url;
+                break;
+            default:
+                $location = $url;
+        }
+
+        return \Image::make(storage_path('uploads/'. $location))->response();
+    }
+
+    /**
+     * @param $url
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
+    public function download($url)
+    {
+        $download =  \Response::download(storage_path('uploads/file/'.$url), $url);
+
+        $berkas = \Berkas::where('url', $url)->first();
+        $downloadCounter = $berkas->downloadcounter;
+        $berkas->downloadcounter = (int) $downloadCounter + 1;
+        $berkas->save();
+
+        return $download;
+    }
 }
