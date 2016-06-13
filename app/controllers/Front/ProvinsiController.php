@@ -140,7 +140,8 @@ class ProvinsiController extends \BaseController
                 ))
                 ->with('fields', \ProfilProvinsi::$fields)
                 ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
-                ->with('provinsi', $provinsiDetail);
+                ->with('provinsi', $provinsiDetail)
+                ->with('kolom', 'TotalPenduduk');
 
         }
         catch (ProvinsiNotFoundException $e)

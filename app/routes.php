@@ -12,8 +12,7 @@
 */
 
 Route::get('test', function(){
-   return \Hunian::with('referensi')->get();
-
+   return \Repositories\Navigasi\Builder::render();
 });
 
 // Route::get('/', ['uses' => 'Front\HomeController@index', 'as' => 'front.home']);
@@ -73,7 +72,7 @@ Route::get('{provinsi}/hunian/rusunami', array('uses' => 'Front\Provinsi\HunianC
 Route::get('{provinsi}/hunian/rusunami-subsidi', array('uses' => 'Front\Provinsi\HunianController@getRusunamiSubsidi', 'as' => 'front.provinsi.hunian.rusunamisubs'));
 Route::get('{provinsi}/hunian/rumah-subsidi', array('uses' => 'Front\Provinsi\HunianController@getRumahSubsidi', 'as' => 'front.provinsi.hunian.rumahsubs'));
 Route::get('{provinsi}/hunian/condotel', array('uses' => 'Front\Provinsi\HunianController@getCondotel', 'as' => 'front.provinsi.hunian.condotel'));
-Route::get('{provinsi}/hunian/apertemen', array('uses' => 'Front\Provinsi\HunianController@getApartemen', 'as' => 'front.provinsi.hunian.apartemen'));
+Route::get('{provinsi}/hunian/apartemen', array('uses' => 'Front\Provinsi\HunianController@getApartemen', 'as' => 'front.provinsi.hunian.apartemen'));
 Route::get('{provinsi}/hunian/hotel', array('uses' => 'Front\Provinsi\HunianController@getHotel', 'as' => 'front.provinsi.hunian.hotel'));
 Route::get('{provinsi}/hunian/data', array('uses' => 'Front\Provinsi\HunianController@data', 'as' => 'front.provinsi.hunian.data'));
 Route::get('{provinsi}/hunian/{hunian}', array('uses' => 'Front\Provinsi\HunianController@show', 'as' => 'front.provinsi.hunian.show'));

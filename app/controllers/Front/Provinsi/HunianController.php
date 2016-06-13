@@ -105,7 +105,7 @@ class HunianController extends \BaseController
 
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat','slug'
+            'kontak.Nama','hunian.Alamat','hunian.slug'
         ))
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
