@@ -17,35 +17,41 @@ class KontakController extends \BaseController
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.kontak.index', compact('provinsi'))
-            ->with('jenis',\Kontak::DEVELOPER);
+            ->with('jenis',\Kontak::DEVELOPER)
+            ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
+
     }
 
     public function getKontraktor($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.kontak.index', compact('provinsi'))
-            ->with('jenis',\Kontak::KONTRAKTOR);
+            ->with('jenis',\Kontak::KONTRAKTOR)
+            ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
     public function getSupplier($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.kontak.index', compact('provinsi'))
-            ->with('jenis',\Kontak::SUPPLIER);
+            ->with('jenis',\Kontak::SUPPLIER)
+            ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
     public function getTukang($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.kontak.index', compact('provinsi'))
-            ->with('jenis',\Kontak::TUKANG);
+            ->with('jenis',\Kontak::TUKANG)
+            ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
     public function getArsitek($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.kontak.index', compact('provinsi'))
-            ->with('jenis',\Kontak::ARSITEK);
+            ->with('jenis',\Kontak::ARSITEK)
+            ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
     /**
@@ -65,12 +71,12 @@ class KontakController extends \BaseController
 
         if(\Input::has('jenis') || $jenisKontak != '' || !is_null($jenisKontak))
         {
-            //$kontak->where('kontak.JenisKontak', $jenisKontak);
+            $kontak->where('kontak.JenisKontak', $jenisKontak);
         }
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
-            //$kontak->where('kontak.KodeProvinsi', $provinsiId);
+            $kontak->where('kontak.KodeProvinsi', $provinsiId);
         }
 
         $datatables = Datatables::of($kontak)

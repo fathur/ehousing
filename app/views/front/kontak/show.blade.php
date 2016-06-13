@@ -123,15 +123,27 @@
                                             <tr>
                                                 <td>
                                                     <div class="team-members">
-                                                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug, $hunian->slug))}}">
-                                                            <!--img src="http://ehousing.id/uploads/hunian/no-home-image.png" class="img-circle m-b-md" alt="no-image" -->
-                                                            <img src="{{$hunian->picture}}" class="img-circle m-b-md" alt="{{$hunian->picture}}">
-                                                        </a>
+                                                        @if(isset($type) && $type == 'nasional')
+                                                            <a href="{{route('front.nasional.hunian.show', array($hunian->slug))}}">
+                                                                <!--img src="http://ehousing.id/uploads/hunian/no-home-image.png" class="img-circle m-b-md" alt="no-image" -->
+                                                                <img src="{{$hunian->picture}}" class="img-circle m-b-md" alt="{{$hunian->picture}}">
+                                                            </a>
+                                                        @else
+                                                            <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug, $hunian->slug))}}">
+                                                                <!--img src="http://ehousing.id/uploads/hunian/no-home-image.png" class="img-circle m-b-md" alt="no-image" -->
+                                                                <img src="{{$hunian->picture}}" class="img-circle m-b-md" alt="{{$hunian->picture}}">
+                                                            </a>
+                                                        @endif
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug, $hunian->slug))}}">{{{ $hunian->NamaHunian }}}</a>
+                                                    @if(isset($type) && $type == 'nasional')
+                                                        <a href="{{route('front.nasional.hunian.show', array($hunian->slug))}}">{{{ $hunian->NamaHunian }}}</a>
+                                                    @else
+                                                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug, $hunian->slug))}}">{{{ $hunian->NamaHunian }}}</a>
+                                                    @endif
                                                     <small><br>{{{ $hunian->Alamat }}}</small>
+
                                                 </td>
                                                 <td>{{{ $hunian->JenisHunian }}}</td>
                                                 <td>{{{ $kontak->Nama }}}</td>

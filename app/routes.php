@@ -33,6 +33,8 @@ Route::get('kontak/kontraktor', array('uses' => 'Front\Nasional\KontakController
 Route::get('kontak/supplier', array('uses' => 'Front\Nasional\KontakController@getSupplier','as' => 'front.nasional.kontak.supplier'));
 Route::get('kontak/tukang', array('uses' => 'Front\Nasional\KontakController@getTukang','as' => 'front.nasional.kontak.tukang'));
 Route::get('kontak/desain-arsitek', array('uses' => 'Front\Nasional\KontakController@getArsitek','as' => 'front.nasional.kontak.arsitek'));
+Route::get('kontak/data', array('uses' => 'Front\Nasional\KontakController@data', 'as' => 'front.nasional.kontak.data'));
+Route::get('kontak/{kontak}', array('uses' => 'Front\Nasional\KontakController@show', 'as' => 'front.nasional.kontak.show'));
 
 // Hunian routes
 Route::get('hunian/rusun-sewa', array('uses' => 'Front\Nasional\HunianController@getRusunSewa', 'as' => 'front.nasional.hunian.rusunsewa'));

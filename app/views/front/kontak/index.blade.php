@@ -42,9 +42,13 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{route('front.provinsi.kontak.data', array($provinsi->slug))}}",
+                url: "{{ $datatablesRoute }}",
                 data: function(params) {
+
+                    @if(isset($provinsi))
                     params.provinsi = '{{{ $provinsi->id }}}';
+                    @endif
+
                     params.jenis = '{{{ $jenis }}}';
                 }
             },
