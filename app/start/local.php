@@ -8,6 +8,13 @@ View::composer('sidebar', function($view) {
     {
         $region = Provinsi::slug($segment)->first();
         $view->with('region', $region);
-        $view->with('sidemenu', \Repositories\Navigasi\Builder::render());
     }
+
+    $view->with('sidemenu', \Repositories\Navigasi\Builder::render());
+
+});
+
+App::missing(function($exception)
+{
+    return Response::view('errors.404', array(), 404);
 });

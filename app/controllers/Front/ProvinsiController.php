@@ -199,6 +199,10 @@ class ProvinsiController extends \BaseController
     public function getEhousing($provinsiSlug)
     {
         $provinsi = Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         $dataProvinsi = new ProvinsiDataProvider($provinsi->id);
         $data = $dataProvinsi->getDetail();
 

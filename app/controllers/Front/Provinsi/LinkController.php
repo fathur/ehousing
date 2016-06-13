@@ -17,6 +17,10 @@ class LinkController extends \BaseController
     public function getImb($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::IMB)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
@@ -26,6 +30,10 @@ class LinkController extends \BaseController
     public function getPbb($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::PBB)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
@@ -35,6 +43,10 @@ class LinkController extends \BaseController
     public function getTataRuang($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::TATA_RUANG)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
@@ -44,6 +56,10 @@ class LinkController extends \BaseController
     public function getBpn($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.link.index', compact('provinsi'))
             ->with('jenis', \LinkInfo::BPN)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));

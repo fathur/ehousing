@@ -17,6 +17,16 @@ use Datatables;
  */
 class FileController extends \BaseController
 {
+    public function getAll($provinsiSlug)
+    {
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
+        return \View::make('front.file.index', compact('provinsi'))
+            ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
+    }
     /**
      * @param $provinsiSlug
      * @return $this
@@ -25,6 +35,10 @@ class FileController extends \BaseController
     public function getKebijakan($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::KEBIJAKAN)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
@@ -39,6 +53,10 @@ class FileController extends \BaseController
     public function getPenelitian($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::PENELITIAN)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
@@ -53,6 +71,10 @@ class FileController extends \BaseController
     public function getInformasi($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::INFORMASI)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
@@ -67,6 +89,10 @@ class FileController extends \BaseController
     public function getStandarHargaMaterial($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+        
         return \View::make('front.file.index', compact('provinsi'))
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
@@ -87,19 +113,28 @@ class FileController extends \BaseController
         ))
             ->where('file.ExpiryDate','>',Carbon::now());
 
-        if(\Input::has('jenis') || $jenisBerkas != '' || !is_null($jenisBerkas))
+        if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
+        {
+            $berkas->where(function($query) use ($provinsiId, $jenisBerkas)
+            {
+                $query->where('file.KodeProvinsi', $provinsiId);
+
+                if (!\Input::has('jenis') || $jenisBerkas == '')
+                {
+                    $query->orWhere('file.KodeProvinsi', '-');
+                    $query->orWhereNull('file.KodeProvinsi');
+                }
+            });
+        }
+
+        if(\Input::has('jenis') || $jenisBerkas != '')
         {
             $berkas->where('file.categoryfile', $jenisBerkas);
         }
 
-        if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
-        {
-            $berkas->where('file.KodeProvinsi', $provinsiId);
-        }
-
         $datatables = Datatables::of($berkas)
             ->editColumn('filename', function($data) {
-                $html = "<a href='#'>{$data->filename}</a>";
+                $html = "<a href='".route('front.file.download', array($data->url))."'>{$data->filename}</a>";
                 return $html;
             })
             ->editColumn('description', function($data) {

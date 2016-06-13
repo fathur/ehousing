@@ -25,6 +25,10 @@ class PostController extends \BaseController
     public function getProgram($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         $data = new ProvinsiDataProvider($provinsi->id);
         $posts = $data->setLimit(12)->getPrograms();
 
@@ -35,8 +39,25 @@ class PostController extends \BaseController
     public function getBerita($provinsiSlug)
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         $data = new ProvinsiDataProvider($provinsi->id);
         $posts = $data->setLimit(12)->getNews();
+
+        return \View::make('front.post.grid', compact('posts','provinsi'));
+    }
+
+    public function getInformasi($provinsiSlug)
+    {
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
+        $data = new ProvinsiDataProvider($provinsi->id);
+        $posts = $data->setLimit(12)->getInformasi();
 
         return \View::make('front.post.grid', compact('posts','provinsi'));
     }

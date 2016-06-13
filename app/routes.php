@@ -60,10 +60,10 @@ Route::get('link/data', array('uses' => 'Front\Nasional\LinkController@data', 'a
 
 
 // File routes
-Route::get('file/kebijakan', array('uses' => 'Front\Nasional\FileController@getKebijakan', 'as '=> 'front.nasional.file.kebijakan'));
-Route::get('file/penelitian', array('uses' => 'Front\Nasional\FileController@getPenelitian', 'as '=> 'front.nasional.file.penelitian'));
-Route::get('file/informasi', array('uses' => 'Front\Nasional\FileController@getInformasi', 'as '=> 'front.nasional.file.informasi'));
-Route::get('file/shm', array('uses' => 'Front\Nasional\FileController@getStandarHargaMaterial', 'as '=> 'front.nasional.file.shm'));
+Route::get('file/kebijakan', array('uses' => 'Front\Nasional\FileController@getKebijakan', 'as' => 'front.nasional.file.kebijakan'));
+Route::get('file/penelitian', array('uses' => 'Front\Nasional\FileController@getPenelitian', 'as' => 'front.nasional.file.penelitian'));
+Route::get('file/informasi', array('uses' => 'Front\Nasional\FileController@getInformasi', 'as' => 'front.nasional.file.informasi'));
+Route::get('file/shm', array('uses' => 'Front\Nasional\FileController@getStandarHargaMaterial', 'as' => 'front.nasional.file.shm'));
 Route::get('file/data', array('uses' => 'Front\Nasional\FileController@data', 'as' => 'front.nasional.file.data'));
 
 Route::get('file/download/{url}', array('uses' => 'Front\Nasional\FileController@download', 'as' => 'front.file.download'));
@@ -104,6 +104,7 @@ Route::get('{provinsi}/kontak/{kontak}', array('uses' => 'Front\Provinsi\KontakC
 // Post routes
 Route::get('{provinsi}/program', array('uses' => 'Front\Provinsi\PostController@getProgram','as' => 'front.provinsi.program.list'));
 Route::get('{provinsi}/berita', array('uses' => 'Front\Provinsi\PostController@getBerita','as' => 'front.provinsi.berita.list'));
+Route::get('{provinsi}/informasi', array('uses' => 'Front\Provinsi\PostController@getInformasi','as' => 'front.provinsi.info.list'));
 
 // Post routes
 Route::get('{provinsi}/post/{slug}', array('uses' => 'Front\Provinsi\PostController@show','as' => 'front.provinsi.post.show'));
@@ -116,9 +117,10 @@ Route::get('{provinsi}/link/bpn', array('uses' => 'Front\Provinsi\LinkController
 Route::get('{provinsi}/link/data', array('uses' => 'Front\Provinsi\LinkController@data', 'as' => 'front.provinsi.link.data'));
 
 // File routes
-Route::get('{provinsi}/file/kebijakan', array('uses' => 'Front\Provinsi\FileController@getKebijakan', 'as '=> 'front.provinsi.file.kebijakan'));
-Route::get('{provinsi}/file/penelitian', array('uses' => 'Front\Provinsi\FileController@getPenelitian', 'as '=> 'front.provinsi.file.penelitian'));
-Route::get('{provinsi}/file/informasi', array('uses' => 'Front\Provinsi\FileController@getInformasi', 'as '=> 'front.provinsi.file.informasi'));
-Route::get('{provinsi}/file/shm', array('uses' => 'Front\Provinsi\FileController@getStandarHargaMaterial', 'as '=> 'front.provinsi.file.shm'));
+Route::get('{provinsi}/file', array('uses' => 'Front\Provinsi\FileController@getAll', 'as' => 'front.provinsi.file'));
+Route::get('{provinsi}/file/kebijakan', array('uses' => 'Front\Provinsi\FileController@getKebijakan', 'as' => 'front.provinsi.file.kebijakan'));
+Route::get('{provinsi}/file/penelitian', array('uses' => 'Front\Provinsi\FileController@getPenelitian', 'as' => 'front.provinsi.file.penelitian'));
+Route::get('{provinsi}/file/informasi', array('uses' => 'Front\Provinsi\FileController@getInformasi', 'as' => 'front.provinsi.file.informasi'));
+Route::get('{provinsi}/file/shm', array('uses' => 'Front\Provinsi\FileController@getStandarHargaMaterial', 'as' => 'front.provinsi.file.shm'));
 Route::get('{provinsi}/file/data', array('uses' => 'Front\Provinsi\FileController@data', 'as' => 'front.provinsi.file.data'));
 

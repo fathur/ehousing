@@ -24,6 +24,10 @@ class HunianController extends \BaseController
      */
     public function getRusunSewa($provinsiSlug) {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::RUSUN_SEWA)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -36,6 +40,10 @@ class HunianController extends \BaseController
      */
     public function getRusunami($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::RUSUNAMI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -48,6 +56,10 @@ class HunianController extends \BaseController
      */
     public function getRusunamiSubsidi($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -60,6 +72,10 @@ class HunianController extends \BaseController
      */
     public function getRumahSubsidi($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -72,6 +88,10 @@ class HunianController extends \BaseController
      */
     public function getCondotel($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::CONDOTEL)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -84,6 +104,10 @@ class HunianController extends \BaseController
      */
     public function getApartemen($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::APERTEMEN)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
@@ -96,6 +120,10 @@ class HunianController extends \BaseController
      */
     public function getHotel($provinsiSlug){
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
         return \View::make('front.hunian.index', compact('provinsi'))
             ->with('jenis',\Hunian::HOTEL)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));

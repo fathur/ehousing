@@ -4,7 +4,11 @@
     <div class="row m-b-sm m-t-lg">
         <div class="col-md-6">
             <div class="profile-image">
-                <img src="#" class="img-circle circle-border m-b-md" alt="profile">
+                @if($provinsi->konfigurasi_situs->Logo == '')
+                    <img src="{{ route('front.file.show', array('profile', 'no-home-image.png')) }}" class="img-circle circle-border m-b-md" alt="profile">
+                @else
+                <img src="{{ route('front.file.show', array('profile', $provinsi->konfigurasi_situs->Logo)) }}" class="img-circle circle-border m-b-md" alt="profile">
+                @endif
             </div>
             <div class="profile-info">
                 <div class="">
@@ -80,7 +84,9 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h2><a href="http://ehousing.id/post/grid/berita" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span> </a></h2>
+                            <a href="{{ route('front.provinsi.berita.list', array($provinsi->slug)) }}" class="btn-link">
+                                <h2><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span></h2>
+                            </a>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -126,7 +132,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/post/grid/info" class="btn-link">
+                                <a href="{{ route('front.provinsi.info.list', array($provinsi->slug)) }}" class="btn-link">
                                     <i class="fa fa-th-large"></i>
                                     <span class="nav-label">Info e-Housing</span>
                                 </a>
@@ -176,7 +182,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/post/grid/program" class="btn-link">
+                                <a href="{{ route('front.provinsi.program.list', array($provinsi->slug)) }}" class="btn-link">
                                     <i class="fa fa-home"></i>
                                     <span class="nav-label">Bantuan &amp; Program Pemerintah</span>
                                 </a>
@@ -200,7 +206,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/file" class="btn-link">
+                                <a href="{{ route('front.provinsi.file', array($provinsi->slug)) }}" class="btn-link">
                                     <i class="fa fa-book"></i> <span class="nav-label"> Publikasi</span>
                                 </a>
                             </h2>

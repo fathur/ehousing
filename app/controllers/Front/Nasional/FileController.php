@@ -9,6 +9,7 @@ namespace Front\Nasional;
 
 use Carbon\Carbon;
 use Datatables;
+use Illuminate\Filesystem\FileNotFoundException;
 
 /**
  * Class FileController
@@ -67,7 +68,7 @@ class FileController extends \BaseController
 
         $datatables = Datatables::of($berkas)
             ->editColumn('filename', function($data) {
-                $html = "<a href='#'>{$data->filename}</a>";
+                $html = "<a href='".route('front.file.download', array($data->url))."'>{$data->filename}</a>";
                 return $html;
             })
             ->editColumn('description', function($data) {
@@ -129,13 +130,17 @@ class FileController extends \BaseController
      */
     public function download($url)
     {
-        $download =  \Response::download(storage_path('uploads/file/'.$url), $url);
+        if(file_exists(storage_path('uploads/file/'.$url))) {
+            $download = \Response::download(storage_path('uploads/file/' . $url), $url);
 
-        $berkas = \Berkas::where('url', $url)->first();
-        $downloadCounter = $berkas->downloadcounter;
-        $berkas->downloadcounter = (int) $downloadCounter + 1;
-        $berkas->save();
+            $berkas = \Berkas::where('url', $url)->first();
+            $downloadCounter = $berkas->downloadcounter;
+            $berkas->downloadcounter = (int)$downloadCounter + 1;
+            $berkas->save();
 
-        return $download;
+            return $download;
+        }
+
+        \App::abort(404);
     }
 }

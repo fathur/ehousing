@@ -7,7 +7,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="profile-image">
-                        <img src="http://ehousing.id/uploads/profile/no-home-image.png" class="img-circle circle-border m-b-md" alt="profile">
+                        @if($provinsi->konfigurasi_situs->Logo == '')
+                            <img src="{{ route('front.file.show', array('profile', 'no-home-image.png')) }}" class="img-circle circle-border m-b-md" alt="profile">
+                        @else
+                            <img src="{{ route('front.file.show', array('profile', $provinsi->konfigurasi_situs->Logo)) }}" class="img-circle circle-border m-b-md" alt="profile">
+                        @endif
                     </div>
                     <div class="profile-info">
                         <div class="">

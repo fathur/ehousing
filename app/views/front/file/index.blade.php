@@ -48,7 +48,9 @@
                     params.provinsi = '{{{ $provinsi->id }}}';
                     @endif
 
+                    @if(isset($jenis))
                     params.jenis = '{{{ $jenis }}}';
+                    @endif
                 }
             },
             columns: [
