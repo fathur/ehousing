@@ -9,6 +9,9 @@ use Carbon\Carbon;
  */
 class Builder
 {
+    public static $exceptionFirstSegment = array('test','login','password','kontak','hunian','posts','post','link',
+        'file','profile','statistik','program','berita','ehousing');
+
     public static function render()
     {
         $nav = new static;
@@ -74,12 +77,9 @@ class Builder
 
     public function checkProvinsi($string)
     {
-        $exclude = array('test','login','password','kontak','hunian','posts','post','link',
-            'file','profile','statistik','program','berita','ehousing');
-
         $segmentProv = \Request::segment(1);
 
-        if(in_array($segmentProv, $exclude))
+        if(in_array($segmentProv, static::$exceptionFirstSegment))
             return preg_replace('/\{(provinsi)\}/i', '', $string);
 
         return preg_replace('/\{(provinsi)\}/i', $segmentProv, $string);

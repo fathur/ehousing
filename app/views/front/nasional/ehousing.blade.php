@@ -3,6 +3,7 @@
 @section('content')
     <div class="ibox">
         <div class="ibox-content">
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="profile-image">
@@ -23,6 +24,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="small">
@@ -39,42 +41,43 @@
                         <a href="mailto:?Subject={{ $title }}&amp;Body={{{ urlencode(Request::url()) }}}" class="btn btn-primary btn-outline btn-circle" type="button" title="envelope"><i class="fa fa-envelope"></i></a>
 
                     </div>
-            </div>
-            <div class="row m-t-sm">
-                <div class="col-lg-12">
-                    <div class="panel blank-panel">
-                        <div class="panel-heading">
-                            <div class="panel-options">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab-1" data-toggle="tab" aria-expanded="true">Visi-Misi</a></li>
-                                    <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">Struktur Organisasi</a></li>
-                                    <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="false">Mitra</a></li>
-                                    <li class=""><a href="#tab-4" data-toggle="tab" aria-expanded="false">Tentang Kami</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="panel-body">
-
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="tab-1">
-                                    <p>{{ $data->VisiMisi }}</p>
-                                </div>
-                                <div class="tab-pane" id="tab-2">
-                                    <p>{{{ $data->StrukturOrg }}}</p>
-
-                                </div>
-                                <div class="tab-pane" id="tab-3">
-                                    <p>-</p>
-                                </div>
-                                <div class="tab-pane" id="tab-4">
-                                    <p>{{{ $data->Deskripsi }}}</p>
-
+                </div>
+                <div class="row m-t-sm">
+                    <div class="col-lg-12">
+                        <div class="panel blank-panel">
+                            <div class="panel-heading">
+                                <div class="panel-options">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab-1" data-toggle="tab" aria-expanded="true">Visi-Misi</a></li>
+                                        <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">Struktur Organisasi</a></li>
+                                        <li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="false">Mitra</a></li>
+                                        <li class=""><a href="#tab-4" data-toggle="tab" aria-expanded="false">Tentang Kami</a></li>
+                                    </ul>
                                 </div>
                             </div>
 
-                        </div>
+                            <div class="panel-body">
 
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab-1">
+                                        <p>{{ $data->VisiMisi }}</p>
+                                    </div>
+                                    <div class="tab-pane" id="tab-2">
+                                        <p>{{{ $data->StrukturOrg }}}</p>
+
+                                    </div>
+                                    <div class="tab-pane" id="tab-3">
+                                        <p>-</p>
+                                    </div>
+                                    <div class="tab-pane" id="tab-4">
+                                        <p>{{{ $data->Deskripsi }}}</p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,12 +4,16 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     <a href="{{ url('/') }}">
-                            <span class="clear">
-								<span class="block m-t-xs">
-                                    <i class="fa fa-home"></i>
-                                    <strong class="font-bold">e-housing KemenPUPR</strong>
-                                </span>
-							</span>
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <i class="fa fa-home"></i>
+                                <strong class="font-bold">e-housing KemenPUPR</strong>
+                            </span>
+
+                            @if(isset($region))
+                                <span class='small'><i class='fa fa-circle' style='color:green'></i> {{{ $region->NamaProvinsi }}}</span>
+                            @endif
+                        </span>
                     </a>
                 </div>
                 <div class="logo-element">
@@ -18,15 +22,6 @@
             </li>
 
             {{ $sidemenu }}
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-building"></i>
-						<span class="nav-label">
-							Hubungi Kami
-						</span>
-                </a>
-            </li>
 
         </ul>
     </div>

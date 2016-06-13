@@ -20,8 +20,6 @@ class BaseController extends Controller {
 		else $title = '';
 
 		View::share('title', $title);
-		View::share('sidemenu', \Repositories\Navigasi\Builder::render());
-
 	}
 
 }
