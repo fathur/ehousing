@@ -74,8 +74,8 @@ class Builder
 
     public function checkProvinsi($string)
     {
-        $exclude = array('test','login','password','kontak','hunian','posts','link',
-            'file','profile','statistik');
+        $exclude = array('test','login','password','kontak','hunian','posts','post','link',
+            'file','profile','statistik','program','berita');
 
         $segmentProv = \Request::segment(1);
 

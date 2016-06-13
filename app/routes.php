@@ -44,8 +44,8 @@ Route::get('hunian/data', array('uses' => 'Front\Nasional\HunianController@data'
 Route::get('hunian/{hunian}', array('uses' => 'Front\Nasional\HunianController@show', 'as' => 'front.nasional.hunian.show'));
 
 // Post routes
-Route::get('posts/program', array('uses' => 'Front\Nasional\PostController@getProgram','as' => 'front.nasional.program.list'));
-Route::get('posts/berita', array('uses' => 'Front\Nasional\PostController@getBerita','as' => 'front.nasional.berita.list'));
+Route::get('program', array('uses' => 'Front\Nasional\PostController@getProgram','as' => 'front.nasional.program.list'));
+Route::get('berita', array('uses' => 'Front\Nasional\PostController@getBerita','as' => 'front.nasional.berita.list'));
 Route::get('post/{slug}', array('uses' => 'Front\Nasional\PostController@show','as' => 'front.nasional.post.show'));
 
 
@@ -103,6 +103,9 @@ Route::get('{provinsi}/kontak/{kontak}', array('uses' => 'Front\Provinsi\KontakC
 Route::get('{provinsi}/program', array('uses' => 'Front\Provinsi\PostController@getProgram','as' => 'front.provinsi.program.list'));
 Route::get('{provinsi}/berita', array('uses' => 'Front\Provinsi\PostController@getBerita','as' => 'front.provinsi.berita.list'));
 
+// Post routes
+Route::get('{provinsi}/post/{slug}', array('uses' => 'Front\Provinsi\PostController@show','as' => 'front.provinsi.post.show'));
+
 // Link routes
 Route::get('{provinsi}/link/imb', array('uses' => 'Front\Provinsi\LinkController@getImb', 'as' => 'front.provinsi.link.imb'));
 Route::get('{provinsi}/link/pbb', array('uses' => 'Front\Provinsi\LinkController@getPbb', 'as' => 'front.provinsi.link.pbb'));
@@ -116,3 +119,4 @@ Route::get('{provinsi}/file/penelitian', array('uses' => 'Front\Provinsi\FileCon
 Route::get('{provinsi}/file/informasi', array('uses' => 'Front\Provinsi\FileController@getInformasi', 'as '=> 'front.provinsi.file.informasi'));
 Route::get('{provinsi}/file/shm', array('uses' => 'Front\Provinsi\FileController@getStandarHargaMaterial', 'as '=> 'front.provinsi.file.shm'));
 Route::get('{provinsi}/file/data', array('uses' => 'Front\Provinsi\FileController@data', 'as' => 'front.provinsi.file.data'));
+

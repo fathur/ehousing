@@ -27,4 +27,14 @@ class Post extends EhousingModel implements \Cviebrock\EloquentSluggable\Sluggab
     {
         return (int) $this->PostId;
     }
+
+    public function user()
+    {
+        return $this->belongsTo('User','CreateUid');
+    }
+
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
+    }
 }

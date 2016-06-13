@@ -87,23 +87,28 @@ class Provinsi
      */
     public function getPostByCategory($categoryId = array())
     {
+
+
         $post = \Post::select(['post.*','user.Nama'])
             ->leftJoin('user','user.UserId', '=', 'post.CreateUid')
             ->whereRaw(\DB::raw('post.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'));
 
-        if(count($categoryId) != 0)
+        if(count($categoryId) > 0)
             $post->whereIn('post.KategoriId', $categoryId);
 
         if( ! is_null($this->provinsiId) || 0 != $this->provinsiId)
         {
-            $post->where('post.KodeProvinsi', $this->provinsiId)
-                ->orWhere('post.KodeProvinsi', '-')
-                ->orWhereNull('post.KodeProvinsi');
+            $post->where(function($query) {
+                $query->where('post.KodeProvinsi', $this->provinsiId)
+                    ->orWhere('post.KodeProvinsi', '-')
+                    ->orWhereNull('post.KodeProvinsi');
+            });
         }
 
         $results = $post->orderBy('post.CreateDate','desc')
             ->take($this->limit)
             ->get();
+
 
         if(! is_null($results))
             return $results;
@@ -171,9 +176,12 @@ class Provinsi
 
         if( ! is_null($this->provinsiId) || 0 != $this->provinsiId)
         {
-            $file->where('file.KodeProvinsi', $this->provinsiId)
-                ->orWhere('file.KodeProvinsi', '-')
-                ->orWhereNull('file.KodeProvinsi');
+            $file->where(function($query) {
+                $query->where('file.KodeProvinsi', $this->provinsiId)
+                    ->orWhere('file.KodeProvinsi', '-')
+                    ->orWhereNull('file.KodeProvinsi');
+            });
+
         }
 
         $results = $file->orderBy('file.createdate','desc')
@@ -440,6 +448,4 @@ class Provinsi
     {
         return $this->getStatistik('TotalAPBDProv');
     }
-
-
 }

@@ -109,6 +109,7 @@ class FileController extends \BaseController
     {
         switch ($type) {
             case 'post':
+            case 'posts':
                 $location = 'post/' . $url;
                 break;
             default:
