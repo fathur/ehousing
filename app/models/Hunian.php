@@ -50,6 +50,11 @@ class Hunian extends EhousingModel implements \Cviebrock\EloquentSluggable\Slugg
         return $this->belongsTo('Referensi','JenisHunian');
     }
 
+    public function kontak()
+    {
+        return $this->belongsTo('Kontak','KodePengembang');
+    }
+
     public function scopeSlug($query, $slug)
     {
         return $query->where('slug', $slug);

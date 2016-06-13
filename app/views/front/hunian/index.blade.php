@@ -40,7 +40,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{route('front.provinsi.hunian.data')}}",
+                url: "{{route('front.provinsi.hunian.data', array($provinsi->slug))}}",
                 data: function(params) {
                     params.provinsi = '{{{ $provinsi->id }}}';
                     params.jenis = '{{{ $jenis }}}';

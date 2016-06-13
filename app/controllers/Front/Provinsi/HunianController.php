@@ -98,32 +98,32 @@ class HunianController extends \BaseController
      * @return null
      * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
      */
-    public function data()
+    public function data($provinsiSlug)
     {
         $jenisHunian = \Input::get('jenis');
         $provinsiId = \Input::get('provinsi');
 
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat'
+            'kontak.Nama','hunian.Alamat','slug'
         ))
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisHunian != '' || !is_null($jenisHunian))
         {
-            $hunian->where('hunian.JenisHunian', $jenisHunian);
+            // $hunian->where('hunian.JenisHunian', $jenisHunian);
         }
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
-            $hunian->where('hunian.KodeProvinsi', $provinsiId);
+            // $hunian->where('hunian.KodeProvinsi', $provinsiId);
         }
 
         $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
 
         $datatables = Datatables::of($hunian)
-            ->editColumn('NamaHunian', function($data){
-                $html = "<div><a href='".url('hunian/'. \Str::slug($data->NamaHunian))."'>".$data->NamaHunian."</a></div>";
+            ->editColumn('NamaHunian', function($data) use ($provinsiSlug) {
+                $html = "<div><a href='".route('front.provinsi.hunian.show', array($provinsiSlug, $data->slug))."'>".$data->NamaHunian."</a></div>";
                 $html .= "<small>{$data->Alamat}</small>";
 
                 return $html;
@@ -144,7 +144,24 @@ class HunianController extends \BaseController
      */
     public function show($provinsiSlug, $hunianSlug)
     {
-        $hunian = \Hunian::slug($hunianSlug)->first();
-        return \View::make('front.hunian.show', compact('hunian'));
+        $hunian = \Hunian::with('referensi','kontak')
+            ->slug($hunianSlug)
+            ->first();
+
+        // return \Response::json($hunian);
+
+        if(!is_null($hunian)) {
+
+            if(!empty($hunian->Koordinat))
+                $coordinat = explode(',', $hunian->Koordinat);
+            else
+                $coordinat = array(0,0);
+
+            return \View::make('front.hunian.show', compact('hunian'))
+                ->with('latitude', $coordinat[0])
+                ->with('longitude', $coordinat[1]);
+        }
+
+        \App::abort(404);
     }
 }
