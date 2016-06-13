@@ -44,7 +44,7 @@
                                             </div>
 
                                             <p>
-                                                @if(!is_null($item->Foto) || ('' != $item->Foto))
+                                                @if('' != $item->Foto)
                                                     <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
                                                     {{{ Str::limit($item->IsiPost, 200) }}}
