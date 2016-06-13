@@ -26,7 +26,8 @@ class FileController extends \BaseController
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.file.index', compact('provinsi'))
-            ->with('jenis',\Berkas::KEBIJAKAN);
+            ->with('jenis',\Berkas::KEBIJAKAN)
+            ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }
 
@@ -39,7 +40,9 @@ class FileController extends \BaseController
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.file.index', compact('provinsi'))
-            ->with('jenis',\Berkas::PENELITIAN);
+            ->with('jenis',\Berkas::PENELITIAN)
+            ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
+
     }
 
     /**
@@ -51,7 +54,9 @@ class FileController extends \BaseController
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.file.index', compact('provinsi'))
-            ->with('jenis',\Berkas::INFORMASI);
+            ->with('jenis',\Berkas::INFORMASI)
+            ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
+
     }
 
     /**
@@ -63,7 +68,9 @@ class FileController extends \BaseController
     {
         $provinsi = \Provinsi::slug($provinsiSlug)->first();
         return \View::make('front.file.index', compact('provinsi'))
-            ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL);
+            ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL)
+            ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
+
     }
 
     /**

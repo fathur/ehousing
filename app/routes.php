@@ -67,6 +67,8 @@ Route::get('file/kebijakan', array('uses' => 'Front\Nasional\FileController@getK
 Route::get('file/penelitian', array('uses' => 'Front\Nasional\FileController@getPenelitian', 'as '=> 'front.nasional.file.penelitian'));
 Route::get('file/informasi', array('uses' => 'Front\Nasional\FileController@getInformasi', 'as '=> 'front.nasional.file.informasi'));
 Route::get('file/shm', array('uses' => 'Front\Nasional\FileController@getStandarHargaMaterial', 'as '=> 'front.nasional.file.shm'));
+Route::get('file/data', array('uses' => 'Front\Nasional\FileController@data', 'as' => 'front.nasional.file.data'));
+
 
 // ============================================//
 
