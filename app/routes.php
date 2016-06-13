@@ -58,6 +58,8 @@ Route::get('link/imb', array('uses' => 'Front\Nasional\LinkController@getImb', '
 Route::get('link/pbb', array('uses' => 'Front\Nasional\LinkController@getPbb', 'as' => 'front.nasional.link.pbb'));
 Route::get('link/tata-ruang', array('uses' => 'Front\Nasional\LinkController@getTataRuang', 'as' => 'front.nasional.link.tataruang'));
 Route::get('link/bpn', array('uses' => 'Front\Nasional\LinkController@getBpn', 'as' => 'front.nasional.link.bpn'));
+Route::get('link/data', array('uses' => 'Front\Nasional\LinkController@data', 'as' => 'front.nasional.link.data'));
+
 
 
 // File routes

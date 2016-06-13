@@ -38,9 +38,13 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{route('front.provinsi.link.data')}}",
+                url: "{{ $datatablesRoute }}",
                 data: function(params) {
+
+                    @if(isset($provinsi))
                     params.provinsi = '{{{ $provinsi->id }}}';
+                    @endif
+
                     params.jenis = '{{{ $jenis }}}';
                 }
             },
