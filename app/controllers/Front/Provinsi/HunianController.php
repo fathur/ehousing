@@ -111,12 +111,12 @@ class HunianController extends \BaseController
 
         if(\Input::has('jenis') || $jenisHunian != '' || !is_null($jenisHunian))
         {
-            // $hunian->where('hunian.JenisHunian', $jenisHunian);
+            $hunian->where('hunian.JenisHunian', $jenisHunian);
         }
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
-            // $hunian->where('hunian.KodeProvinsi', $provinsiId);
+            $hunian->where('hunian.KodeProvinsi', $provinsiId);
         }
 
         $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');

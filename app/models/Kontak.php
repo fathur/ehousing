@@ -5,8 +5,10 @@
  * Date: 6/11/16
  * Time: 14:06
  */
-class Kontak extends EhousingModel
+class Kontak extends EhousingModel implements \Cviebrock\EloquentSluggable\SluggableInterface
 {
+    use \Cviebrock\EloquentSluggable\SluggableTrait;
+
     const DEVELOPER = 'dev';
     const KONTRAKTOR = 'kon';
     const SUPPLIER = 'sup';
@@ -18,8 +20,20 @@ class Kontak extends EhousingModel
     protected $fillable = [
         'JenisKontak','Nama','Deskripsi','Alamat','KodeKecamatan','NoTelp','NoHP',
         'Email','Website','IsCorporate','Kompetensi','IsActive','Image','Picture',
-        'KodeProvinsi','KodeKota','TglRegistrasi','TglVerifikasi','Status'
+        'KodeProvinsi','KodeKota','TglRegistrasi','TglVerifikasi','Status','slug'
     ];
+
+    protected $appends = array('id');
+
+    protected $sluggable = array(
+        'build_from' => 'Nama',
+        'save_to'    => 'slug',
+    );
+
+    public function getIdAttribute()
+    {
+        return (int) $this->KontakId;
+    }
 
     public function provinsi()
     {
@@ -34,5 +48,15 @@ class Kontak extends EhousingModel
     public function kota()
     {
         return $this->belongsTo('Kota','KodeKota');
+    }
+
+    public function hunian()
+    {
+        return $this->hasMany('Hunian', 'KodePengembang');
+    }
+
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
     }
 }

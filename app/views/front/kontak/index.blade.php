@@ -42,7 +42,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{route('front.provinsi.kontak.data')}}",
+                url: "{{route('front.provinsi.kontak.data', array($provinsi->slug))}}",
                 data: function(params) {
                     params.provinsi = '{{{ $provinsi->id }}}';
                     params.jenis = '{{{ $jenis }}}';

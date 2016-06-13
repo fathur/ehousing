@@ -48,7 +48,12 @@ class KontakController extends \BaseController
             ->with('jenis',\Kontak::ARSITEK);
     }
 
-    public function data()
+    /**
+     * @param $provinsiSlug
+     * @return null
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
+    public function data($provinsiSlug)
     {
         $jenisKontak = \Input::get('jenis');
         $provinsiId = \Input::get('provinsi');
@@ -60,17 +65,17 @@ class KontakController extends \BaseController
 
         if(\Input::has('jenis') || $jenisKontak != '' || !is_null($jenisKontak))
         {
-            $kontak->where('kontak.JenisKontak', $jenisKontak);
+            //$kontak->where('kontak.JenisKontak', $jenisKontak);
         }
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
-            $kontak->where('kontak.KodeProvinsi', $provinsiId);
+            //$kontak->where('kontak.KodeProvinsi', $provinsiId);
         }
 
         $datatables = Datatables::of($kontak)
-            ->editColumn('Nama', function($data) {
-                $html = "<div><a href='#'>{$data->Nama}</a></div>";
+            ->editColumn('Nama', function($data) use ($provinsiSlug) {
+                $html = "<div><a href='".route('front.provinsi.kontak.show', array($provinsiSlug, $data->slug))."'>{$data->Nama}</a></div>";
                 $html .= "<small>{$data->Alamat}</small>";
                 return $html;
             })
@@ -96,5 +101,23 @@ class KontakController extends \BaseController
             ->make(true);
 
         return $datatables;
+    }
+
+    public function show($provinsiSlug, $kontakSlug)
+    {
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        $kontak = \Kontak::with('hunian')
+            ->slug($kontakSlug)
+            ->first();
+
+        // return \Response::json($kontak);
+
+        if(!is_null($kontak)) {
+
+            return \View::make('front.kontak.show', compact('kontak','provinsi'));
+        }
+
+        \App::abort(404);
     }
 }

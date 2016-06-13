@@ -4,21 +4,21 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class GenerateProvinsiSlug extends Command {
+class GenerateKontakSlug extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'ehousing:provinsi:slug';
+	protected $name = 'ehousing:kontak:slug';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Generate provinsi slug.';
+	protected $description = 'Generate kontak slug.';
 
 	/**
 	 * Create a new command instance.
@@ -37,14 +37,14 @@ class GenerateProvinsiSlug extends Command {
 	 */
 	public function fire()
 	{
-		Provinsi::chunk(10, function($provinces){
-			foreach ($provinces as $province) {
-				$prov = Provinsi::find($province->id);
-				$prov->NamaProvinsi = $prov->NamaProvinsi; // agak aneh yang penting jalan
+		Kontak::chunk(10, function($kontak){
+			foreach ($kontak as $item) {
+				$model = Kontak::find($item->id);
+				$model->Nama = $model->Nama; // agak aneh yang penting jalan
 
-				if($prov->save())
+				if($model->save())
 				{
-					$this->info("({$prov->id}) {$prov->NamaProvinsi} = {$prov->slug}");
+					$this->info("({$model->id}) {$model->Nama} = {$model->slug}");
 				}
 			}
 		});

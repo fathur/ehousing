@@ -14,3 +14,4 @@
 Artisan::add(new GenerateProvinsiSlug());
 Artisan::add(new GeneratePostSlug());
 Artisan::add(new GenerateHunianSlug());
+Artisan::add(new GenerateKontakSlug());
