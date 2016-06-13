@@ -195,4 +195,16 @@ class ProvinsiController extends \BaseController
             ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
             ->with('provinsi', $provinsiDetail);
     }
+
+    public function getEhousing($provinsiSlug)
+    {
+        $provinsi = Provinsi::slug($provinsiSlug)->first();
+        $dataProvinsi = new ProvinsiDataProvider($provinsi->id);
+        $data = $dataProvinsi->getDetail();
+
+        // return \Response::json($data);
+
+        return \View::make('front.provinsi.ehousing', compact('data'))
+            ->with('title', 'Profil Ehousing');
+    }
 }

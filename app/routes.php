@@ -20,6 +20,7 @@ Route::post('login', ['uses' => 'Front\AuthController@postLogin','as' => 'front.
 Route::get('password/forgot', ['uses' => 'Front\AuthController@getLostPassword','as' => 'front.auth.forgot']);
 Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword','as' => 'front.auth.reset']);
 
+Route::get('ehousing', array('uses' => 'Front\NasionalController@getEHousing','as'=>'front.nasional.ehousing'));
 Route::get('profile', function(){});
 Route::get('statistik', function(){});
 
@@ -73,6 +74,7 @@ Route::get('file/{type}/{url}', array('uses' => 'Front\Nasional\FileController@s
 
 // Provinsi routes
 Route::get('{provinsi}', ['uses' => 'Front\ProvinsiController@getDashboard','as'=>'front.provinsi.dashboard']);
+Route::get('{provinsi}/ehousing', ['uses' => 'Front\ProvinsiController@getEhousing','as'=>'front.provinsi.ehousing']);
 Route::get('{provinsi}/profile', ['uses' => 'Front\ProvinsiController@getProfile','as'=>'front.provinsi.profile']);
 Route::get('{provinsi}/statistik', ['uses' => 'Front\ProvinsiController@getStatistik','as'=>'front.provinsi.statistik']);
 

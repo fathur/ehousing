@@ -112,6 +112,9 @@ class FileController extends \BaseController
             case 'posts':
                 $location = 'post/' . $url;
                 break;
+            case 'profile':
+                $location = 'profile/' . $url;
+                break;
             default:
                 $location = $url;
         }

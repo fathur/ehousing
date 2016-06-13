@@ -102,4 +102,12 @@ class NasionalController extends \BaseController
 
         }
     }
+
+    public function getEhousing()
+    {
+        $data = \KonfigurasiSitus::where('KodeProvinsi', 0)->first();
+
+        return \View::make('front.nasional.ehousing', compact('data'))
+            ->with('title', 'Profil Ehousing');
+    }
 }
