@@ -4,21 +4,21 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class GeneratePostSlug extends Command {
+class GenerateHunianSlug extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'ehousing:post:slug';
+	protected $name = 'ehousing:hunian:slug';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Generate post slug.';
+	protected $description = 'Generate hunian slug.';
 
 	/**
 	 * Create a new command instance.
@@ -37,15 +37,14 @@ class GeneratePostSlug extends Command {
 	 */
 	public function fire()
 	{
-		Post::chunk(10, function($posts)
-		{
-			foreach ($posts as $post) {
-				$article = Post::find($post->id);
-				$article->Judul = $article->Judul; // agak aneh yang penting jalan
+		Hunian::chunk(10, function($hunian){
+			foreach ($hunian as $item) {
+				$model = Hunian::find($item->id);
+				$model->NamaHunian = $model->NamaHunian; // agak aneh yang penting jalan
 
-				if($article->save())
+				if($model->save())
 				{
-					$this->info("({$post->id}) {$article->Judul} = {$article->slug}");
+					$this->info("({$model->id}) {$model->NamaHunian} = {$model->slug}");
 				}
 			}
 		});

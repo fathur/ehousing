@@ -5,23 +5,30 @@
  * Date: 6/11/16
  * Time: 14:09
  */
-class Provinsi extends EhousingModel
+class Provinsi extends EhousingModel implements \Cviebrock\EloquentSluggable\SluggableInterface
 {
+    use \Cviebrock\EloquentSluggable\SluggableTrait;
+
     protected $table = 'provinsi';
     protected $primaryKey = 'KodeProvinsi';
-    protected $fillable = [
+    protected $fillable = array(
         'KodeProvinsi',
         'NamaProvinsi'
-    ];
-    protected $hidden = [
+    );
+    protected $hidden = array(
         'CreateUid',
         'CreateDate',
         'ModUid',
         'ModDate',
         'ExpiryDate'
-    ];
+    );
 
-    protected $appends = ['id'];
+    protected $appends = array('id');
+
+    protected $sluggable = array(
+        'build_from' => 'NamaProvinsi',
+        'save_to'    => 'slug',
+    );
 
     public function bantuanProgram()
     {

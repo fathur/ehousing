@@ -39,12 +39,12 @@ class GenerateProvinsiSlug extends Command {
 	{
 		Provinsi::chunk(10, function($provinces){
 			foreach ($provinces as $province) {
-				$slug = Str::slug($province->NamaProvinsi);
-				$prov = Provinsi::find($province->KodeProvinsi);
-				$prov->slug = $slug;
+				$prov = Provinsi::find($province->id);
+				$prov->NamaProvinsi = $prov->NamaProvinsi; // agak aneh yang penting jalan
+
 				if($prov->save())
 				{
-					$this->info($province->NamaProvinsi . ' = ' . $slug);
+					$this->info("({$prov->id}) {$prov->NamaProvinsi} = {$prov->slug}");
 				}
 			}
 		});

@@ -136,8 +136,15 @@ class HunianController extends \BaseController
         return $datatables;
     }
 
+    /**
+     * @param $provinsiSlug
+     * @param $hunianSlug
+     * @return \Illuminate\View\View
+     * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
+     */
     public function show($provinsiSlug, $hunianSlug)
     {
-
+        $hunian = \Hunian::slug($hunianSlug)->first();
+        return \View::make('front.hunian.show', compact('hunian'));
     }
 }

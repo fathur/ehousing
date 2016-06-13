@@ -5,8 +5,10 @@
  * Date: 6/11/16
  * Time: 14:05
  */
-class Hunian extends EhousingModel
+class Hunian extends EhousingModel implements \Cviebrock\EloquentSluggable\SluggableInterface
 {
+    use \Cviebrock\EloquentSluggable\SluggableTrait;
+
     const RUSUN_SEWA = 'RS';
     const RUSUNAMI = 'RN';
     const RUSUNAMI_SUBSIDI = 'RNS';
@@ -23,10 +25,15 @@ class Hunian extends EhousingModel
         'TahunPembangunan','TahunSelesai','JumlahUnit','JumlahLantai','LuasLahan',
         'TingkatHunian','KodeProvinsi','KodeKota','picture','Harga','Deskripsi',
         'StatusHunian','LinkExternal2','LinkExternal3','LinkExternal4','Tab2',
-        'Tab3', 'Tab4'
+        'Tab3', 'Tab4','slug'
     ];
 
     protected $appends = array('id');
+
+    protected $sluggable = array(
+        'build_from' => 'NamaHunian',
+        'save_to'    => 'slug',
+    );
 
     public function getIdAttribute()
     {
@@ -41,5 +48,10 @@ class Hunian extends EhousingModel
     public function referensi()
     {
         return $this->belongsTo('Referensi','JenisHunian');
+    }
+
+    public function scopeSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
     }
 }
