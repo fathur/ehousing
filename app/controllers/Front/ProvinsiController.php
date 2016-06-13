@@ -32,7 +32,7 @@ class ProvinsiController extends \BaseController
             $provinsi = Provinsi::slug($provinsiSlug)->first();
 
             if(is_null($provinsi))
-                return \Response::view('errors.404', array(), 404);
+                \App::abort(404);
 
             $data = new ProvinsiDataProvider($provinsi->id);
 
@@ -100,12 +100,12 @@ class ProvinsiController extends \BaseController
     public function getProfile($provinsiSlug)
     {
         try {
-            $tahun = \Input::has('tahun') ? \Input::get('tahun') : Carbon::now()->subYear()->year;
+            $tahun = \Input::get('tahun', Carbon::now()->subYear()->year);
 
             $provinsi = Provinsi::slug($provinsiSlug)->first();
 
             if(is_null($provinsi))
-                return \Response::view('errors.404', array(), 404);
+                \App::abort(404);
 
             $data = ProvinsiDataProvider::create($provinsi->id)
                 ->setYear($tahun);

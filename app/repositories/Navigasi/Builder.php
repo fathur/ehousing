@@ -75,12 +75,12 @@ class Builder
     public function checkProvinsi($string)
     {
         $exclude = array('test','login','password','kontak','hunian','posts','link',
-            'file');
+            'file','profile','statistik');
 
         $segmentProv = \Request::segment(1);
 
         if(in_array($segmentProv, $exclude))
-            return $string;
+            return preg_replace('/\{(provinsi)\}/i', '', $string);
 
         return preg_replace('/\{(provinsi)\}/i', $segmentProv, $string);
     }

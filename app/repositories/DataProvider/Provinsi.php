@@ -20,7 +20,7 @@ class Provinsi
      * Provinsi constructor.
      * @param $provinsiId
      */
-    function __construct($provinsiId)
+    function __construct($provinsiId = null)
     {
         $this->provinsiId = $provinsiId;
     }
@@ -30,7 +30,7 @@ class Provinsi
      * @return static
      * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
      */
-    public static function create($provinsiId)
+    public static function create($provinsiId = null)
     {
         $provinsi = new static($provinsiId);
         return $provinsi;

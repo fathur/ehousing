@@ -15,6 +15,8 @@ Route::get('test', function(){
    return \Repositories\Navigasi\Builder::render();
 });
 
+Route::get('/', array('uses' => 'Front\NasionalController@getDashboard','as'=>'front.nasional.dashboard'));
+
 // Route::get('/', ['uses' => 'Front\HomeController@index', 'as' => 'front.home']);
 
 Route::get('login', ['uses' => 'Front\AuthController@getLogin','as' => 'front.auth.login']);
@@ -22,6 +24,8 @@ Route::post('login', ['uses' => 'Front\AuthController@postLogin','as' => 'front.
 Route::get('password/forgot', ['uses' => 'Front\AuthController@getLostPassword','as' => 'front.auth.forgot']);
 Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword','as' => 'front.auth.reset']);
 
+Route::get('profile', function(){});
+Route::get('statistik', function(){});
 
 // Kontak routes
 Route::get('kontak/developer', array('uses' => 'Front\Nasional\KontakController@getDeveloper','as' => 'front.nasional.kontak.developer'));
@@ -38,6 +42,8 @@ Route::get('hunian/rumah-subsidi', array('uses' => 'Front\Nasional\HunianControl
 Route::get('hunian/condotel', array('uses' => 'Front\Nasional\HunianController@getCondotel', 'as' => 'front.nasional.hunian.condotel'));
 Route::get('hunian/apertemen', array('uses' => 'Front\Nasional\HunianController@getApartemen', 'as' => 'front.nasional.hunian.apartemen'));
 Route::get('hunian/hotel', array('uses' => 'Front\Nasional\HunianController@getHotel', 'as' => 'front.nasional.hunian.hotel'));
+Route::get('hunian/data', array('uses' => 'Front\Nasional\HunianController@data', 'as' => 'front.nasional.hunian.data'));
+Route::get('hunian/{hunian}', array('uses' => 'Front\Nasional\HunianController@show', 'as' => 'front.nasional.hunian.show'));
 
 // Post routes
 Route::get('posts/program', array('uses' => 'Front\Nasional\PostController@getProgram','as' => 'front.nasional.program.list'));
