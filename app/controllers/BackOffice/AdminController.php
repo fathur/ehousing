@@ -10,5 +10,10 @@ namespace BackOffice;
 
 class AdminController extends \BaseController
 {
+    protected $identifier = 'ehousing';
 
+    public function __construct()
+    {
+        \View::share('identifier', $this->identifier);
+    }
 }

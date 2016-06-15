@@ -17,6 +17,8 @@
 
     <link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap.css')}}">
+
     {{--
 
     <link href="{{asset("/assets/css/plugins/chartist/chartist.min.css")}}" rel="stylesheet"> --}}
@@ -152,6 +154,43 @@
 
     <script src="{{asset('vendor/classie/classie.js')}}"></script>
     <script src="{{asset('vendor/wow/dist/wow.js')}}"></script>
+
+    <script src="{{asset('vendor/bootbox.js/bootbox.js')}}"></script>
+
+    <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap.js')}}"></script>
+
+
+    <script>
+        function datatablesDelete(dom) {
+            $this = $(dom);
+
+            var     _token  = $this.data('token'),
+                    table   = $this.data('table'),
+                    url     = $this.data('url'),
+                    tableDt;
+
+            if(table != undefined)
+                tableDt = $('#' + table).DataTable();
+
+            bootbox.confirm('Apakah Anda yakin ingin menghapus data ini?', function(answer){
+                if (answer) {
+                    $.post(url, {
+                        _method: 'DELETE',
+                        _token: _token
+                    }, function(resp) {
+                        if (resp == '1' ||  resp == 1 || resp == true)
+                        {
+                            if (table != undefined) {
+                                tableDt.ajax.reload(null, false)
+                            }
+                        }
+                    })
+                }
+            });
+
+        }
+    </script>
 
     @yield('scripts')
     @yield('script')

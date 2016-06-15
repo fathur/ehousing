@@ -28,6 +28,12 @@ Route::group(array('prefix' => 'back-office'), function() {
         Route::resource('hunian', 'HunianController', array('except' => array('show')));
         Route::get('hunian/data', array('uses' => 'HunianController@data', 'as' => 'back-office.hunian.data'));
 
+        Route::resource('hunian.gallery', 'GaleriHunianController', array('only' => array('index','store','destroy')));
+        Route::get('gallery/data', array('uses' => 'GaleriHunianController@data', 'as' => 'back-office.gallary.data'));
+
+        Route::resource('kategori', 'KategoriController',array('except' => array('show')));
+        Route::get('kategori/data', array('uses' => 'KategoriController@data', 'as' => 'back-office.kategori.data'));
+
         Route::get('provinsi/name', array('uses' => 'ProvinsiController@getFromName', 'as' => 'back-office.provinsi.name'));
         Route::get('kontak/name', array('uses' => 'KontakController@getFromName', 'as' => 'back-office.kontak.name'));
         Route::get('kota/name', array('uses' => 'KabupatenController@getFromName', 'as' => 'back-office.kota.name'));
