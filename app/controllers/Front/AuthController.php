@@ -34,11 +34,11 @@ class AuthController extends \BaseController {
 
 		$attempt = \Auth::attempt(array(
 			'UserName' => \Input::get('UserName'),
-			'UserPassword' => \Input::get('UserPassword')
+			'password' => \Input::get('UserPassword')
 		));
 
 		if($attempt)
-			return \Redirect::intended('hunian');
+			return \Redirect::intended('back-office');
 
 		return \Redirect::route('front.auth.login')
 			->with('message','Login gagal! Username atau password tidak cocok.')

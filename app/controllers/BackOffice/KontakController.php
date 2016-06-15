@@ -83,5 +83,18 @@ class KontakController extends \BaseController {
 		//
 	}
 
+	public function getFromName()
+	{
+        $q = strtolower(\Input::get('q'));
+        $jenis = \Input::get('type');
 
+        $kontak = \Kontak::whereRaw(\DB::raw("LOWER(Nama) LIKE '%{$q}%'"));
+
+        if(!is_null($jenis))
+        {
+            $kontak->where('JenisKontak', $jenis);
+        }
+
+        return $kontak->get();
+	}
 }

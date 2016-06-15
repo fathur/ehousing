@@ -13,6 +13,13 @@ class Kota extends EhousingModel
         'KodeProvinsi','NamaKota'
     ];
 
+    protected $appends = array('id');
+
+    public function getIdAttribute()
+    {
+        return (int) $this->KodeKota;
+    }
+
     public function provinsi()
     {
         return $this->belongsTo('Provinsi','KodeProvinsi');

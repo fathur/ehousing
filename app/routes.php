@@ -14,11 +14,29 @@
 Route::get('/', array('uses' => 'Front\NasionalController@getDashboard','as'=>'front.nasional.dashboard'));
 
 // Route::get('/', ['uses' => 'Front\HomeController@index', 'as' => 'front.home']);
+Route::group(array('prefix' => 'back-office'), function() {
 
-Route::get('login', ['uses' => 'Front\AuthController@getLogin','as' => 'front.auth.login']);
-Route::post('login', ['uses' => 'Front\AuthController@postLogin','as' => 'front.auth.check']);
-Route::get('password/forgot', ['uses' => 'Front\AuthController@getLostPassword','as' => 'front.auth.forgot']);
-Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword','as' => 'front.auth.reset']);
+    Route::get('login', ['uses' => 'Front\AuthController@getLogin','as' => 'front.auth.login']);
+    Route::post('login', ['uses' => 'Front\AuthController@postLogin','as' => 'front.auth.check']);
+    Route::get('password/forgot', ['uses' => 'Front\AuthController@getLostPassword','as' => 'front.auth.forgot']);
+    Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword','as' => 'front.auth.reset']);
+
+
+    //Route::get('/', array('uses' => ''));
+
+    Route::group(array('namespace' => 'BackOffice'), function(){
+        Route::resource('hunian', 'HunianController', array('except' => array('show')));
+        Route::get('hunian/data', array('uses' => 'HunianController@data', 'as' => 'back-office.hunian.data'));
+
+        Route::get('provinsi/name', array('uses' => 'ProvinsiController@getFromName', 'as' => 'back-office.provinsi.name'));
+        Route::get('kontak/name', array('uses' => 'KontakController@getFromName', 'as' => 'back-office.kontak.name'));
+        Route::get('kota/name', array('uses' => 'KabupatenController@getFromName', 'as' => 'back-office.kota.name'));
+        Route::get('kecamatan/name', array('uses' => 'KecamatanController@getFromName', 'as' => 'back-office.kecamatan.name'));
+
+    });
+
+});
+
 
 Route::get('ehousing', array('uses' => 'Front\NasionalController@getEHousing','as'=>'front.nasional.ehousing'));
 Route::get('profile', function(){});

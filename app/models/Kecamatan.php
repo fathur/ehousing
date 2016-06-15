@@ -13,6 +13,13 @@ class Kecamatan extends EhousingModel
         'KodeKota','NamaKecamatan'
     ];
 
+    protected $appends = array('id');
+
+    public function getIdAttribute()
+    {
+        return (int) $this->KodeKecamatan;
+    }
+
     public function kota()
     {
         return $this->belongsTo('Kota','KodeKota');

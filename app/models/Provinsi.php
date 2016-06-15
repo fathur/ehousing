@@ -45,6 +45,11 @@ class Provinsi extends EhousingModel implements \Cviebrock\EloquentSluggable\Slu
         return $this->hasOne('KonfigurasiSitus','KodeProvinsi');
     }
 
+    public function hunian()
+    {
+        return $this->hasMany('Hunian','KodeProvinsi');
+    }
+
     public function getIdAttribute()
     {
         return (int) $this->KodeProvinsi;

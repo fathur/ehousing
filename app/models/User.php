@@ -29,6 +29,10 @@ class User extends EhousingModel implements UserInterface, RemindableInterface {
 		'UserName','Nama','UserPassword','Email','UserStatus','Region','KodeProvinsi'
 	];
 
+	public function getAuthPassword() {
+		return $this->UserPassword;
+	}
+
 	public function post()
 	{
 		return $this->hasMany('Post','CreateUid');

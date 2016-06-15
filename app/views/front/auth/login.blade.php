@@ -24,7 +24,7 @@
         <div>
             <h1 class="logo-name"><i class="fa fa-home"></i></h1>
         </div>
-        <form class="m-t" role="form" action="{{route('front.auth.check')}}" method="post">
+        {{Form::open(array('route' => 'front.auth.check', 'class' => 'm-t'))}}
 
             @if(Session::has('message'))
                 <div class="alert alert-{{Session::get('class')}} alert-dismissable" >
@@ -42,7 +42,7 @@
             <input type="submit" class="btn btn-primary block full-width m-b" value="Login">
 
             <a href="{{ route('front.auth.forgot') }}"><small>Lupa password?</small></a>
-        </form>
+        {{Form::close()}}
         <p class="m-t"> <small>E-Housing &copy; 2016</small> </p>
     </div>
 </div>
