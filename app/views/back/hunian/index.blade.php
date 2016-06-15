@@ -12,7 +12,7 @@
                     <h5>Daftar Hunian</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
+                    <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -20,6 +20,7 @@
                             <th>Jenis Hunian</th>
                             <th>Nama Pengembang</th>
                             <th>Hunian</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                     </table>
@@ -36,7 +37,7 @@
 
 @section('script')
     <script>
-        $('#hunian-datatables').DataTable({
+        $('#{{$identifier}}-datatables').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -54,7 +55,8 @@
                 {data:'NamaHunian',name:'NamaHunian'},
                 {data:'JenisHunian',name:'JenisHunian'},
                 {data:'Nama',name:'kontak.Nama'},
-                {data:'Website',name:'hunian.Website'}
+                {data:'Website',name:'hunian.Website'},
+                {data:'action',name:'action',searchable:false,orderable:false}
 
             ]
         });

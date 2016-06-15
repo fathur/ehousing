@@ -4,9 +4,11 @@ namespace BackOffice;
 use Carbon\Carbon;
 use Datatables;
 use Response;
+use View;
 
 class HunianController extends AdminController {
 
+    protected $identifier = 'hunian';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -153,18 +155,7 @@ class HunianController extends AdminController {
 	 */
 	public function destroy($id)
 	{
-		$result = \Hunian::destroy($id);
-
-        $redirect = \Redirect::route('back-office.hunian.index');
-
-        if($result)
-            $redirect->with('message','Data berhasil dihapus')
-                ->with('class','success');
-        else
-            $redirect->with('message','Data gagal dihapus')
-                ->with('class','danger');
-
-        return $redirect;
+		return \Hunian::destroy($id);
 	}
 
     public function data()
@@ -188,6 +179,14 @@ class HunianController extends AdminController {
             })
             ->editColumn('Website', function($data) {
                 return "<a href='{$data->Website}' target='_blank'>".$data->Website.'</a>';
+            })
+            ->addColumn('action', function($data){
+
+                return View::make('back.action')
+                    ->with('table', $this->identifier)
+                    ->with('url', route('back-office.hunian.destroy', array($data->id)))
+                    ->with('edit_action', route('back-office.hunian.edit', array($data->id)))
+                    ->render();
             })
             ->make(true);
 

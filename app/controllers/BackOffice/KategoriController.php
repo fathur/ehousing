@@ -88,7 +88,7 @@ class KategoriController extends AdminController
         $data = \Kategori::find($id);
         $data->NamaKategori =  \Input::get('NamaKategori');
         $data->save();
-        
+
         return \Redirect::route('back-office.kategori.edit', array($data->KategoriId))
             ->with('message', 'Data berhasil diubah')
             ->with('class', 'success');
@@ -104,17 +104,6 @@ class KategoriController extends AdminController
     public function destroy($id)
     {
         return \Kategori::destroy($id);
-        /*
-        $redirect = \Redirect::route('back-office.kategori.index');
-
-        if($result)
-            $redirect->with('message','Data berhasil dihapus')
-                ->with('class','success');
-        else
-            $redirect->with('message','Data gagal dihapus')
-                ->with('class','danger');
-
-        return $redirect;*/
     }
 
     public function data()
