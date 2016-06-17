@@ -14,6 +14,8 @@ class AdminController extends \BaseController
 
     public function __construct()
     {
+        parent::__construct();
+
         \View::share('identifier', $this->identifier);
     }
 }

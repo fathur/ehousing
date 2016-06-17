@@ -4,6 +4,14 @@ class BaseController extends Controller {
 
 	protected $title;
 
+	public function __construct()
+	{
+		if (! is_null($this->title)) $title = ' - ' . $this->title;
+		else $title = '';
+
+		View::share('title', $title);
+	}
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -16,10 +24,7 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 
-		if (! is_null($this->title)) $title = ' - ' . $this->title;
-		else $title = '';
 
-		View::share('title', $title);
 	}
 
 }

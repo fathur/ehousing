@@ -3317,12 +3317,7 @@ video {
     /* Only for demo */
     width: 24%;
 }
-/* Summernote text editor  */
-.note-editor {
-    height: auto !important;
-    min-height: 300px;
-    border: 1px solid #e5e6e7;
-}
+
 /* MODAL */
 .modal-content {
     background-clip: padding-box;

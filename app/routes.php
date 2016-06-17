@@ -34,6 +34,9 @@ Route::group(array('prefix' => 'back-office'), function() {
         Route::resource('kategori', 'KategoriController',array('except' => array('show')));
         Route::get('kategori/data', array('uses' => 'KategoriController@data', 'as' => 'back-office.kategori.data'));
 
+        Route::resource('post', 'PostController',array('except' => array('show')));
+        Route::get('post/data', array('uses' => 'PostController@data', 'as' => 'back-office.post.data'));
+
         Route::get('provinsi/name', array('uses' => 'ProvinsiController@getFromName', 'as' => 'back-office.provinsi.name'));
         Route::get('kontak/name', array('uses' => 'KontakController@getFromName', 'as' => 'back-office.kontak.name'));
         Route::get('kota/name', array('uses' => 'KabupatenController@getFromName', 'as' => 'back-office.kota.name'));

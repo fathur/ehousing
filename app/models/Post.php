@@ -12,7 +12,11 @@ class Post extends EhousingModel implements \Cviebrock\EloquentSluggable\Sluggab
     protected $table = 'post';
     protected $primaryKey = 'PostId';
 
-    protected $fillable = array('Judul','slug');
+    protected $fillable = array(
+        'Judul','KategoriId','IsiPost','Foto','PostStatus',
+        'ExpiryDate','PublishDate','ShareSocmed','JumlahVisit',
+        'IzinKomentar','Region','KodeProvinsi'
+    );
 
     protected $appends = array('id');
 
@@ -31,6 +35,16 @@ class Post extends EhousingModel implements \Cviebrock\EloquentSluggable\Sluggab
     public function user()
     {
         return $this->belongsTo('User','CreateUid');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo('Kategori','KategoriId');
+    }
+
+    public function provinsi()
+    {
+        return $this->belongsTo('Provinsi','KodeProvinsi');
     }
 
     public function scopeSlug($query, $slug)
