@@ -134,7 +134,7 @@ class LinkController extends AdminController {
 			->addColumn('action', function($data){
 
 				return View::make('back.action')
-					->with('table', $this->identifier)
+					->with('table', $this->identifier . '-datatables')
 					->with('url', route('back-office.link.destroy', array($data->id)))
 					->with('edit_action', route('back-office.link.edit', array($data->id)))
 					->render();

@@ -16,27 +16,29 @@
                     </div>
                 </div><!-- end of ibox-title -->
                 <div class="ibox-content">
-                    @if(Session::has('message'))
-                        <div class="alert alert-{{Session::get('class')}} alert-dismissable">
-                            <button aria-hidden="true" data-dismiss="alert" class="close" name="notif-success" type="button">×</button>
-                            {{Session::get('message')}} <a class="alert-link" href="#"></a>.
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @include('back.alert')
                         </div>
-                    @endif
-                    
-                    {{Form::open(array('route' => 'back-office.kategori.store', 'class' => "form-horizontal"))}}
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="NamaKategori">Nama Kategori *)</label>
-                            <div class="col-sm-10">
-                                <input type="text" id="NamaKategori" name="NamaKategori" class="form-control" maxlength="30">
+                    </div>
+
+                    <div class="row">
+                        {{Form::open(array('route' => 'back-office.kategori.store', 'class' => "form-horizontal"))}}
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="NamaKategori">Nama Kategori *)</label>
+                                <div class="col-sm-10">
+                                    {{Form::text('NamaKategori', null, array('class' => 'form-control', 'id' => 'NamaKategori'))}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group">
-                            <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">Simpan</button>
+                                </div>
                             </div>
-                        </div>
-                    {{Form::close()}}
+                        {{Form::close()}}
+                    </div>
                 </div><!-- end of ibox-content -->
             </div><!-- end of ibox float-e-margins -->
         </div><!-- end of col-lg-12 -->

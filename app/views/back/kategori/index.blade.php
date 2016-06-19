@@ -11,7 +11,6 @@
                     <table class="table table-hover table-striped" id="{{{ $identifier }}}-datatables">
                         <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Kategori</th>
                             <th>Action</th>
                         </tr>
@@ -39,7 +38,6 @@
                 }
             },
             columns: [
-                {data:'KategoriId',name:'KategoriId'},
                 {data:'NamaKategori',name:'NamaKategori'},
                 {data:'action',name:'action',searchable:false,orderable:false},
             ]
