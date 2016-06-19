@@ -9,4 +9,6 @@ class EhousingModel extends Eloquent
 {
     const UPDATED_AT = 'ModDate';
     const CREATED_AT = 'CreateDate';
+    const DEFAULT_EXPIRY_DATE = '9999-12-31 00:00:00';
+
 }

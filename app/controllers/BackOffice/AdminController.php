@@ -17,5 +17,14 @@ class AdminController extends \BaseController
         parent::__construct();
 
         \View::share('identifier', $this->identifier);
+
+        if(\Auth::check()) {
+            if(strtolower(\Auth::user()->Region) == strtolower('Nasional'))
+                \View::share('isNasional', true);
+            else
+                \View::share('isNasional', false);
+        }
+        else
+            \View::share('isNasional', null);
     }
 }

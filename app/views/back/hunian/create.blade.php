@@ -14,67 +14,46 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    {{Form::open(array('route' => 'back-office.hunian.store', 'id' => 'hunianForm', 'novalidate' => 'novalidate'))}}
-                        <div class="row">
 
-                            @if(Session::has('message'))
-                            <div class="alert alert-{{Session::get('class')}} alert-dismissable">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" name="notif-success" type="button">×</button>
-                                {{Session::get('message')}} <a class="alert-link" href="#"></a>.
-                            </div>
-                            @endif
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @include('back.alert')
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {{Form::open(array('route' => 'back-office.hunian.store', 'id' => 'hunianForm', 'novalidate' => 'novalidate'))}}
 
                             <div class="col-sm-4">
 
                                 <div class="form-group">
                                     <label for="namahunian">Nama Hunian *)</label>
-                                    <input type="text" name="NamaHunian" class="form-control" id="namahunian">
+                                    {{Form::text('NamaHunian', null, array('class' => 'form-control', 'id' => 'namahunian'))}}
                                 </div>
 
                                 <div class="form-group">
                                     <label for="jenishunian">Jenis Hunian *)</label>
                                     {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b", 'placeholder' => '- Jenis Hunian -'))}}
-                                    {{--
-                                    <select class="form-control m-b" name="jenishunian" id="jenishunian">
-                                        <option value="">- Jenis Hunian - </option>
-                                        <option value="APT">
-                                            Apartemen</option>
-                                        <option value="CDT">
-                                            Condotel</option>
-                                        <option value="HTL" selected="">
-                                            Hotel</option>
-                                        <option value="PRM">
-                                            Perumahan</option>
-                                        <option value="RMS">
-                                            Rumah Subsidi</option>
-                                        <option value="RS">
-                                            Rusun Sewa</option>
-                                        <option value="RN">
-                                            Rusunami</option>
-                                        <option value="RNS">
-                                            Rusunami Subsidi</option>
-                                    </select>
---}}
                                 </div>
                                 <div class="form-group">
                                     <label for="tahunpembangunan">Tahun Pembangunan</label>
-                                    <input type="text"  placeholder="" name="TahunPembangunan" class="form-control">
+                                    {{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlahunit">Jumlah Unit</label>
-                                    <input type="text" placeholder="" name="JumlahUnit" class="form-control">
+                                    {{Form::text('JumlahUnit', null, array('class' => 'form-control'))}}
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlahlantai">Jumlah Lantai</label>
-                                    <input type="text" placeholder="" name="JumlahLantai" class="form-control">
+                                    {{Form::text('JumlahLantai', null, array('class' => 'form-control'))}}
                                 </div>
                                 <div class="form-group">
                                     <label for="luaslahan">Luas Lahan</label>
-                                    <input type="text" placeholder="m²" name="LuasLahan" class="form-control">
+                                    {{Form::text('LuasLahan', null, array('class' => 'form-control'))}}
                                 </div>
                                 <div class="form-group">
                                     <label for="tingkathunian">Tingkat Hunian</label>
-                                    <input type="text" placeholder="" name="TingkatHunian" class="form-control">
+                                    {{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}
                                 </div>
 
                             </div>
@@ -82,7 +61,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="alamat">Alamat Hunian *)</label>
-                                    <textarea name="Alamat" class="form-control" id="alamat"></textarea>
+                                    {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}
                                 </div>
 
                                 <div class="form-group">
@@ -100,7 +79,7 @@
 
                                 <div class="form-group">
                                     <label for="koordinat">Koordinat</label>
-                                    <input type="text" placeholder="Latitude, longtudr" name="Koordinat" class="form-control">
+                                    {{Form::text('Koordinat', null, array('class' => 'form-control'))}}
                                 </div>
 
                             </div>
@@ -112,33 +91,36 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pengelola">Pengelola</label>
-                                    <input type="text" placeholder="" name="Pengelola" class="form-control">
+                                    {{Form::text('Pengelola', null, array('class' => 'form-control'))}}
+
                                 </div>
                                 <div class="form-group">
                                     <label for="notelp">No Telp</label>
-                                    <input type="text" placeholder="" name="NoTelp" class="form-control">
+                                    {{Form::text('NoTelp', null, array('class' => 'form-control'))}}
+
                                 </div>
                                 <div class="form-group">
                                     <label for="teleponPIC">No Telp PIC</label>
-                                    <input type="text"  placeholder="" name="NoHP_PIC" class="form-control">
+                                    {{Form::text('NoHP_PIC', null, array('class' => 'form-control'))}}
+
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" placeholder="Email" name="Email" class="form-control">
+                                    {{Form::text('Email', null, array('class' => 'form-control'))}}
+
                                 </div>
 
                                 <div class="form-group">
                                     <label for="website">Website</label>
-                                    <input type="text" placeholder="http://" name="Website" class="form-control">
+                                    {{Form::text('Website', null, array('class' => 'form-control'))}}
+
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-2">
-                                        <button class="btn btn-primary" type="submit">Simpan</button>
-                                    </div>
-                                </div>
+
+                                <button class="btn btn-primary" type="submit">Simpan</button>
+
                             </div>
-                        </div>
-                    {{Form::close()}}
+                        {{Form::close()}}
+                    </div>
                 </div>
             </div>
         </div>

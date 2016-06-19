@@ -9,6 +9,19 @@ class UserController extends AdminController {
 
 	protected $identifier = 'user';
 
+    protected $regions = array(
+            'Provinsi'	=> 'Provinsi',
+            'Nasional'	=> 'Nasional'
+        );
+
+    protected $statuses = array(
+            'Non-Active'    => 'Non Active',
+            'Active'        => 'Active',
+            'Pending'       => 'Pending',
+        );
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -29,7 +42,10 @@ class UserController extends AdminController {
 	 */
 	public function create()
 	{
-		//
+        return \View::make('back.user.create')
+            ->with('regions', $this->regions)
+            ->with('statuses', $this->statuses);
+
 	}
 
 
@@ -40,7 +56,36 @@ class UserController extends AdminController {
 	 */
 	public function store()
 	{
-		//
+        $rules = array(
+            'UserPassword'          => 'required',
+            'UserPasswordConfirm'   => 'required',
+        );
+
+		$validator = \Validator::make(\Input::all(), $rules);
+
+        if(!$validator->fails())
+        {
+            $result = \User::create(array(
+                'UserName' => \Input::get('UserName'),
+                'Nama' => \Input::get('Nama'),
+                'UserPassword' => \Hash::make(\Input::get('UserPassword')),
+                'Email' => \Input::get('Email'),
+                'UserStatus' => \Input::get('UserStatus'),
+                'Region' => \Input::get('Region'),
+                'KodeProvinsi' => \Input::get('KodeProvinsi')
+
+            ));
+
+            if($result)
+                return \Redirect::route('back-office.user.edit', $result->UserId)
+                    ->with('message', 'Data berhasil diubah')
+                    ->with('class', 'success');
+        }
+
+        return \Redirect::route('back-office.user.create')
+            ->with('message', 'Data gagal diubah')
+            ->with('class', 'danger')
+            ->withInput();
 	}
 
 
@@ -65,18 +110,10 @@ class UserController extends AdminController {
 	public function edit($id)
 	{
 		$data = \User::with('provinsi')->find($id);
-		$regions = array(
-			'Provinsi'	=> 'Provinsi',
-			'Nasional'	=> 'Nasional'
-		);
 
-		$statuses = array(
-			'Non-Active' => 'Non Active',
-			'Active' => 'Active',
-			'Pending' => 'Pending',
-		);
-
-		return \View::make('back.user.edit', compact('data','regions','statuses'));
+		return \View::make('back.user.edit', compact('data'))
+            ->with('regions', $this->regions)
+            ->with('statuses', $this->statuses);
 	}
 
 

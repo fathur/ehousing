@@ -15,21 +15,19 @@
                 </div>
                 <div class="ibox-content">
 
-                    {{Form::model($data, array(
-                        'method' => 'PUT',
-                        'route' => array('back-office.hunian.update', $data->id),
-                        'id' => 'hunianForm',
-                        'novalidate' => 'novalidate'
-                    ))}}
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @include('back.alert')
+                        </div>
+                    </div>
 
                     <div class="row">
-
-                        @if(Session::has('message'))
-                            <div class="alert alert-{{Session::get('class')}} alert-dismissable">
-                                <button aria-hidden="true" data-dismiss="alert" class="close" name="notif-success" type="button">×</button>
-                                {{Session::get('message')}} <a class="alert-link" href="#"></a>.
-                            </div>
-                        @endif
+                        {{Form::model($data, array(
+                            'method' => 'PUT',
+                            'route' => array('back-office.hunian.update', $data->id),
+                            'id' => 'hunianForm',
+                            'novalidate' => 'novalidate'
+                        ))}}
 
                         <div class="col-sm-4">
 
@@ -40,7 +38,7 @@
 
                             <div class="form-group">
                                 <label for="jenishunian">Jenis Hunian *)</label>
-                                {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b", 'placeholder' => '- Jenis Hunian -'))}}
+                                {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b"))}}
                             </div>
                             <div class="form-group">
                                 <label for="tahunpembangunan">Tahun Pembangunan</label>
@@ -141,14 +139,13 @@
                                 {{Form::text('Website', null, array('class' => 'form-control'))}}
 
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">Simpan</button>
-                                </div>
-                            </div>
+
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                            
                         </div>
+                        {{Form::close()}}
+
                     </div>
-                    {{Form::close()}}
                 </div>
             </div>
         </div>

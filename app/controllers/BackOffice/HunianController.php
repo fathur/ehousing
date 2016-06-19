@@ -9,6 +9,37 @@ use View;
 class HunianController extends AdminController {
 
     protected $identifier = 'hunian';
+
+	protected $rules = array(
+		'NamaHunian'	=> 'required',
+		'JenisHunian'	=> 'required|exists:referensi,koderef',
+		'Alamat'	=> 'required',
+		'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
+		'KodeKecamatan'	=> 'integer|exists:kecamatan,KodeKecamatan',
+		'KodeKota'		=> 'integer|exists:kota,KodeKota',
+		'TahunPembangunan'	=> 'numeric',
+		'JumlahUnit'	=> 'numeric',
+		'JumlahLantai'	=> 'numeric',
+		'LuasLahan'		=> 'numeric',
+		'TingkatHunian'	=> 'numeric',
+		'KodePengembang'	=> 'required|integer|exists:kontak,KontakId',
+		'Email'			=> 'email',
+		'Website'		=> 'url',
+	);
+
+	protected $messages = array(
+		'NamaHunian.required'	=> 'Nama hunian tidak boleh kosong',
+		'JenisHunian.required'	=> 'Jenis hunian tidak boleh kosong',
+		'JenisHunian.exists'	=> 'Jenis hunian yang diisi tidak ada',
+		'Alamat.required'		=> 'Alamat tidak boleh kosong',
+		'KodeProvinsi.required'	=> 'Provinsi tidak boleh kosong',
+		'KodeProvinsi.exists'	=> 'Provinsi yang diisi tidak ada',
+		'KodeKecamatan.exists'	=> 'Kecamatan yang diisi tidak ada',
+		'KodeKota.exists'		=> 'Kota/Kabupaten yang diisi tidak ada',
+		'KodePengembang.exists'		=> 'Nama pengembang yang diisi tidak ada',
+
+	);
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -27,15 +58,17 @@ class HunianController extends AdminController {
 	 */
 	public function create()
 	{
-        $listHunian = \Referensi::where('refId', 'JHN')
-            ->where(function($query) {
-                $query->where('Flag','=',0);
-                $query->orWhereNull('Flag');
-            })
-            ->orderBy('deskripsi', 'asc')
-            ->lists('deskripsi', 'koderef');
+
+		$listHunian = \Referensi::where('refId', \Referensi::JENIS_HUNIAN)
+			->where(function ($query) {
+				$query->where('Flag', '=', 0);
+				$query->orWhereNull('Flag');
+			})
+			->orderBy('deskripsi', 'asc')
+			->lists('deskripsi', 'koderef');
 
 		return \View::make('back.hunian.create', compact('listHunian'));
+
 	}
 
 
@@ -46,6 +79,15 @@ class HunianController extends AdminController {
 	 */
 	public function store()
 	{
+		$validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+		if($validator->fails()) {
+			return \Redirect::route('back-office.hunian.create')
+				->withErrors($validator)
+				->with('class', 'danger')
+				->withInput();
+		}
+
 		$result = \Hunian::create(array(
 			'JenisHunian' => \Input::get('JenisHunian'),
 			'NamaHunian' => \Input::get('NamaHunian'),
@@ -76,18 +118,21 @@ class HunianController extends AdminController {
 			// 'Tab2',
 			// 'Tab3',
 			// 'Tab4',
+			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
+			'CreateUid'		=> \Auth::user()->id
 		));
 
 
-        if($result)
-            return \Redirect::route('back-office.hunian.edit', $result->HunianId)
-                ->with('message', 'Data berhasil diubah')
-                ->with('class', 'success');
+		if ($result)
+			return \Redirect::route('back-office.hunian.edit', $result->HunianId)
+				->with('message', 'Data berhasil disimpan')
+				->with('class', 'success');
 
-        return \Redirect::route('back-office.hunian.create')
-            ->with('message', 'Data gagal diubah')
-            ->with('class', 'danger')
-            ->withInput();
+		return \Redirect::route('back-office.hunian.create')
+			->with('message', 'Data gagal disimpan')
+			->with('class', 'danger')
+			->withInput();
+
 	}
 
 	/**
@@ -98,7 +143,8 @@ class HunianController extends AdminController {
 	 */
 	public function edit($id)
 	{
-        $data = \Hunian::with('provinsi','kota','kecamatan')->find($id);
+        $data = \Hunian::with('provinsi','kota','kecamatan','kontak')
+			->find($id);
 
         $listHunian = \Referensi::where('refId', 'JHN')
             ->where(function($query) {
@@ -120,6 +166,16 @@ class HunianController extends AdminController {
 	 */
 	public function update($id)
 	{
+
+		$validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+		if($validator->fails()) {
+			return \Redirect::route('back-office.hunian.edit', array($id))
+				->withErrors($validator)
+				->with('class', 'danger')
+				->withInput();
+		}
+
 		$data = \Hunian::find($id);
         $data->JenisHunian = \Input::get('JenisHunian');
         $data->NamaHunian = \Input::get('NamaHunian');
@@ -139,11 +195,20 @@ class HunianController extends AdminController {
         $data->TingkatHunian = \Input::get('TingkatHunian');
         $data->KodeProvinsi = \Input::get('KodeProvinsi');
         $data->KodeKota = \Input::get('KodeKota');
-        $data->save();
 
-        return \Redirect::route('back-office.hunian.edit', array($data->HunianId))
-            ->with('message', 'Data berhasil diubah')
-            ->with('class', 'success');
+		$data->ModUid = \Auth::user()->id;
+
+        if($data->save())
+		{
+			return \Redirect::route('back-office.hunian.edit', array($id))
+				->with('message', 'Data berhasil diubah')
+				->with('class', 'success');
+		}
+
+		return \Redirect::route('back-office.hunian.edit', array($id))
+			->with('message', 'Data gagal diubah')
+			->with('class', 'danger')
+			->withInput();
 	}
 
 
@@ -183,7 +248,7 @@ class HunianController extends AdminController {
             ->addColumn('action', function($data){
 
                 return View::make('back.action')
-                    ->with('table', $this->identifier)
+                    ->with('table', $this->identifier . '-datatables')
                     ->with('url', route('back-office.hunian.destroy', array($data->id)))
                     ->with('edit_action', route('back-office.hunian.edit', array($data->id)))
                     ->render();

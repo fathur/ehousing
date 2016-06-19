@@ -25,7 +25,8 @@ class Hunian extends EhousingModel implements \Cviebrock\EloquentSluggable\Slugg
         'TahunPembangunan','TahunSelesai','JumlahUnit','JumlahLantai','LuasLahan',
         'TingkatHunian','KodeProvinsi','KodeKota','picture','Harga','Deskripsi',
         'StatusHunian','LinkExternal2','LinkExternal3','LinkExternal4','Tab2',
-        'Tab3', 'Tab4','slug'
+        'Tab3', 'Tab4','slug',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

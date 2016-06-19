@@ -26,7 +26,7 @@ Route::group(array('prefix' => 'back-office'), function() {
 
     Route::group(array(
         'namespace' => 'BackOffice',
-        // 'before' => 'auth'
+        'before' => 'auth'
     ), function(){
         Route::resource('hunian', 'HunianController', array('except' => array('show')));
         Route::get('hunian/data', array('uses' => 'HunianController@data', 'as' => 'back-office.hunian.data'));
