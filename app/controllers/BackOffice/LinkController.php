@@ -1,8 +1,15 @@
 <?php
 namespace BackOffice;
 
-class LinkController extends \BaseController {
+use Carbon\Carbon;
+use Datatables;
+use LinkInfo;
+use View;
 
+class LinkController extends AdminController {
+
+	protected $title = 'Link';
+	protected $identifier = 'link';
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -10,9 +17,9 @@ class LinkController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return \View::make('back.link.index')
+			->with('datatablesRoute', route('back-office.link.data'));
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -21,7 +28,13 @@ class LinkController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+
+		$linkGroups = \Referensi::where('RefId', 'GL0')
+			->where('Flag', '0')
+			->orderBy('Deskripsi','asc')
+			->lists('Deskripsi','KodeRef');
+
+		return \View::make('back.link.create', compact('linkGroups'));
 	}
 
 
@@ -32,21 +45,27 @@ class LinkController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		// dd(\Input::all());
+		$result = \LinkInfo::create(array(
+			'GrupLinkInfo' => \Input::get('GrupLinkInfo'),
+			'Judul' => \Input::get('Judul'),
+			'Deskripsi' => \Input::get('Deskripsi'),
+			'LinkInfo' => \Input::get('LinkInfo'),
+			'Region' => \Input::get('Region'),
+			'KodeProvinsi' => \Input::get('KodeProvinsi')
+		));
+
+
+		if($result)
+			return \Redirect::route('back-office.link.edit', $result->LinkInfoId)
+				->with('message', 'Data berhasil diubah')
+				->with('class', 'success');
+
+		return \Redirect::route('back-office.link.create')
+			->with('message', 'Data gagal diubah')
+			->with('class', 'danger')
+			->withInput();
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -56,7 +75,13 @@ class LinkController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$data = LinkInfo::with('provinsi')->find($id);
+		$linkGroups = \Referensi::where('RefId', 'GL0')
+			->where('Flag', '0')
+			->orderBy('Deskripsi','asc')
+			->lists('Deskripsi','KodeRef');
+
+		return \View::make('back.link.edit', compact('data','linkGroups'));
 	}
 
 
@@ -68,7 +93,19 @@ class LinkController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$data = \LinkInfo::find($id);
+		// ...
+		$data->GrupLinkInfo =  \Input::get('GrupLinkInfo');
+		$data->Judul =  \Input::get('Judul');
+		$data->Deskripsi =  \Input::get('Deskripsi');
+		$data->LinkInfo =  \Input::get('LinkInfo');
+		$data->Region =  \Input::get('Region');
+		$data->KodeProvinsi =  \Input::get('KodeProvinsi');
+		$data->save();
+
+		return \Redirect::route('back-office.link.edit', array($data->LinkInfoId))
+			->with('message', 'Data berhasil diubah')
+			->with('class', 'success');
 	}
 
 
@@ -80,8 +117,31 @@ class LinkController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return \LinkInfo::destroy($id);
 	}
 
+	public function data()
+	{
+
+		$data = \LinkInfo::select(array(
+			'linkinfo.*'
+		))->where('linkinfo.ExpiryDate','>',Carbon::now());
+
+		$datatables = Datatables::of($data)
+			->editColumn('LinkInfo', function($data) {
+				return "<a href='{$data->LinkInfo}' target='_blank'>{$data->LinkInfo}</a>";
+			})
+			->addColumn('action', function($data){
+
+				return View::make('back.action')
+					->with('table', $this->identifier)
+					->with('url', route('back-office.link.destroy', array($data->id)))
+					->with('edit_action', route('back-office.link.edit', array($data->id)))
+					->render();
+			})
+			->make(true);
+
+		return $datatables;
+	}
 
 }

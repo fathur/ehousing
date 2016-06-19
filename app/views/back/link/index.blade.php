@@ -12,17 +12,14 @@
                     <h5>Daftar Kontak</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
+                    <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>
-                            <th>&nbsp;</th>
-                            <th>Nama</th>
-                            <th>Jenis Kontak</th>
-                            <th>No. Telp</th>
-                            <th>Email</th>
-                            <th>Kompetensi</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th>Judul</th>
+                            <th>URL</th>
+                            <th>Group</th>
+                            <th>Deskripsi</th>
+                            <th width="10%">Action</th>
                         </tr>
                         </thead>
                     </table>
@@ -39,7 +36,7 @@
 
 @section('script')
     <script>
-        $('#hunian-datatables').DataTable({
+        $('#{{$identifier}}-datatables').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -47,22 +44,20 @@
                 data: function(params) {
 
                     @if(isset($provinsi))
-                        params.provinsi = '{{{ $provinsi->id }}}';
+                            params.provinsi = '{{{ $provinsi->id }}}';
                     @endif
 
                     @if(isset($jenis))
-                        params.jenis = '{{{ $jenis }}}';
+                            params.jenis = '{{{ $jenis }}}';
                     @endif
+
                 }
             },
             columns: [
-                {data:'KontakId',name:'KontakId'},
-                {data:'Nama',name:'Nama'},
-                {data:'JenisKontak',name:'JenisKontak'},
-                {data:'NoTelp',name:'NoTelp'},
-                {data:'Email',name:'Email'},
-                {data:'Kompetensi',name:'Kompetensi'},
-                {data:'TglVerifikasi',name:'TglVerifikasi'},
+                {data:'Judul',name:'Judul'},
+                {data:'LinkInfo',name:'LinkInfo'},
+                {data:'GrupLinkInfo',name:'GrupLinkInfo'},
+                {data:'Deskripsi',name:'Deskripsi'},
                 {data:'action',name:'action',searchable:false,orderable:false}
 
             ]

@@ -171,5 +171,106 @@
 @section('script')
     <script>
         $('#jeniskontak').select2();
+
+        $('#KodeProvinsi').select2({
+            ajax: {
+                url: '{{ route('back-office.provinsi.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Provinsi',
+            templateResult: function(data) {
+                return data.NamaProvinsi || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaProvinsi || data.text;
+            }
+        });
+
+
+
+        $('#KodeKota').select2({
+            ajax: {
+                url: '{{ route('back-office.kota.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page,
+                        provinsi: $('#KodeProvinsi').val()
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Kota / Kabupaten',
+            templateResult: function(data) {
+                return data.NamaKota || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaKota || data.text;
+            }
+        });
+
+
+        $('#KodeKecamatan').select2({
+            ajax: {
+                url: '{{ route('back-office.kecamatan.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page,
+                        kota: $('#KodeKota').val()
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Kecamatan',
+            templateResult: function(data) {
+                return data.NamaKecamatan || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaKecamatan || data.text;
+            }
+        });
     </script>
 @stop
