@@ -8,6 +8,26 @@ use View;
 class KontakController extends AdminController {
 
 	protected $title = 'Kontak';
+
+	protected $identifier = 'kontak';
+
+
+	protected $rules = array(
+		'Nama'	=> 'required',
+		'JenisKontak'	=> 'required|exists:referensi,koderef',
+		'Alamat'	=> 'required',
+		'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
+
+	);
+
+	protected $messages = array(
+		'Nama.required'	=> 'Nama kontak tidak boleh kosong',
+		'JenisKontak.required'	=> 'Jenis kontak tidak boleh kosong',
+		'Alamat.required'		=> 'Alamat tidak boleh kosong',
+		'KodeProvinsi.required'	=> 'Provinsi tidak boleh kosong',
+
+
+	);
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -26,14 +46,10 @@ class KontakController extends AdminController {
 	 */
 	public function create()
 	{
-		$jenisKontak = array(
-			'ARS' => 'Desain &amp; Arsitek',
-			'DEV' => 'Developer',
-			'KON' => 'Kontraktor',
-			'SUP' => 'Supplier',
-			'CON' => 'Tipe Kontak',
-			'TUK' => 'Tukang',
-		);
+		$jenisKontak = \Referensi::where('refId', \Referensi::JENIS_KONTAK)
+			->orderBy('deskripsi', 'asc')
+			->lists('deskripsi', 'koderef');
+
 		return \View::make('back.kontak.create', compact('jenisKontak'));
 	}
 
@@ -45,6 +61,16 @@ class KontakController extends AdminController {
 	 */
 	public function store()
 	{
+		$validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+		if($validator->fails()) {
+			return \Redirect::route('back-office.kontak.create')
+				->withErrors($validator)
+				->with('class', 'danger')
+				->withInput();
+		}
+
+
 		// dd(\Input::all());
 		$result = \Kontak::create(array(
 			'JenisKontak' => \Input::get('JenisKontak'),
@@ -56,7 +82,7 @@ class KontakController extends AdminController {
 			'NoHP' => \Input::get('NoHP'),
 			'Email' => \Input::get('Email'),
 			'Website' => \Input::get('Website'),
-			'IsCorporate' => \Input::get('IsCorporate'),
+			'IsCorporate' => \Input::get('IsCorporate') == '1' ? true: false, // todo: issue here
 			'Kompetensi' => \Input::get('Kompetensi'),
 			'IsActive' => true, //\Input::has('IsActive') ? true : false,
 			'Image' => \Input::get('Image'),
@@ -66,16 +92,19 @@ class KontakController extends AdminController {
 			'TglRegistrasi' => \Input::get('TglRegistrasi'),
 			'TglVerifikasi' => \Input::get('TglVerifikasi'),
 			'Status' => \Input::get('Status'),
+
+			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
+			'CreateUid'		=> \Auth::user()->id
 		));
 
 
 		if($result)
 			return \Redirect::route('back-office.kontak.edit', $result->KontakId)
-				->with('message', 'Data berhasil diubah')
+				->with('message', 'Data berhasil disimpan')
 				->with('class', 'success');
 
 		return \Redirect::route('back-office.kontak.create')
-			->with('message', 'Data gagal diubah')
+			->with('message', 'Data gagal disimpan')
 			->with('class', 'danger')
 			->withInput();
 	}
@@ -90,14 +119,11 @@ class KontakController extends AdminController {
 	{
 		$data = \Kontak::with('provinsi','kota','kecamatan')
 			->find($id);
-		$jenisKontak = array(
-			'ARS' => 'Desain &amp; Arsitek',
-			'DEV' => 'Developer',
-			'KON' => 'Kontraktor',
-			'SUP' => 'Supplier',
-			'CON' => 'Tipe Kontak',
-			'TUK' => 'Tukang',
-		);
+
+		$jenisKontak = \Referensi::where('refId', \Referensi::JENIS_KONTAK)
+			->orderBy('deskripsi', 'asc')
+			->lists('deskripsi', 'koderef');
+
 		return \View::make('back.kontak.edit', compact('data','jenisKontak'));
 	}
 
@@ -110,6 +136,16 @@ class KontakController extends AdminController {
 	 */
 	public function update($id)
 	{
+
+		$validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+		if($validator->fails()) {
+			return \Redirect::route('back-office.kontak.edit', array($id))
+				->withErrors($validator)
+				->with('class', 'danger')
+				->withInput();
+		}
+
 		$data = \Kontak::find($id);
 		$data->JenisKontak = \Input::get('JenisKontak');
 		$data->Nama = \Input::get('Nama');
@@ -120,7 +156,7 @@ class KontakController extends AdminController {
 		$data->NoHP = \Input::get('NoHP');
 		$data->Email = \Input::get('Email');
 		$data->Website = \Input::get('Website');
-		$data->IsCorporate = \Input::get('IsCorporate');
+		$data->IsCorporate = \Input::get('IsCorporate') == '1' ? true: false; // todo: issue here
 		$data->Kompetensi = \Input::get('Kompetensi');
 		$data->IsActive = \Input::get('IsActive');
 		$data->Image = \Input::get('Image');
@@ -130,11 +166,20 @@ class KontakController extends AdminController {
 		$data->TglRegistrasi = \Input::get('TglRegistrasi');
 		$data->TglVerifikasi = \Input::get('TglVerifikasi');
 		$data->Status = \Input::get('Status');
-		$data->save();
 
-		return \Redirect::route('back-office.kontak.edit', array($data->KontakId))
-			->with('message', 'Data berhasil diubah')
-			->with('class', 'success');
+		$data->ModUid = \Auth::user()->id;
+
+		if($data->save()) {
+
+			return \Redirect::route('back-office.kontak.edit', array($id))
+				->with('message', 'Data berhasil diubah')
+				->with('class', 'success');
+		}
+
+		return \Redirect::route('back-office.kontak.edit', array($id))
+			->with('message', 'Data gagal diubah')
+			->with('class', 'danger')
+			->withInput();
 	}
 
 

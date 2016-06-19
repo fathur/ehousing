@@ -17,6 +17,12 @@
                 <div class="ibox-content">
 
                     <div class="row">
+                        <div class="col-sm-12">
+                            @include('back.alert')
+                        </div>
+                    </div>
+
+                    <div class="row">
 
                             {{Form::open(array(
                                 'route' => 'back-office.kontak.store',

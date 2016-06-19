@@ -17,9 +17,16 @@
                 <div class="ibox-content">
 
                     <div class="row">
+                        <div class="col-sm-12">
+                            @include('back.alert')
+                        </div>
+                    </div>
+
+                    <div class="row">
 
                         {{Form::model($data, array(
                             'route' => array('back-office.kontak.update', $data->id),
+                            'method' => 'PUT',
                             'name'  => 'kontakForm',
                             'id' => 'kontakForm'
                         ))}}

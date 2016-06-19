@@ -8,6 +8,7 @@
 class Referensi extends EhousingModel
 {
     const JENIS_HUNIAN = 'JHN';
+    const JENIS_KONTAK = 'CON';
 
     protected $table = 'referensi';
     protected $primaryKey = 'KodeRef';

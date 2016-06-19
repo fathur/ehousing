@@ -12,7 +12,7 @@
                     <h5>Daftar Kontak</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
+                    <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -39,7 +39,7 @@
 
 @section('script')
     <script>
-        $('#hunian-datatables').DataTable({
+        $('#{{$identifier}}-datatables').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
