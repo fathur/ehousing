@@ -10,7 +10,8 @@ class HunianDetail extends Eloquent
     protected $primaryKey = 'HunianDetailId';
     protected $table = 'HunianDetail';
     protected $fillable = [
-        'HunianId','Realisasi','Rencana','Bulan','Tahun','KodeProvinsi','KontakId'
+        'HunianId','Realisasi','Rencana','Bulan','Tahun','KodeProvinsi','KontakId',
+        'CreateUid','ModUid'
     ];
 
     public function provinsi()

@@ -10,7 +10,8 @@ class Kategori extends EhousingModel
     protected $table = 'kategori';
     protected $primaryKey = 'KategoriId';
     protected $fillable = [
-        'NamaKategori','ExpiryDate'
+        'NamaKategori','ExpiryDate',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

@@ -10,7 +10,8 @@ class Kota extends EhousingModel
     protected $table = 'kota';
     protected $primaryKey = 'KodeKota';
     protected $fillable = [
-        'KodeProvinsi','NamaKota'
+        'KodeProvinsi','NamaKota',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

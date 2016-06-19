@@ -14,7 +14,8 @@ class KonfigurasiSitus extends EhousingModel
         'VisiMisi','StukturOrg','Email','KodeProvinsi','NamaGubernur',
         'NamaWakilGubernur','PeriodeJabatan','KelembagaanPerkim','LetakGeografis',
         'Kabupaten','Kota','NamaCP','NoTelpCP','EmailCP','TotalLuas','Daratan',
-        'Lautan','Website','JumlahVisit'
+        'Lautan','Website','JumlahVisit',
+        'CreateUid','ModUid'
     ];
 
     public function provinsi()

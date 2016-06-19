@@ -14,7 +14,8 @@ class BantuanProgram extends EhousingModel
         'Nama',
         'Deskripsi',
         'Lampiran',
-        'KodeProvinsi'
+        'KodeProvinsi',
+        'CreateUid','ModUid'
     ];
 
     public function provinsi()

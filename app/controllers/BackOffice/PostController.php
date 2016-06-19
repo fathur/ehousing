@@ -16,6 +16,19 @@ class PostController extends AdminController
 {
     protected $identifier = 'post';
 
+    protected $rules = array(
+        'Judul'	=> 'required',
+        'KategoriId' => 'required',
+        'Region' => 'required'
+    );
+
+    protected $messages = array(
+        'Judul.required'	=> 'Judul tidak boleh kosong',
+        'KategoriId.required'	=> 'Kategori tidak boleh kosong',
+        'Region.required'	=> 'Region tidak boleh kosong',
+
+    );
+
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +50,9 @@ class PostController extends AdminController
         $listCategories = \Kategori::lists('NamaKategori','KategoriId');
         $listProvinces = \Provinsi::lists('NamaProvinsi','KodeProvinsi');
 
+        array_unshift($listCategories, '- Pilih Kategori -');
+        array_unshift($listProvinces, '- Pilih Provinsi -');
+
         return \View::make('back.post.create', compact('listCategories','listProvinces'));
     }
 
@@ -48,6 +64,14 @@ class PostController extends AdminController
      */
     public function store()
     {
+        $validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+        if($validator->fails()) {
+            return \Redirect::route('back-office.post.create')
+                ->withErrors($validator)
+                ->with('class', 'danger')
+                ->withInput();
+        }
 
         if(\Input::hasFile('userfile'))
         {
@@ -71,23 +95,25 @@ class PostController extends AdminController
             'IsiPost' => \Input::get('IsiPost'),
             'Foto' => $newName,
             'PostStatus' => \Input::has('PostStatus') ? true : false,
-            'ExpiryDate' => \Input::get('ExpiryDate'),
             'PublishDate' => \Input::get('PublishDate'),
             'ShareSocmed' => \Input::has('ShareSocmed') ? true : false,
             'JumlahVisit' => \Input::get('JumlahVisit'),
             'IzinKomentar' => \Input::has('IzinKomentar') ? true : false,
             'Region' => \Input::get('Region'),
-            'KodeProvinsi' => \Input::get('KodeProvinsi')
+            'KodeProvinsi' => \Input::get('KodeProvinsi'),
+
+            'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
+            'CreateUid'		=> \Auth::user()->id
         ));
 
 
         if($result)
             return \Redirect::route('back-office.post.edit', $result->PostId)
-                ->with('message', 'Data berhasil diubah')
+                ->with('message', 'Data berhasil disimpan')
                 ->with('class', 'success');
 
         return \Redirect::route('back-office.post.create')
-            ->with('message', 'Data gagal diubah')
+            ->with('message', 'Data gagal disimpan')
             ->with('class', 'danger')
             ->withInput();
     }
@@ -121,13 +147,58 @@ class PostController extends AdminController
      */
     public function update($id)
     {
+        $validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+
+        if($validator->fails()) {
+            return \Redirect::route('back-office.post.edit', array($id))
+                ->withErrors($validator)
+                ->with('class', 'danger')
+                ->withInput();
+        }
+
+        if(\Input::hasFile('userfile'))
+        {
+            $file = \Input::file('userfile');
+            $destination = storage_path('uploads/post/');
+            $newName = $file->getClientOriginalName();
+
+            if($file->isValid())
+            {
+                $file->move($destination, $newName);
+            }
+        }
+        else
+        {
+            $newName = \Input::get('Foto');
+        }
+
         $data = \Post::find($id);
         // do something here
-        $data->save();
+        $data->Judul = \Input::get('Judul');
+        $data->KategoriId = \Input::get('KategoriId');
+        $data->IsiPost = \Input::get('IsiPost');
+        $data->Foto = $newName;
+        $data->PostStatus = \Input::has('PostStatus') ? true : false;
+        $data->PublishDate = \Input::get('PublishDate');
+        $data->ShareSocmed = \Input::has('ShareSocmed') ? true : false;
+        $data->JumlahVisit = \Input::get('JumlahVisit');
+        $data->IzinKomentar = \Input::has('IzinKomentar') ? true : false;
+        $data->Region = \Input::get('Region');
+        $data->KodeProvinsi = \Input::get('KodeProvinsi');
 
-        return \Redirect::route('back-office.post.edit', array($data->PostId))
-            ->with('message', 'Data berhasil diubah')
-            ->with('class', 'success');
+        $data->ModUid = \Auth::user()->id;
+
+        if($data->save()) {
+
+            return \Redirect::route('back-office.post.edit', array($id))
+                ->with('message', 'Data berhasil diubah')
+                ->with('class', 'success');
+        }
+
+        return \Redirect::route('back-office.post.edit', array($id))
+            ->with('message', 'Data gagal diubah')
+            ->with('class', 'danger')
+            ->withInput();
     }
 
 

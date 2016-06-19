@@ -26,7 +26,8 @@ class User extends EhousingModel implements UserInterface, RemindableInterface {
 	protected $primaryKey = 'UserId';
 
 	protected $fillable = [
-		'UserName','Nama','UserPassword','Email','UserStatus','Region','KodeProvinsi'
+		'UserName','Nama','UserPassword','Email','UserStatus','Region','KodeProvinsi',
+		'CreateUid','ModUid'
 	];
 
 	protected $appends =array('id');

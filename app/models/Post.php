@@ -15,7 +15,8 @@ class Post extends EhousingModel implements \Cviebrock\EloquentSluggable\Sluggab
     protected $fillable = array(
         'Judul','KategoriId','IsiPost','Foto','PostStatus',
         'ExpiryDate','PublishDate','ShareSocmed','JumlahVisit',
-        'IzinKomentar','Region','KodeProvinsi'
+        'IzinKomentar','Region','KodeProvinsi',
+        'CreateUid','ModUid'
     );
 
     protected $appends = array('id');

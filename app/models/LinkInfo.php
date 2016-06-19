@@ -15,7 +15,8 @@ class LinkInfo extends EhousingModel
     protected $table = 'linkinfo';
     protected $primaryKey = 'LinkInfoId';
     protected $fillable = [
-        'GrupLinkInfo','Judul','Deskripsi','LinkInfo','Region','KodeProvinsi'
+        'GrupLinkInfo','Judul','Deskripsi','LinkInfo','Region','KodeProvinsi',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

@@ -10,7 +10,8 @@ class LogAktifitas extends Eloquent
     protected $table = 'logaktifitas';
     protected $primaryKey = 'IdLog';
     protected $fillable = [
-        'UserId','Aktifitas','Waktu'
+        'UserId','Aktifitas','Waktu',
+        'CreateUid','ModUid'
     ];
 
     public function user()

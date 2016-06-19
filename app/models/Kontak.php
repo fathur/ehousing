@@ -20,7 +20,8 @@ class Kontak extends EhousingModel implements \Cviebrock\EloquentSluggable\Slugg
     protected $fillable = [
         'JenisKontak','Nama','Deskripsi','Alamat','KodeKecamatan','NoTelp','NoHP',
         'Email','Website','IsCorporate','Kompetensi','IsActive','Image','Picture',
-        'KodeProvinsi','KodeKota','TglRegistrasi','TglVerifikasi','Status','slug'
+        'KodeProvinsi','KodeKota','TglRegistrasi','TglVerifikasi','Status','slug',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

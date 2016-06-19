@@ -13,7 +13,8 @@ class Provinsi extends EhousingModel implements \Cviebrock\EloquentSluggable\Slu
     protected $primaryKey = 'KodeProvinsi';
     protected $fillable = array(
         'KodeProvinsi',
-        'NamaProvinsi'
+        'NamaProvinsi',
+        'CreateUid','ModUid'
     );
     protected $hidden = array(
         'CreateUid',

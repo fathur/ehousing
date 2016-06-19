@@ -18,6 +18,15 @@
 
                 <div class="ibox-content">
 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            @include('back.alert')
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+
                     {{Form::open(array(
                         'route' => 'back-office.post.store',
                         'files' => true,
@@ -72,29 +81,43 @@
 
                     {{-- If user has nasional role --}}
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="Region">Region *)</label>
-                        <div class="col-sm-10">
-                            <select class="form-control m-b" name="Region" id="Region">
-                                <option value="Nasional">Nasional</option>
-                                <option value="Provinsi">Provinsi</option>
-                            </select>
+                    @if($isNasional)
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="Region">Region *)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="Region" id="Region">
+                                    <option value="Nasional" selected>Nasional</option>
+                                    <option value="Provinsi">Provinsi</option>
+                                </select>
+                            </div>
+                        </div>
+                    @else
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="Region">Region *)</label>
+                            <div class="col-sm-10">
+                                <select class="form-control m-b" name="Region" id="Region">
+                                    <option value="Provinsi" selected>Provinsi</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div id="provinsi-wrapper">
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="KodeProvinsi">Provinsi</label>
+                            <div class="col-sm-10">
+                                {{Form::select('KodeProvinsi', $listProvinces, null, array(
+                                    'class' => "form-control m-b",
+                                    'name' => "KodeProvinsi",
+                                     'id' => "KodeProvinsi"
+                                ))}}
+
+                            </div>
                         </div>
                     </div>
 
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="KodeProvinsi">Provinsi</label>
-                        <div class="col-sm-10">
-                            {{Form::select('KodeProvinsi', $listProvinces, null, array(
-                                'class' => "form-control m-b",
-                                'name' => "KodeProvinsi",
-                                 'id' => "KodeProvinsi"
-                            ))}}
-
-                        </div>
-                    </div>
                     <div class="hr-line-dashed"></div>
 
                     {{-- end if --}}
@@ -141,6 +164,8 @@
                         </div>
                     </div>
                     {{Form::close()}}
+                        </div>
+                    </div>
                 </div><!-- end of ibox-content -->
             </div><!-- end of ibox float-e-margins -->
         </div><!-- end of col-lg-12 -->
@@ -167,5 +192,26 @@
             format: 'yyyy-mm-dd',
             todayBtn: true
         });
+
+        var $region = $('#Region');
+
+        showOrHideProvince($region);
+
+        $region.change(function(e){
+            var $this = $(this);
+            showOrHideProvince($this);
+        });
+
+        function showOrHideProvince(region)
+        {
+            if(region.val() == 'Nasional') {
+                $('#provinsi-wrapper').hide();
+                $('#KodeProvinsi').select2('val', '0');
+            }
+            else {
+                $('#provinsi-wrapper').show();
+
+            }
+        }
     </script>
 @stop

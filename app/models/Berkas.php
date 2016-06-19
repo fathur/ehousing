@@ -20,6 +20,7 @@ class Berkas extends EhousingModel
         'filename','url','file_size','description','categoryfile','publisheddate',
         'module','refkey','fileext','filecontent','downloadcounter','sharecounter',
         'raw_name','KodeProvinsi','Judul',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

@@ -11,7 +11,8 @@ class GaleriHunian extends EhousingModel
     protected $primaryKey = 'GaleriHunianId';
     protected $fillable = [
         'HunianId',
-        'Foto'
+        'Foto',
+        'CreateUid','ModUid'
     ];
 
     protected $hidden = [

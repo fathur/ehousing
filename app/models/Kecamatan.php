@@ -10,7 +10,8 @@ class Kecamatan extends EhousingModel
     protected $table ='kecamatan';
     protected $primaryKey = 'KodeKecamatan';
     protected $fillable = [
-        'KodeKota','NamaKecamatan'
+        'KodeKota','NamaKecamatan',
+        'CreateUid','ModUid'
     ];
 
     protected $appends = array('id');

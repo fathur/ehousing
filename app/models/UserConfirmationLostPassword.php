@@ -10,7 +10,8 @@ class UserConfirmationLostPassword extends Eloquent
     protected $table = 'userconfirmationlostpassword';
     protected $primaryKey = 'ConfirmId';
     protected $fillable = [
-        'UserId','UserEmail','ConfirmCode','ConfirmDateTime'
+        'UserId','UserEmail','ConfirmCode','ConfirmDateTime',
+        'CreateUid','ModUid'
     ];
 
     public function user()
