@@ -43,6 +43,9 @@ Route::group(array('prefix' => 'back-office'), function() {
         Route::resource('link', 'LinkController',array('except' => array('show')));
         Route::get('link/data', array('uses' => 'LinkController@data', 'as' => 'back-office.link.data'));
 
+        Route::resource('file', 'FileController',array('except' => array('show')));
+        Route::get('file/data', array('uses' => 'FileController@data', 'as' => 'back-office.file.data'));
+
         Route::get('provinsi/name', array('uses' => 'ProvinsiController@getFromName', 'as' => 'back-office.provinsi.name'));
         Route::get('kontak/name', array('uses' => 'KontakController@getFromName', 'as' => 'back-office.kontak.name'));
         Route::get('kota/name', array('uses' => 'KabupatenController@getFromName', 'as' => 'back-office.kota.name'));
