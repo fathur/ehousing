@@ -9,10 +9,11 @@ use Carbon\Carbon;
  */
 class Builder
 {
-    public static $exceptionFirstSegment = array('test','login','password','kontak','hunian','posts','post','link',
+    public static $exceptionFirstSegment = array(
+        'test','login','password','kontak','hunian','posts','post','link',
         'file','profile','statistik','program','berita','ehousing','back-office');
 
-    public static function render()
+    public static function renderFront()
     {
         $nav = new static;
 
@@ -22,6 +23,14 @@ class Builder
             ->get();
 
         return $nav->buildMenu($navigasi);
+    }
+
+    /**
+     * @author Fathur Rohman <fathur@dragoncapital.center>
+     */
+    public static function renderBack()
+    {
+        return \View::make('sidebar_back')->render();
     }
 
     protected function buildMenu($navigasi, $parent = 0)
@@ -84,4 +93,6 @@ class Builder
 
         return preg_replace('/\{(provinsi)\}/i', $segmentProv, $string);
     }
+
+
 }

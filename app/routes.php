@@ -24,7 +24,10 @@ Route::group(array('prefix' => 'back-office'), function() {
 
     //Route::get('/', array('uses' => ''));
 
-    Route::group(array('namespace' => 'BackOffice'), function(){
+    Route::group(array(
+        'namespace' => 'BackOffice',
+        // 'before' => 'auth'
+    ), function(){
         Route::resource('hunian', 'HunianController', array('except' => array('show')));
         Route::get('hunian/data', array('uses' => 'HunianController@data', 'as' => 'back-office.hunian.data'));
 
@@ -45,6 +48,12 @@ Route::group(array('prefix' => 'back-office'), function() {
 
         Route::resource('file', 'FileController',array('except' => array('show')));
         Route::get('file/data', array('uses' => 'FileController@data', 'as' => 'back-office.file.data'));
+
+        Route::resource('user', 'UserController',array('except' => array('show')));
+        Route::get('user/data', array('uses' => 'UserController@data', 'as' => 'back-office.user.data'));
+
+        Route::resource('pengajuan', 'PengajuanController',array('except' => array('show')));
+        Route::get('pengajuan/data', array('uses' => 'PengajuanController@data', 'as' => 'back-office.pengajuan.data'));
 
         Route::get('provinsi/name', array('uses' => 'ProvinsiController@getFromName', 'as' => 'back-office.provinsi.name'));
         Route::get('kontak/name', array('uses' => 'KontakController@getFromName', 'as' => 'back-office.kontak.name'));

@@ -13,13 +13,18 @@ View::composer('sidebar', function($view) {
         if(is_null($region))
             $view->with('sidemenu', '');
         else
-            $view->with('sidemenu', \Repositories\Navigasi\Builder::render());
+            $view->with('sidemenu', \Repositories\Navigasi\Builder::renderFront());
 
         $view->with('region', $region);
     }
+    // Jika back office
+    elseif ('back-office' == $segment)
+    {
+        $view->with('sidemenu', \Repositories\Navigasi\Builder::renderBack());
+    }
     // Jika nasional
     else {
-        $view->with('sidemenu', \Repositories\Navigasi\Builder::render());
+        $view->with('sidemenu', \Repositories\Navigasi\Builder::renderFront());
     }
 
 

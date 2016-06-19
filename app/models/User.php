@@ -29,6 +29,13 @@ class User extends EhousingModel implements UserInterface, RemindableInterface {
 		'UserName','Nama','UserPassword','Email','UserStatus','Region','KodeProvinsi'
 	];
 
+	protected $appends =array('id');
+
+	public function getIdAttribute()
+	{
+		return (int) $this->UserId;
+	}
+
 	public function getAuthPassword() {
 		return $this->UserPassword;
 	}
@@ -36,6 +43,12 @@ class User extends EhousingModel implements UserInterface, RemindableInterface {
 	public function post()
 	{
 		return $this->hasMany('Post','CreateUid');
+	}
+
+	public function provinsi()
+	{
+		return $this->belongsTo('Provinsi','KodeProvinsi');
+
 	}
 
 }
