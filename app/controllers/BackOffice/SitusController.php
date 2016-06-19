@@ -1,17 +1,7 @@
 <?php
 namespace BackOffice;
 
-class SitusController extends \BaseController {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+class SitusController extends AdminController {
 
 
 	/**
@@ -19,44 +9,18 @@ class SitusController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function edit()
 	{
-		//
-	}
+		$kodeProvinsi = \Auth::user()->KodeProvinsi;
 
+		if (\Auth::user()->Region == 'Provinsi') {
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+			$data = \KonfigurasiSitus::where('KodeProvinsi', $kodeProvinsi)->first();
 
+			return \View::make('back.situs.edit', compact('data'));
+		}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		\App::abort(404);
 	}
 
 
@@ -66,22 +30,71 @@ class SitusController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$kodeProvinsi = \Auth::user()->KodeProvinsi;
+
+		if (\Auth::user()->Region == 'Provinsi') {
+
+			if(\Input::hasFile('userfile'))
+			{
+				$file = \Input::file('userfile');
+				$destination = storage_path('uploads/profile/');
+				$newName = $file->getClientOriginalName();
+
+				if($file->isValid())
+				{
+					$file->move($destination, $newName);
+				}
+			}
+			else
+			{
+				$newName = \Input::get('Logo');
+			}
+
+			$data = \KonfigurasiSitus::where('KodeProvinsi', $kodeProvinsi)->first();
+
+			$data->Nama =  \Input::get('Nama');
+			$data->Deskripsi =  \Input::get('Deskripsi');
+			$data->ibukota =  \Input::get('ibukota');
+			// $data->Tagline =  \Input::get('Tagline');
+			$data->Alamat1 =  \Input::get('Alamat1');
+			$data->Alamat2 =  \Input::get('Alamat2');
+			$data->Alamat3 =  \Input::get('Alamat3');
+			$data->Logo =  $newName;
+			$data->VisiMisi =  \Input::get('VisiMisi');
+			$data->StrukturOrg =  \Input::get('StrukturOrg');
+			$data->Email =  \Input::get('Email');
+			// $data->KodeProvinsi =  \Input::get('KodeProvinsi');
+			$data->NamaGubernur =  \Input::get('NamaGubernur');
+			$data->NamaWakilGubernur =  \Input::get('NamaWakilGubernur');
+			$data->PeriodeJabatan =  \Input::get('PeriodeJabatan');
+			$data->KelembagaanPerkim =  \Input::get('KelembagaanPerkim');
+			$data->LetakGeografis =  \Input::get('LetakGeografis');
+			// $data->Kabupaten =  \Input::get('Kabupaten');
+			// $data->Kota =  \Input::get('Kota');
+			$data->NamaCP =  \Input::get('NamaCP');
+			$data->NoTelpCP =  \Input::get('NoTelpCP');
+			$data->EmailCP =  \Input::get('EmailCP');
+			$data->TotalLuas =  \Input::get('TotalLuas');
+			$data->Daratan =  \Input::get('Daratan');
+			$data->Lautan =  \Input::get('Lautan');
+			$data->Website =  \Input::get('Website');
+			// $data->JumlahVisit =  \Input::get('JumlahVisit');
+
+			if($data->save()) {
+
+				return \Redirect::route('back-office.provinsi.setting.edit')
+					->with('message', 'Data berhasil diubah')
+					->with('class', 'success');
+			}
+
+			return \Redirect::route('back-office.provinsi.setting.edit')
+				->with('message', 'Data gagal diubah')
+				->with('class', 'danger')
+				->withInput();
+		}
+
+		\App::abort(404);
 	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-
 }

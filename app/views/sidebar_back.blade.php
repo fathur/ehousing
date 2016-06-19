@@ -63,10 +63,10 @@
     </ul>
 </li>
 
-@if($isNasional)
+@if(!$isNasional)
 <li>
-    <a href="#">
-        <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Situs</span>
+    <a href="{{route('back-office.provinsi.setting.edit')}}">
+        <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Provinsi</span>
     </a>
 </li>
 @endif
@@ -82,5 +82,7 @@
 @endif
 
 <li>
-    <a href="{{url('/')}}"><span class="nav-label">Visit Home Page</span><span class="fa"></span></a>
+    <a href="{{url('/')}}">
+        <i class="fa fa-home"></i><span class="nav-label">Visit Home Page</span>
+    </a>
 </li>

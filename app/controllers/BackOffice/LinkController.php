@@ -29,7 +29,7 @@ class LinkController extends AdminController {
 	public function create()
 	{
 
-		$linkGroups = \Referensi::where('RefId', 'GL0')
+		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
 			->orderBy('Deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
@@ -76,7 +76,7 @@ class LinkController extends AdminController {
 	public function edit($id)
 	{
 		$data = LinkInfo::with('provinsi')->find($id);
-		$linkGroups = \Referensi::where('RefId', 'GL0')
+		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
 			->orderBy('Deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
