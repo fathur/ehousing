@@ -18,6 +18,7 @@ Route::group(array('prefix' => 'back-office'), function() {
 
     Route::get('login', ['uses' => 'Front\AuthController@getLogin','as' => 'front.auth.login']);
     Route::post('login', ['uses' => 'Front\AuthController@postLogin','as' => 'front.auth.check']);
+    Route::get('logout', ['uses' => 'Front\AuthController@getLogout','as' => 'front.auth.logout']);
     Route::get('password/forgot', ['uses' => 'Front\AuthController@getLostPassword','as' => 'front.auth.forgot']);
     Route::post('password/forgot', ['uses' => 'Front\AuthController@postLostPassword','as' => 'front.auth.reset']);
 

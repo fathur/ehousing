@@ -38,7 +38,7 @@ class AuthController extends \BaseController {
 		));
 
 		if($attempt)
-			return \Redirect::intended('back-office');
+			return \Redirect::intended('back-office/hunian');
 
 		return \Redirect::route('front.auth.login')
 			->with('message','Login gagal! Username atau password tidak cocok.')
@@ -47,7 +47,9 @@ class AuthController extends \BaseController {
 
 	public function getLogout()
 	{
+		\Auth::logout();
 
+		return \Redirect::to('/');
 	}
 
 	public function getLostPassword()

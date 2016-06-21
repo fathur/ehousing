@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class Builder
 {
     public static $exceptionFirstSegment = array(
-        'test','login','password','kontak','hunian','posts','post','link',
+        'test','login','logout','password','kontak','hunian','posts','post','link',
         'file','profile','statistik','program','berita','ehousing','back-office');
 
     public static function renderFront()

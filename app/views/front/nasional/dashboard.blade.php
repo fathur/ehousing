@@ -47,7 +47,7 @@
                                                 @if('' != $item->Foto)
                                                     <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
-                                                    {{{ Str::limit($item->IsiPost, 200) }}}
+                                                    {{{ Str::limit(strip_tags($item->IsiPost), 200) }}}
                                                 @endif
                                             </p>
 
@@ -97,7 +97,7 @@
                                                 @if(!is_null($item->Foto) || ('' != $item->Foto))
                                                     <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
-                                                    {{{ Str::limit($item->IsiPost, 200) }}}
+                                                    {{{ Str::limit(strip_tags($item->IsiPost), 200) }}}
                                                 @endif
                                             </p>
 
