@@ -45,6 +45,24 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
 
+                    @if(Auth::check())
+                        <li>
+                            Selamat datang, {{Auth::user()->Nama}}
+                        </li>
+                        <li>
+                            <a href="{{route('front.auth.logout')}}">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+
+                    @else
+                        <li>
+                            <a href="{{route('front.auth.login')}}">
+                                <i class="fa fa-sign-in"></i> Login
+                            </a>
+                        </li>
+
+                    @endif
                 </ul>
             </nav>
         </div>

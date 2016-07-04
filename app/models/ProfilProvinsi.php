@@ -27,9 +27,21 @@ class ProfilProvinsi extends Eloquent
 
     protected $table = 'ProfilProvinsi';
     protected $primaryKey = 'KodeProfilProv';
+    public $timestamps = false;
+    protected $appends = array('id');
+
+    public function getIdAttribute()
+    {
+        return (int) $this->KodeProfilProv;
+    }
 
     public function provinsi()
     {
         return $this->belongsTo('Provinsi','KodeProv');
+    }
+
+    public function source()
+    {
+        return $this->hasOne('ProfileProvinsiSource','profil_provinsi_id','KodeProfilProv');
     }
 }
