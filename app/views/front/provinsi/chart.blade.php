@@ -87,6 +87,16 @@
 
             <div class="ibox-content">
                 <div id="backlog-statistic"></div>
+
+                <div class="small">
+                    Sumber:
+                    <ul>
+                        @foreach($statistikBackLogSrc as $src)
+                            <li>{{$src}}</li>
+                        @endforeach
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -97,6 +107,15 @@
             </div>
             <div class="ibox-content">
                 <div id="anggaran-statistic"></div>
+
+                <div class="small">
+                    Sumber:
+                    <ul>
+                        @foreach($statistikAnggaranSrc as $src)
+                            <li>{{$src}}</li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -159,8 +178,16 @@
 
                 <div id="data-chart">
                     <div id="filter-statistic"></div>
+
+                    <div class="small">
+                        Sumber:
+                        <ul>
+                            @foreach($statistikAPBDSrc as $src)
+                                <li>{{$src}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-                <h6 class="no-margins">Sumber : <strong>BPS (Badan Pusat Statistik)</strong></h6>
             </div>
         </div>
     </div>

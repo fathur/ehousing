@@ -1,6 +1,8 @@
 <?php
 
 namespace Repositories\DataProvider;
+use BackOffice\ChartController;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
  * Project: ehousing-3.0
@@ -406,6 +408,30 @@ class Provinsi
         }
     }
 
+    public function getStatistikSource($kolom)
+    {
+        $jenis = null;
+
+        foreach (\ProfileProvinsiSource::$kinds as $key => $val) {
+            if($val['column'] === $kolom) {
+                $jenis = $key;
+                continue;
+            }
+        }
+
+        $src = \ProfileProvinsiSource::select(array(
+            \ProfileProvinsiSource::$kinds[$jenis]['source_column']
+        ))
+            ->distinct()
+            ->leftJoin('ProfilProvinsi','ProfilProvinsi.KodeProfilProv','=','profile_provinsi_sources.profil_provinsi_id');
+
+        if( ! is_null($this->provinsiId) || 0 != $this->provinsiId) {
+            $src->where('ProfilProvinsi.KodeProv', $this->provinsiId);
+        }
+
+        return $src->lists(\ProfileProvinsiSource::$kinds[$jenis]['source_column']);
+    }
+
     /**
      * Untuk data statistik
      *
@@ -439,13 +465,28 @@ class Provinsi
         return $this->getStatistik('BacklogRumah');
     }
 
+    public function getStatistikSourceBacklog()
+    {
+        return $this->getStatistikSource('BacklogRumah');
+    }
+
     public function getStatistikAnggaran()
     {
         return $this->getStatistik('AnggaranKemenpera');
     }
 
+    public function getStatistikSourceAnggaran()
+    {
+        return $this->getStatistikSource('AnggaranKemenpera');
+    }
+
     public function getStatistikAPBD()
     {
         return $this->getStatistik('TotalAPBDProv');
+    }
+
+    public function getStatistikSourceAPBD()
+    {
+        return $this->getStatistikSource('TotalAPBDProv');
     }
 }

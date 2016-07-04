@@ -121,13 +121,26 @@ class ProvinsiController extends \BaseController
                                     ->setYear($tahun)
                                     ->getStatistikBacklog();
 
+            $statistikBackLogSrc   = ProvinsiDataProvider::create($provinsi->id)
+                ->setYear($tahun)
+                ->getStatistikSourceBacklog();
+
+
             $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikAnggaran();
 
+            $statistikAnggaranSrc   = ProvinsiDataProvider::create($provinsi->id)
+                ->setYear($tahun)
+                ->getStatistikSourceAnggaran();
+
             $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikAPBD();
+
+            $statistikAPBDSrc   = ProvinsiDataProvider::create($provinsi->id)
+                ->setYear($tahun)
+                ->getStatistikSourceAPBD();
 
 
 
@@ -136,7 +149,8 @@ class ProvinsiController extends \BaseController
 
             return \View::make('front.provinsi.profile', compact(
                     'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
-                    'statistikAnggaran','statistikBackLog','filterStatistic'
+                    'statistikAnggaran','statistikBackLog','filterStatistic',
+                    'statistikBackLogSrc','statistikAnggaranSrc','statistikAPBDSrc'
                 ))
                 ->with('fields', \ProfilProvinsi::$fields)
                 ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
@@ -177,18 +191,33 @@ class ProvinsiController extends \BaseController
             ->setYear($tahun)
             ->getStatistikBacklog();
 
+        $statistikBackLogSrc   = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistikSourceBacklog();
+
         $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikAnggaran();
+
+        $statistikAnggaranSrc   = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistikSourceAnggaran();
 
         $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistik($kolom);
 
+        /*$statistikAPBDSrc   = ProvinsiDataProvider::create($provinsi->id)
+            ->setYear($tahun)
+            ->getStatistikSourceAPBD();*/
+
         return \View::make('front.provinsi.statistik', compact(
             'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
             'statistikAnggaran','statistikBackLog','filterStatistic','fields',
-            'kolom'
+            'kolom',
+            'statistikBackLogSrc','statistikAnggaranSrc'
+            //'statistikAPBDSrc'
+
         ))
 
             ->with('fields', \ProfilProvinsi::$fields)
