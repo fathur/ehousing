@@ -106,6 +106,7 @@ class PostController extends AdminController
             'CreateUid'		=> \Auth::user()->id
         ));
 
+        $this->flushPostCache();
 
         if($result)
             return \Redirect::route('back-office.post.edit', $result->PostId)
@@ -188,6 +189,8 @@ class PostController extends AdminController
 
         $data->ModUid = \Auth::user()->id;
 
+        $this->flushPostCache();
+
         if($data->save()) {
 
             return \Redirect::route('back-office.post.edit', array($id))
@@ -210,6 +213,8 @@ class PostController extends AdminController
      */
     public function destroy($id)
     {
+        $this->flushPostCache();
+
         return \Post::destroy($id);
     }
 
@@ -239,5 +244,10 @@ class PostController extends AdminController
             ->make(true);
 
         return $datatables;
+    }
+
+    protected function flushPostCache()
+    {
+        \Cache::flush();
     }
 }

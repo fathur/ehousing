@@ -97,6 +97,7 @@ class KontakController extends AdminController {
 			'CreateUid'		=> \Auth::user()->id
 		));
 
+		$this->flushKontakCache();
 
 		if($result)
 			return \Redirect::route('back-office.kontak.edit', $result->KontakId)
@@ -169,6 +170,8 @@ class KontakController extends AdminController {
 
 		$data->ModUid = \Auth::user()->id;
 
+		$this->flushKontakCache();
+
 		if($data->save()) {
 
 			return \Redirect::route('back-office.kontak.edit', array($id))
@@ -191,6 +194,8 @@ class KontakController extends AdminController {
 	 */
 	public function destroy($id)
 	{
+		$this->flushKontakCache();
+
 		return \Kontak::destroy($id);
 	}
 
@@ -233,5 +238,10 @@ class KontakController extends AdminController {
         }
 
         return $kontak->get();
+	}
+
+	protected function flushKontakCache()
+	{
+		\Cache::flush();
 	}
 }

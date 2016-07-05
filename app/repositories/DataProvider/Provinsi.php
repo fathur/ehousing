@@ -2,6 +2,7 @@
 
 namespace Repositories\DataProvider;
 use BackOffice\ChartController;
+use Carbon\Carbon;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 /**
@@ -126,7 +127,11 @@ class Provinsi
      */
     public function getNews()
     {
-        $results = $this->getPostByCategory(array(1,2));
+        $categories = array(1,2);
+
+
+
+        $results = $this->getPostByCategory($categories);
         $this->limit = self::DEFAULT_LIMIT;
         return $results;
     }
@@ -139,7 +144,11 @@ class Provinsi
      */
     public function getInformasi()
     {
-        return $this->getPostByCategory(array(3));
+        $categories = array(3);
+
+
+
+        return $this->getPostByCategory($categories);
     }
 
     /**
@@ -151,7 +160,11 @@ class Provinsi
      */
     public function getPrograms()
     {
-        return $this->getPostByCategory(array(7));
+        $categories = array(7);
+
+
+
+        return $this->getPostByCategory($categories);
     }
 
     public function getFileByCategory($categoryId = array())
@@ -247,6 +260,22 @@ class Provinsi
             ->take($this->limit)
             ->get();
 
+        // masukin di cache biar ga query lagi
+        if(! is_null($jenisKontak) || '' != $jenisKontak)
+        {
+            if(! is_null($this->provinsiId) || 0 != $this->provinsiId)
+                \Cache::put('kontak.'.$this->provinsiId.'.'.$jenisKontak, $results, Carbon::now()->addDay());
+            else
+                \Cache::put('kontak.all.'.$jenisKontak, $results, Carbon::now()->addDay());
+        }
+        else
+        {
+            if(! is_null($this->provinsiId) || 0 != $this->provinsiId)
+                \Cache::put('kontak.'.$this->provinsiId.'.all', $results, Carbon::now()->addDay());
+            else
+                \Cache::put('kontak.all.all', $results, Carbon::now()->addDay());
+        }
+
         if(! is_null($results))
             return $results;
 
@@ -262,7 +291,7 @@ class Provinsi
      */
     public function getContactDevelopers()
     {
-        return $this->getContacts('dev');
+        return $this->getKontakFromCacheOrDatabase('dev');
     }
 
     /**
@@ -274,9 +303,7 @@ class Provinsi
      */
     public function getContactArsitek()
     {
-        return $this->getContacts('ars');
-
-
+        return $this->getKontakFromCacheOrDatabase('ars');
     }
 
     /**
@@ -288,7 +315,7 @@ class Provinsi
      */
     public function getContactContractor()
     {
-        return $this->getContacts('kon');
+        return $this->getKontakFromCacheOrDatabase('kon');
     }
 
     /**
@@ -300,8 +327,7 @@ class Provinsi
      */
     public function getContactTukang()
     {
-        return $this->getContacts('tuk');
-
+        return $this->getKontakFromCacheOrDatabase('tuk');
     }
 
     /**
@@ -313,7 +339,7 @@ class Provinsi
      */
     public function getContactSupplier()
     {
-        return $this->getContacts('sup');
+        return $this->getKontakFromCacheOrDatabase('sup');
     }
 
     /**
@@ -491,5 +517,25 @@ class Provinsi
     public function getStatistikSourceAPBD()
     {
         return $this->getStatistikSource('TotalAPBDProv');
+    }
+
+    /**
+     * @return array|\Illuminate\Database\Eloquent\Collection|mixed|static[]
+     * @throws ContactNotFoundException
+     * @author Fathur Rohman <fathur@dragoncapital.center>
+     */
+    protected function getKontakFromCacheOrDatabase($key)
+    {
+        if (!is_null($this->provinsiId) || 0 != $this->provinsiId) {
+            if (\Cache::has('kontak.' . $this->provinsiId . '.'.$key)) {
+                return \Cache::get('kontak.' . $this->provinsiId . '.'.$key);
+            }
+        } else {
+            if (\Cache::has('kontak.all.'.$key)) {
+                return \Cache::get('kontak.all.'.$key);
+            }
+        }
+
+        return $this->getContacts($key);
     }
 }
