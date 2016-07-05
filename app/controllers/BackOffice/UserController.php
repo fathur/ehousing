@@ -160,7 +160,12 @@ class UserController extends AdminController {
 
 		if(\Input::has('provinsi'))
 		{
-			$data->where('KodeProvinsi', \Input::get('provinsi'));
+			$data->where('user.KodeProvinsi', \Input::get('provinsi'));
+		}
+
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$data->where('user.KodeProvinsi', \Auth::user()->KodeProvinsi);
 		}
 
 		$datatables = Datatables::of($data)

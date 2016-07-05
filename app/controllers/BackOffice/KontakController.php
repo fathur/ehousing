@@ -201,6 +201,11 @@ class KontakController extends AdminController {
 			'kontak.*'
 		))->where('kontak.ExpiryDate','>',Carbon::now());
 
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$data->where('kontak.KodeProvinsi', \Auth::user()->KodeProvinsi);
+		}
+
 		$datatables = Datatables::of($data)
 			->addColumn('action', function($data){
 

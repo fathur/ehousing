@@ -222,6 +222,11 @@ class PostController extends AdminController
             ->leftJoin('user','user.UserId','=','post.CreateUid')
             ->where('post.ExpiryDate','>',Carbon::now());
 
+        if(\Auth::user()->Region == 'Provinsi')
+        {
+            $data->where('post.KodeProvinsi', \Auth::user()->KodeProvinsi);
+        }
+
         $datatables = Datatables::of($data)
             ->addColumn('action', function($data){
 

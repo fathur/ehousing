@@ -47,7 +47,13 @@
 
                     @if(Auth::check())
                         <li>
-                            Selamat datang, {{Auth::user()->Nama}}
+                            Selamat datang, {{Auth::user()->Nama}} ( {{Auth::user()->Region}}
+                            @if(Auth::user()->Region == 'Provinsi')
+                                : {{\Provinsi::find(Auth::user()->KodeProvinsi)->NamaProvinsi}}
+                            @endif )
+                        </li>
+                        <li>
+                            <a href="{{url('back-office/hunian')}}">Back Office</a>
                         </li>
                         <li>
                             <a href="{{route('front.auth.logout')}}">

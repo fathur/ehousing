@@ -232,6 +232,10 @@ class HunianController extends AdminController {
         ))
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$hunian->where('hunian.KodeProvinsi', \Auth::user()->KodeProvinsi);
+		}
 
         $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
 

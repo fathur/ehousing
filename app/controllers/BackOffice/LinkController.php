@@ -127,6 +127,11 @@ class LinkController extends AdminController {
 			'linkinfo.*'
 		))->where('linkinfo.ExpiryDate','>',Carbon::now());
 
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$data->where('linkinfo.KodeProvinsi', \Auth::user()->KodeProvinsi);
+		}
+
 		$datatables = Datatables::of($data)
 			->editColumn('LinkInfo', function($data) {
 				return "<a href='{$data->LinkInfo}' target='_blank'>{$data->LinkInfo}</a>";

@@ -158,6 +158,11 @@ class FileController extends AdminController {
 			'file.*'
 		))->where('file.ExpiryDate','>',Carbon::now());
 
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$data->where('file.KodeProvinsi', \Auth::user()->KodeProvinsi);
+		}
+
 		$datatables = Datatables::of($data)
 			->editColumn('filename', function($data) {
 				$html = "<a href='".route('front.file.download', array($data->url))."'>{$data->filename}</a>";
