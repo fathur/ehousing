@@ -182,7 +182,7 @@
                     <div class="small">
                         Sumber:
                         <ul>
-                            @foreach($statistikAPBDSrc as $src)
+                            @foreach($filterStatisticSrc as $src)
                                 <li>{{$src}}</li>
                             @endforeach
                         </ul>

@@ -429,7 +429,10 @@ class Provinsi
             $src->where('ProfilProvinsi.KodeProv', $this->provinsiId);
         }
 
-        return $src->lists(\ProfileProvinsiSource::$kinds[$jenis]['source_column']);
+        return array_filter($src->lists(\ProfileProvinsiSource::$kinds[$jenis]['source_column']), function($el) {
+            if($el != '')
+                return $el;
+        });
     }
 
     /**
