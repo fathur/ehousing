@@ -65,16 +65,35 @@ class UserController extends AdminController {
 
         if(!$validator->fails())
         {
-            $result = \User::create(array(
-                'UserName' => \Input::get('UserName'),
-                'Nama' => \Input::get('Nama'),
-                'UserPassword' => \Hash::make(\Input::get('UserPassword')),
-                'Email' => \Input::get('Email'),
-                'UserStatus' => \Input::get('UserStatus'),
-                'Region' => \Input::get('Region'),
-                'KodeProvinsi' => \Input::get('KodeProvinsi')
+			$postData = array(
+				'UserName' => \Input::get('UserName'),
+				'Nama' => \Input::get('Nama'),
+				'UserPassword' => \Hash::make(\Input::get('UserPassword')),
+				'Email' => \Input::get('Email'),
+				'UserStatus' => \Input::get('UserStatus'),
+				'Region' => \Input::get('Region'),
+				'KodeProvinsi' => \Input::get('KodeProvinsi')
 
-            ));
+			);
+
+			// Provinsi
+			if(\Auth::user()->Region == 'Provinsi')
+			{
+				array_push($postData, array(
+					'KodeProvinsi' => \Auth::user()->KodeProvinsi,
+					'Region' => 'Provinsi',
+				));
+			}
+			// Nasional
+			else
+			{
+				array_push($postData, array(
+					'KodeProvinsi' => \Input::get('KodeProvinsi'),
+					'Region' => \Input::get('Region'),
+				));
+			}
+
+            $result = \User::create($postData);
 
             if($result)
                 return \Redirect::route('back-office.user.edit', $result->UserId)
@@ -130,8 +149,18 @@ class UserController extends AdminController {
 		$data->Nama = \Input::get('Nama');
 		$data->Email = \Input::get('Email');
 		$data->UserStatus = \Input::get('UserStatus');
-		$data->Region = \Input::get('Region');
-		$data->KodeProvinsi = \Input::get('KodeProvinsi');
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+			$data->Region = 'Provinsi';
+
+		}
+		else {
+			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+			$data->Region = \Input::get('Region');
+
+		}
+
 		$data->save();
 
 		return \Redirect::route('back-office.user.edit', array($data->UserId))

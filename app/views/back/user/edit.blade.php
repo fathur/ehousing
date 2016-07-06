@@ -44,6 +44,7 @@
 
                             <div class="hr-line-dashed"></div>
 
+                            @if($isNasional)
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="Region">Region *)</label>
                                 <div class="col-sm-10">
@@ -64,7 +65,8 @@
                             </div>
 
                             <div class="hr-line-dashed"></div>
-
+                            @endif
+                        
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="UserStatus">Status</label>
                                 <div class="col-sm-10">
