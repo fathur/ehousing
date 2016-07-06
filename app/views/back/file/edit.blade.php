@@ -29,6 +29,16 @@
                                 {{Form::textarea('description', null, array('class' => 'form-control', 'id' => 'description'))}}
                             </div>
 
+                            @if($isNasional)
+                                <div class="form-group">
+                                    <label for="provinsi">Provinsi *)</label>
+                                    <select class="form-control m-b" name="KodeProvinsi" id="provinsi">
+                                        @if(isset($data->provinsi))
+                                            <option value="{{$data->KodeProvinsi}}" selected>{{$data->provinsi->NamaProvinsi}}</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="col-sm-3">
@@ -69,4 +79,41 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('script')
+    <script>
+        $('#provinsi').select2({
+            ajax: {
+                url: '{{ route('back-office.provinsi.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Provinsi',
+            templateResult: function(data) {
+                return data.NamaProvinsi || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaProvinsi || data.text;
+            }
+        });
+
+    </script>
 @stop

@@ -62,8 +62,7 @@ class FileController extends AdminController {
 			throw new UploadException('Nothing to upload');
 		}
 
-		// dd(\Input::all());
-		$result = \Berkas::create(array(
+		$postData = array(
 			// ...
 			'filename' => $file->getClientOriginalName(),
 			'url' => $newName,
@@ -73,7 +72,23 @@ class FileController extends AdminController {
 			'description' => \Input::get('description'),
 			'categoryfile' => \Input::get('categoryfile'),
 			'Judul' => \Input::get('Judul')
-		));
+		);
+
+		// Provinsi
+		if(\Auth::user()->Region == 'Provinsi') {
+			array_push($postData, array(
+				'KodeProvinsi' => \Auth::user()->KodeProvinsi
+			));
+		}
+		// Nasional
+		else {
+			array_push($postData, array(
+				'KodeProvinsi' => \Input::get('KodeProvinsi')
+			));
+		}
+
+		// dd(\Input::all());
+		$result = \Berkas::create($postData);
 
 
 		if($result)
@@ -132,6 +147,14 @@ class FileController extends AdminController {
         // $data->raw_name = \Input::get('raw_name');
 		// $data->KodeProvinsi = \Input::get('KodeProvinsi');
 		$data->Judul = \Input::get('Judul');
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+		}
+		else {
+			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+		}
+		
 		$data->save();
 
 		return \Redirect::route('back-office.file.edit', array($data->fileid))
