@@ -88,7 +88,7 @@ class HunianController extends AdminController {
 				->withInput();
 		}
 
-		$result = \Hunian::create(array(
+		$postData = array(
 			'JenisHunian' => \Input::get('JenisHunian'),
 			'NamaHunian' => \Input::get('NamaHunian'),
 			'TahunPembangunan' => \Input::get('TahunPembangunan'),
@@ -120,7 +120,25 @@ class HunianController extends AdminController {
 			// 'Tab4',
 			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
 			'CreateUid'		=> \Auth::user()->id
-		));
+		);
+
+		// Menentukan apakah menggunakan kode provinsi atau tidak
+		// Provinsi
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			array_push($postData, array(
+				'KodeProvinsi' => \Auth::user()->KodeProvinsi
+			));
+		}
+		// Nasional
+		else
+		{
+			array_push($postData, array(
+				'KodeProvinsi' => \Input::get('KodeProvinsi')
+			));
+		}
+
+		$result = \Hunian::create($postData);
 
 
 		if ($result)
@@ -193,8 +211,14 @@ class HunianController extends AdminController {
         $data->JumlahLantai = \Input::get('JumlahLantai');
         $data->LuasLahan = \Input::get('LuasLahan');
         $data->TingkatHunian = \Input::get('TingkatHunian');
-        $data->KodeProvinsi = \Input::get('KodeProvinsi');
         $data->KodeKota = \Input::get('KodeKota');
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+		}
+		else {
+			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+		}
 
 		$data->ModUid = \Auth::user()->id;
 
