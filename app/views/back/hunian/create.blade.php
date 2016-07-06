@@ -64,10 +64,13 @@
                                     {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}
                                 </div>
 
+                                @if(Auth::user()->Region == 'Nasional')
                                 <div class="form-group">
                                     <label for="provinsi">Provinsi *)</label>
                                     <select class="form-control m-b" name="KodeProvinsi" id="provinsi"></select>
                                 </div>
+                                @endif
+
                                 <div class="form-group">
                                     <label for="kotakab">Kota / Kabupaten</label>
                                     <select class="form-control m-b" name="KodeKota" id="kotakab"></select>
@@ -181,7 +184,11 @@
                 return {
                     q: params.term,
                     page: params.page,
+                    @if(Auth::user()->Region == 'Provinsi')
+                    provinsi: {{Auth::user()->KodeProvinsi}}
+                    @else
                     provinsi: $('#provinsi').val()
+                    @endif
                 }
             },
             processResults: function(data, page) {
