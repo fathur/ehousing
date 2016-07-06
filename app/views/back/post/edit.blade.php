@@ -96,20 +96,14 @@
 
                                 </div>
                             </div>
-                            @else
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="Region">Region *)</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control m-b" name="Region" id="Region">
-                                            <option value="Provinsi" selected>Provinsi</option>
-                                        </select>
-                                    </div>
-                                </div>
+                            <div class="hr-line-dashed"></div>
+
                             @endif
+
+                            @if($isNasional)
 
                             <div id="provinsi-wrapper">
 
-                                <div class="hr-line-dashed"></div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="KodeProvinsi">Provinsi</label>
@@ -126,6 +120,8 @@
                             </div>
 
                             <div class="hr-line-dashed"></div>
+                            @endif
+
 
                             {{-- end if --}}
 

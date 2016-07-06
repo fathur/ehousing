@@ -72,7 +72,7 @@
                                 {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}
                             </div>
 
-                            @if(Auth::user()->Region == 'Nasional')
+                            @if($isNasional)
                             <div class="form-group">
                                 <label for="provinsi">Provinsi *)</label>
                                 <select class="form-control m-b" name="KodeProvinsi" id="provinsi">
@@ -209,10 +209,10 @@
                     return {
                         q: params.term,
                         page: params.page,
-                        @if(Auth::user()->Region == 'Provinsi')
-                        provinsi: {{Auth::user()->KodeProvinsi}}
-                        @else
+                        @if($isNasional)
                         provinsi: $('#provinsi').val()
+                        @else
+                        provinsi: {{Auth::user()->KodeProvinsi}}
                         @endif
                     }
                 },

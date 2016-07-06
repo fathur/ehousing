@@ -124,15 +124,13 @@ class HunianController extends AdminController {
 
 		// Menentukan apakah menggunakan kode provinsi atau tidak
 		// Provinsi
-		if(\Auth::user()->Region == 'Provinsi')
-		{
+		if(\Auth::user()->Region == 'Provinsi') {
 			array_push($postData, array(
 				'KodeProvinsi' => \Auth::user()->KodeProvinsi
 			));
 		}
 		// Nasional
-		else
-		{
+		else {
 			array_push($postData, array(
 				'KodeProvinsi' => \Input::get('KodeProvinsi')
 			));

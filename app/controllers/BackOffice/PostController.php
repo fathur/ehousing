@@ -89,7 +89,7 @@ class PostController extends AdminController
             $newName = null;
         }
 
-        $result = \Post::create(array(
+        $postData = array(
             'Judul' => \Input::get('Judul'),
             'KategoriId' => \Input::get('KategoriId'),
             'IsiPost' => \Input::get('IsiPost'),
@@ -99,12 +99,30 @@ class PostController extends AdminController
             'ShareSocmed' => \Input::has('ShareSocmed') ? true : false,
             'JumlahVisit' => \Input::get('JumlahVisit'),
             'IzinKomentar' => \Input::has('IzinKomentar') ? true : false,
-            'Region' => \Input::get('Region'),
-            'KodeProvinsi' => \Input::get('KodeProvinsi'),
 
             'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
             'CreateUid'		=> \Auth::user()->id
-        ));
+        );
+
+        // Menentukan apakah menggunakan kode provinsi atau tidak
+        // Provinsi
+        if(\Auth::user()->Region == 'Provinsi')
+        {
+            array_push($postData, array(
+                'KodeProvinsi' => \Auth::user()->KodeProvinsi,
+                'Region' => 'Provinsi',
+            ));
+        }
+        // Nasional
+        else
+        {
+            array_push($postData, array(
+                'KodeProvinsi' => \Input::get('KodeProvinsi'),
+                'Region' => \Input::get('Region'),
+            ));
+        }
+
+        $result = \Post::create($postData);
 
         $this->flushPostCache();
 
@@ -184,8 +202,17 @@ class PostController extends AdminController
         $data->ShareSocmed = \Input::has('ShareSocmed') ? true : false;
         $data->JumlahVisit = \Input::get('JumlahVisit');
         $data->IzinKomentar = \Input::has('IzinKomentar') ? true : false;
-        $data->Region = \Input::get('Region');
-        $data->KodeProvinsi = \Input::get('KodeProvinsi');
+
+        if(\Auth::user()->Region == 'Provinsi') {
+            $data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+            $data->Region = 'Provinsi';
+
+        }
+        else {
+            $data->KodeProvinsi = \Input::get('KodeProvinsi');
+            $data->Region = \Input::get('Region');
+
+        }
 
         $data->ModUid = \Auth::user()->id;
 
