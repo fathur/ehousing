@@ -69,6 +69,8 @@
                         </div>
 
                         <div class="col-md-3">
+
+                            @if($isNasional)
                             <div class="form-group">
                                 <label for="KodeProvinsi">Provinsi *)</label>
                                 <select name="KodeProvinsi" id="KodeProvinsi" class="form-control m-b">
@@ -77,6 +79,7 @@
                                     @endif
                                 </select>
                             </div>
+                            @endif
 
                             <div class="form-group">
                                 <label for="KodeKota">Kota / Kabupaten</label>
@@ -85,8 +88,8 @@
                                         <option value="{{$data->KodeKota}}" selected>{{$data->kota->NamaKota}}</option>
                                     @endif
                                 </select>
-
                             </div>
+
                             <div class="form-group">
                                 <label for="KodeKecamatan">Kecamatan</label>
                                 <select name="KodeKecamatan" id="KodeKecamatan" class="form-control m-b">
@@ -222,7 +225,11 @@
                     return {
                         q: params.term,
                         page: params.page,
-                        provinsi: $('#KodeProvinsi').val()
+                        @if($isNasional)
+                        provinsi: $('#provinsi').val()
+                        @else
+                        provinsi: {{Auth::user()->KodeProvinsi}}
+                        @endif
                     }
                 },
                 processResults: function(data, page) {

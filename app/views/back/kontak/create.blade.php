@@ -67,10 +67,13 @@
                             </div>
 
                             <div class="col-md-3">
+
+                                @if($isNasional)
                                 <div class="form-group">
                                     <label for="KodeProvinsi">Provinsi *)</label>
                                     <select name="KodeProvinsi" id="KodeProvinsi" class="form-control m-b"></select>
                                 </div>
+                                @endif
 
                                 <div class="form-group">
                                     <label for="KodeKota">Kota / Kabupaten</label>
@@ -208,7 +211,11 @@
                 return {
                     q: params.term,
                     page: params.page,
-                    provinsi: $('#KodeProvinsi').val()
+                    @if($isNasional)
+                    provinsi: $('#provinsi').val(),
+                    @else
+                    provinsi: {{Auth::user()->KodeProvinsi}}
+                    @endif
                 }
             },
             processResults: function(data, page) {

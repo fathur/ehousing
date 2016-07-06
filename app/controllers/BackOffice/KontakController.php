@@ -70,9 +70,7 @@ class KontakController extends AdminController {
 				->withInput();
 		}
 
-
-		// dd(\Input::all());
-		$result = \Kontak::create(array(
+		$dataPost = array(
 			'JenisKontak' => \Input::get('JenisKontak'),
 			'Nama' => \Input::get('Nama'),
 			'Deskripsi' => \Input::get('Deskripsi'),
@@ -87,7 +85,6 @@ class KontakController extends AdminController {
 			'IsActive' => true, //\Input::has('IsActive') ? true : false,
 			'Image' => \Input::get('Image'),
 			'Picture' => \Input::get('Picture'),
-			'KodeProvinsi' => \Input::get('KodeProvinsi'),
 			'KodeKota' => \Input::get('KodeKota'),
 			'TglRegistrasi' => \Input::get('TglRegistrasi'),
 			'TglVerifikasi' => \Input::get('TglVerifikasi'),
@@ -95,7 +92,23 @@ class KontakController extends AdminController {
 
 			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
 			'CreateUid'		=> \Auth::user()->id
-		));
+		);
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			array_push($postData, array(
+				'KodeProvinsi' => \Auth::user()->KodeProvinsi,
+			));
+		}
+		// Nasional
+		else {
+			array_push($postData, array(
+				'KodeProvinsi' => \Input::get('KodeProvinsi'),
+			));
+		}
+
+
+		// dd(\Input::all());
+		$result = \Kontak::create($dataPost);
 
 		$this->flushKontakCache();
 
@@ -162,11 +175,17 @@ class KontakController extends AdminController {
 		$data->IsActive = \Input::get('IsActive');
 		$data->Image = \Input::get('Image');
 		$data->Picture = \Input::get('Picture');
-		$data->KodeProvinsi = \Input::get('KodeProvinsi');
 		$data->KodeKota = \Input::get('KodeKota');
 		$data->TglRegistrasi = \Input::get('TglRegistrasi');
 		$data->TglVerifikasi = \Input::get('TglVerifikasi');
 		$data->Status = \Input::get('Status');
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+		}
+		else {
+			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+		}
 
 		$data->ModUid = \Auth::user()->id;
 
