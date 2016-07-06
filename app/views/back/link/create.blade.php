@@ -63,16 +63,15 @@
                                 </div>
                             </div>
 
+                            @if($isNasional)
+
                             <div class="form-group">
                                 <label for="KodeProvinsi" class="col-sm-2 control-label">Provinsi *)</label>
                                 <div class="col-sm-10">
-                                    <select name="KodeProvinsi" id="KodeProvinsi" class="form-control m-b">
-                                        @if(isset($data->provinsi))
-                                            <option value="{{$data->KodeProvinsi}}" selected>{{$data->provinsi->NamaProvinsi}}</option>
-                                        @endif
-                                    </select>
+                                    <select name="KodeProvinsi" id="KodeProvinsi" class="form-control m-b"></select>
                                 </div>
                             </div>
+                            @endif
                         </div>
 
                         <div class="hr-line-dashed"></div>

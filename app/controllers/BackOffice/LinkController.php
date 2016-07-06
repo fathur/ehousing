@@ -45,16 +45,29 @@ class LinkController extends AdminController {
 	 */
 	public function store()
 	{
-		// dd(\Input::all());
-		$result = \LinkInfo::create(array(
+		$dataPost = array(
 			'GrupLinkInfo' => \Input::get('GrupLinkInfo'),
 			'Judul' => \Input::get('Judul'),
 			'Deskripsi' => \Input::get('Deskripsi'),
 			'LinkInfo' => \Input::get('LinkInfo'),
 			'Region' => \Input::get('Region'),
-			'KodeProvinsi' => \Input::get('KodeProvinsi')
-		));
+		);
 
+		// Provinsi
+		if(\Auth::user()->Region == 'Provinsi') {
+			array_push($postData, array(
+				'KodeProvinsi' => \Auth::user()->KodeProvinsi
+			));
+		}
+		// Nasional
+		else {
+			array_push($postData, array(
+				'KodeProvinsi' => \Input::get('KodeProvinsi')
+			));
+		}
+
+		// dd(\Input::all());
+		$result = \LinkInfo::create($dataPost);
 
 		if($result)
 			return \Redirect::route('back-office.link.edit', $result->LinkInfoId)
@@ -100,7 +113,14 @@ class LinkController extends AdminController {
 		$data->Deskripsi =  \Input::get('Deskripsi');
 		$data->LinkInfo =  \Input::get('LinkInfo');
 		$data->Region =  \Input::get('Region');
-		$data->KodeProvinsi =  \Input::get('KodeProvinsi');
+
+		if(\Auth::user()->Region == 'Provinsi') {
+			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
+		}
+		else {
+			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+		}
+
 		$data->save();
 
 		return \Redirect::route('back-office.link.edit', array($data->LinkInfoId))
