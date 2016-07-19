@@ -102,15 +102,15 @@ $(document).ready(function () {
         var wrapperHeigh = $('#page-wrapper').height();
 
         if(navbarHeigh > wrapperHeigh){
-            $('#page-wrapper').css("min-height", navbarHeigh + "px");
+            // $('#page-wrapper').css("min-height", navbarHeigh + "px");
         }
 
         if(navbarHeigh < wrapperHeigh){
-            $('#page-wrapper').css("min-height", $(window).height()  + "px");
+            // $('#page-wrapper').css("min-height", $(window).height()  + "px");
         }
 
         if ($('body').hasClass('fixed-nav')) {
-            $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
+            // $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
         }
 
     }

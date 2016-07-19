@@ -5,7 +5,7 @@
         <div class="ibox float-e-margins">
 
             <div class="ibox-content no-padding border-left-right">
-                <img alt="image" class="img-responsive" src="{{{ $hunian->picture }}}">
+                <img alt="image" class="img-responsive" src="{{ route('front.file.show', array('hunian', $hunian->picture)) }}">
             </div>
 
             <div class="ibox-content profile-content">

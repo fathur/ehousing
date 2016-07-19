@@ -116,6 +116,9 @@ class FileController extends \BaseController
             case 'profile':
                 $location = 'profile/' . $url;
                 break;
+            case 'hunian':
+                $location = 'hunian/' . $url;
+                break;
             default:
                 $location = $url;
         }

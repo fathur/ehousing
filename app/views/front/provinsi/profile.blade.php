@@ -74,7 +74,9 @@
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab-2" data-toggle="tab">Statistik</a></li>
+                                    @if(! is_null($provinsi->konfigurasi_situs->Website))
                                     <li class=""><a href="#tab-1" data-toggle="tab">Website</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -87,9 +89,15 @@
 
                                 </div>
 
+                                @if(! is_null($provinsi->konfigurasi_situs->Website))
                                 <div class="tab-pane" id="tab-1">
-                                    <h2>Official Website</h2>
+                                    <h2>Official Website </h2>
+                                    <h3><small><a href="{{$provinsi->konfigurasi_situs->Website}}" target="_blank">{{$provinsi->konfigurasi_situs->Website}}</a></small></h3>
+
+                                    <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;" align="center" name="frame1" scrolling="auto" src="{{ $provinsi->konfigurasi_situs->Website }}"></iframe>
                                 </div>
+                                @endif
+
                             </div>
                         </div>
 

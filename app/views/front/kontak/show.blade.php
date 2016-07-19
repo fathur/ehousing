@@ -4,7 +4,7 @@
     <div class="col-md-3">
         <div class="ibox float-e-margins">
             <div class="ibox-content no-padding border-left-right">
-                <img alt="image" class="img-responsive" src="http://ehousing.id/assets/img/no-pict_profile_big.jpg">
+                <img alt="image" class="img-responsive" src="{{ url('img/no-pict_profile_big.jpg') }}">
             </div>
             <div class="ibox-content profile-content text-center">
                 <h4><strong>{{{ $kontak->Nama }}}</strong></h4>
