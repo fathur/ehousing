@@ -17,8 +17,8 @@
         <div class="col-xs-12 col-md-9">
 
             <div class="jumbotron">
-                <h1>E-Housing</h1>
-                <p>Dirjen Penyediaan Perumahan Kementrian PUPR</p>
+                <h1>e-Housing</h1>
+                <p>Dirjen Penyediaan Perumahan Kementerian PUPR</p>
             </div>
 
             <div class="row">

@@ -79,16 +79,17 @@
 
         <div class="footer">
             <div class="pull-right">
-                <strong>Copyright</strong> E-Housing Kemenpupra &copy; <?php echo date("Y");?>
+                <strong>Copyright</strong> e-Housing KemenPUPR &copy; <?php echo date("Y");?>
             </div>
             <div class="text-navy">
-                <strong>E-Housing</strong> :
+                <strong>e-Housing</strong> :
+
                 <a href="{{ url('/') }}" class='btn-link'>Nasional</a> &bull;
-                <a href="{{ url('/') }}" class="btn-link">Aceh</a> &bull;
-                <a href="{{ url('/') }}" class="btn-link">Bali</a>  &bull;
-                <a href="{{ url('/') }}" class="btn-link">Banten</a>  &bull;
-                <a href="{{ url('/') }}" class="btn-link">Bengkulu</a>  &bull;
-                <a href="{{ url('/') }}" class="btn-link">DI Yogyakarta</a> &bull;
+
+                @for($i = 0; $i < 5; $i++)
+                    <a href="{{ url($allProvinsi[$i]->slug) }}" class="btn-link">{{ $allProvinsi[$i]->NamaProvinsi }}</a> &bull;
+                @endfor
+
                 <a href="#" class="btn-link" data-toggle="modal" data-target="#more_wilayah">More »</a>
             </div>
         </div>

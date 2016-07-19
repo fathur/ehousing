@@ -16,7 +16,7 @@
                     <div class="profile-info">
                         <div class="">
                             <div>
-                                <h2 class="no-margins">Ehousing {{{ $data->Nama }}}</h2>
+                                <h2 class="no-margins">e-Housing {{{ $data->Nama }}}</h2>
                                 <h4>Nasional</h4>
                                 <small>{{{ $data->Deskripsi }}}</small>
                             </div>

@@ -4698,6 +4698,8 @@ a.compose-mail {
 }
 .profile-info {
     margin-left: 120px;
+    margin-top: 36px;
+    margin-bottom: 20px;
 }
 .feed-activity-list .feed-element {
     border-bottom: 1px solid #e7eaec;

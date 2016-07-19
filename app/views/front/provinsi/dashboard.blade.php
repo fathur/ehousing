@@ -13,7 +13,7 @@
             <div class="profile-info">
                 <div class="">
                     <div>
-                        <h2 class="no-margins">Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h2>
+                        <h2 class="no-margins">Provinsi {{{ $provinsi->NamaProvinsi }}}</h2>
                         <h4>{{{ $provinsi->konfigurasi_situs->Tagline }}}</h4>
                         <small>{{ Str::limit($provinsi->konfigurasi_situs->Deskripsi, 170, '...') }}</small>
                     </div>
@@ -63,7 +63,7 @@
     <div class="row m-b-lg m-l-sm text-navy">
         <strong>Wilayah Lain</strong> :
         <a href="{{ url('/') }}" class='btn btn-white btn-xs'>Nasional</a>
-        
+
         @for($i = 0; $i < 5; $i++)
             <a href="{{ url($allProvinsi[$i]->slug) }}" class="btn btn-white btn-xs">{{ $allProvinsi[$i]->NamaProvinsi }}</a>
         @endfor
@@ -75,8 +75,9 @@
         <div class="col-xs-12 col-md-9">
 
             <div class="jumbotron">
-                <h1>E-Housing {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h1>
-                <p>{{{  $provinsi->konfigurasi_situs->Deskripsi }}}</p>
+                <h1>e-Housing {{{ $provinsi->NamaProvinsi }}}</h1>
+         {{--       <p>{{{  $provinsi->konfigurasi_situs->Deskripsi }}}</p>--}}
+                <p>Dirjen Penyediaan Perumahan Kementerian PUPR</p>
             </div>
 
             <div class="row">
@@ -106,7 +107,7 @@
                                             @if(!is_null($item->Foto) || ('' != $item->Foto))
                                                 <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                             @else
-                                                {{{ Str::limit($item->IsiPost, 200) }}}
+                                                {{{ Str::limit(strip_tags($item->IsiPost), 200) }}}
                                             @endif
                                         </p>
 
@@ -156,7 +157,7 @@
                                                 @if(!is_null($item->Foto) || ('' != $item->Foto))
                                                     <img class="img-responsive" src="{{ route('front.file.show', array('post', $item->Foto)) }}" />
                                                 @else
-                                                    {{{ Str::limit($item->IsiPost, 200) }}}
+                                                    {{{ Str::limit(strip_tags($item->IsiPost), 200) }}}
                                                 @endif
                                             </p>
 

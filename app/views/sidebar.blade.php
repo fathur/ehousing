@@ -7,7 +7,7 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <i class="fa fa-home"></i>
-                                <strong class="font-bold">e-housing KemenPUPR</strong>
+                                <strong class="font-bold">e-Housing KemenPUPR</strong>
                             </span>
 
                             @if(isset($region))

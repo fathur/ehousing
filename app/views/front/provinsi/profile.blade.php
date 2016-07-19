@@ -16,8 +16,8 @@
                     <div class="profile-info">
                         <div class="">
                             <div>
-                                <h2 class="no-margins">Provinsi {{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h2>
-                                <h4>{{{ ucwords(strtolower($provinsi->NamaProvinsi)) }}}</h4>
+                                <h2 class="no-margins">Provinsi {{{ $provinsi->NamaProvinsi }}}</h2>
+                                <h4>{{{ $provinsi->NamaProvinsi }}}</h4>
                                 <small>{{{ $provinsi->konfigurasi_situs->Deskripsi }}}</small>
                             </div>
                         </div>

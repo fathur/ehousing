@@ -15,15 +15,15 @@
                     <div class="profile-info">
                         <div class="">
                             <div>
-                                <h2 class="no-margins">Ehousing {{{ $data->konfigurasi_situs->Nama }}}</h2>
-                                <h4>{{{ $data->konfigurasi_situs->Nama }}}</h4>
-                                <small>{{{ $data->konfigurasi_situs->Deskripsi }}}</small>
+                                <h2 class="no-margins"><i>e-Housing</i> {{{ $data->konfigurasi_situs->Nama }}}</h2>
+                                {{--<small>{{{ $data->konfigurasi_situs->Deskripsi }}}</small>--}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            {{--
             <div class="row">
                 <div class="col-lg-6">
                     <dl class="dl-horizontal">
@@ -47,12 +47,15 @@
                     </dl>
                 </div>
             </div>
+            --}}
 
             <div class="row">
                 <div class="col-lg-6">
+                    {{--
                     <div class="small">
                         <i class="fa fa-eye"> </i> 0 view
                     </div>
+                    --}}
                 </div>
                 <div class="col-lg-6">
                     <div class="pull-right">
