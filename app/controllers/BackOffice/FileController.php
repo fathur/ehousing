@@ -154,7 +154,7 @@ class FileController extends AdminController {
 		else {
 			$data->KodeProvinsi = \Input::get('KodeProvinsi');
 		}
-		
+
 		$data->save();
 
 		return \Redirect::route('back-office.file.edit', array($data->fileid))

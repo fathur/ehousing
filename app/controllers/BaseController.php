@@ -9,6 +9,7 @@ class BaseController extends Controller {
 		if (! is_null($this->title)) $title = ' - ' . $this->title;
 		else $title = '';
 
+		View::share('allProvinsi', Provinsi::orderBy('NamaProvinsi', 'asc')->get());
 		View::share('title', $title);
 	}
 

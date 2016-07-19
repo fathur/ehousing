@@ -43,7 +43,6 @@ class NasionalController extends \BaseController
 
             $provinsiFeeds = $feedReader->generate();
 
-
             return \View::make('front.nasional.dashboard')
                 ->with('news', $provinsiNews)
                 ->with('information', $provinsiInformation)

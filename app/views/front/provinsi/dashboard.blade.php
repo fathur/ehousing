@@ -63,11 +63,10 @@
     <div class="row m-b-lg m-l-sm text-navy">
         <strong>Wilayah Lain</strong> :
         <a href="{{ url('/') }}" class='btn btn-white btn-xs'>Nasional</a>
-        <a href="{{ url('aceh') }}" class="btn btn-white btn-xs">Aceh</a>
-        <a href="{{ url('bali') }}" class="btn btn-white btn-xs">Bali</a>
-        <a href="{{ url('banten') }}" class="btn btn-white btn-xs">Banten</a>
-        <a href="{{ url('bengkulu') }}" class="btn btn-white btn-xs">Bengkulu</a>
-        <a href="{{ url('yogyakarta') }}" class="btn btn-white btn-xs">DI Yogyakarta</a>
+        
+        @for($i = 0; $i < 5; $i++)
+            <a href="{{ url($allProvinsi[$i]->slug) }}" class="btn btn-white btn-xs">{{ $allProvinsi[$i]->NamaProvinsi }}</a>
+        @endfor
 
         <a href="#" class="btn btn-white btn-xs" data-toggle="modal" data-target="#more_wilayah">More »</a>
     </div>

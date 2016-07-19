@@ -106,52 +106,11 @@
                     Dibawah adalah daftar wilayah yang telah terdaftar ke dalam e-Housing.
                 </div>
                 <div class="modal-body">
-                    <span class="btn btn-primary btn-xs m-b-xs">A</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Aceh</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">B</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Bali</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Banten</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Bengkulu</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">D</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">DI Yogyakarta</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">DKI Jakarta</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">G</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Gorontalo</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">J</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Jambi</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Jawa Barat</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Jawa Tengah</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Jawa Timur</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">K</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kalimantan Barat</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kalimantan Selatan</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kalimantan Tengah</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kalimantan Timur</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kalimantan Utara</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kepulauan Bangka Belitung</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Kelupauan Riau</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">L</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Lampung</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">M</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Maluku</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Maluku Utara</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">N</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Nusa Tenggara Timur</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Nusa Tenggara Barat</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">P</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Papua</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Papua Barat</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">R</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Riau</a>
-                    <span class="btn btn-primary btn-xs m-b-xs">S</span>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sulawesi Barat</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sulawesi Selatan</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sulawesi Tengah</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sulawesi Tenggara</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sulawesi Barat</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sumatera Barat</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Suamtera Selatan</a>
-                    <a href="{{ url('/') }}" class="btn btn-white btn-xs m-b-xs">Sumatera Utara</a>
+
+                    @foreach($allProvinsi as $itemProvinsi)
+                        <a href="{{ url($itemProvinsi->slug) }}" class="btn btn-white btn-xs m-b-xs">{{ $itemProvinsi->NamaProvinsi }}</a>
+                    @endforeach
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
