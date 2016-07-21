@@ -16,7 +16,7 @@ class KontakController extends AdminController {
 		'Nama'	=> 'required',
 		'JenisKontak'	=> 'required|exists:referensi,koderef',
 		'Alamat'	=> 'required',
-		'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
+		// 'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
 
 	);
 
@@ -160,6 +160,23 @@ class KontakController extends AdminController {
 				->withInput();
 		}
 
+		if(\Input::hasFile('userfile'))
+		{
+			$file = \Input::file('userfile');
+			$destination = storage_path('uploads/kontak/');
+			$newName = $file->getClientOriginalName();
+
+			if($file->isValid())
+			{
+				$file->move($destination, $newName);
+			}
+		}
+		else
+		{
+			$newName = \Input::get('Picture');
+		}
+
+
 		$data = \Kontak::find($id);
 		$data->JenisKontak = \Input::get('JenisKontak');
 		$data->Nama = \Input::get('Nama');
@@ -179,6 +196,9 @@ class KontakController extends AdminController {
 		$data->TglRegistrasi = \Input::get('TglRegistrasi');
 		$data->TglVerifikasi = \Input::get('TglVerifikasi');
 		$data->Status = \Input::get('Status');
+
+		if(!is_null($newName))
+			$data->Picture = $newName;
 
 		if(\Auth::user()->Region == 'Provinsi') {
 			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;

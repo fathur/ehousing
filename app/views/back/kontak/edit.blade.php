@@ -28,6 +28,7 @@
                             'route' => array('back-office.kontak.update', $data->id),
                             'method' => 'PUT',
                             'name'  => 'kontakForm',
+                            'files' => true,
                             'id' => 'kontakForm'
                         ))}}
 
@@ -139,29 +140,35 @@
                             <button class="btn btn-primary" type="submit">Simpan</button>
                         </div>
 
-                        {{Form::close()}}
-
                         <div class="col-md-2">
 
-                            <div class="profile-image">
-                                <a href="http://ehousing.id/kontak/entry/edit">
-                                    <img src="http://ehousing.id/uploads/profile/no-pict.jpeg" class="img-circle m-b-md" alt="no-image">
-                                </a>
-                            </div>
-
                             <div class="form-group">
+                                <label for="userfile">Upload Image</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{Form::file('userfile', array())}}
+                                        <p class="help-block small">
+                                            File : gif|jpg|jpeg|png
+                                            <br>Ukuran file maksimal : 2MB
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="profile-image">
+                                            @if(!is_null($data->Picture))
+                                                <img src="{{ route('front.file.show', ['kontak', $data->Picture]) }}" class="img-responsive" alt="{{$data->Picture}}">
+                                                {{--{{Form::hidden('picture', null)}}--}}
+                                            @endif
+                                        </div>
+                                    </div>
 
-                                <div class="col-sm-10">
-                                    <input type="file" name="picture" id="picture" size="50" maxlength="100" style="width:500px;">
-                                    <p class="help-block">
-                                        Dimensi foto yang disarankan : 64px * 64px (foto standar).
-                                        <br>Ukuran file foto maksimal : 160kb
-                                    </p>
-                                    <input type="hidden" name="FotoPost" value="">
                                 </div>
                             </div>
 
                         </div>
+
+
+                    {{Form::close()}}
+
                     </div> <!--end row-->
 
                     <!-- <div class="hr-line-dashed"></div> -->
