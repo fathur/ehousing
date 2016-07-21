@@ -26,6 +26,7 @@
                             'method' => 'PUT',
                             'route' => array('back-office.hunian.update', $data->id),
                             'id' => 'hunianForm',
+                           'files' => true,
                             'novalidate' => 'novalidate'
                         ))}}
 
@@ -67,6 +68,28 @@
                         </div>
 
                         <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="userfile">Upload Image</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{Form::file('userfile', array())}}
+                                        <p class="help-block small">
+                                            File : gif|jpg|jpeg|png
+                                            <br>Ukuran file maksimal : 2MB
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="profile-image">
+                                            @if(!is_null($data->picture))
+                                                <img src="{{ route('front.file.show', ['hunian', $data->picture]) }}" class="img-responsive" alt="{{$data->picture}}">
+                                                {{--{{Form::hidden('picture', null)}}--}}
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="alamat">Alamat Hunian *)</label>
                                 {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}

@@ -14,7 +14,7 @@ class HunianController extends AdminController {
 		'NamaHunian'	=> 'required',
 		'JenisHunian'	=> 'required|exists:referensi,koderef',
 		'Alamat'	=> 'required',
-		'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
+		// 'KodeProvinsi'	=> 'required|integer|exists:provinsi,KodeProvinsi',
 		'KodeKecamatan'	=> 'integer|exists:kecamatan,KodeKecamatan',
 		'KodeKota'		=> 'integer|exists:kota,KodeKota',
 		'TahunPembangunan'	=> 'numeric',
@@ -192,6 +192,22 @@ class HunianController extends AdminController {
 				->withInput();
 		}
 
+		if(\Input::hasFile('userfile'))
+		{
+			$file = \Input::file('userfile');
+			$destination = storage_path('uploads/hunian/');
+			$newName = $file->getClientOriginalName();
+
+			if($file->isValid())
+			{
+				$file->move($destination, $newName);
+			}
+		}
+		else
+		{
+			$newName = \Input::get('picture');
+		}
+
 		$data = \Hunian::find($id);
         $data->JenisHunian = \Input::get('JenisHunian');
         $data->NamaHunian = \Input::get('NamaHunian');
@@ -209,7 +225,10 @@ class HunianController extends AdminController {
         $data->JumlahLantai = \Input::get('JumlahLantai');
         $data->LuasLahan = \Input::get('LuasLahan');
         $data->TingkatHunian = \Input::get('TingkatHunian');
-        $data->KodeKota = \Input::get('KodeKota');
+		$data->KodeKota = \Input::get('KodeKota');
+
+		if(!is_null($newName))
+			$data->picture = $newName;
 
 		if(\Auth::user()->Region == 'Provinsi') {
 			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
