@@ -27,7 +27,8 @@
                             {{Form::open(array(
                                 'route' => 'back-office.kontak.store',
                                 'name'  => 'kontakForm',
-                                'id' => 'kontakForm'
+                                'id' => 'kontakForm',
+                                'files' => true
                             ))}}
 
                             <div class="col-md-3">
@@ -125,29 +126,28 @@
                                 <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
 
+                            <div class="col-md-2">
+
+                                <div class="form-group">
+                                    <label for="userfile">Upload Image</label>
+                                    <div class="row">
+                                        <div class="col-xs-8">
+                                            {{Form::file('userfile', array())}}
+                                            <p class="help-block small">
+                                                File : gif|jpg|jpeg|png
+                                                <br>Ukuran file maksimal : 2MB
+                                            </p>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                         {{Form::close()}}
 
-                        <div class="col-md-2">
 
-                            <div class="profile-image">
-                                <a href="http://ehousing.id/kontak/entry/edit">
-                                    <img src="http://ehousing.id/uploads/profile/no-pict.jpeg" class="img-circle m-b-md" alt="no-image">
-                                </a>
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="col-sm-10">
-                                    <input type="file" name="picture" id="picture" size="50" maxlength="100" style="width:500px;">
-                                    <p class="help-block">
-                                        Dimensi foto yang disarankan : 64px * 64px (foto standar).
-                                        <br>Ukuran file foto maksimal : 160kb
-                                    </p>
-                                    <input type="hidden" name="FotoPost" value="">
-                                </div>
-                            </div>
-
-                        </div>
                     </div> <!--end row-->
 
                     <!-- <div class="hr-line-dashed"></div> -->

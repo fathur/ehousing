@@ -88,6 +88,23 @@ class HunianController extends AdminController {
 				->withInput();
 		}
 
+		if(\Input::hasFile('userfile'))
+		{
+			$file = \Input::file('userfile');
+
+			$destination = storage_path('uploads/kontak/');
+			$newName = $file->getClientOriginalName();
+
+			if($file->isValid())
+			{
+				$file->move($destination, $newName);
+			}
+		}
+		else
+		{
+			$newName = \Input::get('picture');
+		}
+
 		$postData = array(
 			'JenisHunian' => \Input::get('JenisHunian'),
 			'NamaHunian' => \Input::get('NamaHunian'),
@@ -122,18 +139,20 @@ class HunianController extends AdminController {
 			'CreateUid'		=> \Auth::user()->id
 		);
 
+		if(!is_null($newName)) {
+			$postData['Picture'] = $newName;
+		}
+
 		// Menentukan apakah menggunakan kode provinsi atau tidak
 		// Provinsi
 		if(\Auth::user()->Region == 'Provinsi') {
-			array_push($postData, array(
-				'KodeProvinsi' => \Auth::user()->KodeProvinsi
-			));
+
+			$postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
 		}
 		// Nasional
 		else {
-			array_push($postData, array(
-				'KodeProvinsi' => \Input::get('KodeProvinsi')
-			));
+
+			$postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
 		}
 
 		$result = \Hunian::create($postData);

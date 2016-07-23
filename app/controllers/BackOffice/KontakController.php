@@ -46,6 +46,7 @@ class KontakController extends AdminController {
 	 */
 	public function create()
 	{
+		// dd(\Auth::user()->KodeProvinsi);
 		$jenisKontak = \Referensi::where('refId', \Referensi::JENIS_KONTAK)
 			->orderBy('deskripsi', 'asc')
 			->lists('deskripsi', 'koderef');
@@ -70,6 +71,22 @@ class KontakController extends AdminController {
 				->withInput();
 		}
 
+		if(\Input::hasFile('userfile'))
+		{
+			$file = \Input::file('userfile');
+
+			$destination = storage_path('uploads/kontak/');
+			$newName = $file->getClientOriginalName();
+
+			if($file->isValid())
+			{
+				$file->move($destination, $newName);
+			}
+		}
+		else
+		{
+			$newName = \Input::get('Picture');
+		}
 		$dataPost = array(
 			'JenisKontak' => \Input::get('JenisKontak'),
 			'Nama' => \Input::get('Nama'),
@@ -94,18 +111,20 @@ class KontakController extends AdminController {
 			'CreateUid'		=> \Auth::user()->id
 		);
 
+		if(!is_null($newName)) {
+			$dataPost['Picture'] = $newName;
+		}
+
 		if(\Auth::user()->Region == 'Provinsi') {
-			array_push($postData, array(
-				'KodeProvinsi' => \Auth::user()->KodeProvinsi,
-			));
+
+			$dataPost['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
 		}
 		// Nasional
 		else {
-			array_push($postData, array(
-				'KodeProvinsi' => \Input::get('KodeProvinsi'),
-			));
-		}
 
+			$dataPost['KodeProvinsi'] = \Input::get('KodeProvinsi');
+
+		}
 
 		// dd(\Input::all());
 		$result = \Kontak::create($dataPost);
