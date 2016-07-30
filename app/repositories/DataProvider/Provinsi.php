@@ -410,12 +410,13 @@ class Provinsi
         return $this->getTotalProfileNumber('TotalAPBDProv');
     }
 
-    public function getStatistik($kolom)
+    public function  getStatistik($kolom)
     {
 
         $profil = \ProfilProvinsi::select(array(
             'TahunBerlaku',
-            \DB::raw("SUM({$kolom}) AS jumlah")
+            \DB::raw("SUM({$kolom}) AS jumlah"),
+            \DB::raw("MAX(updated_at) AS last_update")
         ));
 
         if( ! is_null($this->provinsiId) || 0 != $this->provinsiId) {

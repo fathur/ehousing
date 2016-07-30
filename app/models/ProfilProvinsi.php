@@ -27,7 +27,7 @@ class ProfilProvinsi extends Eloquent
 
     protected $table = 'ProfilProvinsi';
     protected $primaryKey = 'KodeProfilProv';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $appends = array('id');
 
     public function getIdAttribute()

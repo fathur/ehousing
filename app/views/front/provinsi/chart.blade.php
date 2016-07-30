@@ -153,6 +153,7 @@
                                 <th></th>
                                 <th>Tahun</th>
                                 <th class="text-right">Jumlah</th>
+                                <th>Last Update</th>
                             </tr>
                         </thead>
 
@@ -168,6 +169,11 @@
                                     @else
                                     {{{ number_format($filterStatistic->showResults()[$i]->jumlah) }}}
                                     @endif
+                                </td>
+                                <td>
+                                @if($filterStatistic->showResults()[$i]->last_update != '0000-00-00 00:00:00')
+                                    {{{Carbon\Carbon::parse($filterStatistic->showResults()[$i]->last_update)->format('d M Y H:i:s')}}}
+                                @endif
                                 </td>
                             </tr>
                             @endfor
