@@ -2,6 +2,8 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}">
+
 @stop
 
 @section('content')
@@ -120,6 +122,13 @@
                                    'id' => 'Website'
                                 ))}}
                             </div>
+                            <div class="form-group">
+                                <label for="website">Tanggal Verifikasi</label>
+                                {{Form::text('TglVerifikasi', null, array(
+                                   'class' => "form-control",
+                                   'id' => 'tgl-verifikasi'
+                                ))}}
+                            </div>
                         </div>
 
                         <div class="col-md-2">
@@ -182,6 +191,8 @@
 
 @section('scripts')
     <script src="{{asset('vendor/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+
 @stop
 
 
@@ -292,6 +303,10 @@
             templateSelection: function(data) {
                 return data.NamaKecamatan || data.text;
             }
+        });
+
+        $('#tgl-verifikasi').datepicker({
+            format: 'yyyy-mm-dd',
         });
     </script>
 @stop

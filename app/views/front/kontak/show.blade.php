@@ -10,7 +10,7 @@
                 @else
                 <img alt="image" class="img-responsive" src="{{ route('front.file.show', 'kontak', $kontak->Image) }}">
                 @endif
-                
+
             </div>
             <div class="ibox-content profile-content text-center">
                 <h4><strong>{{{ $kontak->Nama }}}</strong></h4>

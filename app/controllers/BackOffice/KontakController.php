@@ -48,6 +48,7 @@ class KontakController extends AdminController {
 	{
 		// dd(\Auth::user()->KodeProvinsi);
 		$jenisKontak = \Referensi::where('refId', \Referensi::JENIS_KONTAK)
+			->where('KodeRef','<>',\Referensi::JENIS_KONTAK)
 			->orderBy('deskripsi', 'asc')
 			->lists('deskripsi', 'koderef');
 
