@@ -109,4 +109,110 @@ class NasionalController extends \BaseController
         return \View::make('front.nasional.ehousing', compact('data'))
             ->with('title', 'Profil Ehousing');
     }
+
+    public function getStatistik()
+    {
+        $years = \ProfilProvinsi::select(array(
+            \DB::raw('DISTINCT(TahunBerlaku) AS tahun')
+        ))->orderBy('tahun','asc')->lists('tahun','tahun');
+
+
+        $years = array_filter($years, function($var){
+
+            if($var != '')
+                return $var;
+        });
+
+        $kolom = \Input::get('kolom', 'TotalPenduduk');
+        $tahun = \Input::get('tahun', min($years));
+
+
+        //select sum(pp.BacklogRumah) as jumlah, p.NamaProvinsi
+        //from ProfilProvinsi pp
+        //left join provinsi p on p.KodeProvinsi = pp.KodeProv
+        //group by pp.KodeProv
+        //order by jumlah desc
+        //limit 10;
+        $topTenBacklog = \ProfilProvinsi::select(array(
+            \DB::raw('SUM(BacklogRumah) AS jumlah'),
+            'provinsi.NamaProvinsi'
+        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+            ->groupBy('ProfilProvinsi.KodeProv')
+            ->orderBy('jumlah','desc')
+            ->take(10)
+            ->get();
+
+        $mapBacklog = array();
+        foreach ($topTenBacklog as $item) {
+            array_push($mapBacklog, array(
+                'name'  => $item->NamaProvinsi,
+                'y'     => (int) $item->jumlah
+            ));
+        }
+
+        $dataBacklog = json_encode($mapBacklog);
+
+        $topTenAnggaran = \ProfilProvinsi::select(array(
+            \DB::raw('SUM(AnggaranKemenpera) AS jumlah'),
+            'provinsi.NamaProvinsi'
+        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+            ->groupBy('ProfilProvinsi.KodeProv')
+            ->orderBy('jumlah','desc')
+            ->take(10)
+            ->get();
+
+        $mapAnggaran = array();
+        foreach ($topTenAnggaran as $item) {
+            array_push($mapAnggaran, array(
+                'name'  => $item->NamaProvinsi,
+                'y'     => (int) $item->jumlah
+            ));
+        }
+
+        $dataAnggaran = json_encode($mapAnggaran);
+
+
+
+
+        $filterStatistic = $this->loadDataStatistik($kolom, $tahun);
+        $dataFilter = $this->loadDataStatistik($kolom, $tahun, null, false);
+
+
+        return \View::make('front.nasional.statistik', compact('dataBacklog','dataAnggaran','filterStatistic','dataFilter'))
+            ->with('fields', \ProfilProvinsi::$fields)
+            ->with('years', $years);
+    }
+
+    /**
+     * @param $kolom
+     * @param $tahun
+     * @param null $take
+     */
+    private function loadDataStatistik($kolom, $tahun = null, $take = null, $json = true)
+    {
+        $dataRaw = \ProfilProvinsi::select(array(
+            \DB::raw("SUM({$kolom}) AS jumlah"),
+            'provinsi.NamaProvinsi'
+        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+            ->groupBy('ProfilProvinsi.KodeProv')
+            ->orderBy('jumlah','desc');
+
+        if(!is_null($tahun))
+            $dataRaw->where('TahunBerlaku','=',$tahun);
+
+         $dataRaw = $dataRaw->get();
+
+        $map = array();
+        foreach ($dataRaw as $item) {
+            array_push($map, array(
+                'name' => $item->NamaProvinsi,
+                'y' => (int)$item->jumlah
+            ));
+        };
+
+        if($json)
+            return json_encode($map);
+
+        return $map;
+    }
 }

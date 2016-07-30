@@ -81,7 +81,7 @@ Route::group(array('prefix' => 'back-office'), function() {
 
 Route::get('ehousing', array('uses' => 'Front\NasionalController@getEHousing','as'=>'front.nasional.ehousing'));
 Route::get('profile', function(){});
-Route::get('statistik', function(){});
+Route::get('statistik', ['uses' => 'Front\NasionalController@getStatistik','as'=>'front.nasional.statistik']);
 
 // Kontak routes
 Route::get('kontak/developer', array('uses' => 'Front\Nasional\KontakController@getDeveloper','as' => 'front.nasional.kontak.developer'));
