@@ -67,7 +67,8 @@ Route::group(array('prefix' => 'back-office'), function() {
         # Route::resource('chart/{jenis}', 'ChartController@index', array('only' => array('index','create','store','edit','update','destroy')));
         Route::get('chart/data', array('uses' => 'ChartController@data', 'as' => 'back-office.chart.data'));
         Route::get('chart/{jenis}', array('uses' => 'ChartController@index', 'as' => 'back-office.chart.index'));
-        # oute::get('chart/{jenis}/create', array('uses' => 'ChartController@create', 'as' => 'back-office.chart.create'));
+        Route::post('chart/{jenis}', array('uses' => 'ChartController@store', 'as' => 'back-office.chart.store'));
+        Route::get('chart/{jenis}/create', array('uses' => 'ChartController@create', 'as' => 'back-office.chart.create'));
         Route::get('chart/{jenis}/{id}/edit', array('uses' => 'ChartController@edit', 'as' => 'back-office.chart.edit'));
         # Route::post('chart/{jenis}', array('uses' => 'ChartController@store', 'as' => 'back-office.chart.store'));
         Route::put('chart/{jenis}/{id}', array('uses' => 'ChartController@update', 'as' => 'back-office.chart.update'));

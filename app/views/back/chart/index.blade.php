@@ -12,6 +12,15 @@
                     <h5>Daftar Data {{$kinds[$jenis]['name']}}</h5>
                 </div>
                 <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-xs-12 m-b-md">
+                            <a href="{{route('back-office.chart.create', $jenis)}}" class="btn btn-success">
+                                <i class="fa fa-plus"></i> Tambah Data
+                            </a>
+                        </div>
+                    </div>
+
                     <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>

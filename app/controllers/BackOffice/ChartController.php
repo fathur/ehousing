@@ -23,6 +23,39 @@ class ChartController extends AdminController
 
     }
 
+    public function create($jenis)
+    {
+
+        $sourceColumn = \ProfileProvinsiSource::$kinds[$jenis]['source_column'];
+
+        return \View::make('back.chart.create', compact('jenis','sourceColumn'))
+            ->with('kinds', \ProfileProvinsiSource::$kinds);
+    }
+
+    public function store($jenis)
+    {
+        //dd(\ProfileProvinsiSource::$kinds[$jenis]['column']);
+        $profil = new \ProfilProvinsi();
+        $profil->{\ProfileProvinsiSource::$kinds[$jenis]['column']} = \Input::get('jumlah');
+        $profil->KodeProv = \Auth::user()->KodeProvinsi;
+        $profil->TahunBerlaku = \Input::get('TahunBerlaku');
+        if($profil->save()) {
+
+            // $src = \ProfileProvinsiSource::where('profil_provinsi_id', $profil->KodeProfilProv);
+
+            $profil->source()->save(
+                new \ProfileProvinsiSource(array(
+                        \ProfileProvinsiSource::$kinds[$jenis]['source_column'] => \Input::get('source.' . \ProfileProvinsiSource::$kinds[$jenis]['source_column'])
+                    )
+                ));
+
+            return \Redirect::route('back-office.chart.index', array($jenis));
+        }
+
+        return 'salah';
+
+    }
+
     public function edit($jenis, $id)
     {
         $data = \ProfilProvinsi::select(array(
@@ -32,7 +65,6 @@ class ChartController extends AdminController
         ))->with('source')->find($id);
 
         $sourceColumn = \ProfileProvinsiSource::$kinds[$jenis]['source_column'];
-
 
         return \View::make('back.chart.edit', compact('data','jenis','sourceColumn'));
 
@@ -44,6 +76,7 @@ class ChartController extends AdminController
 
         $profil = \ProfilProvinsi::find($id);
         $profil->{\ProfileProvinsiSource::$kinds[$jenis]['column']} = \Input::get('jumlah');
+        $profil->TahunBerlaku = \Input::get('TahunBerlaku');
         $profil->save();
 
         $src = \ProfileProvinsiSource::where('profil_provinsi_id', $id);
@@ -63,6 +96,13 @@ class ChartController extends AdminController
         }
 
         return \Redirect::route('back-office.chart.index', array($jenis));
+    }
+
+    public function destroy($jenis, $id)
+    {
+        \ProfilProvinsi::destroy($id);
+
+        return 1;//\Redirect::route('back-office.chart.index', array($jenis));
     }
 
     public function data()
