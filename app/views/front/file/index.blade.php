@@ -12,18 +12,38 @@
                     <h5>Daftar Kontak</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
-                        <thead>
-                        <tr>
-                            <th>Nama File</th>
-                            <th>Deskripsi</th>
-                            <th>Kategori</th>
-                            <th>Format File</th>
-                            <th>Size</th>
-                            <th>Banyak Unduh</th>
-                        </tr>
-                        </thead>
-                    </table>
+
+                    @if(isset($listCities))
+                        <div class="row m-b-sm">
+                            <div class="col-xs-12">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="kota" style="font-weight: normal;">Kota / Kabupaten</label>
+                                        {{ Form::select('filter-kota', $listCities, null, array('class' => "form-control", 'id' => "kota", 'onchange' => 'refreshDt()')) }}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-hover table-striped" id="hunian-datatables">
+                                <thead>
+                                <tr>
+                                    <th>Nama File</th>
+                                    <th>Deskripsi</th>
+                                    <th>Kategori</th>
+                                    <th>Format File</th>
+                                    <th>Size</th>
+                                    <th>Kota/Kabupaten</th>
+                                    <th>Banyak Unduh</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -51,6 +71,9 @@
                     @if(isset($jenis))
                     params.jenis = '{{{ $jenis }}}';
                     @endif
+
+                    params.kota = $('#kota').val();
+
                 }
             },
             columns: [
@@ -59,9 +82,15 @@
                 {data:'categoryfile',name:'categoryfile'},
                 {data:'fileext',name:'fileext'},
                 {data:'file_size',name:'file_size'},
+                {data:'NamaKota',name:'kota.NamaKota'},
                 {data:'downloadcounter',name:'downloadcounter'}
 
             ]
         });
+
+        function refreshDt()
+        {
+            $('#hunian-datatables').DataTable().ajax.reload();
+        }
     </script>
 @stop

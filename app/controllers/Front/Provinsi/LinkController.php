@@ -21,7 +21,11 @@ class LinkController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.link.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.link.index', compact('provinsi','listCities'))
             ->with('jenis', \LinkInfo::IMB)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
 
@@ -34,7 +38,11 @@ class LinkController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.link.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.link.index', compact('provinsi','listCities'))
             ->with('jenis', \LinkInfo::PBB)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
 
@@ -47,7 +55,11 @@ class LinkController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.link.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.link.index', compact('provinsi','listCities'))
             ->with('jenis', \LinkInfo::TATA_RUANG)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
 
@@ -60,7 +72,11 @@ class LinkController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.link.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.link.index', compact('provinsi','listCities'))
             ->with('jenis', \LinkInfo::BPN)
             ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
 
@@ -73,8 +89,11 @@ class LinkController extends \BaseController
         $provinsiId = \Input::get('provinsi');
 
         $link = \LinkInfo::select(array(
-            'linkinfo.*'
+            'linkinfo.*',
+            'kota.NamaKota'
+
         ))
+            ->leftJoin('kota','linkinfo.KodeKota','=','kota.KodeKota')
             ->where('linkinfo.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisLink != '' || !is_null($jenisLink))
@@ -87,11 +106,28 @@ class LinkController extends \BaseController
             $link->where('linkinfo.KodeProvinsi', $provinsiId);
         }
 
+        if(\Input::has('kota'))
+        {
+            $kota = (int) \Input::get('kota');
+
+
+            if($kota != 0) {
+                $link->where('kota.KodeKota', $kota);
+            }
+        }
+
         $datatables = Datatables::of($link)
             ->editColumn('LinkInfo', function($data) {
                 return "<a href='{$data->LinkInfo}' target='_blank'>{$data->LinkInfo}</a>";
             })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
+            })
             ->make(true);
+
         return $datatables;
 
     }

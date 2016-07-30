@@ -24,7 +24,11 @@ class FileController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.file.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
     }
     /**
@@ -39,7 +43,11 @@ class FileController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.file.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::KEBIJAKAN)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
@@ -57,7 +65,11 @@ class FileController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.file.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::PENELITIAN)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
@@ -75,7 +87,11 @@ class FileController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.file.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::INFORMASI)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
@@ -92,8 +108,12 @@ class FileController extends \BaseController
 
         if(is_null($provinsi))
             \App::abort(404);
-        
-        return \View::make('front.file.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL)
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
@@ -132,6 +152,16 @@ class FileController extends \BaseController
             $berkas->where('file.categoryfile', $jenisBerkas);
         }
 
+        if(\Input::has('kota'))
+        {
+            $kota = (int) \Input::get('kota');
+
+
+            if($kota != 0) {
+                $berkas->where('kota.KodeKota', $kota);
+            }
+        }
+
         $datatables = Datatables::of($berkas)
             ->editColumn('filename', function($data) {
                 $html = "<a href='".route('front.file.download', array($data->url))."'>{$data->filename}</a>";
@@ -160,6 +190,12 @@ class FileController extends \BaseController
                 }
 
                 return $data->downloadcounter;
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 

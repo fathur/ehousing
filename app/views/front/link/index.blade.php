@@ -12,15 +12,38 @@
                     <h5>Daftar Kontak</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
-                        <thead>
-                        <tr>
-                            <th>Judul</th>
-                            <th>URL</th>
-                            <th>Group</th>
-                        </tr>
-                        </thead>
-                    </table>
+
+
+                    @if(isset($listCities))
+                        <div class="row m-b-sm">
+                            <div class="col-xs-12">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="kota" style="font-weight: normal;">Kota / Kabupaten</label>
+                                        {{ Form::select('filter-kota', $listCities, null, array('class' => "form-control", 'id' => "kota", 'onchange' => 'refreshDt()')) }}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <table class="table table-hover table-striped" id="hunian-datatables">
+                                <thead>
+                                <tr>
+                                    <th>Judul</th>
+                                    <th>URL</th>
+                                    <th>Group</th>
+                                    <th>Kota/Kabupaten</th>
+
+                                </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,14 +69,21 @@
                     @endif
 
                     params.jenis = '{{{ $jenis }}}';
+                    params.kota = $('#kota').val();
+
                 }
             },
             columns: [
                 {data:'Judul',name:'Judul'},
                 {data:'LinkInfo',name:'LinkInfo'},
-                {data:'GrupLinkInfo',name:'GrupLinkInfo'}
-
+                {data:'GrupLinkInfo',name:'GrupLinkInfo'},
+                {data:'NamaKota',name:'kota.NamaKota'}
             ]
         });
+
+        function refreshDt()
+        {
+            $('#hunian-datatables').DataTable().ajax.reload();
+        }
     </script>
 @stop
