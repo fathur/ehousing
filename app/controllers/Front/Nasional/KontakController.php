@@ -53,8 +53,10 @@ class KontakController extends \BaseController
         $jenisKontak = \Input::get('jenis');
 
         $kontak= \Kontak::select(array(
-            'kontak.*'
+            'kontak.*',
+            'kota.NamaKota'
         ))
+            ->leftJoin('kota','kontak.KodeKota','=','kota.KodeKota')
             ->where('kontak.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisKontak != '' || !is_null($jenisKontak))
@@ -86,6 +88,12 @@ class KontakController extends \BaseController
                     return "<span class='label label-danger'>Belum terverifikasi</span>";
                 else
                     return "<span class='label label-success'>Terverifikasi</span>";
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 

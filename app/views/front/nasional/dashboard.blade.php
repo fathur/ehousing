@@ -73,7 +73,7 @@
                             <h2>
                                 <a href="http://ehousing.id/post/grid/info" class="btn-link">
                                     <i class="fa fa-th-large"></i>
-                                    <span class="nav-label">Info e-Housing</span>
+                                    <span class="nav-label">Teknologi Rancang Bangun</span>
                                 </a>
                             </h2>
                         </div>

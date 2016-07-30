@@ -57,13 +57,26 @@ class FileController extends \BaseController
         $jenisBerkas = \Input::get('jenis');
 
         $berkas = \Berkas::select(array(
-            'file.*'
+            'file.*',
+            'kota.NamaKota'
+
         ))
+            ->leftJoin('kota','file.KodeKota','=','kota.KodeKota')
             ->where('file.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisBerkas != '' || !is_null($jenisBerkas))
         {
             $berkas->where('file.categoryfile', $jenisBerkas);
+        }
+
+        if(\Input::has('kota'))
+        {
+            $kota = (int) \Input::get('kota');
+
+
+            if($kota != 0) {
+                $berkas->where('kota.KodeKota', $kota);
+            }
         }
 
         $datatables = Datatables::of($berkas)
@@ -94,6 +107,12 @@ class FileController extends \BaseController
                 }
 
                 return $data->downloadcounter;
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 

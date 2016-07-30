@@ -46,8 +46,11 @@ class LinkController extends \BaseController
         $jenisLink = \Input::get('jenis');
 
         $link = \LinkInfo::select(array(
-            'linkinfo.*'
+            'linkinfo.*',
+            'kota.NamaKota'
+
         ))
+            ->leftJoin('kota','linkinfo.KodeKota','=','kota.KodeKota')
             ->where('linkinfo.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisLink != '' || !is_null($jenisLink))
@@ -60,6 +63,12 @@ class LinkController extends \BaseController
         $datatables = Datatables::of($link)
             ->editColumn('LinkInfo', function($data) {
                 return "<a href='{$data->LinkInfo}' target='_blank'>{$data->LinkInfo}</a>";
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
         return $datatables;

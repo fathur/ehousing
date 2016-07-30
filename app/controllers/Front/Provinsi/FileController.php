@@ -129,8 +129,11 @@ class FileController extends \BaseController
         $provinsiId = \Input::get('provinsi');
 
         $berkas = \Berkas::select(array(
-            'file.*'
+            'file.*',
+            'kota.NamaKota'
+
         ))
+            ->leftJoin('kota','file.KodeKota','=','kota.KodeKota')
             ->where('file.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
