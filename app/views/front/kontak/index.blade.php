@@ -12,19 +12,40 @@
                     <h5>Daftar Kontak</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-hover table-striped" id="hunian-datatables">
-                        <thead>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th>Nama</th>
-                            <th>Jenis Kontak</th>
-                            <th>No. Telp</th>
-                            <th>Email</th>
-                            <th>Kompetensi</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                    </table>
+
+                    @if(isset($listCities))
+                        <div class="row m-b-sm">
+                            <div class="col-xs-12">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="kota" style="font-weight: normal;">Kota / Kabupaten</label>
+                                        {{ Form::select('filter-kota', $listCities, null, array('class' => "form-control", 'id' => "kota", 'onchange' => 'refreshDt()')) }}
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="table-responsive">
+                            <table class="table table-hover table-striped" id="hunian-datatables">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Nama</th>
+                                    <th>Jenis Kontak</th>
+                                    <th>No. Telp</th>
+                                    <th>Email</th>
+                                    <th>Kompetensi</th>
+                                    <th>Kota/Kabupaten</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,6 +71,9 @@
                     @endif
 
                     params.jenis = '{{{ $jenis }}}';
+
+                    params.kota = $('#kota').val();
+
                 }
             },
             columns: [
@@ -59,9 +83,15 @@
                 {data:'NoTelp',name:'NoTelp'},
                 {data:'Email',name:'Email'},
                 {data:'Kompetensi',name:'Kompetensi'},
+                {data:'NamaKota',name:'kota.NamaKota'},
                 {data:'TglVerifikasi',name:'TglVerifikasi'}
 
             ]
         });
+
+        function refreshDt()
+        {
+            $('#hunian-datatables').DataTable().ajax.reload();
+        }
     </script>
 @stop

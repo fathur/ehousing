@@ -29,7 +29,6 @@ class HunianController extends \BaseController
             \App::abort(404);
 
         $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
-
         $listCities = array(0 => 'Semua') + $listCities;
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
@@ -48,7 +47,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUNAMI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -64,7 +67,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -80,7 +87,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -96,7 +107,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::CONDOTEL)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -112,7 +127,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::APERTEMEN)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -128,7 +147,10 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::HOTEL)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }

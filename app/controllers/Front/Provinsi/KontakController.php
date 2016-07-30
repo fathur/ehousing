@@ -20,7 +20,10 @@ class KontakController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.kontak.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::DEVELOPER)
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
 
@@ -33,7 +36,10 @@ class KontakController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.kontak.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::KONTRAKTOR)
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
@@ -45,7 +51,10 @@ class KontakController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.kontak.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::SUPPLIER)
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
@@ -57,7 +66,10 @@ class KontakController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.kontak.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::TUKANG)
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
@@ -69,7 +81,10 @@ class KontakController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.kontak.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::ARSITEK)
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
@@ -85,8 +100,10 @@ class KontakController extends \BaseController
         $provinsiId = \Input::get('provinsi');
 
         $kontak= \Kontak::select(array(
-            'kontak.*'
+            'kontak.*',
+            'kota.NamaKota'
         ))
+            ->leftJoin('kota','kontak.KodeKota','=','kota.KodeKota')
             ->where('kontak.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisKontak != '' || !is_null($jenisKontak))
@@ -97,6 +114,16 @@ class KontakController extends \BaseController
         if(\Input::has('provinsi') || $provinsiId != '' || !is_null($provinsiId))
         {
             $kontak->where('kontak.KodeProvinsi', $provinsiId);
+        }
+
+        if(\Input::has('kota'))
+        {
+            $kota = (int) \Input::get('kota');
+
+
+            if($kota != 0) {
+                $kontak->where('kota.KodeKota', $kota);
+            }
         }
 
         $datatables = Datatables::of($kontak)
@@ -123,6 +150,12 @@ class KontakController extends \BaseController
                     return "<span class='label label-danger'>Belum terverifikasi</span>";
                 else
                     return "<span class='label label-success'>Terverifikasi</span>";
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 
