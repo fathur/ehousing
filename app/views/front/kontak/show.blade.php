@@ -4,7 +4,13 @@
     <div class="col-md-3">
         <div class="ibox float-e-margins">
             <div class="ibox-content no-padding border-left-right">
+
+                @if(is_null($kontak->Image))
                 <img alt="image" class="img-responsive" src="{{ url('img/no-pict_profile_big.jpg') }}">
+                @else
+                <img alt="image" class="img-responsive" src="{{ route('front.file.show', 'kontak', $kontak->Image) }}">
+                @endif
+                
             </div>
             <div class="ibox-content profile-content text-center">
                 <h4><strong>{{{ $kontak->Nama }}}</strong></h4>
