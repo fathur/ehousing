@@ -9,6 +9,8 @@ use Carbon\Carbon;
  */
 class Builder
 {
+    const KODE_PROFIL_PROFINSI = 201511020000;
+
     public static $exceptionFirstSegment = array(
         'test','login','logout','password','kontak','hunian','posts','post','link',
         'file','profile','statistik','program','berita','ehousing','back-office');
@@ -39,18 +41,20 @@ class Builder
         foreach ($navigasi as $item) {
             if($item->ParentKodeMenu ==  $parent)
             {
-                $arrow = $this->hasChildren($navigasi, $item->KodeMenu) ? '<span class="fa arrow"></span>' : '';
+                if($this->checkProvinsi($item->URL) != '/profile') {
+                    $arrow = $this->hasChildren($navigasi, $item->KodeMenu) ? '<span class="fa arrow"></span>' : '';
 
-                $html .= "<li class=''>
-						<a href='".url($this->checkProvinsi($item->URL))."'>
+                    $html .= "<li class=''>
+						<a href='" . url($this->checkProvinsi($item->URL)) . "'>
 							<i class='{$item->Icon}'></i>
 							<span class='nav-label'>{$item->Nama}</span> {$arrow}
 						</a>";
 
-                if($this->hasChildren($navigasi, $item->KodeMenu))
-                    $html .= $this->buildSubMenu($navigasi, $item->KodeMenu);
+                    if ($this->hasChildren($navigasi, $item->KodeMenu))
+                        $html .= $this->buildSubMenu($navigasi, $item->KodeMenu);
 
-                $html .= "</li>";
+                    $html .= "</li>";
+                }
             }
         }
 

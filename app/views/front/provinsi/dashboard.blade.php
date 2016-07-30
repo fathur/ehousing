@@ -264,7 +264,7 @@
         <div class="col-xs-12 col-md-3">
 
             <div class="list-group">
-                <a href="http://ehousing.id/hunian" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
 
                 @if($hunian->count() > 0)
                     @foreach($hunian as $item)
@@ -280,7 +280,7 @@
             </div>
 
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/developer" class="list-group-item active">
+                <a href="#" class="list-group-item active">
                     <i class="fa fa-connectdevelop"></i> Developer
                 </a>
                 @if($developers->count() > 0)
@@ -296,7 +296,7 @@
             </div>
 
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/desain_arsitek" class="list-group-item active">
+                <a href="#" class="list-group-item active">
                     <i class="fa fa-object-group"></i> Desain &amp; Arsitek
                 </a>
                 @if($arsitek->count() > 0)
@@ -311,7 +311,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/kontraktor" class="list-group-item active"><i class="fa fa-cogs"></i> Kontraktor</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-cogs"></i> Kontraktor</a>
                 @if($kontraktor->count() > 0)
                     @foreach($kontraktor as $item)
                         <a href='#' class='list-group-item'>
@@ -324,7 +324,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/tukang" class="list-group-item active"><i class="fa fa-user"></i> Tukang</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-user"></i> Tukang</a>
                 @if($tukang->count() > 0)
                     @foreach($tukang as $item)
                         <a href='#' class='list-group-item'>
@@ -337,7 +337,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/suplier" class="list-group-item active"> <i class="fa fa-support"></i> Suplier</a>
+                <a href="#" class="list-group-item active"> <i class="fa fa-support"></i> Suplier</a>
                 @if($supplier->count() > 0)
                     @foreach($supplier as $item)
                         <a href='#' class='list-group-item'>
@@ -351,7 +351,7 @@
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <a href="http://ehousing.id/file" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
+                    <a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
                 </div>
                 <div class="panel-body list-group no-margins no-padding">
                     @foreach($files as $item)

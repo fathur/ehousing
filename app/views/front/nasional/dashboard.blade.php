@@ -17,15 +17,23 @@
         <div class="col-xs-12 col-md-9">
 
             <div class="jumbotron">
-                <h1>e-Housing</h1>
-                <p>Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
+                <div class="col-sm-4">
+                    <img src="{{asset('img/logo-pupr-300.jpg')}}" alt="PUPR" class="img-responsive" style="height: 145px;">
+                </div>
+                <div class="col-sm-8">
+                    <h1>e-Housing</h1>
+                    <p>Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
+                </div>
+
+                <div style="clear: both"></div>
+
             </div>
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h2><a href="http://ehousing.id/post/grid/berita" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span> </a></h2>
+                            <h2><a href="#" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span> </a></h2>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -71,7 +79,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/post/grid/info" class="btn-link">
+                                <a href="#" class="btn-link">
                                     <i class="fa fa-th-large"></i>
                                     <span class="nav-label">Teknologi Rancang Bangun</span>
                                 </a>
@@ -121,7 +129,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/post/grid/program" class="btn-link">
+                                <a href="#" class="btn-link">
                                     <i class="fa fa-home"></i>
                                     <span class="nav-label">Bantuan &amp; Program Pemerintah</span>
                                 </a>
@@ -145,7 +153,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="http://ehousing.id/file" class="btn-link">
+                                <a href="#" class="btn-link">
                                     <i class="fa fa-book"></i> <span class="nav-label"> Publikasi</span>
                                 </a>
                             </h2>
@@ -203,7 +211,7 @@
         <div class="col-xs-12 col-md-3">
 
             <div class="list-group">
-                <a href="http://ehousing.id/hunian" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
 
                 @if($hunian->count() > 0)
                     @foreach($hunian as $item)
@@ -219,7 +227,7 @@
             </div>
 
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/developer" class="list-group-item active">
+                <a href="#" class="list-group-item active">
                     <i class="fa fa-connectdevelop"></i> Developer
                 </a>
                 @if($developers->count() > 0)
@@ -235,7 +243,7 @@
             </div>
 
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/desain_arsitek" class="list-group-item active">
+                <a href="#" class="list-group-item active">
                     <i class="fa fa-object-group"></i> Desain &amp; Arsitek
                 </a>
                 @if($arsitek->count() > 0)
@@ -250,7 +258,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/kontraktor" class="list-group-item active"><i class="fa fa-cogs"></i> Kontraktor</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-cogs"></i> Kontraktor</a>
                 @if($kontraktor->count() > 0)
                     @foreach($kontraktor as $item)
                         <a href='#' class='list-group-item'>
@@ -263,7 +271,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/tukang" class="list-group-item active"><i class="fa fa-user"></i> Tukang</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-user"></i> Tukang</a>
                 @if($tukang->count() > 0)
                     @foreach($tukang as $item)
                         <a href='#' class='list-group-item'>
@@ -276,7 +284,7 @@
                 @endif
             </div>
             <div class="list-group">
-                <a href="http://ehousing.id/kontak/listkontak/suplier" class="list-group-item active"> <i class="fa fa-support"></i> Suplier</a>
+                <a href="#" class="list-group-item active"> <i class="fa fa-support"></i> Suplier</a>
                 @if($supplier->count() > 0)
                     @foreach($supplier as $item)
                         <a href='#' class='list-group-item'>
@@ -290,7 +298,7 @@
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <a href="http://ehousing.id/file" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
+                    <a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
                 </div>
                 <div class="panel-body list-group no-margins no-padding">
                     @foreach($files as $item)
