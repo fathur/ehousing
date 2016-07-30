@@ -28,7 +28,11 @@ class HunianController extends \BaseController
         if(is_null($provinsi))
             \App::abort(404);
 
-        return \View::make('front.hunian.index', compact('provinsi'))
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+
+        $listCities = array(0 => 'Semua') + $listCities;
+
+        return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUN_SEWA)
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
@@ -135,13 +139,19 @@ class HunianController extends \BaseController
      */
     public function data($provinsiSlug)
     {
+
+
         $jenisHunian = \Input::get('jenis');
         $provinsiId = \Input::get('provinsi');
 
+
+
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat','hunian.slug'
+            'kontak.Nama','hunian.Alamat','hunian.slug',
+            'kota.NamaKota'
         ))
+            ->leftJoin('kota','hunian.KodeKota','=','kota.KodeKota')
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisHunian != '' || !is_null($jenisHunian))
@@ -154,7 +164,18 @@ class HunianController extends \BaseController
             $hunian->where('hunian.KodeProvinsi', $provinsiId);
         }
 
+        if(\Input::has('kota'))
+        {
+            $kota = (int) \Input::get('kota');
+
+
+            if($kota != 0) {
+                $hunian->where('kota.KodeKota', $kota);
+            }
+        }
+
         $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
+
 
         $datatables = Datatables::of($hunian)
             ->editColumn('NamaHunian', function($data) use ($provinsiSlug) {
@@ -165,6 +186,12 @@ class HunianController extends \BaseController
             })
             ->editColumn('Website', function($data) {
                 return "<a href='{$data->Website}' target='_blank'>".$data->Website.'</a>';
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 

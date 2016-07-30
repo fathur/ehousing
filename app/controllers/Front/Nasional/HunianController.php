@@ -14,6 +14,9 @@ use Datatables;
 class HunianController extends \BaseController
 {
     public function getRusunSewa(){
+
+        //$listCities =
+
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUN_SEWA)
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
@@ -62,8 +65,10 @@ class HunianController extends \BaseController
 
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat','hunian.slug'
+            'kontak.Nama','hunian.Alamat','hunian.slug',
+            'kota.NamaKota'
         ))
+            ->leftJoin('kota','hunian.KodeKota','=','kota.KodeKota')
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
         if(\Input::has('jenis') || $jenisHunian != '' || !is_null($jenisHunian))
@@ -82,6 +87,12 @@ class HunianController extends \BaseController
             })
             ->editColumn('Website', function($data) {
                 return "<a href='{$data->Website}' target='_blank'>".$data->Website.'</a>';
+            })
+            ->editColumn('NamaKota', function($data) {
+                if(is_null($data->NamaKota))
+                    return '-';
+
+                return $data->NamaKota;
             })
             ->make(true);
 
