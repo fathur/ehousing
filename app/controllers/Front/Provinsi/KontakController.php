@@ -25,6 +25,7 @@ class KontakController extends \BaseController
 
         return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::DEVELOPER)
+            ->with('kontakTitle', 'Daftar Kontak - Developer')
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
 
     }
@@ -41,6 +42,7 @@ class KontakController extends \BaseController
 
         return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::KONTRAKTOR)
+            ->with('kontakTitle', 'Daftar Kontak - Kontraktor')
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
@@ -56,6 +58,7 @@ class KontakController extends \BaseController
 
         return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::SUPPLIER)
+            ->with('kontakTitle', 'Daftar Kontak - Supplier')
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
@@ -71,6 +74,7 @@ class KontakController extends \BaseController
 
         return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::TUKANG)
+            ->with('kontakTitle', 'Daftar Kontak - Tukang')
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 
@@ -86,6 +90,7 @@ class KontakController extends \BaseController
 
         return \View::make('front.kontak.index', compact('provinsi','listCities'))
             ->with('jenis',\Kontak::ARSITEK)
+            ->with('kontakTitle', 'Daftar Kontak - Arsitek')
             ->with('datatablesRoute', route('front.provinsi.kontak.data', array($provinsiSlug)));
     }
 

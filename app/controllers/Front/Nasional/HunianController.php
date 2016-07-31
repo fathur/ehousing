@@ -19,6 +19,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUN_SEWA)
+            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
 
     }
@@ -26,36 +27,43 @@ class HunianController extends \BaseController
     public function getRusunami(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUNAMI)
+            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
+
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getRusunamiSubsidi(){
         return \View::make('front.hunian.index')
-            ->with('jenis',\Hunian::RUMAH_SUBSIDI)
+            ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
+            ->with('hunianTitle', 'Daftar Hunian - Rusunami Subsidi')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getRumahSubsidi(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Subsidi')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getCondotel(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::CONDOTEL)
+            ->with('hunianTitle', 'Daftar Hunian - Condotel')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getApartemen(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::APERTEMEN)
+            ->with('hunianTitle', 'Daftar Hunian - Apartemen')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getHotel(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::HOTEL)
+            ->with('hunianTitle', 'Daftar Hotel')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 

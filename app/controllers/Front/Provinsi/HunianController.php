@@ -33,6 +33,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUN_SEWA)
+            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -53,6 +54,8 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUNAMI)
+            ->with('hunianTitle', 'Daftar Hunian - Rusunami')
+
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -73,6 +76,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
+            ->with('hunianTitle', 'Daftar Hunian - Rusunami Subsidi')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -93,6 +97,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Subsidi')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -113,6 +118,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::CONDOTEL)
+            ->with('hunianTitle', 'Daftar Hunian - Condotel')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -133,6 +139,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::APERTEMEN)
+            ->with('hunianTitle', 'Daftar Hunian - Apartemen')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -152,6 +159,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::HOTEL)
+            ->with('hunianTitle', 'Daftar Hotel')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
