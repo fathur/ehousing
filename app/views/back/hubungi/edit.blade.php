@@ -53,6 +53,11 @@
                             <label for="name">Pesan</label>
                             <div class="form-control-static">{{{ $data->Deskripsi }}}</div>
                         </div>
+                        <div class="col-xs-12">
+                            <label for="attachment">Attachment</label>
+                            {{$data->url}}
+                            <div class="form-control-static"><a href="{{ url(route('front.file.show', array('hubungi', $data->url))) }}">{{{ $data->filename }}}</a></div>
+                        </div>
 
                         <div class="col-xs-12 m-b-lg">
                             <label for="name">Status</label>

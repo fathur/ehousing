@@ -53,7 +53,7 @@ class CallUsController extends AdminController
 
         if(\Auth::user()->Region == 'Provinsi')
         {
-           // $pengajuan->where('pengajuan.KodeProvinsi', \Auth::user()->KodeProvinsi);
+            $pengajuan->where('pengajuan.KodeProvinsi', \Auth::user()->KodeProvinsi);
         }
 
 

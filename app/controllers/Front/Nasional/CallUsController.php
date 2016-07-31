@@ -65,7 +65,7 @@ class CallUsController extends \BaseController
 
                 $hash = sha1_file($file->getRealPath());
 
-                $file->move(storage_path('hubungi'), $hash . '.' . $file->getClientOriginalExtension());
+                $file->move(storage_path('uploads/hubungi'), $hash . '.' . $file->getClientOriginalExtension());
 
                 $pengajuan->filename = $file->getClientOriginalName();
                 $pengajuan->raw_name = $file->getClientOriginalName();
