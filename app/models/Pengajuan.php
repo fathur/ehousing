@@ -7,6 +7,11 @@
  */
 class Pengajuan extends Eloquent
 {
+
+    const UPDATED_AT = 'ModDate';
+    const CREATED_AT = 'CreateDate';
+
+
     protected $table = 'pengajuan';
     protected $primaryKey = 'KodePengajuan';
 }

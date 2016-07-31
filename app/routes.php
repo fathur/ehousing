@@ -128,6 +128,10 @@ Route::get('file/data', array('uses' => 'Front\Nasional\FileController@data', 'a
 Route::get('file/download/{url}', array('uses' => 'Front\Nasional\FileController@download', 'as' => 'front.file.download'));
 Route::get('file/{type}/{url}', array('uses' => 'Front\Nasional\FileController@show', 'as' => 'front.file.show'));
 
+// Call us routes
+Route::get('hubungi-kami', array('uses' => 'Front\Nasional\CallUsController@index', 'as' => 'front.nasional.call.index'));
+Route::post('hubungi-kami', array('uses' => 'Front\Nasional\CallUsController@store', 'as' => 'front.nasional.call.store'));
+
 
 // ============================================//
 
@@ -182,4 +186,8 @@ Route::get('{provinsi}/file/penelitian', array('uses' => 'Front\Provinsi\FileCon
 Route::get('{provinsi}/file/informasi', array('uses' => 'Front\Provinsi\FileController@getInformasi', 'as' => 'front.provinsi.file.informasi'));
 Route::get('{provinsi}/file/shm', array('uses' => 'Front\Provinsi\FileController@getStandarHargaMaterial', 'as' => 'front.provinsi.file.shm'));
 Route::get('{provinsi}/file/data', array('uses' => 'Front\Provinsi\FileController@data', 'as' => 'front.provinsi.file.data'));
+
+//
+Route::get('{provinsi}/hubungi-kami', array('uses' => 'Front\Provinsi\CallUsController@index', 'as' => 'front.provinsi.call.index'));
+Route::post('{provinsi}/hubungi-kami', array('uses' => 'Front\Provinsi\CallUsController@store', 'as' => 'front.provinsi.call.store'));
 
