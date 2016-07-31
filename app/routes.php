@@ -74,6 +74,10 @@ Route::group(array('prefix' => 'back-office'), function() {
         Route::put('chart/{jenis}/{id}', array('uses' => 'ChartController@update', 'as' => 'back-office.chart.update'));
         Route::delete('chart/{jenis}/{id}', array('uses' => 'ChartController@destroy', 'as' => 'back-office.chart.destroy'));
 
+        Route::resource('hubungi-kami', 'CallUsController', array('except'=>array('show')));
+        Route::get('hubungi-kami/data', array('uses' => 'CallUsController@data', 'as' => 'back-office.hubungi-kami.data'));
+
+
     });
 
 });

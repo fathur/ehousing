@@ -14,4 +14,11 @@ class Pengajuan extends Eloquent
 
     protected $table = 'pengajuan';
     protected $primaryKey = 'KodePengajuan';
+
+    protected $appends = array('id');
+
+    public function getIdAttribute()
+    {
+        return (int) $this->KodePengajuan;
+    }
 }

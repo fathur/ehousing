@@ -107,6 +107,12 @@
 @endif
 
 <li>
+    <a href="{{route('back-office.hubungi-kami.index')}}">
+        <i class="fa fa-history"></i> <span class="nav-label">Hubungi Kami</span>
+    </a>
+</li>
+
+<li>
     <a href="{{url('/')}}">
         <i class="fa fa-home"></i><span class="nav-label">Visit Home Page</span>
     </a>
