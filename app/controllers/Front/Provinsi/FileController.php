@@ -50,7 +50,7 @@ class FileController extends \BaseController
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::KEBIJAKAN)
-            ->with('fileTitle', 'Daftar Kebijakan')
+            ->with('fileTitle', 'Daftar Produk Hukum')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }

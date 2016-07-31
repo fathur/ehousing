@@ -1,6 +1,14 @@
 @extends('layout')
 
 @section('content')
+    <div class="row white-bg" style="    margin-top: -20px;
+    margin-left: -25px;
+    margin-right: -25px;
+    margin-bottom: 20px;">
+        <div class="col-xs-12">
+            <h2 style="font-weight: 100; padding: 2px 0 16px 0;">{{$postTitle}}</h2>
+        </div>
+    </div>
     <div class="row">
 
         @foreach($posts as $post)

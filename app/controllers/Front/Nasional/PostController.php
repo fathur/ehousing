@@ -27,6 +27,7 @@ class PostController extends \BaseController
         $posts = $data->setLimit(12)->getPrograms();
 
         return \View::make('front.post.grid', compact('posts'))
+            ->with('postTitle', 'Program dan Kegiatan')
             ->with('type','nasional');
     }
 
@@ -37,6 +38,7 @@ class PostController extends \BaseController
         $posts = $data->setLimit(12)->getNews();
 
         return \View::make('front.post.grid', compact('posts','provinsi'))
+            ->with('postTitle', 'Berita')
             ->with('type','nasional');
     }
 }

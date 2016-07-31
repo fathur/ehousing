@@ -32,7 +32,8 @@ class PostController extends \BaseController
         $data = new ProvinsiDataProvider($provinsi->id);
         $posts = $data->setLimit(12)->getPrograms();
 
-        return \View::make('front.post.grid', compact('posts','provinsi'));
+        return \View::make('front.post.grid', compact('posts','provinsi'))
+            ->with('postTitle', 'Program dan Kegiatan');
     }
 
 
@@ -46,7 +47,8 @@ class PostController extends \BaseController
         $data = new ProvinsiDataProvider($provinsi->id);
         $posts = $data->setLimit(12)->getNews();
 
-        return \View::make('front.post.grid', compact('posts','provinsi'));
+        return \View::make('front.post.grid', compact('posts','provinsi'))
+            ->with('postTitle', 'Berita');
     }
 
     public function getInformasi($provinsiSlug)
@@ -59,6 +61,7 @@ class PostController extends \BaseController
         $data = new ProvinsiDataProvider($provinsi->id);
         $posts = $data->setLimit(12)->getInformasi();
 
-        return \View::make('front.post.grid', compact('posts','provinsi'));
+        return \View::make('front.post.grid', compact('posts','provinsi'))
+            ->with('postTitle', 'Informasi');
     }
 }

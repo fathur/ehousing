@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-sm-8 b-l">
-                            <form method="post" action="{{route('front.provinsi.call.store', $provinsi->slug)}}" class="form-horizontal" enctype="multipart/form-data">
+                            <form method="post" action="{{route('front.nasional.call.store')}}" class="form-horizontal" enctype="multipart/form-data">
 
                                 <div class="form-group @if($errors->has('Nama')) has-error @endif">
                                     <label class="col-sm-2 control-label" for="nama">Nama</label>
@@ -117,7 +117,7 @@
                                 <div class="form-group @if($errors->has('KodeProvinsi')) has-error @endif">
                                     <label for="provinsi" class="col-sm-2 control-label">Provinsi</label>
                                     <div class="col-sm-10">
-                                        {{Form::select('KodeProvinsi', $provinces, $provinsi->id, array('class' => 'form-control m-b'))}}
+                                        {{Form::select('KodeProvinsi', $provinces, null, array('class' => 'form-control m-b'))}}
                                         @if($errors->has('Nama'))
                                             <div class="help-block">
 

@@ -25,6 +25,7 @@ class FileController extends \BaseController
     {
         return \View::make('front.file.index')
             ->with('jenis',\Berkas::KEBIJAKAN)
+            ->with('fileTitle', 'Daftar Produk Hukum')
             ->with('datatablesRoute', route('front.nasional.file.data'));
 
     }
@@ -33,6 +34,7 @@ class FileController extends \BaseController
     {
         return \View::make('front.file.index')
             ->with('jenis',\Berkas::PENELITIAN)
+            ->with('fileTitle', 'Daftar Hasil Penelitian/Kajian')
             ->with('datatablesRoute', route('front.nasional.file.data'));
     }
 
@@ -40,6 +42,7 @@ class FileController extends \BaseController
     {
         return \View::make('front.file.index')
             ->with('jenis',\Berkas::INFORMASI)
+            ->with('fileTitle', 'Daftar Informasi')
             ->with('datatablesRoute', route('front.nasional.file.data'));
 
     }
@@ -48,6 +51,7 @@ class FileController extends \BaseController
     {
         return \View::make('front.file.index')
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL)
+            ->with('fileTitle', 'Daftar Harga Bangunan')
             ->with('datatablesRoute', route('front.nasional.file.data'));
 
     }
