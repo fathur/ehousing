@@ -48,7 +48,7 @@ class PostController extends \BaseController
         $posts = $data->setLimit(12)->getNews();
 
         return \View::make('front.post.grid', compact('posts','provinsi'))
-            ->with('postTitle', 'Berita');
+            ->with('postTitle', 'Berita dan Aktifitas');
     }
 
     public function getInformasi($provinsiSlug)
@@ -62,6 +62,6 @@ class PostController extends \BaseController
         $posts = $data->setLimit(12)->getInformasi();
 
         return \View::make('front.post.grid', compact('posts','provinsi'))
-            ->with('postTitle', 'Informasi');
+            ->with('postTitle', 'Teknologi Rancang Bangun');
     }
 }

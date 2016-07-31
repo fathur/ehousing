@@ -6,7 +6,7 @@
     margin-right: -25px;
     margin-bottom: 20px;">
         <div class="col-xs-12">
-            <h2 style="font-weight: 100; padding: 2px 0 16px 0;">{{$postTitle}}</h2>
+            <h2 style="font-weight: 100; padding: 2px 0 16px 0; margin-left: 15px;">{{$postTitle}}</h2>
         </div>
     </div>
     <div class="row">
