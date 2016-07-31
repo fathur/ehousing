@@ -77,7 +77,7 @@
             <div class="jumbotron">
                 <h1>e-Housing {{{ $provinsi->NamaProvinsi }}}</h1>
          {{--       <p>{{{  $provinsi->konfigurasi_situs->Deskripsi }}}</p>--}}
-                <p>Dirjen Penyediaan Perumahan Kementerian PUPR</p>
+                <p>Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
             </div>
 
             <div class="row">
@@ -184,7 +184,7 @@
                             <h2>
                                 <a href="{{ route('front.provinsi.program.list', array($provinsi->slug)) }}" class="btn-link">
                                     <i class="fa fa-home"></i>
-                                    <span class="nav-label">Bantuan &amp; Program Pemerintah</span>
+                                    <span class="nav-label">Program &amp; Kegiatan</span>
                                 </a>
                             </h2>
                             <small>Berikut beberapa bantuan yang telah pemerintah setempat berikan untuk masyarakat, diantaranya:</small>

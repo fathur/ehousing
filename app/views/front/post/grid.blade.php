@@ -30,7 +30,7 @@
                         @if($post->Foto != null || $post->Foto != '')
                             <img class='img-responsive' src='{{ route('front.file.show', array('post', $post->Foto)) }}'>
                         @else
-                            {{{ Str::limit($post->IsiPost, 250) }}}
+                            {{{ strip_tags(Str::limit($post->IsiPost, 250)) }}}
                         @endif
                     </p>
 

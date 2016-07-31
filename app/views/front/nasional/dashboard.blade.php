@@ -17,10 +17,10 @@
         <div class="col-xs-12 col-md-9">
 
             <div class="jumbotron">
-                <div class="col-sm-4">
-                    <img src="{{asset('img/logo-pupr-300.jpg')}}" alt="PUPR" class="img-responsive" style="height: 145px;">
+                <div class="col-sm-3 col-xs-12">
+                    <img src="{{asset('img/logo-pupr-300.jpg')}}" alt="PUPR" style="height: 100px; height: 100px;">
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-9 col-xs-12">
                     <h1>e-Housing</h1>
                     <p>Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
                 </div>

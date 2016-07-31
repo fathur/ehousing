@@ -29,6 +29,7 @@ class FileController extends \BaseController
 
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
+            ->with('fileTitle', 'Daftar File')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
     }
     /**
@@ -49,6 +50,7 @@ class FileController extends \BaseController
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::KEBIJAKAN)
+            ->with('fileTitle', 'Daftar Kebijakan')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }
@@ -71,6 +73,7 @@ class FileController extends \BaseController
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::PENELITIAN)
+            ->with('fileTitle', 'Daftar Hasil Penelitian/Kajian')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }
@@ -93,6 +96,7 @@ class FileController extends \BaseController
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::INFORMASI)
+            ->with('fileTitle', 'Daftar Informasi')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }
@@ -115,6 +119,7 @@ class FileController extends \BaseController
 
         return \View::make('front.file.index', compact('provinsi','listCities'))
             ->with('jenis',\Berkas::STANDAR_HARGA_MATERIAL)
+            ->with('fileTitle', 'Daftar Bahan Bangunan')
             ->with('datatablesRoute', route('front.provinsi.file.data', array($provinsiSlug)));
 
     }
