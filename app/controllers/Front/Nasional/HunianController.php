@@ -27,7 +27,7 @@ class HunianController extends \BaseController
     public function getRusunami(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUNAMI)
-            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
+            ->with('hunianTitle', 'Daftar Hunian - Rusunami')
 
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }

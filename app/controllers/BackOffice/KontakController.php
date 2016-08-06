@@ -296,6 +296,11 @@ class KontakController extends AdminController {
             $kontak->where('JenisKontak', $jenis);
         }
 
+		if(\Auth::user()->Region == 'Provinsi')
+		{
+			$kontak->where('kontak.KodeProvinsi', \Auth::user()->KodeProvinsi);
+		}
+
         return $kontak->get();
 	}
 

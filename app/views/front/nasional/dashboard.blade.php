@@ -131,7 +131,7 @@
                             <h2>
                                 <a href="#" class="btn-link">
                                     <i class="fa fa-home"></i>
-                                    <span class="nav-label">Bantuan &amp; Program Pemerintah</span>
+                                    <span class="nav-label">Program & Kegiatan</span>
                                 </a>
                             </h2>
                             <small>Berikut beberapa bantuan yang telah pemerintah setempat berikan untuk masyarakat, diantaranya:</small>

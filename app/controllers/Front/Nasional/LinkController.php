@@ -17,6 +17,7 @@ class LinkController extends \BaseController
     {
         return \View::make('front.link.index')
             ->with('jenis', \LinkInfo::IMB)
+            ->with('linkTitle', 'Daftar Link - IMB')
             ->with('datatablesRoute', route('front.nasional.link.data'));
     }
 
@@ -24,6 +25,7 @@ class LinkController extends \BaseController
     {
         return \View::make('front.link.index')
             ->with('jenis', \LinkInfo::PBB)
+            ->with('linkTitle', 'Daftar Link - PBB')
             ->with('datatablesRoute', route('front.nasional.link.data'));
     }
 
@@ -31,6 +33,7 @@ class LinkController extends \BaseController
     {
         return \View::make('front.link.index')
             ->with('jenis', \LinkInfo::TATA_RUANG)
+            ->with('linkTitle', 'Daftar Link - Tata Ruang')
             ->with('datatablesRoute', route('front.nasional.link.data'));
     }
 
@@ -38,6 +41,7 @@ class LinkController extends \BaseController
     {
         return \View::make('front.link.index')
             ->with('jenis', \LinkInfo::BPN)
+            ->with('linkTitle', 'Daftar Link - BPN')
             ->with('datatablesRoute', route('front.nasional.link.data'));
     }
 

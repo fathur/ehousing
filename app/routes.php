@@ -102,7 +102,7 @@ Route::get('hunian/rusunami', array('uses' => 'Front\Nasional\HunianController@g
 Route::get('hunian/rusunami-subsidi', array('uses' => 'Front\Nasional\HunianController@getRusunamiSubsidi', 'as' => 'front.nasional.hunian.rusunamisubs'));
 Route::get('hunian/rumah-subsidi', array('uses' => 'Front\Nasional\HunianController@getRumahSubsidi', 'as' => 'front.nasional.hunian.rumahsubs'));
 Route::get('hunian/condotel', array('uses' => 'Front\Nasional\HunianController@getCondotel', 'as' => 'front.nasional.hunian.condotel'));
-Route::get('hunian/apertemen', array('uses' => 'Front\Nasional\HunianController@getApartemen', 'as' => 'front.nasional.hunian.apartemen'));
+Route::get('hunian/apartemen', array('uses' => 'Front\Nasional\HunianController@getApartemen', 'as' => 'front.nasional.hunian.apartemen'));
 Route::get('hunian/hotel', array('uses' => 'Front\Nasional\HunianController@getHotel', 'as' => 'front.nasional.hunian.hotel'));
 Route::get('hunian/data', array('uses' => 'Front\Nasional\HunianController@data', 'as' => 'front.nasional.hunian.data'));
 Route::get('hunian/{hunian}', array('uses' => 'Front\Nasional\HunianController@show', 'as' => 'front.nasional.hunian.show'));
