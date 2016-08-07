@@ -5,10 +5,10 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content no-padding border-left-right">
 
-                @if(is_null($kontak->Image))
+                @if(is_null($kontak->Picture))
                 <img alt="image" class="img-responsive" src="{{ url('img/no-pict_profile_big.jpg') }}">
                 @else
-                <img alt="image" class="img-responsive" src="{{ route('front.file.show', 'kontak', $kontak->Image) }}">
+                <img alt="image" class="img-responsive" src="{{ route('front.file.show', ['kontak', $kontak->Picture]) }}" alt="{{$kontak->Picture}}">
                 @endif
 
             </div>
