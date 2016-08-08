@@ -37,8 +37,21 @@ class PostController extends \BaseController
         $data = new ProvinsiDataProvider();
         $posts = $data->setLimit(12)->getNews();
 
-        return \View::make('front.post.grid', compact('posts','provinsi'))
+        return \View::make('front.post.grid', compact('posts'))
             ->with('postTitle', 'Berita dan Aktifitas')
             ->with('type','nasional');
+    }
+
+    public function getInformasi()
+    {
+
+
+        $data = new ProvinsiDataProvider();
+        $posts = $data->setLimit(12)->getInformasi();
+
+        return \View::make('front.post.grid', compact('posts'))
+            ->with('postTitle', 'Teknologi Rancang Bangun')
+            ->with('type','nasional');
+
     }
 }
