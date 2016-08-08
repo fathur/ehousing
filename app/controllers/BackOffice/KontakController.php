@@ -211,7 +211,6 @@ class KontakController extends AdminController {
 		$data->Kompetensi = \Input::get('Kompetensi');
 		$data->IsActive = \Input::get('IsActive');
 		$data->Image = \Input::get('Image');
-		$data->Picture = \Input::get('Picture');
 		$data->KodeKota = \Input::get('KodeKota');
 		$data->TglRegistrasi = \Input::get('TglRegistrasi');
 		$data->TglVerifikasi = \Input::get('TglVerifikasi');
