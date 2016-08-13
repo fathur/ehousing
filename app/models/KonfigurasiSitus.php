@@ -14,7 +14,7 @@ class KonfigurasiSitus extends EhousingModel
     protected $table = 'konfigurasisitus';
     protected $primaryKey = 'KodeKonfSitus';
     protected $fillable = [
-        'Nama','Deskripsi','Tagline','Alamat1','Alamat2','Alamat3','Logo',
+        'Nama','Deskripsi','Tagline','Alamat1','Alamat2','Alamat3','Logo','tentang_kami',
         'VisiMisi','StukturOrg','Email','KodeProvinsi','NamaGubernur',
         'NamaWakilGubernur','PeriodeJabatan','KelembagaanPerkim','LetakGeografis',
         'Kabupaten','Kota','NamaCP','NoTelpCP','EmailCP','TotalLuas','Daratan',

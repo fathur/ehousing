@@ -36,6 +36,9 @@ class SitusController extends AdminController {
 
 		if (\Auth::user()->Region == 'Provinsi') {
 
+			$data = \KonfigurasiSitus::where('KodeProvinsi', $kodeProvinsi)->first();
+
+
 			if(\Input::hasFile('userfile'))
 			{
 				$file = \Input::file('userfile');
@@ -52,10 +55,25 @@ class SitusController extends AdminController {
 				$newName = \Input::get('Logo');
 			}
 
-			$data = \KonfigurasiSitus::where('KodeProvinsi', $kodeProvinsi)->first();
+			if(\Input::hasFile('StrukturOrg'))
+			{
+				$fileStruktur = \Input::file('StrukturOrg');
+				$destinationStruktur = storage_path('uploads/profile/');
+				$strukturName = $fileStruktur->getClientOriginalName();
+
+				if($fileStruktur->isValid())
+				{
+					$fileStruktur->move($destinationStruktur, $strukturName);
+				}
+
+				$data->StrukturOrg =  $strukturName;
+
+			}
+
 
 			$data->Nama =  \Input::get('Nama');
 			$data->Deskripsi =  \Input::get('Deskripsi');
+			$data->tentang_kami =  \Input::get('tentang_kami');
 			$data->ibukota =  \Input::get('ibukota');
 			// $data->Tagline =  \Input::get('Tagline');
 			$data->Alamat1 =  \Input::get('Alamat1');
@@ -63,7 +81,6 @@ class SitusController extends AdminController {
 			$data->Alamat3 =  \Input::get('Alamat3');
 			$data->Logo =  $newName;
 			$data->VisiMisi =  \Input::get('VisiMisi');
-			$data->StrukturOrg =  \Input::get('StrukturOrg');
 			$data->Email =  \Input::get('Email');
 			// $data->KodeProvinsi =  \Input::get('KodeProvinsi');
 			$data->NamaGubernur =  \Input::get('NamaGubernur');

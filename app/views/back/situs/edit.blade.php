@@ -43,6 +43,11 @@
 
                             </div>
                             <div class="form-group">
+                                <label for="tentang_kami">Tentang Kami</label>
+                                {{Form::textarea('tentang_kami', null, array('class' => 'form-control', 'id' => 'tentang_kami', 'rows' => null))}}
+
+                            </div>
+                            <div class="form-group">
                                 <label for="NamaGubernur">Nama Gubernur</label>
                                 {{Form::text('NamaGubernur', null, array('class' => 'form-control', 'id' => 'NamaGubernur'))}}
                             </div>
@@ -113,9 +118,29 @@
                                 {{Form::textarea('VisiMisi', null, array('class' => 'form-control', 'id' => 'VisiMisi', 'rows' => null))}}
 
                             </div>
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label for="StrukturOrg">Struktur Organisasi</label>
                                 {{Form::textarea('StrukturOrg', null, array('class' => 'form-control', 'id' => 'StrukturOrg', 'rows' => null))}}
+                            </div>--}}
+                            <div class="form-group">
+                                <label for="StrukturOrg">Struktur Organisasi</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{Form::file('StrukturOrg', array())}}
+                                        <p class="help-block small">
+                                            File : gif|jpg|jpeg|png
+                                            <br>Ukuran file maksimal : 2MB
+                                        </p>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <div class="profile-image">
+                                            @if(!is_null($data->StrukturOrg))
+                                                <img src="{{ route('front.file.show', ['profile', $data->StrukturOrg]) }}" class="img-responsive" alt="{{$data->StrukturOrg}}">
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
