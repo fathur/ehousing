@@ -1,5 +1,10 @@
 @extends('layout')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}">
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -54,7 +59,7 @@
 
                             </div>
 
-                            <button type="submit" value="upload" class="btn btn-sm btn-primary"> Update</button>
+                            <button type="submit" value="upload" class="btn btn-sm btn-primary"> Simpan</button>
 
                         </div>
                     </div>
@@ -64,6 +69,12 @@
         </div>
     </div>
 @stop
+
+@section('scripts')
+    <script src="{{asset('vendor/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+@stop
+
 
 @section('script')
 <script>

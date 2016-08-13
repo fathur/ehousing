@@ -1,5 +1,11 @@
 @extends('layout')
 
+@section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css')}}">
+
+@stop
+
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -13,7 +19,8 @@
 
                     {{Form::model($data, array(
                         'route' => array('back-office.file.update', $data->id),
-                        'method' => 'PUT'
+                        'method' => 'PUT',
+                        'files' => true
                     ))}}
 
                     <div class="row">
@@ -42,6 +49,27 @@
                         </div>
 
                         <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="filename">Upload Image</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{Form::file('filename', array())}}
+                                        <p class="help-block small">
+                                            File : gif|jpg|jpeg|png
+                                            <br>Ukuran file maksimal : 2MB
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="profile-image">
+                                            @if(!is_null($data->url))
+                                                <img src="{{ route('front.file.show', ['file', $data->url]) }}" class="img-responsive" alt="{{$data->url}}">
+                                                {{--{{Form::hidden('picture', null)}}--}}
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             {{--<div class="form-group">
                                 <label for="userfile">File</label>
                                 <input type="file" name="userfi.e" placeholder="Select file to upload ..">
@@ -79,6 +107,12 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('scripts')
+    <script src="{{asset('vendor/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+
 @stop
 
 @section('script')

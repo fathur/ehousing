@@ -148,6 +148,9 @@ class FileController extends \BaseController
             case 'hubungi':
                 $location = 'hubungi/' . $url;
                 break;
+            case 'file':
+                $location = 'file/' . $url;
+                break;
             default:
                 $location = $url;
         }

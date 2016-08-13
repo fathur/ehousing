@@ -19,7 +19,7 @@ class Berkas extends EhousingModel
     protected $fillable = [
         'filename','url','file_size','description','categoryfile','publisheddate',
         'module','refkey','fileext','filecontent','downloadcounter','sharecounter',
-        'raw_name','KodeProvinsi','Judul',
+        'raw_name','KodeProvinsi','Judul','ExpiryDate',
         'CreateUid','ModUid'
     ];
 

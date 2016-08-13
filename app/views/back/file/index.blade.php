@@ -9,14 +9,13 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Daftar Kontak</h5>
+                    <h5>Daftar File</h5>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>
                             <th>Nama File</th>
-                            <th>Deskripsi</th>
                             <th>Kategori</th>
                             <th>Format File</th>
                             <th>Size</th>
@@ -56,7 +55,6 @@
             },
             columns: [
                 {data:'Judul',name:'Judul'},
-                {data:'description',name:'description'},
                 {data:'categoryfile',name:'categoryfile'},
                 {data:'fileext',name:'fileext'},
                 {data:'file_size',name:'file_size'},

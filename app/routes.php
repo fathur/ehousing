@@ -49,6 +49,7 @@ Route::group(array('prefix' => 'back-office'), function() {
 
         Route::resource('file', 'FileController',array('except' => array('show')));
         Route::get('file/data', array('uses' => 'FileController@data', 'as' => 'back-office.file.data'));
+        Route::get('file/{id}/download', array('uses' => 'FileController@download', 'as' => 'back-office.file.download'));
 
         Route::resource('user', 'UserController',array('except' => array('show')));
         Route::get('user/data', array('uses' => 'UserController@data', 'as' => 'back-office.user.data'));

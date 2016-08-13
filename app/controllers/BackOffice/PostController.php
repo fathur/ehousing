@@ -166,7 +166,10 @@ class PostController extends AdminController
      */
     public function update($id)
     {
-        $validator = \Validator::make(\Input::all(), $this->rules, $this->messages);
+        $validator = \Validator::make(\Input::all(), array(
+            'Judul'	=> 'required',
+            'KategoriId' => 'required',
+        ), $this->messages);
 
         if($validator->fails()) {
             return \Redirect::route('back-office.post.edit', array($id))

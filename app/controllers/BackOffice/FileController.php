@@ -68,24 +68,24 @@ class FileController extends AdminController {
 			'url' => $newName,
 			'file_size' => $file->getSize(),
 			'raw_name' => $file->getClientOriginalName(),
-			'fileext' => $file->getExtension(),
+			'fileext' => $file->getClientOriginalExtension(),
 			'description' => \Input::get('description'),
 			'categoryfile' => \Input::get('categoryfile'),
-			'Judul' => \Input::get('Judul')
+			'Judul' => \Input::get('Judul'),
+			'ExpiryDate' => '9999-12-31 00:00:00'
 		);
 
 		// Provinsi
 		if(\Auth::user()->Region == 'Provinsi') {
-			array_push($postData, array(
-				'KodeProvinsi' => \Auth::user()->KodeProvinsi
-			));
+
+			$postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
 		}
 		// Nasional
 		else {
-			array_push($postData, array(
-				'KodeProvinsi' => \Input::get('KodeProvinsi')
-			));
+
+			$postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
 		}
+
 
 		// dd(\Input::all());
 		$result = \Berkas::create($postData);
@@ -131,6 +131,28 @@ class FileController extends AdminController {
 	public function update($id)
 	{
 		$data = \Berkas::find($id);
+
+		if(\Input::hasFile('filename'))
+		{
+			$file = \Input::file('filename');
+			$destination = storage_path('uploads/file/');
+			$newName = $file->getClientOriginalName();
+
+			if($file->isValid())
+			{
+				$file->move($destination, $newName);
+			}
+
+
+			$data->filename = $file->getClientOriginalName();
+			$data->url = $newName;
+			$data->file_size = $file->getSize();
+			$data->raw_name = $file->getClientOriginalName();
+			$data->fileext = $file->getClientOriginalExtension();
+		}
+
+
+
 		// ...
 		// $data->filename = \Input::get('filename');
 		// $data->url = \Input::get('url');
@@ -215,9 +237,13 @@ class FileController extends AdminController {
 
 				return $data->downloadcounter;
 			})
+			->editColumn('file_size', function($data){
+				return $this->formatBytes($data->file_size);
+			})
 			->addColumn('action', function($data){
 
-				return View::make('back.action')
+				return View::make('back.file.action')
+					->with('idfile', $data->fileid)
 					->with('table', $this->identifier . '-datatables')
 					->with('url', route('back-office.file.destroy', array($data->id)))
 					->with('edit_action', route('back-office.file.edit', array($data->id)))
@@ -226,5 +252,19 @@ class FileController extends AdminController {
 			->make(true);
 
 		return $datatables;
+	}
+
+	public function download($id)
+	{
+		$file = \Berkas::find($id);
+
+		return \Response::download(storage_path('uploads/file/'. $file->url));
+	}
+
+
+	private function formatBytes($bytes, $precision = 2) {
+		$sz = 'BKMGTP';
+		$factor = floor((strlen($bytes) - 1) / 3);
+		return sprintf("%.{$precision}f ", $bytes / pow(1024, $factor), 'B') . @$sz[$factor] . 'B';
 	}
 }
