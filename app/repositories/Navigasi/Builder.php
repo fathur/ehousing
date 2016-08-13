@@ -13,7 +13,7 @@ class Builder
 
     public static $exceptionFirstSegment = array(
         'test','login','logout','password','kontak','hunian','posts','post','link',
-        'file','profile','statistik','program','berita','ehousing','back-office','hubungi-kami');
+        'file','profile','statistik','program','berita','ehousing','back-office','hubungi-kami','informasi');
 
     public static function renderFront()
     {

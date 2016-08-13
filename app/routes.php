@@ -110,6 +110,8 @@ Route::get('hunian/{hunian}', array('uses' => 'Front\Nasional\HunianController@s
 // Post routes
 Route::get('program', array('uses' => 'Front\Nasional\PostController@getProgram','as' => 'front.nasional.program.list'));
 Route::get('berita', array('uses' => 'Front\Nasional\PostController@getBerita','as' => 'front.nasional.berita.list'));
+Route::get('informasi', array('uses' => 'Front\Nasional\PostController@getInformasi','as' => 'front.nasional.info.list'));
+
 Route::get('post/{slug}', array('uses' => 'Front\Nasional\PostController@show','as' => 'front.nasional.post.show'));
 
 
