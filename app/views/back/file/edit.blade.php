@@ -46,6 +46,16 @@
                                     </select>
                                 </div>
                             @endif
+
+                            <div class="form-group">
+                                <label for="kotakab">Kota / Kabupaten</label>
+                                <select class="form-control m-b" name="KodeKota" id="kotakab">
+                                    @if(isset($data->kota))
+                                        <option value="{{$data->KodeKota}}" selected>{{$data->kota->NamaKota}}</option>
+                                    @endif
+                                </select>
+                            </div>
+
                         </div>
 
                         <div class="col-sm-3">
@@ -149,5 +159,41 @@
             }
         });
 
+        $('#kotakab').select2({
+            ajax: {
+                url: '{{ route('back-office.kota.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page,
+                        @if($isNasional)
+                        provinsi: $('#provinsi').val(),
+                        @else
+                        provinsi: {{Auth::user()->KodeProvinsi}}
+                        @endif
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Kota / Kabupaten',
+            templateResult: function(data) {
+                return data.NamaKota || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaKota || data.text;
+            }
+        });
     </script>
 @stop

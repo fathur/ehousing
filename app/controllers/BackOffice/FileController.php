@@ -71,6 +71,7 @@ class FileController extends AdminController {
 			'fileext' => $file->getClientOriginalExtension(),
 			'description' => \Input::get('description'),
 			'categoryfile' => \Input::get('categoryfile'),
+			'KodeKota' => \Input::get('KodeKota'),
 			'Judul' => \Input::get('Judul'),
 			'ExpiryDate' => '9999-12-31 00:00:00'
 		);
@@ -110,7 +111,8 @@ class FileController extends AdminController {
 	 */
 	public function edit($id)
 	{
-		$data = \Berkas::find($id);
+		$data = \Berkas::with('kota','provinsi')
+			->find($id);
 
 		$categories = \Referensi::where('RefId','KPU')
 			->orderBy('deskripsi','asc')
@@ -169,6 +171,7 @@ class FileController extends AdminController {
         // $data->raw_name = \Input::get('raw_name');
 		// $data->KodeProvinsi = \Input::get('KodeProvinsi');
 		$data->Judul = \Input::get('Judul');
+		$data->KodeKota = \Input::get('KodeKota');
 
 		if(\Auth::user()->Region == 'Provinsi') {
 			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;

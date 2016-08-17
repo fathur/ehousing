@@ -19,7 +19,7 @@ class Berkas extends EhousingModel
     protected $fillable = [
         'filename','url','file_size','description','categoryfile','publisheddate',
         'module','refkey','fileext','filecontent','downloadcounter','sharecounter',
-        'raw_name','KodeProvinsi','Judul','ExpiryDate',
+        'raw_name','KodeProvinsi','KodeKota','Judul','ExpiryDate',
         'CreateUid','ModUid'
     ];
 
@@ -33,6 +33,11 @@ class Berkas extends EhousingModel
     public function provinsi()
     {
         return $this->belongsTo('Provinsi','KodeProvinsi');
+    }
+
+    public function kota()
+    {
+        return $this->belongsTo('Kota','KodeKota');
     }
 
     public function referensi()
