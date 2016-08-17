@@ -41,7 +41,7 @@
                 }
             },
             columns: [
-                {data:'KategoriId',name:'KategoriId'},
+                {data:'KategoriId',name:'KategoriId', searchable:false},
                 {data:'NamaKategori',name:'NamaKategori'},
                 {data:'Judul',name:'Judul'},
                 {data:'user_nama',name:'user.Nama'},
