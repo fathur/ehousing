@@ -28,13 +28,13 @@
     </ul>
 </li>
 
-<li>
-    <a href="#"><i class="fa fa-phone"></i> <span class="nav-label">Kontak</span><span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level collapse">
-        <li><a href="{{route('back-office.kontak.index')}}">Daftar Kontak</a></li>
-        <li><a href="{{route('back-office.kontak.create')}}">Tambah Kontak</a></li>
-    </ul>
-</li>
+{{--<li>--}}
+    {{--<a href="#"><i class="fa fa-phone"></i> <span class="nav-label">Kontak</span><span class="fa arrow"></span></a>--}}
+    {{--<ul class="nav nav-second-level collapse">--}}
+        {{--<li><a href="{{route('back-office.kontak.index')}}">Daftar Kontak</a></li>--}}
+        {{--<li><a href="{{route('back-office.kontak.create')}}">Tambah Kontak</a></li>--}}
+    {{--</ul>--}}
+{{--</li>--}}
 <li>
     <a href="#"><i class="fa fa-list"></i> <span class="nav-label">Link Informasi</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
@@ -56,12 +56,12 @@
         <li><a href="{{route('back-office.user.create')}}">Tambah User</a></li>
     </ul>
 </li>
-<li>
-    <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Pengajuan</span><span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level collapse">
-        <li><a href="{{route('back-office.pengajuan.index')}}">Daftar Pengajuan</a></li>
-    </ul>
-</li>
+{{--<li>--}}
+    {{--<a href="#"><i class="fa fa-user"></i> <span class="nav-label">Pengajuan</span><span class="fa arrow"></span></a>--}}
+    {{--<ul class="nav nav-second-level collapse">--}}
+        {{--<li><a href="{{route('back-office.pengajuan.index')}}">Daftar Pengajuan</a></li>--}}
+    {{--</ul>--}}
+{{--</li>--}}
 
 @if(!$isNasional)
 <li>
