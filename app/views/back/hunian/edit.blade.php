@@ -41,10 +41,10 @@
                                 <label for="jenishunian">Jenis Hunian *)</label>
                                 {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b"))}}
                             </div>
-                            <div class="form-group">
-                                <label for="tahunpembangunan">Tahun Pembangunan</label>
-                                {{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="tahunpembangunan">Tahun Pembangunan</label>--}}
+                                {{--{{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}--}}
+                            {{--</div>--}}
                             <div class="form-group">
                                 <label for="jumlahunit">Jumlah Unit</label>
                                 {{Form::text('JumlahUnit', null, array('class' => 'form-control'))}}
@@ -55,15 +55,15 @@
                                 {{Form::text('JumlahLantai', null, array('class' => 'form-control'))}}
 
                             </div>
-                            <div class="form-group">
-                                <label for="luaslahan">Luas Lahan</label>
-                                {{Form::text('LuasLahan', null, array('class' => 'form-control'))}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="luaslahan">Luas Lahan</label>--}}
+                                {{--{{Form::text('LuasLahan', null, array('class' => 'form-control'))}}--}}
 
-                            </div>
-                            <div class="form-group">
-                                <label for="tingkathunian">Tingkat Hunian</label>
-                                {{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}
-                            </div>
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="tingkathunian">Tingkat Hunian</label>--}}
+                                {{--{{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}--}}
+                            {{--</div>--}}
 
                         </div>
 
