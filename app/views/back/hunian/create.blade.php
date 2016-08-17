@@ -1,7 +1,9 @@
 @extends('layout')
 
 @section('styles')
-<link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/summernote/dist/summernote.css')}}">
+    <link rel="stylesheet" href="{{asset('css/summernote-bs3.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
 @stop
 
 @section('content')
@@ -21,122 +23,175 @@
                         </div>
                     </div>
 
+                    {{Form::open(array('route' => 'back-office.hunian.store', 'id' => 'hunianForm', 'novalidate' => 'novalidate'))}}
+
                     <div class="row">
-                        {{Form::open(array('route' => 'back-office.hunian.store', 'id' => 'hunianForm', 'novalidate' => 'novalidate'))}}
 
-                            <div class="col-sm-4">
+                        <div class="col-sm-4">
 
-                                <div class="form-group">
-                                    <label for="namahunian">Nama Hunian *)</label>
-                                    {{Form::text('NamaHunian', null, array('class' => 'form-control', 'id' => 'namahunian'))}}
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="jenishunian">Jenis Hunian *)</label>
-                                    {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b", 'placeholder' => '- Jenis Hunian -'))}}
-                                </div>
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="tahunpembangunan">Tahun Pembangunan</label>--}}
-                                    {{--{{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}--}}
-                                {{--</div>--}}
-                                <div class="form-group">
-                                    <label for="jumlahunit">Jumlah Unit</label>
-                                    {{Form::text('JumlahUnit', null, array('class' => 'form-control'))}}
-                                </div>
-                                <div class="form-group">
-                                    <label for="jumlahlantai">Jumlah Lantai</label>
-                                    {{Form::text('JumlahLantai', null, array('class' => 'form-control'))}}
-                                </div>
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="luaslahan">Luas Lahan</label>--}}
-                                    {{--{{Form::text('LuasLahan', null, array('class' => 'form-control'))}}--}}
-                                {{--</div>--}}
-                                {{--<div class="form-group">--}}
-                                    {{--<label for="tingkathunian">Tingkat Hunian</label>--}}
-                                    {{--{{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}--}}
-                                {{--</div>--}}
-
+                            <div class="form-group">
+                                <label for="namahunian">Nama Hunian *)</label>
+                                {{Form::text('NamaHunian', null, array('class' => 'form-control', 'id' => 'namahunian'))}}
                             </div>
 
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="userfile">Upload Image</label>
-                                    <div class="row">
-                                        <div class="col-xs-8">
-                                            {{Form::file('userfile', array())}}
-                                            <p class="help-block small">
-                                                File : gif|jpg|jpeg|png
-                                                <br>Ukuran file maksimal : 2MB
-                                            </p>
-                                        </div>
+                            <div class="form-group">
+                                <label for="jenishunian">Jenis Hunian *)</label>
+                                {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b", 'placeholder' => '- Jenis Hunian -'))}}
+                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="tahunpembangunan">Tahun Pembangunan</label>--}}
+                                {{--{{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}--}}
+                            {{--</div>--}}
+                            <div class="form-group">
+                                <label for="jumlahunit">Jumlah Unit</label>
+                                {{Form::text('JumlahUnit', null, array('class' => 'form-control'))}}
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlahlantai">Jumlah Lantai</label>
+                                {{Form::text('JumlahLantai', null, array('class' => 'form-control'))}}
+                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="luaslahan">Luas Lahan</label>--}}
+                                {{--{{Form::text('LuasLahan', null, array('class' => 'form-control'))}}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--<label for="tingkathunian">Tingkat Hunian</label>--}}
+                                {{--{{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}--}}
+                            {{--</div>--}}
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="userfile">Upload Image</label>
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        {{Form::file('userfile', array())}}
+                                        <p class="help-block small">
+                                            File : gif|jpg|jpeg|png
+                                            <br>Ukuran file maksimal : 2MB
+                                        </p>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="alamat">Alamat Hunian *)</label>
-                                    {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}
-                                </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat Hunian *)</label>
+                                {{Form::textarea('Alamat', null, array('class' => 'form-control', 'id' => 'alamat', 'rows' => null, 'cols' => null))}}
+                            </div>
 
-                                @if($isNasional)
-                                <div class="form-group">
-                                    <label for="provinsi">Provinsi *)</label>
-                                    <select class="form-control m-b" name="KodeProvinsi" id="provinsi"></select>
-                                </div>
-                                @endif
+                            @if($isNasional)
+                            <div class="form-group">
+                                <label for="provinsi">Provinsi *)</label>
+                                <select class="form-control m-b" name="KodeProvinsi" id="provinsi"></select>
+                            </div>
+                            @endif
 
-                                <div class="form-group">
-                                    <label for="kotakab">Kota / Kabupaten</label>
-                                    <select class="form-control m-b" name="KodeKota" id="kotakab"></select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kecamatan">Kecamatan</label>
-                                    <select class="form-control m-b" name="KodeKecamatan" id="kecamatan"></select>
-                                </div>
+                            <div class="form-group">
+                                <label for="kotakab">Kota / Kabupaten</label>
+                                <select class="form-control m-b" name="KodeKota" id="kotakab"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kecamatan">Kecamatan</label>
+                                <select class="form-control m-b" name="KodeKecamatan" id="kecamatan"></select>
+                            </div>
 
-                                <div class="form-group">
-                                    <label for="koordinat">Koordinat</label>
-                                    {{Form::text('Koordinat', null, array('class' => 'form-control'))}}
-                                </div>
+                            <div class="form-group">
+                                <label for="koordinat">Koordinat</label>
+                                {{Form::text('Koordinat', null, array('class' => 'form-control'))}}
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="kodepengembang">Nama Pengembang</label>
+                                <select class="form-control m-b" name="KodePengembang" id="kodepengembang"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="pengelola">Pengelola</label>
+                                {{Form::text('Pengelola', null, array('class' => 'form-control'))}}
+
+                            </div>
+                            <div class="form-group">
+                                <label for="notelp">No Telp</label>
+                                {{Form::text('NoTelp', null, array('class' => 'form-control'))}}
+
+                            </div>
+                            <div class="form-group">
+                                <label for="teleponPIC">No Telp PIC</label>
+                                {{Form::text('NoHP_PIC', null, array('class' => 'form-control'))}}
+
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                {{Form::text('Email', null, array('class' => 'form-control'))}}
 
                             </div>
 
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="kodepengembang">Nama Pengembang</label>
-                                    <select class="form-control m-b" name="KodePengembang" id="kodepengembang"></select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="pengelola">Pengelola</label>
-                                    {{Form::text('Pengelola', null, array('class' => 'form-control'))}}
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="notelp">No Telp</label>
-                                    {{Form::text('NoTelp', null, array('class' => 'form-control'))}}
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="teleponPIC">No Telp PIC</label>
-                                    {{Form::text('NoHP_PIC', null, array('class' => 'form-control'))}}
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    {{Form::text('Email', null, array('class' => 'form-control'))}}
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="website">Website</label>
-                                    {{Form::text('Website', null, array('class' => 'form-control'))}}
-
-                                </div>
-
-                                <button class="btn btn-primary" type="submit">Simpan</button>
+                            <div class="form-group">
+                                <label for="website">Website</label>
+                                {{Form::text('Website', null, array('class' => 'form-control'))}}
 
                             </div>
-                        {{Form::close()}}
+
+
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab2">Title Tab 2</label>
+                                <input type="text" class="form-control" id="tab2" name="Tab2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab2-content">Content Tab 2</label>
+                                <textarea class="form-control" id="tab2-content" name="LinkExternal2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab3">Title Tab 3</label>
+                                <input type="text" class="form-control" id="tab3" name="Tab3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab3-content">Content Tab 3</label>
+                                <textarea class="form-control" id="tab3-content" name="LinkExternal3"></textarea>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab4">Title Tab 4</label>
+                                <input type="text" class="form-control" id="tab4" name="Tab4">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab4-content">Content Tab 4</label>
+                                <textarea class="form-control" id="tab4-content" name="LinkExternal4"></textarea>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg" type="submit">Simpan</button>
+
+                        </div>
+
+
+                    </div>
+
+                    {{Form::close()}}
+
                 </div>
             </div>
         </div>
@@ -144,7 +199,8 @@
 @stop
 
 @section('scripts')
-    <script src="{{ asset('vendor/select2/dist/js/select2.js') }}"></script>
+    <script src="{{asset('vendor/summernote/dist/summernote.js')}}"></script>
+    <script src="{{asset('vendor/select2/dist/js/select2.min.js')}}"></script>
 @stop
 
 @section('script')
@@ -290,6 +346,24 @@
         templateSelection: function(data) {
             return data.Nama || data.text;
         }
+    });
+
+    $('#tab2-content').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null             // set maximum height of editor
+    });
+
+    $('#tab3-content').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null             // set maximum height of editor
+    });
+
+    $('#tab4-content').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null             // set maximum height of editor
     });
 
 </script>

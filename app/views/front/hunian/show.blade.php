@@ -104,16 +104,17 @@
                                         @endif
 
                                         @if(!empty($hunian->Tab4))
-                                            <li class=""><a href="#tab3" data-toggle="tab">{{{$hunian->Tab4}}}</a></li>
+                                            <li class=""><a href="#tab4" data-toggle="tab">{{{$hunian->Tab4}}}</a></li>
                                         @endif
                                     </ul>
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <div class="tab-content">
-                                    <h2>Official Website</h2>
                                     <div class="tab-pane active" id="tab1">
                                         @if(!empty($hunian->Website))
+                                            <h2>Official Website</h2>
+
                                             <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"
                                                     align="center"
                                                     name="frame1"
@@ -126,31 +127,35 @@
 
                                     @if(!empty($hunian->LinkExternal2))
                                         <div class="tab-pane" id="tab2">
-                                            <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"
-                                                    align="center"
-                                                    name="frame1"
-                                                    scrolling="auto"
-                                                    src="{{{ $hunian->LinkExternal2 }}}"></iframe>
+                                            {{{ $hunian->LinkExternal2 }}}
+                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
+                                                    {{--align="center"--}}
+                                                    {{--name="frame1"--}}
+                                                    {{--scrolling="auto"--}}
+                                                    {{--src=""></iframe>--}}
                                         </div>
                                     @endif
 
                                     @if(!empty($hunian->LinkExternal3))
-                                        <div class="tab-pane" id="tab2">
-                                            <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"
-                                                    align="center"
-                                                    name="frame1"
-                                                    scrolling="auto"
-                                                    src="{{{ $hunian->LinkExternal3 }}}"></iframe>
+                                        <div class="tab-pane" id="tab3">
+                                            {{{ $hunian->LinkExternal3 }}}
+                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
+                                                    {{--align="center"--}}
+                                                    {{--name="frame1"--}}
+                                                    {{--scrolling="auto"--}}
+                                                    {{--src="{{{ $hunian->LinkExternal3 }}}"></iframe>--}}
                                         </div>
                                     @endif
 
                                     @if(!empty($hunian->LinkExternal4))
-                                        <div class="tab-pane" id="tab2">
-                                            <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"
-                                                    align="center"
-                                                    name="frame1"
-                                                    scrolling="auto"
-                                                    src="{{{ $hunian->LinkExternal4 }}}"></iframe>
+
+                                        <div class="tab-pane" id="tab4">
+                                            {{{ $hunian->LinkExternal4 }}}
+                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
+                                                    {{--align="center"--}}
+                                                    {{--name="frame1"--}}
+                                                    {{--scrolling="auto"--}}
+                                                    {{--src="{{{ $hunian->LinkExternal4 }}}"></iframe>--}}
                                         </div>
                                     @endif
                                 </div>

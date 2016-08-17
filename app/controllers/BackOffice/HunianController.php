@@ -129,12 +129,12 @@ class HunianController extends AdminController {
 			// 'Harga',
 			// 'Deskripsi',
 			// 'StatusHunian',
-			// 'LinkExternal2',
-			// 'LinkExternal3',
-			// 'LinkExternal4',
-			// 'Tab2',
-			// 'Tab3',
-			// 'Tab4',
+			'LinkExternal2' => \Input::get('LinkExternal2'),
+			'LinkExternal3' => \Input::get('LinkExternal3'),
+			'LinkExternal4' => \Input::get('LinkExternal4'),
+			'Tab2' => \Input::get('Tab2'),
+			'Tab3' => \Input::get('Tab3'),
+			'Tab4' => \Input::get('Tab4'),
 			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE,
 			'CreateUid'		=> \Auth::user()->id
 		);
@@ -245,6 +245,12 @@ class HunianController extends AdminController {
         $data->LuasLahan = \Input::get('LuasLahan');
         $data->TingkatHunian = \Input::get('TingkatHunian');
 		$data->KodeKota = \Input::get('KodeKota');
+		$data->LinkExternal2 = \Input::get('LinkExternal2');
+		$data->LinkExternal3 = \Input::get('LinkExternal3');
+		$data->LinkExternal4 = \Input::get('LinkExternal4');
+		$data->Tab2 = \Input::get('Tab2');
+		$data->Tab3 = \Input::get('Tab3');
+		$data->Tab4 = \Input::get('Tab4');
 
 		if(!is_null($newName))
 			$data->picture = $newName;

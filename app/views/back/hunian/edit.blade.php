@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('styles')
+
+    <link rel="stylesheet" href="{{asset('vendor/summernote/dist/summernote.css')}}">
+    <link rel="stylesheet" href="{{asset('css/summernote-bs3.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/select2/dist/css/select2.min.css')}}">
 @stop
 
@@ -21,14 +24,16 @@
                         </div>
                     </div>
 
+                    {{Form::model($data, array(
+                        'method' => 'PUT',
+                        'route' => array('back-office.hunian.update', $data->id),
+                        'id' => 'hunianForm',
+                       'files' => true,
+                        'novalidate' => 'novalidate'
+                    ))}}
+
                     <div class="row">
-                        {{Form::model($data, array(
-                            'method' => 'PUT',
-                            'route' => array('back-office.hunian.update', $data->id),
-                            'id' => 'hunianForm',
-                           'files' => true,
-                            'novalidate' => 'novalidate'
-                        ))}}
+
 
                         <div class="col-sm-4">
 
@@ -166,12 +171,70 @@
 
                             </div>
 
-                            <button class="btn btn-primary" type="submit">Simpan</button>
-                            
+
                         </div>
-                        {{Form::close()}}
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab2">Title Tab 2</label>
+                                {{Form::text('Tab2', null, array('class' => 'form-control', 'id' => 'tab2'))}}
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab2-content">Content Tab 2</label>
+                                {{Form::textarea('LinkExternal2', null, array('class' => 'form-control', 'id' => 'tab2-content'))}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab3">Title Tab 3</label>
+                                {{Form::text('Tab3', null, array('class' => 'form-control', 'id' => 'tab3'))}}
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab3-content">Content Tab 3</label>
+                                {{Form::textarea('LinkExternal3', null, array('class' => 'form-control', 'id' => 'tab3-content'))}}
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="tab4">Title Tab 4</label>
+                                {{Form::text('Tab4', null, array('class' => 'form-control', 'id' => 'tab4'))}}
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tab4-content">Content Tab 4</label>
+                                {{Form::textarea('LinkExternal4', null, array('class' => 'form-control', 'id' => 'tab4-content'))}}
+
+                            </div>
+
+                            <button class="btn btn-primary btn-lg" type="submit">Simpan</button>
+
+                        </div>
+
+
+                    </div>
+
+                    {{Form::close()}}
+
                 </div>
             </div>
         </div>
@@ -179,6 +242,7 @@
 @stop
 
 @section('scripts')
+    <script src="{{asset('vendor/summernote/dist/summernote.js')}}"></script>
     <script src="{{ asset('vendor/select2/dist/js/select2.js') }}"></script>
 @stop
 
@@ -325,6 +389,24 @@
             templateSelection: function(data) {
                 return data.Nama || data.text;
             }
+        });
+
+        $('#tab2-content').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null             // set maximum height of editor
+        });
+
+        $('#tab3-content').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null             // set maximum height of editor
+        });
+
+        $('#tab4-content').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null             // set maximum height of editor
         });
 
     </script>
