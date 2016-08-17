@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h2><a href="#" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span> </a></h2>
+                            <h2><a href="#" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Informasi Publik</span> </a></h2>
                         </div>
                         <div class="ibox-content">
                             <div class="row">

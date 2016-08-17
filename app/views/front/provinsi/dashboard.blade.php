@@ -91,7 +91,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <a href="{{ route('front.provinsi.berita.list', array($provinsi->slug)) }}" class="btn-link">
-                                <h2><i class="fa fa-newspaper-o"></i> <span class="nav-label">Berita &amp; Aktivitas</span></h2>
+                                <h2><i class="fa fa-newspaper-o"></i> <span class="nav-label">Informasi Publik</span></h2>
                             </a>
                         </div>
                         <div class="ibox-content">
