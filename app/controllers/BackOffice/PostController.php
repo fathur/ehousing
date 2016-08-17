@@ -47,7 +47,7 @@ class PostController extends AdminController
      */
     public function create()
     {
-        $listCategories = \Kategori::lists('NamaKategori','KategoriId');
+        $listCategories = \Kategori::where('ExpiryDate', '>', Carbon::now())->lists('NamaKategori','KategoriId');
         $listProvinces = \Provinsi::lists('NamaProvinsi','KodeProvinsi');
 
         array_unshift($listCategories, '- Pilih Kategori -');
