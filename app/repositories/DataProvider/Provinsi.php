@@ -95,7 +95,7 @@ class Provinsi
         $post = \Post::select(['post.*','user.Nama'])
             ->leftJoin('user','user.UserId', '=', 'post.CreateUid')
             ->where('PostStatus','=', 1)
-            ->where('PublishDate','>', Carbon::now())
+            ->where('PublishDate','<', Carbon::now())
             ->whereRaw(\DB::raw('post.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'));
 
         if(count($categoryId) > 0)
