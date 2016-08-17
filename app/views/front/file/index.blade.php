@@ -31,6 +31,7 @@
                             <table class="table table-hover table-striped" id="hunian-datatables">
                                 <thead>
                                 <tr>
+                                    <th>Judul</th>
                                     <th>Nama File</th>
                                     <th>Deskripsi</th>
                                     <th>Kategori</th>
@@ -77,6 +78,7 @@
                 }
             },
             columns: [
+                {data:'Judul',name:'Judul'},
                 {data:'filename',name:'filename'},
                 {data:'description',name:'description'},
                 {data:'categoryfile',name:'categoryfile'},

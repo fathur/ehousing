@@ -15,6 +15,7 @@
                     <table class="table table-hover table-striped" id="{{$identifier}}-datatables">
                         <thead>
                         <tr>
+                            <th>Judul</th>
                             <th>Nama File</th>
                             <th>Kategori</th>
                             <th>Format File</th>
@@ -55,6 +56,7 @@
             },
             columns: [
                 {data:'Judul',name:'Judul'},
+                {data:'filename',name:'filename'},
                 {data:'categoryfile',name:'categoryfile'},
                 {data:'fileext',name:'fileext'},
                 {data:'file_size',name:'file_size'},
