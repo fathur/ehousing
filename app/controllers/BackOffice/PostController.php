@@ -19,13 +19,13 @@ class PostController extends AdminController
     protected $rules = array(
         'Judul'	=> 'required',
         'KategoriId' => 'required',
-        'Region' => 'required'
+        // 'Region' => 'required'
     );
 
     protected $messages = array(
         'Judul.required'	=> 'Judul tidak boleh kosong',
         'KategoriId.required'	=> 'Kategori tidak boleh kosong',
-        'Region.required'	=> 'Region tidak boleh kosong',
+        // 'Region.required'	=> 'Region tidak boleh kosong',
 
     );
 
@@ -108,18 +108,14 @@ class PostController extends AdminController
         // Provinsi
         if(\Auth::user()->Region == 'Provinsi')
         {
-            array_push($postData, array(
-                'KodeProvinsi' => \Auth::user()->KodeProvinsi,
-                'Region' => 'Provinsi',
-            ));
+            $postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
+            $postData['Region'] = 'Provinsi';
         }
         // Nasional
         else
         {
-            array_push($postData, array(
-                'KodeProvinsi' => \Input::get('KodeProvinsi'),
-                'Region' => \Input::get('Region'),
-            ));
+            $postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
+            $postData['Region'] = \Input::get('Region');
         }
 
         $result = \Post::create($postData);
