@@ -166,13 +166,22 @@ class FileController extends \BaseController
     public function download($url)
     {
         if(file_exists(storage_path('uploads/file/'.$url))) {
-            $download = \Response::download(storage_path('uploads/file/' . $url), $url);
 
             $berkas = \Berkas::where('url', $url)->first();
             $downloadCounter = $berkas->downloadcounter;
             $berkas->downloadcounter = (int)$downloadCounter + 1;
             $berkas->save();
 
+
+            if(preg_match('/pdf/', $berkas->fileext))
+            {
+                return \Response::make(file_get_contents(storage_path('uploads/file/'.$url)), 200, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="'.$url.'"'
+                ]);
+            }
+
+            $download = \Response::download(storage_path('uploads/file/' . $url), $url);
             return $download;
         }
 
