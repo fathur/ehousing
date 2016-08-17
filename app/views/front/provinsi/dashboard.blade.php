@@ -20,6 +20,7 @@
                 </div>
             </div>
         </div>
+        {{--
         <div class="col-md-6">
             <table class="table small m-b-xs">
                 <tbody>
@@ -59,6 +60,11 @@
                 </tbody>
             </table>
         </div>
+        --}}
+        <div class="col-md-6">
+            <a href="{{ route('front.provinsi.profile', array($provinsi->slug)) }}" class="btn btn-info btn-rounded btn-xs">Profile</a>
+        </div>
+
     </div>
     <div class="row m-b-lg m-l-sm text-navy">
         <strong>Wilayah Lain</strong> :

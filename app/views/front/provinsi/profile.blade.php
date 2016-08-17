@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-
+            {{--
             <div class="row">
                 <div class="col-lg-6">
                     <dl class="dl-horizontal">
@@ -48,6 +48,7 @@
                     </dl>
                 </div>
             </div>
+            --}}
             <div class="row">
                 <div class="col-lg-6">
                     <div class="small">
