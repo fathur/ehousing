@@ -143,7 +143,7 @@ class PostController extends AdminController
     {
         $data = \Post::find($id);
 
-        $listCategories = \Kategori::lists('NamaKategori','KategoriId');
+        $listCategories = \Kategori::where('ExpiryDate', '>', Carbon::now())->lists('NamaKategori','KategoriId');
         $listProvinces = \Provinsi::lists('NamaProvinsi','KodeProvinsi');
         $regions = array(
             'Nasional' => 'Nasional',
