@@ -7,3 +7,5 @@ composer.lock
 .DS_Store
 Thumbs.db
 app/storage/uploads
+node_modules/
+public/vendor/

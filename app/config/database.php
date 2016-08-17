@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => 'lakip.ctrotrdydyis.ap-southeast-1.rds.amazonaws.com',
 			'database'  => 'ehousing',
 			'username'  => 'root',
-			'password'  => 'secret',
+			'password'  => 'plokijuh',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
