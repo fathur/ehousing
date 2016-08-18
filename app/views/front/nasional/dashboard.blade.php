@@ -215,7 +215,8 @@
 
                 @if($hunian->count() > 0)
                     @foreach($hunian as $item)
-                        <a href="#" class='list-group-item'>
+                        {{-- dd($item->toArray()) --}}
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
                         <span class='pull-right'>
                             <small>{{{ $item->Deskripsi }}}</small>
                         </span> {{{ $item->NamaHunian }}}
@@ -226,7 +227,7 @@
                 @endif
             </div>
 
-            <div class="list-group">
+            {{--<div class="list-group">
                 <a href="#" class="list-group-item active">
                     <i class="fa fa-connectdevelop"></i> Developer
                 </a>
@@ -295,7 +296,7 @@
                 @else
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
-            </div>
+            </div>--}}
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
