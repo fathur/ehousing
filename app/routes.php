@@ -140,6 +140,10 @@ Route::get('hubungi-kami', array('uses' => 'Front\Nasional\CallUsController@inde
 Route::post('hubungi-kami', array('uses' => 'Front\Nasional\CallUsController@store', 'as' => 'front.nasional.call.store'));
 
 
+Route::get('dekon/provinsi', array('uses' => 'Front\Nasional\DekonController@provinsi', 'as' => 'front.nasional.dekon.provinsi'));
+Route::get('dekon/kabupaten', array('uses' => 'Front\Nasional\DekonController@kabupaten', 'as' => 'front.nasional.dekon.kabupaten'));
+
+
 // ============================================//
 
 // Provinsi routes
