@@ -198,3 +198,6 @@ Route::get('{provinsi}/file/data', array('uses' => 'Front\Provinsi\FileControlle
 Route::get('{provinsi}/hubungi-kami', array('uses' => 'Front\Provinsi\CallUsController@index', 'as' => 'front.provinsi.call.index'));
 Route::post('{provinsi}/hubungi-kami', array('uses' => 'Front\Provinsi\CallUsController@store', 'as' => 'front.provinsi.call.store'));
 
+Route::get('{provinsi}/dekon/provinsi', array('uses' => 'Front\Provinsi\DekonController@provinsi', 'as' => 'front.provinsi.dekon.provinsi'));
+Route::get('{provinsi}/dekon/kabupaten', array('uses' => 'Front\Provinsi\DekonController@kabupaten', 'as' => 'front.provinsi.dekon.kabupaten'));
+
