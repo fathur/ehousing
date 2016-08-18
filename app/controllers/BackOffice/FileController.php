@@ -69,7 +69,7 @@ class FileController extends AdminController {
 
 				$postData['filename'] = $file->getClientOriginalName();
 				$postData['url'] = $newName;
-				$postData['file_size'] = $file->getSize();
+				$postData['file_size'] = $file->getClientSize();
 				$postData['raw_name'] = $file->getClientOriginalName();
 				$postData['fileext'] = $file->getClientOriginalExtension();
 			}
