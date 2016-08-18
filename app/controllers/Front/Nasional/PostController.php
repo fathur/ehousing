@@ -38,7 +38,7 @@ class PostController extends \BaseController
         $posts = $data->setLimit(12)->getNews();
 
         return \View::make('front.post.grid', compact('posts'))
-            ->with('postTitle', 'Berita dan Aktifitas')
+            ->with('postTitle', 'Informasi Publik')
             ->with('type','nasional');
     }
 
