@@ -155,7 +155,13 @@ class FileController extends \BaseController
                 $location = $url;
         }
 
-        return \Image::make(storage_path('uploads/'. $location))->response();
+        $ext = strtolower(pathinfo(storage_path('uploads/'. $location), PATHINFO_EXTENSION));
+
+        if($ext == 'png' || $ext == 'jpg' || $ext == 'jpeg')
+        {
+            return \Image::make(storage_path('uploads/'. $location))->response();
+        }
+
     }
 
     /**

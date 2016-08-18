@@ -46,6 +46,17 @@ class FileController extends AdminController {
 	 */
 	public function store()
 	{
+		$postData = array(
+			// ...
+
+			'description' => \Input::get('description'),
+			'categoryfile' => \Input::get('categoryfile'),
+			'KodeKota' => \Input::get('KodeKota'),
+			'Judul' => \Input::get('Judul'),
+			'ExpiryDate' => \EhousingModel::DEFAULT_EXPIRY_DATE
+		);
+
+
 		if(\Input::hasFile('filename'))
 		{
 			$file = \Input::file('filename');
@@ -55,6 +66,12 @@ class FileController extends AdminController {
 			if($file->isValid())
 			{
 				$file->move($destination, $newName);
+
+				$postData['filename'] = $file->getClientOriginalName();
+				$postData['url'] = $newName;
+				$postData['file_size'] = $file->getSize();
+				$postData['raw_name'] = $file->getClientOriginalName();
+				$postData['fileext'] = $file->getClientOriginalExtension();
 			}
 		}
 		else
@@ -62,19 +79,6 @@ class FileController extends AdminController {
 			throw new UploadException('Nothing to upload');
 		}
 
-		$postData = array(
-			// ...
-			'filename' => $file->getClientOriginalName(),
-			'url' => $newName,
-			'file_size' => $file->getSize(),
-			'raw_name' => $file->getClientOriginalName(),
-			'fileext' => $file->getClientOriginalExtension(),
-			'description' => \Input::get('description'),
-			'categoryfile' => \Input::get('categoryfile'),
-			'KodeKota' => \Input::get('KodeKota'),
-			'Judul' => \Input::get('Judul'),
-			'ExpiryDate' => '9999-12-31 00:00:00'
-		);
 
 		// Provinsi
 		if(\Auth::user()->Region == 'Provinsi') {
