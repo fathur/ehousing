@@ -33,7 +33,9 @@ class FileController extends AdminController {
 			->orderBy('deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
-		array_unshift($categories, '- Pilih Satu -');
+		// array_unshift($categories, '- Pilih Satu -');
+
+		$categories = [0 => '-Pilih Satu-'] + $categories;
 
 		return \View::make('back.file.create', compact('categories'));
 	}
@@ -122,7 +124,10 @@ class FileController extends AdminController {
 			->orderBy('deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
-		array_unshift($categories, '- Pilih Satu -');
+		// array_unshift($categories, '- Pilih Satu -');
+
+		$categories = [0 => '-Pilih Satu-'] + $categories;
+
 
 		return \View::make('back.file.edit', compact('data','categories'));
 	}
