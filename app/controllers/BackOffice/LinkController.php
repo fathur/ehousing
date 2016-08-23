@@ -31,6 +31,7 @@ class LinkController extends AdminController {
 
 		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
+			->where('ExpiryDate','>',Carbon::now())
 			->orderBy('Deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
@@ -91,6 +92,7 @@ class LinkController extends AdminController {
 		$data = LinkInfo::with('provinsi')->find($id);
 		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
+			->where('ExpiryDate','>',Carbon::now())
 			->orderBy('Deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
