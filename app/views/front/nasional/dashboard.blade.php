@@ -379,7 +379,7 @@
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
             </div>--}}
-            <div class="panel panel-info">
+            {{--<div class="panel panel-info">
                 <div class="panel-heading">
                     <a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
                 </div>
@@ -395,6 +395,6 @@
                 </div>
 
             </div>
-
+--}}
         </div>
 @stop
