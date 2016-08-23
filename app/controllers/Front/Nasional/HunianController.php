@@ -73,7 +73,9 @@ class HunianController extends \BaseController
 
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat','hunian.slug',
+            'hunian.nama_pengembang',
+            //'kontak.Nama',
+            'hunian.Alamat','hunian.slug',
             'kota.NamaKota'
         ))
             ->leftJoin('kota','hunian.KodeKota','=','kota.KodeKota')
@@ -84,7 +86,7 @@ class HunianController extends \BaseController
             $hunian->where('hunian.JenisHunian', $jenisHunian);
         }
 
-        $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
+        // $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
 
         $datatables = Datatables::of($hunian)
             ->editColumn('NamaHunian', function($data) {

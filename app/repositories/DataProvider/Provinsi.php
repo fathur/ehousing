@@ -104,9 +104,9 @@ class Provinsi
         if( ! is_null($this->provinsiId) || 0 != $this->provinsiId)
         {
             $post->where(function($query) {
-                $query->where('post.KodeProvinsi', $this->provinsiId)
-                    ->orWhere('post.KodeProvinsi', '-')
-                    ->orWhereNull('post.KodeProvinsi');
+                $query->where('post.KodeProvinsi', $this->provinsiId);
+                    //->orWhere('post.KodeProvinsi', '-')
+                    //->orWhereNull('post.KodeProvinsi');
             });
         }
 

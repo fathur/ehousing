@@ -104,11 +104,16 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="form-group">
+                           {{-- <div class="form-group">
                                 <label for="kodepengembang">Nama Pengembang</label>
                                 <select class="form-control m-b" name="KodePengembang" id="kodepengembang"></select>
-                            </div>
+                            </div>--}}
                             <div class="form-group">
+                                <label for="nama_pengembang">Nama Pengembang</label>
+                                {{Form::text('nama_pengembang', null, array('class' => 'form-control'))}}
+
+                            </div>
+                           {{-- <div class="form-group">
                                 <label for="pengelola">Pengelola</label>
                                 {{Form::text('Pengelola', null, array('class' => 'form-control'))}}
 
@@ -122,7 +127,7 @@
                                 <label for="teleponPIC">No Telp PIC</label>
                                 {{Form::text('NoHP_PIC', null, array('class' => 'form-control'))}}
 
-                            </div>
+                            </div>--}}
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 {{Form::text('Email', null, array('class' => 'form-control'))}}
@@ -315,7 +320,7 @@
         }
     });
 
-    $('#kodepengembang').select2({
+    /*$('#kodepengembang').select2({
         ajax: {
             url: '{{ route('back-office.kontak.name') }}',
             dataType: 'json',
@@ -346,7 +351,7 @@
         templateSelection: function(data) {
             return data.Nama || data.text;
         }
-    });
+    });*/
 
     $('#tab2-content').summernote({
         height: 300,                 // set editor height

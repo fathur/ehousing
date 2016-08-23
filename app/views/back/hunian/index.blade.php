@@ -54,7 +54,7 @@
                 {data:'HunianId',name:'HunianId'},
                 {data:'NamaHunian',name:'NamaHunian'},
                 {data:'JenisHunian',name:'JenisHunian'},
-                {data:'Nama',name:'kontak.Nama'},
+                {data:'nama_pengembang',name:'nama_pengembang'},
                 {data:'Website',name:'hunian.Website'},
                 {data:'action',name:'action',searchable:false,orderable:false}
 

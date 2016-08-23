@@ -20,7 +20,9 @@ class Hunian extends EhousingModel implements \Cviebrock\EloquentSluggable\Slugg
     protected $table = 'hunian';
     protected $primaryKey = 'HunianId';
     protected $fillable = [
-        'JenisHunian','NamaHunian','KodePengembang','Alamat','KodeKecamatan',
+        'JenisHunian','NamaHunian',
+        // 'KodePengembang',
+        'nama_pengembang','Alamat','KodeKecamatan',
         'Koordinat','Pengelola','NoTelp','NoHP_PIC','Email','Website',
         'TahunPembangunan','TahunSelesai','JumlahUnit','JumlahLantai','LuasLahan',
         'TingkatHunian','KodeProvinsi','KodeKota','picture','Harga','Deskripsi',

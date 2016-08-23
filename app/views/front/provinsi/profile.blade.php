@@ -74,7 +74,7 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab-2" data-toggle="tab">Statistik</a></li>
+                                    {{--<li class="active"><a href="#tab-2" data-toggle="tab">Statistik</a></li>--}}
                                     @if(! is_null($provinsi->konfigurasi_situs->Website))
                                     <li class=""><a href="#tab-1" data-toggle="tab">Website</a></li>
                                     @endif
@@ -84,11 +84,11 @@
 
                         <div class="panel-body">
                             <div class="tab-content">
-                                <div class="tab-pane active gray-bg p-md" id="tab-2">
+                                {{--<div class="tab-pane active gray-bg p-md" id="tab-2">--}}
 
-                                    @include('front.provinsi.chart')
+                                    {{--@include('front.provinsi.chart')--}}
 
-                                </div>
+                                {{--</div>--}}
 
                                 @if(! is_null($provinsi->konfigurasi_situs->Website))
                                 <div class="tab-pane" id="tab-1">

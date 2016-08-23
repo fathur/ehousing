@@ -22,7 +22,7 @@ class HunianController extends AdminController {
 		'JumlahLantai'	=> 'numeric',
 		'LuasLahan'		=> 'numeric',
 		'TingkatHunian'	=> 'numeric',
-		'KodePengembang'	=> 'required|integer|exists:kontak,KontakId',
+		// 'KodePengembang'	=> 'required|integer|exists:kontak,KontakId',
 		'Email'			=> 'email',
 		'Website'		=> 'url',
 	);
@@ -36,7 +36,7 @@ class HunianController extends AdminController {
 		'KodeProvinsi.exists'	=> 'Provinsi yang diisi tidak ada',
 		'KodeKecamatan.exists'	=> 'Kecamatan yang diisi tidak ada',
 		'KodeKota.exists'		=> 'Kota/Kabupaten yang diisi tidak ada',
-		'KodePengembang.exists'		=> 'Nama pengembang yang diisi tidak ada',
+		// 'KodePengembang.exists'		=> 'Nama pengembang yang diisi tidak ada',
 
 	);
 
@@ -109,7 +109,8 @@ class HunianController extends AdminController {
 			'JenisHunian' => \Input::get('JenisHunian'),
 			'NamaHunian' => \Input::get('NamaHunian'),
 			'TahunPembangunan' => \Input::get('TahunPembangunan'),
-			'KodePengembang' => \Input::get('KodePengembang'),
+			//'KodePengembang' => \Input::get('KodePengembang'),
+			'nama_pengembang' => \Input::get('nama_pengembang'),
 			'Alamat' => \Input::get('Alamat'),
 			'Koordinat' => \Input::get('Koordinat'),
 			'Pengelola' => \Input::get('Pengelola'),
@@ -230,7 +231,8 @@ class HunianController extends AdminController {
 		$data = \Hunian::find($id);
         $data->JenisHunian = \Input::get('JenisHunian');
         $data->NamaHunian = \Input::get('NamaHunian');
-        $data->KodePengembang = \Input::get('KodePengembang');
+		// $data->KodePengembang = \Input::get('KodePengembang');
+		$data->nama_pengembang = \Input::get('nama_pengembang');
         $data->Alamat = \Input::get('Alamat');
         $data->KodeKecamatan = \Input::get('KodeKecamatan');
         $data->Koordinat = \Input::get('Koordinat');
@@ -294,7 +296,9 @@ class HunianController extends AdminController {
 
         $hunian= \Hunian::select(array(
             'hunian.HunianId','hunian.NamaHunian','hunian.JenisHunian','hunian.Website',
-            'kontak.Nama','hunian.Alamat','hunian.slug'
+			'hunian.nama_pengembang',
+            // 'kontak.Nama',
+			'hunian.Alamat','hunian.slug'
         ))
             ->where('hunian.ExpiryDate','>',Carbon::now());
 
@@ -303,7 +307,7 @@ class HunianController extends AdminController {
 			$hunian->where('hunian.KodeProvinsi', \Auth::user()->KodeProvinsi);
 		}
 
-        $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
+        // $hunian->join('kontak','kontak.KontakId','=','hunian.KodePengembang');
 
         $datatables = Datatables::of($hunian)
             ->editColumn('NamaHunian', function($data) {
