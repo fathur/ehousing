@@ -219,10 +219,15 @@ class Provinsi
      * @throws \Exception
      * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
      */
-    public function getHunian()
+    public function getHunian($jenis = null)
     {
         $hunian = \Hunian::with('referensi')
             ->whereRaw(\DB::raw('hunian.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'));
+
+        if(!is_null($jenis))
+        {
+            $hunian->where('JenisHunian','=',$jenis);
+        }
 
         if( ! is_null($this->provinsiId) || 0 != $this->provinsiId) {
             $hunian->where('hunian.KodeProvinsi', $this->provinsiId);
@@ -236,6 +241,31 @@ class Provinsi
             return $results;
 
         throw new \Exception();
+    }
+
+    public function getHunianRusunSewa()
+    {
+        return $this->getHunian(\Hunian::RUSUN_SEWA);
+    }
+
+    public function getHunianRusunami()
+    {
+        return $this->getHunian(\Hunian::RUSUNAMI);
+    }
+
+    public function getHunianRusunamiSubsidi()
+    {
+        return $this->getHunian(\Hunian::RUSUNAMI_SUBSIDI);
+    }
+
+    public function getHunianRumahSubsidi()
+    {
+        return $this->getHunian(\Hunian::RUMAH_SUBSIDI);
+    }
+
+    public function getHunianApartemen()
+    {
+        return $this->getHunian(\Hunian::APERTEMEN);
     }
 
     /**

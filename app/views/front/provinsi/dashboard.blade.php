@@ -270,10 +270,10 @@
         <div class="col-xs-12 col-md-3">
 
             <div class="list-group">
-                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunawa</a>
 
-                @if($hunian->count() > 0)
-                    @foreach($hunian as $item)
+                @if($hunianRusunSewa->count() > 0)
+                    @foreach($hunianRusunSewa as $item)
                     <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
                         <span class='pull-right'>
                             <small>{{{ $item->Deskripsi }}}</small>
@@ -284,6 +284,72 @@
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
             </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunami</a>
+
+                @if($hunianRusunami->count() > 0)
+                    @foreach($hunianRusunami as $item)
+                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Khusus</a>
+
+                @if($hunianRumahSubsidi->count() > 0)
+                    @foreach($hunianRumahSubsidi as $item)
+                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Subsidi</a>
+
+                @if($hunianRumahSubsidi->count() > 0)
+                    @foreach($hunianRumahSubsidi as $item)
+                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Apartemen</a>
+
+                @if($hunianApartemen->count() > 0)
+                    @foreach($hunianApartemen as $item)
+                        <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+
 
             {{--<div class="list-group">
                 <a href="#" class="list-group-item active">
@@ -355,20 +421,20 @@
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
             </div>--}}
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>
-                </div>
-                <div class="panel-body list-group no-margins no-padding">
-                    @foreach($files as $item)
-                    <a title="{{{ $item->Judul }}}" href="{{ route('front.file.download', $item->url) }}" class="list-group-item">
-                        <span class="pull-right">
-                            <small>{{{ $item->downloadcounter }}} <i class="fa fa-download"></i></small>
-                        </span>{{{ Str::limit($item->Judul, 15) }}}.{{{ $item->fileext }}}
-                    </a>
-                    @endforeach
+            {{--<div class="panel panel-info">--}}
+                {{--<div class="panel-heading">--}}
+                    {{--<a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>--}}
+                {{--</div>--}}
+                {{--<div class="panel-body list-group no-margins no-padding">--}}
+                    {{--@foreach($files as $item)--}}
+                    {{--<a title="{{{ $item->Judul }}}" href="{{ route('front.file.download', $item->url) }}" class="list-group-item">--}}
+                        {{--<span class="pull-right">--}}
+                            {{--<small>{{{ $item->downloadcounter }}} <i class="fa fa-download"></i></small>--}}
+                        {{--</span>{{{ Str::limit($item->Judul, 15) }}}.{{{ $item->fileext }}}--}}
+                    {{--</a>--}}
+                    {{--@endforeach--}}
 
-            </div>
+            {{--</div>--}}
 
         </div>
 

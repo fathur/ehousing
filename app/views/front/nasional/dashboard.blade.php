@@ -227,6 +227,88 @@
                 @endif
             </div>
 
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunawa</a>
+
+                @if($hunianRusunSewa->count() > 0)
+                    @foreach($hunianRusunSewa as $item)
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunami</a>
+
+                @if($hunianRusunami->count() > 0)
+                    @foreach($hunianRusunami as $item)
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Khusus</a>
+
+                @if($hunianRumahSubsidi->count() > 0)
+                    @foreach($hunianRumahSubsidi as $item)
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Subsidi</a>
+
+                @if($hunianRumahSubsidi->count() > 0)
+                    @foreach($hunianRumahSubsidi as $item)
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Apartemen</a>
+
+                @if($hunianApartemen->count() > 0)
+                    @foreach($hunianApartemen as $item)
+                        <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
+                        <span class='pull-right'>
+                            <small>{{{ $item->Deskripsi }}}</small>
+                        </span> {{{ $item->NamaHunian }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
+
+
+
             {{--<div class="list-group">
                 <a href="#" class="list-group-item active">
                     <i class="fa fa-connectdevelop"></i> Developer
