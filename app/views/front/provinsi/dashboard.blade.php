@@ -212,8 +212,8 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="{{ route('front.provinsi.file', array($provinsi->slug)) }}" class="btn-link">
-                                    <i class="fa fa-book"></i> <span class="nav-label"> Publikasi</span>
+                                <a href="{{ route('front.provinsi.file.penelitian', array($provinsi->slug)) }}" class="btn-link">
+                                    <i class="fa fa-book"></i> <span class="nav-label"> Hasil Penelitian/Kajian</span>
                                 </a>
                             </h2>
                         </div>

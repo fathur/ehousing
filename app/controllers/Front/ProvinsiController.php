@@ -40,7 +40,7 @@ class ProvinsiController extends \BaseController
             $provinsiNews               = $data->setLimit(3)->getNews();
             $provinsiInformation        = $data->setLimit(3)->getInformasi();
             $provinsiPrograms           = $data->setLimit(10)->getPrograms();
-            $provinsiFile               = $data->setLimit(3)->getFileByCategory(array());
+            $provinsiFile               = $data->setLimit(3)->getFileByCategory(array('HPK'));
             $provinsiHunian             = $data->setLimit(5)->getHunian();
             $provinsiHunianRusunSewa             = $data->setLimit(5)->getHunianRusunSewa();
             $provinsiHunianRusunami             = $data->setLimit(5)->getHunianRusunami();
