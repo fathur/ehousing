@@ -45,6 +45,14 @@ class LinkController extends \BaseController
             ->with('datatablesRoute', route('front.nasional.link.data'));
     }
 
+    public function getPermukiman()
+    {
+        return \View::make('front.link.index')
+            ->with('jenis', \LinkInfo::MKM)
+            ->with('linkTitle', 'Daftar Link - Permukiman')
+            ->with('datatablesRoute', route('front.nasional.link.data'));
+    }
+
     public function data()
     {
         $jenisLink = \Input::get('jenis');

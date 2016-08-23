@@ -121,6 +121,7 @@ Route::get('link/imb', array('uses' => 'Front\Nasional\LinkController@getImb', '
 Route::get('link/pbb', array('uses' => 'Front\Nasional\LinkController@getPbb', 'as' => 'front.nasional.link.pbb'));
 Route::get('link/tata-ruang', array('uses' => 'Front\Nasional\LinkController@getTataRuang', 'as' => 'front.nasional.link.tataruang'));
 Route::get('link/bpn', array('uses' => 'Front\Nasional\LinkController@getBpn', 'as' => 'front.nasional.link.bpn'));
+Route::get('link/permukiman', array('uses' => 'Front\Nasional\LinkController@getPermukiman', 'as' => 'front.nasional.link.permukiman'));
 Route::get('link/data', array('uses' => 'Front\Nasional\LinkController@data', 'as' => 'front.nasional.link.data'));
 
 
@@ -188,6 +189,7 @@ Route::get('{provinsi}/link/imb', array('uses' => 'Front\Provinsi\LinkController
 Route::get('{provinsi}/link/pbb', array('uses' => 'Front\Provinsi\LinkController@getPbb', 'as' => 'front.provinsi.link.pbb'));
 Route::get('{provinsi}/link/tata-ruang', array('uses' => 'Front\Provinsi\LinkController@getTataRuang', 'as' => 'front.provinsi.link.tataruang'));
 Route::get('{provinsi}/link/bpn', array('uses' => 'Front\Provinsi\LinkController@getBpn', 'as' => 'front.provinsi.link.bpn'));
+Route::get('{provinsi}/link/permukiman', array('uses' => 'Front\Provinsi\LinkController@getPermukiman', 'as' => 'front.provinsi.link.permukiman'));
 Route::get('{provinsi}/link/data', array('uses' => 'Front\Provinsi\LinkController@data', 'as' => 'front.provinsi.link.data'));
 
 // File routes

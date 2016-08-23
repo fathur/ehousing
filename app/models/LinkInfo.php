@@ -11,6 +11,7 @@ class LinkInfo extends EhousingModel
     const PBB = 'PBB';
     const TATA_RUANG = 'TR';
     const BPN = 'BPN';
+    const MKM = 'MKM';
 
     protected $table = 'linkinfo';
     protected $primaryKey = 'LinkInfoId';

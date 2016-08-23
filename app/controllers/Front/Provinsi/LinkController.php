@@ -86,6 +86,24 @@ class LinkController extends \BaseController
 
     }
 
+    public function getPermukiman($provinsiSlug)
+    {
+        $provinsi = \Provinsi::slug($provinsiSlug)->first();
+
+        if(is_null($provinsi))
+            \App::abort(404);
+
+        $listCities = \Kota::where('KodeProvinsi','=',$provinsi->KodeProvinsi)->lists('NamaKota','KodeKota');
+        $listCities = array(0 => 'Semua') + $listCities;
+
+
+        return \View::make('front.link.index', compact('provinsi','listCities'))
+            ->with('jenis', \LinkInfo::MKM)
+            ->with('linkTitle', 'Daftar Link - Permukiman')
+            ->with('datatablesRoute', route('front.provinsi.link.data', array($provinsiSlug)));
+
+    }
+
 
     public function data()
     {
