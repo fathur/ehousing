@@ -276,7 +276,7 @@
             </div>
 
             <div class="list-group">
-                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Subsidi</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Umum dan Komersial</a>
 
                 @if($hunianRumahSubsidi->count() > 0)
                     @foreach($hunianRumahSubsidi as $item)

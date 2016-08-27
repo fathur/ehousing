@@ -41,12 +41,14 @@ class ProvinsiController extends \BaseController
             $provinsiInformation        = $data->setLimit(3)->getInformasi();
             $provinsiPrograms           = $data->setLimit(10)->getPrograms();
             $provinsiFile               = $data->setLimit(3)->getFileByCategory(array('HPK'));
+
             $provinsiHunian             = $data->setLimit(5)->getHunian();
             $provinsiHunianRusunSewa             = $data->setLimit(5)->getHunianRusunSewa();
             $provinsiHunianRusunami             = $data->setLimit(5)->getHunianRusunami();
             $provinsiHunianRusunamiSubsidi             = $data->setLimit(5)->getHunianRusunamiSubsidi();
             $provinsiHunianRumahSubsidi             = $data->setLimit(5)->getHunianRumahSubsidi();
             $provinsiHunianApartemen             = $data->setLimit(5)->getHunianApartemen();
+
             $provinsiKontakDeveloper    = $data->setLimit(5)->getContactDevelopers();
             $provinsiKontakArsitek      = $data->setLimit(5)->getContactArsitek();
             $provinsiKontakKontraktor   = $data->setLimit(5)->getContactContractor();
@@ -75,12 +77,14 @@ class ProvinsiController extends \BaseController
                 ->with('programs', $provinsiPrograms)
                 ->with('files', $provinsiFile)
                 ->with('feeds', $provinsiFeeds)
+
                 ->with('hunian', $provinsiHunian)
                 ->with('hunianRusunSewa', $provinsiHunianRusunSewa)
                 ->with('hunianRusunamiSubsidi', $provinsiHunianRusunamiSubsidi)
                 ->with('hunianRumahSubsidi', $provinsiHunianRumahSubsidi)
                 ->with('hunianRusunami', $provinsiHunianRusunami)
                 ->with('hunianApartemen', $provinsiHunianApartemen)
+
                 ->with('developers', $provinsiKontakDeveloper)
                 ->with('arsitek', $provinsiKontakArsitek)
                 ->with('kontraktor', $provinsiKontakKontraktor)

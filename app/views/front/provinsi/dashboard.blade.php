@@ -304,8 +304,8 @@
             <div class="list-group">
                 <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Khusus</a>
 
-                @if($hunianRumahSubsidi->count() > 0)
-                    @foreach($hunianRumahSubsidi as $item)
+                @if($hunianRusunamiSubsidi->count() > 0)
+                    @foreach($hunianRusunamiSubsidi as $item)
                         <a href="{{route('front.provinsi.hunian.show', array($provinsi->slug,$item->slug))}}" class='list-group-item'>
                         <span class='pull-right'>
                             <small>{{{ $item->Deskripsi }}}</small>
@@ -318,7 +318,7 @@
             </div>
 
             <div class="list-group">
-                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Subsidi</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rumah Umum dan Komersial</a>
 
                 @if($hunianRumahSubsidi->count() > 0)
                     @foreach($hunianRumahSubsidi as $item)
