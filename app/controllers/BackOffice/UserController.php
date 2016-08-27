@@ -79,18 +79,16 @@ class UserController extends AdminController {
 			// Provinsi
 			if(\Auth::user()->Region == 'Provinsi')
 			{
-				array_push($postData, array(
-					'KodeProvinsi' => \Auth::user()->KodeProvinsi,
-					'Region' => 'Provinsi',
-				));
+
+				$postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
+				$postData['Region'] = 'Provinsi';
 			}
 			// Nasional
 			else
 			{
-				array_push($postData, array(
-					'KodeProvinsi' => \Input::get('KodeProvinsi'),
-					'Region' => \Input::get('Region'),
-				));
+
+				$postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
+				$postData['Region'] = \Input::get('Region');
 			}
 
             $result = \User::create($postData);
