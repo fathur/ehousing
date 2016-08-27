@@ -56,15 +56,11 @@ class LinkController extends AdminController {
 
 		// Provinsi
 		if(\Auth::user()->Region == 'Provinsi') {
-			array_push($postData, array(
-				'KodeProvinsi' => \Auth::user()->KodeProvinsi
-			));
+			$postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
 		}
 		// Nasional
 		else {
-			array_push($postData, array(
-				'KodeProvinsi' => \Input::get('KodeProvinsi')
-			));
+			$postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
 		}
 
 		// dd(\Input::all());
