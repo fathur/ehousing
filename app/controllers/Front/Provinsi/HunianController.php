@@ -252,8 +252,8 @@ class HunianController extends \BaseController
                 $coordinat = array(0,0);
 
             return \View::make('front.hunian.show', compact('hunian'))
-                ->with('latitude', $coordinat[0])
-                ->with('longitude', $coordinat[1]);
+                ->with('latitude', isset($coordinat[0]) ? $coordinat[0] : '-')
+                ->with('longitude', isset($coordinat[1]) ? $coordinat[1] : '-');
         }
 
         \App::abort(404);
