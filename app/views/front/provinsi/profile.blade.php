@@ -76,7 +76,7 @@
                                 <ul class="nav nav-tabs">
                                     {{--<li class="active"><a href="#tab-2" data-toggle="tab">Statistik</a></li>--}}
                                     @if(! is_null($provinsi->konfigurasi_situs->Website))
-                                    <li class=""><a href="#tab-1" data-toggle="tab">Website</a></li>
+                                    <li class="active"><a href="#tab-1" data-toggle="tab">Website</a></li>
                                     @endif
                                 </ul>
                             </div>

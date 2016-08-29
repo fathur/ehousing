@@ -70,7 +70,7 @@ class CallUsController extends \BaseController
                 $pengajuan->filename = $file->getClientOriginalName();
                 $pengajuan->raw_name = $file->getClientOriginalName();
                 $pengajuan->url = $hash . '.' . $file->getClientOriginalExtension();
-                $pengajuan->file_size = $file->getSize();
+                $pengajuan->file_size = $file->getClientSize();
                 $pengajuan->fileext = $file->getClientOriginalExtension();
             }
             /*

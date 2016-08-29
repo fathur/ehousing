@@ -157,7 +157,7 @@ class FileController extends AdminController {
 
 			$data->filename = $file->getClientOriginalName();
 			$data->url = $newName;
-			$data->file_size = $file->getSize();
+			$data->file_size = $file->getClientSize();
 			$data->raw_name = $file->getClientOriginalName();
 			$data->fileext = $file->getClientOriginalExtension();
 		}
