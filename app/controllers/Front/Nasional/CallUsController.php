@@ -14,12 +14,12 @@ use Carbon\Carbon;
 class CallUsController extends \BaseController
 {
     protected $rules = array(
-        'Nama' => 'required|alpha_dash',
+        'Nama' => 'required',
         'Alamat' => 'alpha_dash',
         'NoTelp' => 'numeric',
         'NoHP' => 'numeric',
         'Email' => 'required|email',
-        'Deskripsi' => 'required|alpha_dash'
+        'Deskripsi' => 'required'
 
     );
 
