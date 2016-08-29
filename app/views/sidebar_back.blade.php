@@ -63,7 +63,7 @@
     {{--</ul>--}}
 {{--</li>--}}
 
-@if(!$isNasional)
+{{--@if(!$isNasional)
 <li>
     <a href="{{route('back-office.provinsi.setting.edit')}}">
         <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Provinsi</span>
@@ -94,7 +94,7 @@
         <li><a href="{{route('back-office.chart.index', array('anggaran'))}}">Anggaran Kemenpera</a></li>
     </ul>
 </li>
-@endif
+@endif--}}
 
 
 {{--//log aktifitas hanya berlaku untuk user role nasional saja --}}

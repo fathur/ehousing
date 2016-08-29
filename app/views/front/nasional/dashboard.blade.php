@@ -210,12 +210,12 @@
 
         <div class="col-xs-12 col-md-3">
 
-            <div class="list-group">
+            {{--<div class="list-group">
                 <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian</a>
 
                 @if($hunian->count() > 0)
                     @foreach($hunian as $item)
-                        {{-- dd($item->toArray()) --}}
+                        --}}{{-- dd($item->toArray()) --}}{{--
                         <a href="{{route('front.nasional.hunian.show', $item->slug)}}" class='list-group-item'>
                         <span class='pull-right'>
                             <small>{{{ $item->Deskripsi }}}</small>
@@ -226,7 +226,7 @@
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
             </div>
-
+--}}
             <div class="list-group">
                 <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunawa</a>
 
