@@ -63,12 +63,14 @@
     {{--</ul>--}}
 {{--</li>--}}
 
-{{--@if(!$isNasional)
+@if(!$isNasional)
 <li>
     <a href="{{route('back-office.provinsi.setting.edit')}}">
         <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Provinsi</span>
     </a>
 </li>
+@endif
+{{--
 <li>
     <a href="#">
         <i class="fa fa-bar-chart"></i>
