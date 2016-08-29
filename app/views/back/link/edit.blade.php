@@ -20,6 +20,7 @@
 
                         {{Form::model($data, array(
                             'route' => array('back-office.link.update', $data->id),
+                            'method'=>'PUT',
                             'name'  => 'linkForm',
                             'class' => 'form-horizontal',
                         ))}}
@@ -87,7 +88,7 @@
                                 <button class="btn btn-primary" type="submit">Simpan</button>
                             </div>
                         </div>
-                        
+
                         {{Form::close()}}
                     </div> <!--end row-->
                 </div>
