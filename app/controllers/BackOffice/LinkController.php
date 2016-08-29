@@ -6,10 +6,12 @@ use Datatables;
 use LinkInfo;
 use View;
 
-class LinkController extends AdminController {
+class LinkController extends AdminController
+{
 
-	protected $title = 'Link';
+	protected $title      = 'Link';
 	protected $identifier = 'link';
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -31,13 +33,12 @@ class LinkController extends AdminController {
 
 		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
-			->where('ExpiryDate','>',Carbon::now())
-			->orderBy('Deskripsi','asc')
-			->lists('Deskripsi','KodeRef');
+			->where('ExpiryDate', '>', Carbon::now())
+			->orderBy('Deskripsi', 'asc')
+			->lists('Deskripsi', 'KodeRef');
 
 		return \View::make('back.link.create', compact('linkGroups'));
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -46,27 +47,30 @@ class LinkController extends AdminController {
 	 */
 	public function store()
 	{
-		$dataPost = array(
+		$dataPost = [
 			'GrupLinkInfo' => \Input::get('GrupLinkInfo'),
-			'Judul' => \Input::get('Judul'),
-			'Deskripsi' => \Input::get('Deskripsi'),
-			'LinkInfo' => \Input::get('LinkInfo'),
-			'Region' => \Input::get('Region'),
-		);
+			'Judul'        => \Input::get('Judul'),
+			'Deskripsi'    => \Input::get('Deskripsi'),
+			'LinkInfo'     => \Input::get('LinkInfo'),
+			'ExpiryDate'	=> \EhousingModel::DEFAULT_EXPIRY_DATE
+		];
 
 		// Provinsi
-		if(\Auth::user()->Region == 'Provinsi') {
+		if (\Auth::user()->Region == 'Provinsi') {
 			$postData['KodeProvinsi'] = \Auth::user()->KodeProvinsi;
-		}
-		// Nasional
+			$postData['Region'] = 'Provinsi';
+
+		} // Nasional
 		else {
 			$postData['KodeProvinsi'] = \Input::get('KodeProvinsi');
+			$postData['Region'] = 'Nasional';
+
 		}
 
 		// dd(\Input::all());
 		$result = \LinkInfo::create($dataPost);
 
-		if($result)
+		if ($result)
 			return \Redirect::route('back-office.link.edit', $result->LinkInfoId)
 				->with('message', 'Data berhasil diubah')
 				->with('class', 'success');
@@ -80,7 +84,8 @@ class LinkController extends AdminController {
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function edit($id)
@@ -88,49 +93,51 @@ class LinkController extends AdminController {
 		$data = LinkInfo::with('provinsi')->find($id);
 		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
-			->where('ExpiryDate','>',Carbon::now())
-			->orderBy('Deskripsi','asc')
-			->lists('Deskripsi','KodeRef');
+			->where('ExpiryDate', '>', Carbon::now())
+			->orderBy('Deskripsi', 'asc')
+			->lists('Deskripsi', 'KodeRef');
 
-		return \View::make('back.link.edit', compact('data','linkGroups'));
+		return \View::make('back.link.edit', compact('data', 'linkGroups'));
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function update($id)
 	{
 		$data = \LinkInfo::find($id);
 		// ...
-		$data->GrupLinkInfo =  \Input::get('GrupLinkInfo');
-		$data->Judul =  \Input::get('Judul');
-		$data->Deskripsi =  \Input::get('Deskripsi');
-		$data->LinkInfo =  \Input::get('LinkInfo');
-		$data->Region =  \Input::get('Region');
+		$data->GrupLinkInfo = \Input::get('GrupLinkInfo');
+		$data->Judul = \Input::get('Judul');
+		$data->Deskripsi = \Input::get('Deskripsi');
+		$data->LinkInfo = \Input::get('LinkInfo');
 
-		if(\Auth::user()->Region == 'Provinsi') {
+		if (\Auth::user()->Region == 'Provinsi') {
 			$data->KodeProvinsi = \Auth::user()->KodeProvinsi;
-		}
-		else {
+			$data->Region = 'Provinsi';
+
+		} else {
 			$data->KodeProvinsi = \Input::get('KodeProvinsi');
+			$data->Region = 'Nasional';
+
 		}
 
 		$data->save();
 
-		return \Redirect::route('back-office.link.edit', array($data->LinkInfoId))
+		return \Redirect::route('back-office.link.edit', [$data->LinkInfoId])
 			->with('message', 'Data berhasil diubah')
 			->with('class', 'success');
 	}
 
-
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -141,25 +148,24 @@ class LinkController extends AdminController {
 	public function data()
 	{
 
-		$data = \LinkInfo::select(array(
+		$data = \LinkInfo::select([
 			'linkinfo.*'
-		))->where('linkinfo.ExpiryDate','>',Carbon::now());
+		])->where('linkinfo.ExpiryDate', '>', Carbon::now());
 
-		if(\Auth::user()->Region == 'Provinsi')
-		{
+		if (\Auth::user()->Region == 'Provinsi') {
 			$data->where('linkinfo.KodeProvinsi', \Auth::user()->KodeProvinsi);
 		}
 
 		$datatables = Datatables::of($data)
-			->editColumn('LinkInfo', function($data) {
+			->editColumn('LinkInfo', function ($data) {
 				return "<a href='{$data->LinkInfo}' target='_blank'>{$data->LinkInfo}</a>";
 			})
-			->addColumn('action', function($data){
+			->addColumn('action', function ($data) {
 
 				return View::make('back.action')
 					->with('table', $this->identifier . '-datatables')
-					->with('url', route('back-office.link.destroy', array($data->id)))
-					->with('edit_action', route('back-office.link.edit', array($data->id)))
+					->with('url', route('back-office.link.destroy', [$data->id]))
+					->with('edit_action', route('back-office.link.edit', [$data->id]))
 					->render();
 			})
 			->make(true);
