@@ -128,7 +128,7 @@
 
                                     @if(!empty($hunian->LinkExternal2))
                                         <div class="tab-pane" id="tab2">
-                                            {!! $hunian->LinkExternal2 !!}
+                                            {{ $hunian->LinkExternal2 }}
                                             {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
                                                     {{--align="center"--}}
                                                     {{--name="frame1"--}}
@@ -139,7 +139,7 @@
 
                                     @if(!empty($hunian->LinkExternal3))
                                         <div class="tab-pane" id="tab3">
-                                           {!!  $hunian->LinkExternal3 !!}
+                                           {{  $hunian->LinkExternal3 }}
                                             {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
                                                     {{--align="center"--}}
                                                     {{--name="frame1"--}}
@@ -151,7 +151,7 @@
                                     @if(!empty($hunian->LinkExternal4))
 
                                         <div class="tab-pane" id="tab4">
-                                            {!!   $hunian->LinkExternal4 !!}
+                                            {{   $hunian->LinkExternal4 }}
                                             {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
                                                     {{--align="center"--}}
                                                     {{--name="frame1"--}}
