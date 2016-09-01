@@ -71,9 +71,18 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="profile-image">
-                                            @if(!is_null($data->url))
-                                                <img src="{{ route('front.file.show', ['file', $data->url]) }}" class="img-responsive" alt="{{$data->url}}">
-                                                {{--{{Form::hidden('picture', null)}}--}}
+
+                                            @if($data->fileext == 'jpg' || $data->fileext == '.jpg' || $data->fileext == 'png' || $data->fileext == '.jpg')
+
+                                                @if(!is_null($data->url))
+                                                    <img src="{{ route('front.file.show', ['file', $data->url]) }}" class="img-responsive" alt="{{$data->url}}">
+                                                    {{--{{Form::hidden('picture', null)}}--}}
+                                                @endif
+                                            @elseif($data->fileext == 'pdf' || $data->fileext == '.pdf')
+                                                <span style="font-size: 50px;">
+                                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                                </span>
+
                                             @endif
                                         </div>
                                     </div>
