@@ -15,6 +15,9 @@ class PostController extends \BaseController
     {
         $post = \Post::slug($slug)->first();
 
+        $post->JumlahVisit = $post->JumlahVisit++;
+        $post->save();
+
         if($post)
             return \View::make('front.post.show', compact('post'));
 
