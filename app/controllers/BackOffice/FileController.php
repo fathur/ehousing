@@ -30,6 +30,8 @@ class FileController extends AdminController {
 	public function create()
 	{
 		$categories = \Referensi::where('RefId','KPU')
+			->where('ExpiryDate','>',Carbon::now())
+			->where('Flag', 0)
 			->orderBy('deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
@@ -121,6 +123,8 @@ class FileController extends AdminController {
 			->find($id);
 
 		$categories = \Referensi::where('RefId','KPU')
+			->where('ExpiryDate','>',Carbon::now())
+			->where('Flag', 0)
 			->orderBy('deskripsi','asc')
 			->lists('Deskripsi','KodeRef');
 
