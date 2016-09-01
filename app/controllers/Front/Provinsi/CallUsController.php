@@ -75,7 +75,7 @@ class CallUsController extends \BaseController
             }
 
             $pengajuan->statusid = 'NEW';
-            $pengajuan->ExpiryDate = '9999-12-31 00:00:00';
+            $pengajuan->ExpiryDate = \EhousingModel::DEFAULT_EXPIRY_DATE;
 
             if ($pengajuan->save()) {
                 return \Redirect::route('front.provinsi.call.index', array($provinsi))
