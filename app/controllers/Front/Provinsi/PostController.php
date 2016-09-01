@@ -16,6 +16,8 @@ class PostController extends \BaseController
     {
         $post = \Post::slug($postSlug)->first();
 
+        $this->addPostCounter($post);
+
         if($post)
             return \View::make('front.post.show', compact('post'));
 
@@ -63,5 +65,15 @@ class PostController extends \BaseController
 
         return \View::make('front.post.grid', compact('posts','provinsi'))
             ->with('postTitle', 'Teknologi Rancang Bangun');
+    }
+
+    protected function addPostCounter($post)
+    {
+        $post = \Post::find($post->id);
+        $currentVisit = is_null($post->JumlahVisit) ? 0 : $post->JumlahVisit;
+
+        $post->JumlahVisit = $currentVisit + 1;
+        $post->save();
+
     }
 }
