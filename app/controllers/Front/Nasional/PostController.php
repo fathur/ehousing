@@ -15,10 +15,9 @@ class PostController extends \BaseController
     {
         $post = \Post::slug($slug)->first();
 
-        $post->JumlahVisit = $post->JumlahVisit++;
-        $post->save();
+        $this->addPostCounter($post);
 
-        if($post)
+        if ($post)
             return \View::make('front.post.show', compact('post'));
 
         \App::abort(404);
@@ -31,9 +30,8 @@ class PostController extends \BaseController
 
         return \View::make('front.post.grid', compact('posts'))
             ->with('postTitle', 'Program dan Kegiatan')
-            ->with('type','nasional');
+            ->with('type', 'nasional');
     }
-
 
     public function getBerita()
     {
@@ -42,19 +40,29 @@ class PostController extends \BaseController
 
         return \View::make('front.post.grid', compact('posts'))
             ->with('postTitle', 'Informasi Publik')
-            ->with('type','nasional');
+            ->with('type', 'nasional');
     }
 
     public function getInformasi()
     {
-
 
         $data = new ProvinsiDataProvider();
         $posts = $data->setLimit(12)->getInformasi();
 
         return \View::make('front.post.grid', compact('posts'))
             ->with('postTitle', 'Teknologi Rancang Bangun')
-            ->with('type','nasional');
+            ->with('type', 'nasional');
 
     }
+
+    protected function addPostCounter($post)
+    {
+        $post = \Post::find($post->id);
+        $currentVisit = is_null($post->JumlahVisit) ? 0 : $post->JumlahVisit;
+
+        $post->JumlahVisit = $currentVisit + 1;
+        $post->save();
+
+    }
+
 }
