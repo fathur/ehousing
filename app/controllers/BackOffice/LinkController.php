@@ -147,10 +147,16 @@ class LinkController extends AdminController
 
 	public function data()
 	{
+		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
+			->where('Flag', '0')
+			->where('ExpiryDate', '>', Carbon::now())
+			->orderBy('Deskripsi', 'asc')
+			->lists('KodeRef');
 
 		$data = \LinkInfo::select([
 			'linkinfo.*'
-		])->where('linkinfo.ExpiryDate', '>', Carbon::now());
+		])->where('linkinfo.ExpiryDate', '>', Carbon::now())
+		->whereIn('GrupLinkInfo', $linkGroups);
 
 		if (\Auth::user()->Region == 'Provinsi') {
 			$data->where('linkinfo.KodeProvinsi', \Auth::user()->KodeProvinsi);
