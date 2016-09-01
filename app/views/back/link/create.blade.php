@@ -66,7 +66,7 @@
                             @if($isNasional)
 
                             <div class="form-group">
-                                <label for="KodeProvinsi" class="col-sm-2 control-label">Provinsi *)</label>
+                                <label for="KodeProvinsi" class="col-sm-2 control-label">Provinsi</label>
                                 <div class="col-sm-10">
                                     <select name="KodeProvinsi" id="KodeProvinsi" class="form-control m-b"></select>
                                 </div>
