@@ -91,7 +91,7 @@
                                 {{--</div>--}}
 
                                 @if(! is_null($provinsi->konfigurasi_situs->Website))
-                                <div class="tab-pane" id="tab-1">
+                                <div class="tab-pane active" id="tab-1">
                                     <h2>Official Website </h2>
                                     <h3><small><a href="{{$provinsi->konfigurasi_situs->Website}}" target="_blank">{{$provinsi->konfigurasi_situs->Website}}</a></small></h3>
 
