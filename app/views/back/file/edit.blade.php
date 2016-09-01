@@ -65,7 +65,6 @@
                                     <div class="col-xs-8">
                                         {{Form::file('filename', array())}}
                                         <p class="help-block small">
-                                            File : gif|jpg|jpeg|png
                                             <br>Ukuran file maksimal : 2MB
                                         </p>
                                     </div>
@@ -79,8 +78,20 @@
                                                     {{--{{Form::hidden('picture', null)}}--}}
                                                 @endif
                                             @elseif($data->fileext == 'pdf' || $data->fileext == '.pdf')
-                                                <span style="font-size: 50px;">
-                                                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                                <span style="font-size: 60px;">
+                                                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                                                </span>
+                                            @elseif($data->fileext == 'doc' || $data->fileext == '.doc' || $data->fileext == 'docx' || $data->fileext == '.docx')
+                                                <span style="font-size: 60px;">
+                                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                                </span>
+                                            @elseif($data->fileext == 'xls' || $data->fileext == '.xls' || $data->fileext == 'xlsx' || $data->fileext == '.xlsx')
+                                                <span style="font-size: 60px;">
+                                                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                                                </span>
+                                            @elseif($data->fileext == 'ppt' || $data->fileext == '.ppt' || $data->fileext == 'pptx' || $data->fileext == '.pptx')
+                                                <span style="font-size: 60px;">
+                                                    <i class="fa fa-file-powerpoint-o" aria-hidden="true"></i>
                                                 </span>
 
                                             @endif

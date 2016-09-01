@@ -55,7 +55,6 @@
                                 {{Form::file('filename', array())}}
                                 <p class="help-block">
                                     File yang diizinkan di upload :
-                                    <br>.doc, .xls, .ppt, .zip, jpg
                                     <br>Ukuran file maksimal : 2MB
                                 </p>
                             </div>
