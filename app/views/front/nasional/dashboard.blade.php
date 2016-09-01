@@ -33,7 +33,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h2><a href="#" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Informasi Publik</span> </a></h2>
+                            <h2><a href="{{route('front.nasional.berita.list')}}" class="btn-link"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Informasi Publik</span> </a></h2>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -79,7 +79,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="#" class="btn-link">
+                                <a href="{{route('front.nasional.info.list')}}" class="btn-link">
                                     <i class="fa fa-th-large"></i>
                                     <span class="nav-label">Teknologi Rancang Bangun</span>
                                 </a>
@@ -129,7 +129,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h2>
-                                <a href="#" class="btn-link">
+                                <a href="{{route('front.nasional.program.list')}}" class="btn-link">
                                     <i class="fa fa-home"></i>
                                     <span class="nav-label">Program & Kegiatan</span>
                                 </a>
@@ -153,7 +153,7 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h2>
-                                <a href="#" class="btn-link">
+                                <a href="{{route('front.nasional.file.penelitian')}}" class="btn-link">
                                     <i class="fa fa-book"></i> <span class="nav-label"> Hasil Penelitian/Kajian</span>
                                 </a>
                             </h2>
