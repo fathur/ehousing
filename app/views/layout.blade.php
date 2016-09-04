@@ -16,7 +16,7 @@
     <link href="{{asset("/assets/css/plugins/slick/slick-theme.css")}}" rel="stylesheet"> --}}
 
     <link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css?'.rand(1,10))}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap.css')}}">
 
     {{--
