@@ -67,6 +67,10 @@ class LinkController extends AdminController
 
 		}
 
+		$dataPost['KodeKota'] =  \Input::get('KodeKota');
+		$dataPost['KodeKecamatan'] =  \Input::get('KodeKecamatan');
+
+
 		// dd(\Input::all());
 		$result = \LinkInfo::create($dataPost);
 
@@ -90,7 +94,7 @@ class LinkController extends AdminController
 	 */
 	public function edit($id)
 	{
-		$data = LinkInfo::with('provinsi')->find($id);
+		$data = LinkInfo::with('provinsi','kota','kecamatan')->find($id);
 		$linkGroups = \Referensi::where('RefId', \Referensi::JENIS_LINK_INFO)
 			->where('Flag', '0')
 			->where('ExpiryDate', '>', Carbon::now())
@@ -125,6 +129,10 @@ class LinkController extends AdminController
 			$data->Region = 'Nasional';
 
 		}
+
+		$data->KodeKota = \Input::get('KodeKota');
+		$data->KodeKecamatan = \Input::get('KodeKecamatan');
+
 
 		$data->save();
 

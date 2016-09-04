@@ -22,7 +22,8 @@
                 </div>
                 <div class="col-sm-9 col-xs-12">
                     <h1>e-Housing</h1>
-                    <p>Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
+                    <p>Ditjen Penyediaan Perumahan<br/>
+                        Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
                 </div>
 
                 <div style="clear: both"></div>

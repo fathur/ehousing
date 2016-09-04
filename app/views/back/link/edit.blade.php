@@ -77,6 +77,27 @@
                             </div>
                             @endif
 
+                            <div class="form-group">
+                                <label for="kotakab" class="col-sm-2 control-label">Kota / Kabupaten</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" name="KodeKota" id="kotakab">
+                                        @if(isset($data->kota))
+                                            <option value="{{$data->KodeKota}}" selected>{{$data->kota->NamaKota}}</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="kecamatan" class="col-sm-2 control-label">Kecamatan</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control m-b" name="KodeKecamatan" id="kecamatan">
+                                        @if(isset($data->kecamatan))
+                                            <option value="{{$data->KodeKecamatan}}" selected>{{$data->kecamatan->NamaKecamatan}}</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+
 
 
                         </div>
@@ -136,6 +157,76 @@
             }
         });
 
+        $('#kotakab').select2({
+            ajax: {
+                url: '{{ route('back-office.kota.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page,
+                        @if($isNasional)
+                        provinsi: $('#KodeProvinsi').val()
+                        @else
+                        provinsi: {{Auth::user()->KodeProvinsi}}
+                        @endif
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Kota / Kabupaten',
+            templateResult: function(data) {
+                return data.NamaKota || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaKota || data.text;
+            }
+        });
+
+
+        $('#kecamatan').select2({
+            ajax: {
+                url: '{{ route('back-office.kecamatan.name') }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page,
+                        kota: $('#kotakab').val()
+                    }
+                },
+                processResults: function(data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            },
+
+            allowClear: true,
+            placeholder: 'Kecamatan',
+            templateResult: function(data) {
+                return data.NamaKecamatan || data.text;
+            },
+            templateSelection: function(data) {
+                return data.NamaKecamatan || data.text;
+            }
+        });
 
     </script>
 @stop

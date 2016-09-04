@@ -16,7 +16,7 @@ class LinkInfo extends EhousingModel
     protected $table = 'linkinfo';
     protected $primaryKey = 'LinkInfoId';
     protected $fillable = [
-        'GrupLinkInfo','Judul','Deskripsi','LinkInfo','Region','KodeProvinsi',
+        'GrupLinkInfo','Judul','Deskripsi','LinkInfo','Region','KodeProvinsi','KodeKota',
         'CreateUid','ModUid','ExpiryDate'
     ];
 
@@ -31,5 +31,15 @@ class LinkInfo extends EhousingModel
     public function provinsi()
     {
         return $this->belongsTo('Provinsi','KodeProvinsi');
+    }
+
+    public function kota()
+    {
+        return $this->belongsTo('Kota','KodeKota');
+    }
+
+    public function kecamatan()
+    {
+        return $this->belongsTo('Kecamatan','KodeKecamatan');
     }
 }
