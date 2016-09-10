@@ -95,7 +95,7 @@
                                         @endif
                                     </div>
                                     <div class="tab-pane" id="tab-3">
-                                        <p>-</p>
+                                        {{ $data->konfigurasi_situs->pendataan }}
                                     </div>
                                     <div class="tab-pane" id="tab-4">
                                         <p>{{{ $data->konfigurasi_situs->tentang_kami }}}</p>
