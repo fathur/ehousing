@@ -97,6 +97,7 @@ class SitusController extends AdminController {
 			$data->Daratan =  \Input::get('Daratan');
 			$data->Lautan =  \Input::get('Lautan');
 			$data->Website =  \Input::get('Website');
+			$data->pendataan =  \Input::get('pendataan');
 			// $data->JumlahVisit =  \Input::get('JumlahVisit');
 
 			if($data->save()) {
