@@ -19,7 +19,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUN_SEWA)
-            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
+            ->with('hunianTitle', 'Daftar Hunian - Rusunawa')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
 
     }
@@ -35,14 +35,14 @@ class HunianController extends \BaseController
     public function getRusunamiSubsidi(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
-            ->with('hunianTitle', 'Daftar Hunian - Rusunami Subsidi')
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Khusus')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 
     public function getRumahSubsidi(){
         return \View::make('front.hunian.index')
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
-            ->with('hunianTitle', 'Daftar Hunian - Rumah Subsidi')
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Umum dan Komersial')
             ->with('datatablesRoute', route('front.nasional.hunian.data'));
     }
 

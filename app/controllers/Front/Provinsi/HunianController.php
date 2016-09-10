@@ -33,7 +33,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUN_SEWA)
-            ->with('hunianTitle', 'Daftar Hunian - Rusun Sewa')
+            ->with('hunianTitle', 'Daftar Hunian - Rusunawa')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -76,7 +76,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUSUNAMI_SUBSIDI)
-            ->with('hunianTitle', 'Daftar Hunian - Rusunami Subsidi')
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Khusus')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
@@ -97,7 +97,7 @@ class HunianController extends \BaseController
 
         return \View::make('front.hunian.index', compact('provinsi','listCities'))
             ->with('jenis',\Hunian::RUMAH_SUBSIDI)
-            ->with('hunianTitle', 'Daftar Hunian - Rumah Subsidi')
+            ->with('hunianTitle', 'Daftar Hunian - Rumah Umum dan Komersial')
             ->with('datatablesRoute', route('front.provinsi.hunian.data', array($provinsiSlug)));
     }
 
