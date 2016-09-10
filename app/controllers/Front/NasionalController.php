@@ -39,6 +39,7 @@ class NasionalController extends \BaseController
 
             $feedReader = new FeedReader();
             $feedReader->setUrl(array(
+                'http://www.beritasatu.com/rss/properti.xml',
                 'http://inside.kompas.com/getrss/propertiarsitektur',
                 'http://inside.kompas.com/getrss/propertiberita',
                 'http://inside.kompas.com/getrss/propertikawasanterpadu',

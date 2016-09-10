@@ -2,6 +2,7 @@
 
 namespace Front;
 
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Validator;
 use View;
@@ -31,6 +32,16 @@ class AuthController extends \BaseController {
 
 		if($validator->fails())
 			return \Redirect::route('front.auth.login')->withErrors($validator);
+
+
+		$user = \User::where('UserName', \Input::get('UserName'))->first();
+
+		if($user->ExpiryDate > Carbon::now())
+		{
+			return \Redirect::route('front.auth.login')
+				->with('message','Login gagal! Username atau password tidak cocok.')
+				->with('class','danger');
+		}
 
 		$attempt = \Auth::attempt(array(
 			'UserName' => \Input::get('UserName'),
