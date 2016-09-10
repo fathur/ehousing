@@ -16,6 +16,11 @@
                         <h2 class="no-margins">Provinsi {{{ $provinsi->NamaProvinsi }}}</h2>
                         <h4>{{{ $provinsi->konfigurasi_situs->Tagline }}}</h4>
                         <small>{{ Str::limit($provinsi->konfigurasi_situs->Deskripsi, 170, '...') }}</small>
+
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a href="{{ route('front.provinsi.profile', array($provinsi->slug)) }}" class="btn btn-info btn-rounded btn-xs">Profile</a>
+
                     </div>
                 </div>
             </div>
@@ -62,7 +67,44 @@
         </div>
         --}}
         <div class="col-md-6">
-            <a href="{{ route('front.provinsi.profile', array($provinsi->slug)) }}" class="btn btn-info btn-rounded btn-xs">Profile</a>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Backlog</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{{ number_format($provinsi->konfigurasi_situs->backlog) }}}</h1>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>RTLH</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{{ number_format($provinsi->konfigurasi_situs->rtlh) }}}</h1>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Sejuta Rumah</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{{ number_format($provinsi->konfigurasi_situs->sejuta_rumah) }}}</h1>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </div>

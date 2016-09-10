@@ -184,6 +184,21 @@
                                 {{Form::text('Website', null, array('class' => 'form-control', 'id' => 'Website'))}}
                             </div>
 
+                            <div class="form-group">
+                                <label for="backlog">Backlog</label>
+                                {{Form::text('backlog', null, array('class' => 'form-control', 'id' => 'backlog'))}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rtlh">RTLH</label>
+                                {{Form::text('rtlh', null, array('class' => 'form-control', 'id' => 'rtlh'))}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sejuta_rumah">Sejuta Rumah</label>
+                                {{Form::text('sejuta_rumah', null, array('class' => 'form-control', 'id' => 'sejuta_rumah'))}}
+                            </div>
+
                         </div>
 
                         <div class="col-xs-12">

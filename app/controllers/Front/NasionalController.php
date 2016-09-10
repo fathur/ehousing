@@ -43,7 +43,6 @@ class NasionalController extends \BaseController
                 'http://inside.kompas.com/getrss/propertiberita',
                 'http://inside.kompas.com/getrss/propertikawasanterpadu',
                 'http://inside.kompas.com/getrss/propertihunian',
-                'http://rss.detik.com/index.php/finance',
             ));
 
             $provinsiFeeds = $feedReader->generate();
