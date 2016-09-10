@@ -8092,3 +8092,16 @@ body.md-skin {
         display: none;
     }
 }
+
+
+.pu-nasional-logo > .logo {
+    display: inline-block;
+    float: left;
+    padding-right: 20px;
+    padding-top: 25px;
+}
+
+
+.pu-nasional-logo > .text {
+    display: inline-block;
+}
