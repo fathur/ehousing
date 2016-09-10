@@ -93,7 +93,7 @@
                                         <img src="{{ route('front.file.show', ['profile', $data->konfigurasi_situs->StrukturOrg]) }}" alt="{{{$data->konfigurasi_situs->Nama}}}" class="img-responsive">
                                         @endif
                                     </div>
-                                   
+
                                     <div class="tab-pane" id="tab-4">
                                         <p>{{{ $data->konfigurasi_situs->tentang_kami }}}</p>
 

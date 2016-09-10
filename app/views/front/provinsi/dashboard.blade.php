@@ -83,7 +83,7 @@
             <div class="jumbotron">
                 <h1>e-Housing {{{ $provinsi->NamaProvinsi }}}</h1>
          {{--       <p>{{{  $provinsi->konfigurasi_situs->Deskripsi }}}</p>--}}
-                <p>Ditjen Penyediaan Perumahan<br/>
+                <p><strong>Direktorat Jenderal Penyediaan Perumahan</strong><br/>
                     Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
             </div>
 
