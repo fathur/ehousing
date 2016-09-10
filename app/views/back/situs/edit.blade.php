@@ -187,12 +187,41 @@
                         </div>
 
                         <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="pendataan">Pendataan</label>
+                                {{Form::textarea('pendataan', null, array('class' => 'form-control', 'id' => 'pendataan'))}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
                         <button class="btn btn-primary" type="submit">Simpan</button>
                         </div>
+
                         {{Form::close()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@stop
+
+@section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/summernote/dist/summernote.css')}}">
+    <link rel="stylesheet" href="{{asset('css/summernote-bs3.css')}}">
+@stop
+
+
+@section('scripts')
+    <script src="{{asset('vendor/summernote/dist/summernote.js')}}"></script>
+@stop
+
+
+@section('script')
+    <script>
+        $('#pendataan').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null             // set maximum height of editor
+        });
+    </script>
 @stop
