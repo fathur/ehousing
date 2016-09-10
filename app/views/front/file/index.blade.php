@@ -34,7 +34,6 @@
                                     <th>Judul</th>
                                     <th>Nama File</th>
                                     <th>Deskripsi</th>
-                                    <th>Kategori</th>
                                     <th>Format File</th>
                                     <th>Size</th>
                                     <th>Kota/Kabupaten</th>
@@ -81,7 +80,6 @@
                 {data:'Judul',name:'Judul'},
                 {data:'filename',name:'filename'},
                 {data:'description',name:'description'},
-                {data:'categoryfile',name:'categoryfile'},
                 {data:'fileext',name:'fileext'},
                 {data:'file_size',name:'file_size'},
                 {data:'NamaKota',name:'kota.NamaKota'},
