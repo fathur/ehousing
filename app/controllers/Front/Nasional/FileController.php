@@ -187,6 +187,22 @@ class FileController extends \BaseController
                 ]);
             }
 
+            if(preg_match('/jpg/', $berkas->fileext))
+            {
+                return \Response::make(file_get_contents(storage_path('uploads/file/'.$url)), 200, [
+                    'Content-Type' => 'image/jpeg',
+                    'Content-Disposition' => 'inline; filename="'.$url.'"'
+                ]);
+            }
+
+            if(preg_match('/png/', $berkas->fileext))
+            {
+                return \Response::make(file_get_contents(storage_path('uploads/file/'.$url)), 200, [
+                    'Content-Type' => 'image/png',
+                    'Content-Disposition' => 'inline; filename="'.$url.'"'
+                ]);
+            }
+
             $download = \Response::download(storage_path('uploads/file/' . $url), $url);
             return $download;
         }
