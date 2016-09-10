@@ -36,7 +36,7 @@ class AuthController extends \BaseController {
 
 		$user = \User::where('UserName', \Input::get('UserName'))->first();
 
-		if($user->ExpiryDate > Carbon::now())
+		if($user->ExpiryDate < Carbon::now())
 		{
 			return \Redirect::route('front.auth.login')
 				->with('message','Login gagal! Username atau password tidak cocok.')
