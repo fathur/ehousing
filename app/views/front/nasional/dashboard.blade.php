@@ -22,7 +22,7 @@
                 </div>
                 <div class="text">
                     <h1>e-Housing</h1>
-                    <p>Direktorat Jendral Penyediaan Perumahan<br/>
+                    <p><strong>Direktorat Jenderal Penyediaan Perumahan</strong><br/>
                         Kementerian Pekerjaan Umum dan Perumahan Rakyat</p>
                 </div>
 
@@ -30,7 +30,7 @@
 
             </div>
 
-            <div class="row">
+           {{-- <div class="row">
                 <div class="col-xs-7">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -91,7 +91,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div>--}}
 
 
             <div class="row">
