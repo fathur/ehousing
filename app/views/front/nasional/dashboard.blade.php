@@ -24,13 +24,22 @@
                         <div class="carousel slide" id="carousel1">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img alt="image" class="img-responsive" src="http://webapplayers.com/inspinia_admin-v2.6/img/p_big3.jpg">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto1.jpg')}}">
                                 </div>
                                 <div class="item">
-                                    <img alt="image"  class="img-responsive" src="http://webapplayers.com/inspinia_admin-v2.6/img/p_big1.jpg">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto2.jpg')}}">
                                 </div>
                                 <div class="item ">
-                                    <img alt="image" class="img-responsive" src="http://webapplayers.com/inspinia_admin-v2.6/img/p_big2.jpg">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto3.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto4.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto6.jpg')}}">
+                                </div>
+                                <div class="item ">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto7.jpg')}}">
                                 </div>
 
                             </div>
