@@ -126,12 +126,12 @@ class ProvinsiController extends \BaseController
 
             $provinsiDetail     = $data->getDetail();
             $totalAnggaran      = $data->getTotalAnggaran();
-            $totalBackLog       = $data->getTotalBacklog();
-            $totalJumlahRumah   = $data->getTotalJumlahRumah();
-            $totalAPBD          = $data->getTotalAPBD();
+//            $totalBackLog       = $data->getTotalBacklog();
+//            $totalJumlahRumah   = $data->getTotalJumlahRumah();
+//            $totalAPBD          = $data->getTotalAPBD();
 
             // Weird
-            $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
+           /* $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
                                     ->setYear($tahun)
                                     ->getStatistikBacklog();
 
@@ -154,7 +154,7 @@ class ProvinsiController extends \BaseController
 
             $filterStatisticSrc   = ProvinsiDataProvider::create($provinsi->id)
                 ->setYear($tahun)
-                ->getStatistikSourceAPBD();
+                ->getStatistikSourceAPBD();*/
 
 
 
@@ -162,14 +162,15 @@ class ProvinsiController extends \BaseController
             // return \Response::json(ProvinsiDataProvider::getStatistik($provinsi->id, 'TotalAPBDProv')->showResults());
 
             return \View::make('front.provinsi.profile', compact(
-                    'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
-                    'statistikAnggaran','statistikBackLog','filterStatistic',
-                    'statistikBackLogSrc','statistikAnggaranSrc','filterStatisticSrc'
+                    'totalAnggaran'
+                // 'totalBackLog','totalJumlahRumah','totalAPBD'
+//                    'statistikAnggaran','statistikBackLog','filterStatistic',
+//                    'statistikBackLogSrc','statistikAnggaranSrc','filterStatisticSrc'
                 ))
-                ->with('fields', \ProfilProvinsi::$fields)
-                ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
-                ->with('provinsi', $provinsiDetail)
-                ->with('kolom', 'TotalPenduduk');
+                //->with('fields', \ProfilProvinsi::$fields)
+                //->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
+                ->with('provinsi', $provinsiDetail);
+                //->with('kolom', 'TotalPenduduk');
 
         }
         catch (ProvinsiNotFoundException $e)

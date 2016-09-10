@@ -78,6 +78,10 @@
                                     @if(! is_null($provinsi->konfigurasi_situs->Website))
                                     <li class="active"><a href="#tab-1" data-toggle="tab">Website</a></li>
                                     @endif
+
+                                    @if(! is_null($provinsi->konfigurasi_situs->pendataan))
+                                        <li class=""><a href="#tab-2" data-toggle="tab">Pendataan</a></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -97,6 +101,12 @@
 
                                     <iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;" align="center" name="frame1" scrolling="auto" src="{{ $provinsi->konfigurasi_situs->Website }}"></iframe>
                                 </div>
+                                @endif
+
+                                @if(! is_null($provinsi->konfigurasi_situs->pendataan))
+                                    <div class="tab-pane active" id="tab-2">
+                                        {{$provinsi->konfigurasi_situs->pendataan}}
+                                    </div>
                                 @endif
 
                             </div>
