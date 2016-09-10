@@ -3673,7 +3673,9 @@ code {
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
-    min-height: 48px;
+    min-height: 55px;
+    text-transform: uppercase;
+
 }
 .ibox-content {
     background-color: #ffffff;
@@ -8093,8 +8095,31 @@ body.md-skin {
     }
 }
 
+.pu-nasional-logo-slider {
+    position: relative;
+   height: 500px;
+}
 
-.pu-nasional-logo > .logo {
+.pu-nasional-logo-slider > .pu-nasional-logo {
+    position: absolute;
+    background-color: transparent;
+}
+
+.pu-nasional-logo-slider > .carousel {
+    position: absolute;
+}
+
+.pu-nasional-logo-slider > .carousel .darken {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 500px;
+    opacity: 0.5;
+    background-image: linear-gradient(to top,rgba(0,0,0,.0001) 0,rgba(0,0,0,1) 100%);
+}
+
+.pu-nasional-logo .logo {
     display: inline-block;
     float: left;
     padding-right: 20px;
@@ -8102,6 +8127,7 @@ body.md-skin {
 }
 
 
-.pu-nasional-logo > .text {
+.pu-nasional-logo .text {
     display: inline-block;
+    color: #FFFFFF;
 }
