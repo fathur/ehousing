@@ -38,7 +38,7 @@
                             </div>--}}
 
                             <div class="form-group">
-                                <label for="Deskripsi">Deskripsi</label>
+                                <label for="Deskripsi">Tentang Kami</label>
                                 {{Form::textarea('Deskripsi', null, array('class' => 'form-control', 'id' => 'Deskripsi', 'rows' => null))}}
 
                             </div>
