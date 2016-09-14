@@ -24,7 +24,7 @@
                         <div class="carousel slide" id="carousel1">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto1.jpg')}}">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto7.jpg')}}">
                                 </div>
                                 <div class="item">
                                     <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto2.jpg')}}">
@@ -38,9 +38,7 @@
                                 <div class="item">
                                     <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto6.jpg')}}">
                                 </div>
-                                <div class="item ">
-                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto7.jpg')}}">
-                                </div>
+                               
 
                             </div>
                             <div class="darken"></div>
