@@ -69,6 +69,12 @@
         <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Provinsi</span>
     </a>
 </li>
+@else
+<li>
+    <a href="{{route('back-office.nasional.setting.edit')}}">
+        <i class="fa fa-cog"></i> <span class="nav-label">Konfigurasi Nasional</span>
+    </a>
+</li>
 @endif
 {{--
 <li>

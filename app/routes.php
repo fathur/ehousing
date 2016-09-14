@@ -57,6 +57,9 @@ Route::group(array('prefix' => 'back-office'), function() {
         Route::get('provinsi/setting', array('uses' => 'SitusController@edit', 'as' => 'back-office.provinsi.setting.edit'));
         Route::put('provinsi/update', array('uses' => 'SitusController@update', 'as' => 'back-office.provinsi.setting.update'));
 
+        Route::get('nasional/setting', array('uses' => 'SitusController@editNasional', 'as' => 'back-office.nasional.setting.edit'));
+        Route::put('nasional/update', array('uses' => 'SitusController@updateNasional', 'as' => 'back-office.nasional.setting.update'));
+
         Route::resource('pengajuan', 'PengajuanController',array('except' => array('show')));
         Route::get('pengajuan/data', array('uses' => 'PengajuanController@data', 'as' => 'back-office.pengajuan.data'));
 
