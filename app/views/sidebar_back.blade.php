@@ -116,7 +116,7 @@
 
 <li>
     <a href="{{route('back-office.hubungi-kami.index')}}">
-        <i class="fa fa-history"></i> <span class="nav-label">Pengaduan Masyarakat</span>
+        <i class="fa fa-history"></i> <span class="nav-label">Saran, Kritik, Kontak Admin</span>
     </a>
 </li>
 
