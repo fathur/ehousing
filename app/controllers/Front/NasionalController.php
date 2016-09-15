@@ -19,7 +19,7 @@ class NasionalController extends \BaseController
     {
         try {
             $data = new ProvinsiDataProvider();
-
+            $nasionalDetail = $data->getDetailNasional();
             $provinsiNews = $data->setLimit(3)->getNews();
             $provinsiInformation = $data->setLimit(3)->getInformasi();
             $provinsiPrograms = $data->setLimit(10)->getPrograms();
@@ -49,6 +49,7 @@ class NasionalController extends \BaseController
             $provinsiFeeds = $feedReader->generate();
 
             return \View::make('front.nasional.dashboard')
+                ->with('nasional', $nasionalDetail)
                 ->with('news', $provinsiNews)
                 ->with('information', $provinsiInformation)
                 ->with('programs', $provinsiPrograms)

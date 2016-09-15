@@ -275,6 +275,47 @@
                 @endif
             </div>
 --}}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #1C84C6; color: #FFFFFF;">
+                                <h5>Backlog</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{{ number_format($nasional->backlog) }}}</h1>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #1AB394; color: #FFFFFF;">
+                                <h5>RTLH</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{{ number_format($nasional->rtlh) }}}</h1>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title" style="background-color: #ED5565; color: #FFFFFF;">
+                                <h5>Sejuta Rumah</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">{{{ number_format($nasional->sejuta_rumah) }}}</h1>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
             <div class="list-group">
                 <a href="#" class="list-group-item active"><i class="fa fa-home"></i> Hunian Rusunawa</a>
 

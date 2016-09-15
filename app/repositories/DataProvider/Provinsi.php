@@ -81,6 +81,11 @@ class Provinsi
         throw new ProvinsiNotFoundException;
     }
 
+    public function getDetailNasional()
+    {
+        return \KonfigurasiSitus::where('KodeProvinsi', 0)->first();
+    }
+
     /**
      * @param $provinsiId
      * @param array $categoryId
