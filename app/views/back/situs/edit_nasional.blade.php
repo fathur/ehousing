@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Profil Provinsi<small></small></h5>
+                    <h5>Profil Nasional<small></small></h5>
                     <div class="ibox-tools">
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                     <div class="row">
 
                         {{Form::model($data, array(
-                           'route' => array('back-office.provinsi.setting.update'),
+                           'route' => array('back-office.nasional.setting.update'),
                            'method' => 'PUT',
                            'files' => true
                         ))}}
