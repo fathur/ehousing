@@ -25,7 +25,7 @@ class NasionalController extends \BaseController
             $provinsiInformation        = $data->setLimit(3)->getInformasi();
             $provinsiPrograms           = $data->setLimit(10)->getPrograms();
             $provinsiFile               = $data->setLimit(3)->getFileByCategory(array('HPK'));
-            $provinsiFileKebijakan               = $data->setLimit(3)->getFileByCategory(array('HPK'));
+            $provinsiFileKebijakan               = $data->setLimit(3)->getFileByCategory(array('PK'));
             $provinsiHunian             = $data->setLimit(5)->getHunian();
             $provinsiHunianRusunSewa             = $data->setLimit(5)->getHunianRusunSewa();
             $provinsiHunianRusunami             = $data->setLimit(5)->getHunianRusunami();
