@@ -393,6 +393,22 @@
             </div>
 
 
+            <div class="list-group">
+                <a href="#" class="list-group-item " style="background-color: #1C84C6;
+    border-color: #1ab394;
+    color: #FFFFFF;
+    z-index: 2;"><i class="fa fa-home"></i> Produk Hukum</a>
+
+                @if($kebijakanFiles->count() > 0)
+                    @foreach($kebijakanFiles as $item)
+                        <a href="{{route('front.file.download', $item->url)}}" class='list-group-item'>
+                            {{{ Str::limit($item->Judul, 50, '...') }}}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="list-group-item">Tidak ditemukan data.</span>
+                @endif
+            </div>
 
             {{--<div class="list-group">
                 <a href="#" class="list-group-item active">

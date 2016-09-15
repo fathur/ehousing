@@ -7,7 +7,6 @@
 
 namespace Front;
 
-
 use Carbon\Carbon;
 use Repositories\Feeds\FeedReader;
 use Repositories\DataProvider\Provinsi as ProvinsiDataProvider;
@@ -21,31 +20,31 @@ class NasionalController extends \BaseController
         try {
             $data = new ProvinsiDataProvider();
 
-            $provinsiNews               = $data->setLimit(3)->getNews();
-            $provinsiInformation        = $data->setLimit(3)->getInformasi();
-            $provinsiPrograms           = $data->setLimit(10)->getPrograms();
-            $provinsiFile               = $data->setLimit(3)->getFileByCategory(array('HPK'));
-            $provinsiFileKebijakan               = $data->setLimit(3)->getFileByCategory(array('PK'));
-            $provinsiHunian             = $data->setLimit(5)->getHunian();
-            $provinsiHunianRusunSewa             = $data->setLimit(5)->getHunianRusunSewa();
-            $provinsiHunianRusunami             = $data->setLimit(5)->getHunianRusunami();
-            $provinsiHunianRusunamiSubsidi             = $data->setLimit(5)->getHunianRusunamiSubsidi();
-            $provinsiHunianRumahSubsidi             = $data->setLimit(5)->getHunianRumahSubsidi();
-            $provinsiHunianApartemen             = $data->setLimit(5)->getHunianApartemen();
-            $provinsiKontakDeveloper    = $data->setLimit(5)->getContactDevelopers();
-            $provinsiKontakArsitek      = $data->setLimit(5)->getContactArsitek();
-            $provinsiKontakKontraktor   = $data->setLimit(5)->getContactContractor();
-            $provinsiKontakTukang       = $data->setLimit(5)->getContactTukang();
-            $provinsiKontakSupplier     = $data->setLimit(5)->getContactSupplier();
+            $provinsiNews = $data->setLimit(3)->getNews();
+            $provinsiInformation = $data->setLimit(3)->getInformasi();
+            $provinsiPrograms = $data->setLimit(10)->getPrograms();
+            $provinsiFile = $data->setLimit(3)->getFileByCategory(['HPK']);
+            $provinsiFileKebijakan = $data->setLimit(3)->getFileByCategory(['PK']);
+            $provinsiHunian = $data->setLimit(5)->getHunian();
+            $provinsiHunianRusunSewa = $data->setLimit(5)->getHunianRusunSewa();
+            $provinsiHunianRusunami = $data->setLimit(5)->getHunianRusunami();
+            $provinsiHunianRusunamiSubsidi = $data->setLimit(5)->getHunianRusunamiSubsidi();
+            $provinsiHunianRumahSubsidi = $data->setLimit(5)->getHunianRumahSubsidi();
+            $provinsiHunianApartemen = $data->setLimit(5)->getHunianApartemen();
+            $provinsiKontakDeveloper = $data->setLimit(5)->getContactDevelopers();
+            $provinsiKontakArsitek = $data->setLimit(5)->getContactArsitek();
+            $provinsiKontakKontraktor = $data->setLimit(5)->getContactContractor();
+            $provinsiKontakTukang = $data->setLimit(5)->getContactTukang();
+            $provinsiKontakSupplier = $data->setLimit(5)->getContactSupplier();
 
             $feedReader = new FeedReader();
-            $feedReader->setUrl(array(
+            $feedReader->setUrl([
                 'http://www.beritasatu.com/rss/properti.xml',
                 'http://inside.kompas.com/getrss/propertiarsitektur',
                 'http://inside.kompas.com/getrss/propertiberita',
                 'http://inside.kompas.com/getrss/propertikawasanterpadu',
                 'http://inside.kompas.com/getrss/propertihunian',
-            ));
+            ]);
 
             $provinsiFeeds = $feedReader->generate();
 
@@ -67,9 +66,7 @@ class NasionalController extends \BaseController
                 ->with('kontraktor', $provinsiKontakKontraktor)
                 ->with('tukang', $provinsiKontakTukang)
                 ->with('supplier', $provinsiKontakSupplier);
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
 
         }
     }
@@ -82,34 +79,33 @@ class NasionalController extends \BaseController
             $data = ProvinsiDataProvider::create()
                 ->setYear($tahun);
 
-            $totalAnggaran      = $data->getTotalAnggaran();
-            $totalBackLog       = $data->getTotalBacklog();
-            $totalJumlahRumah   = $data->getTotalJumlahRumah();
-            $totalAPBD          = $data->getTotalAPBD();
+            $totalAnggaran = $data->getTotalAnggaran();
+            $totalBackLog = $data->getTotalBacklog();
+            $totalJumlahRumah = $data->getTotalJumlahRumah();
+            $totalAPBD = $data->getTotalAPBD();
 
             // Weird
-            $statistikBackLog   = ProvinsiDataProvider::create()
+            $statistikBackLog = ProvinsiDataProvider::create()
                 ->setYear($tahun)
                 ->getStatistikBacklog();
 
-            $statistikAnggaran  = ProvinsiDataProvider::create()
+            $statistikAnggaran = ProvinsiDataProvider::create()
                 ->setYear($tahun)
                 ->getStatistikAnggaran();
 
-            $filterStatistic      = ProvinsiDataProvider::create()
+            $filterStatistic = ProvinsiDataProvider::create()
                 ->setYear($tahun)
                 ->getStatistikAPBD();
 
             return \View::make('front.nasional.profile', compact(
-                'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
-                'statistikAnggaran','statistikBackLog','filterStatistic'
+                'totalAnggaran', 'totalBackLog', 'totalJumlahRumah', 'totalAPBD',
+                'statistikAnggaran', 'statistikBackLog', 'filterStatistic'
             ))
                 ->with('fields', \ProfilProvinsi::$fields)
                 ->with('title', 'Profile Nasional ')
                 ->with('kolom', 'TotalPenduduk');
 
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
 
         }
     }
@@ -124,20 +120,18 @@ class NasionalController extends \BaseController
 
     public function getStatistik()
     {
-        $years = \ProfilProvinsi::select(array(
+        $years = \ProfilProvinsi::select([
             \DB::raw('DISTINCT(TahunBerlaku) AS tahun')
-        ))->orderBy('tahun','asc')->lists('tahun','tahun');
+        ])->orderBy('tahun', 'asc')->lists('tahun', 'tahun');
 
+        $years = array_filter($years, function ($var) {
 
-        $years = array_filter($years, function($var){
-
-            if($var != '')
+            if ($var != '')
                 return $var;
         });
 
         $kolom = \Input::get('kolom', 'TotalPenduduk');
         $tahun = \Input::get('tahun', min($years));
-
 
         //select sum(pp.BacklogRumah) as jumlah, p.NamaProvinsi
         //from ProfilProvinsi pp
@@ -145,84 +139,80 @@ class NasionalController extends \BaseController
         //group by pp.KodeProv
         //order by jumlah desc
         //limit 10;
-        $topTenBacklog = \ProfilProvinsi::select(array(
+        $topTenBacklog = \ProfilProvinsi::select([
             \DB::raw('SUM(BacklogRumah) AS jumlah'),
             'provinsi.NamaProvinsi'
-        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+        ])->leftJoin('provinsi', 'provinsi.KodeProvinsi', '=', 'ProfilProvinsi.KodeProv')
             ->groupBy('ProfilProvinsi.KodeProv')
-            ->orderBy('jumlah','desc')
+            ->orderBy('jumlah', 'desc')
             ->take(10)
             ->get();
 
-        $mapBacklog = array();
+        $mapBacklog = [];
         foreach ($topTenBacklog as $item) {
-            array_push($mapBacklog, array(
-                'name'  => $item->NamaProvinsi,
-                'y'     => (int) $item->jumlah
-            ));
+            array_push($mapBacklog, [
+                'name' => $item->NamaProvinsi,
+                'y'    => (int)$item->jumlah
+            ]);
         }
 
         $dataBacklog = json_encode($mapBacklog);
 
-        $topTenAnggaran = \ProfilProvinsi::select(array(
+        $topTenAnggaran = \ProfilProvinsi::select([
             \DB::raw('SUM(AnggaranKemenpera) AS jumlah'),
             'provinsi.NamaProvinsi'
-        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+        ])->leftJoin('provinsi', 'provinsi.KodeProvinsi', '=', 'ProfilProvinsi.KodeProv')
             ->groupBy('ProfilProvinsi.KodeProv')
-            ->orderBy('jumlah','desc')
+            ->orderBy('jumlah', 'desc')
             ->take(10)
             ->get();
 
-        $mapAnggaran = array();
+        $mapAnggaran = [];
         foreach ($topTenAnggaran as $item) {
-            array_push($mapAnggaran, array(
-                'name'  => $item->NamaProvinsi,
-                'y'     => (int) $item->jumlah
-            ));
+            array_push($mapAnggaran, [
+                'name' => $item->NamaProvinsi,
+                'y'    => (int)$item->jumlah
+            ]);
         }
 
         $dataAnggaran = json_encode($mapAnggaran);
 
-
-
-
         $filterStatistic = $this->loadDataStatistik($kolom, $tahun);
         $dataFilter = $this->loadDataStatistik($kolom, $tahun, null, false);
 
-
-        return \View::make('front.nasional.statistik', compact('dataBacklog','dataAnggaran','filterStatistic','dataFilter'))
+        return \View::make('front.nasional.statistik', compact('dataBacklog', 'dataAnggaran', 'filterStatistic', 'dataFilter'))
             ->with('fields', \ProfilProvinsi::$fields)
             ->with('years', $years);
     }
 
     /**
-     * @param $kolom
-     * @param $tahun
+     * @param      $kolom
+     * @param      $tahun
      * @param null $take
      */
     private function loadDataStatistik($kolom, $tahun = null, $take = null, $json = true)
     {
-        $dataRaw = \ProfilProvinsi::select(array(
+        $dataRaw = \ProfilProvinsi::select([
             \DB::raw("SUM({$kolom}) AS jumlah"),
             'provinsi.NamaProvinsi'
-        ))->leftJoin('provinsi','provinsi.KodeProvinsi','=','ProfilProvinsi.KodeProv')
+        ])->leftJoin('provinsi', 'provinsi.KodeProvinsi', '=', 'ProfilProvinsi.KodeProv')
             ->groupBy('ProfilProvinsi.KodeProv')
-            ->orderBy('jumlah','desc');
+            ->orderBy('jumlah', 'desc');
 
-        if(!is_null($tahun))
-            $dataRaw->where('TahunBerlaku','=',$tahun);
+        if (!is_null($tahun))
+            $dataRaw->where('TahunBerlaku', '=', $tahun);
 
-         $dataRaw = $dataRaw->get();
+        $dataRaw = $dataRaw->get();
 
-        $map = array();
+        $map = [];
         foreach ($dataRaw as $item) {
-            array_push($map, array(
+            array_push($map, [
                 'name' => $item->NamaProvinsi,
-                'y' => (int)$item->jumlah
-            ));
+                'y'    => (int)$item->jumlah
+            ]);
         };
 
-        if($json)
+        if ($json)
             return json_encode($map);
 
         return $map;

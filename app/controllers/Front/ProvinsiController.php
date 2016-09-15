@@ -20,6 +20,7 @@ class ProvinsiController extends \BaseController
 
     /**
      * @param $provinsiSlug
+     *
      * @return $this|\Illuminate\Http\Response|string
      * @throws \Exception
      * @throws \Repositories\DataProvider\FileNotFoundException
@@ -31,40 +32,41 @@ class ProvinsiController extends \BaseController
 
             $provinsi = Provinsi::slug($provinsiSlug)->first();
 
-            if(is_null($provinsi))
+            if (is_null($provinsi))
                 \App::abort(404);
 
             $data = new ProvinsiDataProvider($provinsi->id);
 
-            $provinsiDetail             = $data->getDetail();
-            $provinsiNews               = $data->setLimit(3)->getNews();
-            $provinsiInformation        = $data->setLimit(3)->getInformasi();
-            $provinsiPrograms           = $data->setLimit(10)->getPrograms();
-            $provinsiFile               = $data->setLimit(3)->getFileByCategory(array('HPK'));
+            $provinsiDetail = $data->getDetail();
+            $provinsiNews = $data->setLimit(3)->getNews();
+            $provinsiInformation = $data->setLimit(3)->getInformasi();
+            $provinsiPrograms = $data->setLimit(10)->getPrograms();
+            $provinsiFile = $data->setLimit(3)->getFileByCategory(['HPK']);
+            $provinsiFileKebijakan = $data->setLimit(3)->getFileByCategory(['PK']);
 
-            $provinsiHunian             = $data->setLimit(5)->getHunian();
-            $provinsiHunianRusunSewa             = $data->setLimit(5)->getHunianRusunSewa();
-            $provinsiHunianRusunami             = $data->setLimit(5)->getHunianRusunami();
-            $provinsiHunianRusunamiSubsidi             = $data->setLimit(5)->getHunianRusunamiSubsidi();
-            $provinsiHunianRumahSubsidi             = $data->setLimit(5)->getHunianRumahSubsidi();
-            $provinsiHunianApartemen             = $data->setLimit(5)->getHunianApartemen();
+            $provinsiHunian = $data->setLimit(5)->getHunian();
+            $provinsiHunianRusunSewa = $data->setLimit(5)->getHunianRusunSewa();
+            $provinsiHunianRusunami = $data->setLimit(5)->getHunianRusunami();
+            $provinsiHunianRusunamiSubsidi = $data->setLimit(5)->getHunianRusunamiSubsidi();
+            $provinsiHunianRumahSubsidi = $data->setLimit(5)->getHunianRumahSubsidi();
+            $provinsiHunianApartemen = $data->setLimit(5)->getHunianApartemen();
 
-            $provinsiKontakDeveloper    = $data->setLimit(5)->getContactDevelopers();
-            $provinsiKontakArsitek      = $data->setLimit(5)->getContactArsitek();
-            $provinsiKontakKontraktor   = $data->setLimit(5)->getContactContractor();
-            $provinsiKontakTukang       = $data->setLimit(5)->getContactTukang();
-            $provinsiKontakSupplier     = $data->setLimit(5)->getContactSupplier();
+            $provinsiKontakDeveloper = $data->setLimit(5)->getContactDevelopers();
+            $provinsiKontakArsitek = $data->setLimit(5)->getContactArsitek();
+            $provinsiKontakKontraktor = $data->setLimit(5)->getContactContractor();
+            $provinsiKontakTukang = $data->setLimit(5)->getContactTukang();
+            $provinsiKontakSupplier = $data->setLimit(5)->getContactSupplier();
             // return \Response::json($provinsiFile->toArray());
 
             $feedReader = new FeedReader();
-            $feedReader->setUrl(array(
+            $feedReader->setUrl([
                 'http://inside.kompas.com/getrss/propertiarsitektur',
                 'http://inside.kompas.com/getrss/propertiberita',
                 'http://inside.kompas.com/getrss/propertikawasanterpadu',
                 'http://inside.kompas.com/getrss/propertihunian',
                 'http://rss.detik.com/index.php/finance',
 
-            ));
+            ]);
 
             $provinsiFeeds = $feedReader->generate();
 
@@ -76,30 +78,26 @@ class ProvinsiController extends \BaseController
                 ->with('information', $provinsiInformation)
                 ->with('programs', $provinsiPrograms)
                 ->with('files', $provinsiFile)
+                ->with('kebijakanFiles', $provinsiFileKebijakan)
                 ->with('feeds', $provinsiFeeds)
-
                 ->with('hunian', $provinsiHunian)
                 ->with('hunianRusunSewa', $provinsiHunianRusunSewa)
                 ->with('hunianRusunamiSubsidi', $provinsiHunianRusunamiSubsidi)
                 ->with('hunianRumahSubsidi', $provinsiHunianRumahSubsidi)
                 ->with('hunianRusunami', $provinsiHunianRusunami)
                 ->with('hunianApartemen', $provinsiHunianApartemen)
-
                 ->with('developers', $provinsiKontakDeveloper)
                 ->with('arsitek', $provinsiKontakArsitek)
                 ->with('kontraktor', $provinsiKontakKontraktor)
                 ->with('tukang', $provinsiKontakTukang)
                 ->with('supplier', $provinsiKontakSupplier);
-        }
-        catch (ProvinsiNotFoundException $e) {
+        } catch (ProvinsiNotFoundException $e) {
 
-            return \Response::view('errors.404', array(
+            return \Response::view('errors.404', [
                 'message' => $e->getMessage()
-            ), 404);
+            ], 404);
 
-        }
-        catch (PostNotFoundException $e)
-        {
+        } catch (PostNotFoundException $e) {
             return $e->getMessage();
         }
 
@@ -108,6 +106,7 @@ class ProvinsiController extends \BaseController
 
     /**
      * @param $provinsiSlug
+     *
      * @return $this|\Illuminate\Http\Response
      * @author Fathur Rohman <fathur_rohman17@yahoo.co.id>
      */
@@ -118,66 +117,61 @@ class ProvinsiController extends \BaseController
 
             $provinsi = Provinsi::slug($provinsiSlug)->first();
 
-            if(is_null($provinsi))
+            if (is_null($provinsi))
                 \App::abort(404);
 
             $data = ProvinsiDataProvider::create($provinsi->id)
                 ->setYear($tahun);
 
-            $provinsiDetail     = $data->getDetail();
-            $totalAnggaran      = $data->getTotalAnggaran();
+            $provinsiDetail = $data->getDetail();
+            $totalAnggaran = $data->getTotalAnggaran();
 //            $totalBackLog       = $data->getTotalBacklog();
 //            $totalJumlahRumah   = $data->getTotalJumlahRumah();
 //            $totalAPBD          = $data->getTotalAPBD();
 
             // Weird
-           /* $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
-                                    ->setYear($tahun)
-                                    ->getStatistikBacklog();
+            /* $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
+                                     ->setYear($tahun)
+                                     ->getStatistikBacklog();
 
-            $statistikBackLogSrc   = ProvinsiDataProvider::create($provinsi->id)
-                ->setYear($tahun)
-                ->getStatistikSourceBacklog();
-
-
-            $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
-                                    ->setYear($tahun)
-                                    ->getStatistikAnggaran();
-
-            $statistikAnggaranSrc   = ProvinsiDataProvider::create($provinsi->id)
-                ->setYear($tahun)
-                ->getStatistikSourceAnggaran();
-
-            $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
-                                    ->setYear($tahun)
-                                    ->getStatistikAPBD();
-
-            $filterStatisticSrc   = ProvinsiDataProvider::create($provinsi->id)
-                ->setYear($tahun)
-                ->getStatistikSourceAPBD();*/
+             $statistikBackLogSrc   = ProvinsiDataProvider::create($provinsi->id)
+                 ->setYear($tahun)
+                 ->getStatistikSourceBacklog();
 
 
+             $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
+                                     ->setYear($tahun)
+                                     ->getStatistikAnggaran();
 
+             $statistikAnggaranSrc   = ProvinsiDataProvider::create($provinsi->id)
+                 ->setYear($tahun)
+                 ->getStatistikSourceAnggaran();
+
+             $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
+                                     ->setYear($tahun)
+                                     ->getStatistikAPBD();
+
+             $filterStatisticSrc   = ProvinsiDataProvider::create($provinsi->id)
+                 ->setYear($tahun)
+                 ->getStatistikSourceAPBD();*/
 
             // return \Response::json(ProvinsiDataProvider::getStatistik($provinsi->id, 'TotalAPBDProv')->showResults());
 
             return \View::make('front.provinsi.profile', compact(
-                    'totalAnggaran'
-                // 'totalBackLog','totalJumlahRumah','totalAPBD'
+                'totalAnggaran'
+            // 'totalBackLog','totalJumlahRumah','totalAPBD'
 //                    'statistikAnggaran','statistikBackLog','filterStatistic',
 //                    'statistikBackLogSrc','statistikAnggaranSrc','filterStatisticSrc'
-                ))
+            ))
                 //->with('fields', \ProfilProvinsi::$fields)
                 //->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
                 ->with('provinsi', $provinsiDetail);
-                //->with('kolom', 'TotalPenduduk');
+            //->with('kolom', 'TotalPenduduk');
 
-        }
-        catch (ProvinsiNotFoundException $e)
-        {
-            return \Response::view('errors.404', array(
+        } catch (ProvinsiNotFoundException $e) {
+            return \Response::view('errors.404', [
                 'message' => $e->getMessage()
-            ), 404);
+            ], 404);
         }
 
     }
@@ -185,57 +179,56 @@ class ProvinsiController extends \BaseController
     public function getStatistik($provinsiSlug)
     {
         $tahun = \Input::get('tahun', Carbon::now()->subYear()->year);
-        $kolom = \Input::get('kolom','TotalPenduduk');
+        $kolom = \Input::get('kolom', 'TotalPenduduk');
 
         $provinsi = Provinsi::slug($provinsiSlug)->first();
 
-        if(is_null($provinsi))
-            return \Response::view('errors.404', array(), 404);
+        if (is_null($provinsi))
+            return \Response::view('errors.404', [], 404);
 
         $data = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun);
 
-        $provinsiDetail     = $data->getDetail();
-        $totalAnggaran      = $data->getTotalAnggaran();
-        $totalBackLog       = $data->getTotalBacklog();
-        $totalJumlahRumah   = $data->getTotalJumlahRumah();
-        $totalAPBD          = $data->getTotalAPBD();
+        $provinsiDetail = $data->getDetail();
+        $totalAnggaran = $data->getTotalAnggaran();
+        $totalBackLog = $data->getTotalBacklog();
+        $totalJumlahRumah = $data->getTotalJumlahRumah();
+        $totalAPBD = $data->getTotalAPBD();
 
         // Weird
-        $statistikBackLog   = ProvinsiDataProvider::create($provinsi->id)
+        $statistikBackLog = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikBacklog();
 
-        $statistikBackLogSrc   = ProvinsiDataProvider::create($provinsi->id)
+        $statistikBackLogSrc = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikSourceBacklog();
 
-        $statistikAnggaran  = ProvinsiDataProvider::create($provinsi->id)
+        $statistikAnggaran = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikAnggaran();
 
-        $statistikAnggaranSrc   = ProvinsiDataProvider::create($provinsi->id)
+        $statistikAnggaranSrc = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikSourceAnggaran();
 
-        $filterStatistic      = ProvinsiDataProvider::create($provinsi->id)
+        $filterStatistic = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistik($kolom);
 
-        $filterStatisticSrc   = ProvinsiDataProvider::create($provinsi->id)
+        $filterStatisticSrc = ProvinsiDataProvider::create($provinsi->id)
             ->setYear($tahun)
             ->getStatistikSource($kolom);
 
         return \View::make('front.provinsi.statistik', compact(
-            'totalAnggaran','totalBackLog','totalJumlahRumah','totalAPBD',
-            'statistikAnggaran','statistikBackLog','filterStatistic','fields',
+            'totalAnggaran', 'totalBackLog', 'totalJumlahRumah', 'totalAPBD',
+            'statistikAnggaran', 'statistikBackLog', 'filterStatistic', 'fields',
             'kolom',
-            'statistikBackLogSrc','statistikAnggaranSrc','filterStatisticSrc'
+            'statistikBackLogSrc', 'statistikAnggaranSrc', 'filterStatisticSrc'
 
         ))
-
             ->with('fields', \ProfilProvinsi::$fields)
-            ->with('title', 'Profile Provinsi '. $provinsi->NamaProvinsi)
+            ->with('title', 'Profile Provinsi ' . $provinsi->NamaProvinsi)
             ->with('provinsi', $provinsiDetail);
     }
 
@@ -243,7 +236,7 @@ class ProvinsiController extends \BaseController
     {
         $provinsi = Provinsi::slug($provinsiSlug)->first();
 
-        if(is_null($provinsi))
+        if (is_null($provinsi))
             \App::abort(404);
 
         $dataProvinsi = new ProvinsiDataProvider($provinsi->id);
