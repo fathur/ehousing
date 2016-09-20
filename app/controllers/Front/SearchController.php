@@ -54,10 +54,10 @@ class SearchController extends \BaseController
             if (count($resultPenelitian) > 0)
                 $results['Daftar Hasil Penelitian/Kajian'] = $resultPenelitian;
 
-            /*if (count($resultInfoHunian) > 0)
+            if (count($resultInfoHunian) > 0)
                 $results['Informasi Hunian'] = $resultInfoHunian;
 
-            if (count($resultInfoLink) > 0)
+            /*if (count($resultInfoLink) > 0)
                 $results['Informasi Link'] = $resultInfoLink;*/
 
         }
@@ -215,7 +215,8 @@ class SearchController extends \BaseController
 
     private function resultInfoHunian($key)
     {
-        $r = \Hunian::where('hunian.ExpiryDate', '>', Carbon::now())
+        $r = \Hunian::with('provinsi')
+            ->where('hunian.ExpiryDate', '>', Carbon::now())
             ->where(function ($q) use ($key) {
                 $q->where('NamaHunian', 'like', "%{$key}%");
                 $q->orWhere('Alamat', 'like', "%{$key}%");
@@ -227,9 +228,43 @@ class SearchController extends \BaseController
 
         $format = [];
         foreach ($r as $item) {
+
+            if (is_null($item->provinsi)) {
+                // todo: kasih logic nasional
+                $link = '#';
+            } else {
+
+                switch ($item->JenisHunian) {
+                    case \Hunian::RUSUN_SEWA:
+                        $link = route('front.provinsi.hunian.rusunsewa', $item->provinsi->slug);
+                        break;
+                    case \Hunian::RUSUNAMI:
+                        $link = route('front.provinsi.hunian.rusunami', $item->provinsi->slug);
+                        break;
+                    case \Hunian::RUSUNAMI_SUBSIDI:
+                        $link = route('front.provinsi.hunian.rusunamisubs', $item->provinsi->slug);
+                        break;
+                    case \Hunian::RUMAH_SUBSIDI:
+                        $link = route('front.provinsi.hunian.rumahsubs', $item->provinsi->slug);
+                        break;
+                    case \Hunian::APERTEMEN:
+                        $link = route('front.provinsi.hunian.apartemen', $item->provinsi->slug);
+                        break;
+                    case \Hunian::CONDOTEL;
+                        $link = route('front.provinsi.hunian.condotel', $item->provinsi->slug);
+                        break;
+                    case \Hunian::HOTEL;
+                        $link = route('front.provinsi.hunian.hotel', $item->provinsi->slug);
+                        break;
+                    default:
+                        $link = '#';
+                }
+            }
+
             array_push($format, [
                 'title'       => $item->NamaHunian,
-                'description' => $item->Alamat
+                'description' => $item->Alamat,
+                'link'        => $link
             ]);
         }
 
