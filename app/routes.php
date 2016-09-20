@@ -86,6 +86,8 @@ Route::group(array('prefix' => 'back-office'), function() {
 
 });
 
+Route::get('search', array('uses' => 'Front\SearchController@show','as' => 'front.search.show'));
+
 
 Route::get('ehousing', array('uses' => 'Front\NasionalController@getEHousing','as'=>'front.nasional.ehousing'));
 Route::get('profile', function(){});

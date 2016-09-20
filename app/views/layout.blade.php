@@ -37,11 +37,11 @@
             <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    {{--<form role="search" class="navbar-form-custom" method="POST" action="#">
+                    <form role="search" class="navbar-form-custom" method="GET" action="{{route('front.search.show')}}">
                         <div class="form-group">
-                            <input type="text" placeholder="Pencarian..." class="form-control" name="search_name" id="top-search">
+                            <input type="text" placeholder="Pencarian..." class="form-control" name="s" id="top-search">
                         </div>
-                    </form>--}}
+                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
 

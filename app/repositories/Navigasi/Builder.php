@@ -12,7 +12,7 @@ class Builder
     const KODE_PROFIL_PROFINSI = 201511020000;
 
     public static $exceptionFirstSegment = array(
-        'test','login','logout','password','kontak','hunian','posts','post','link',
+        'test','login','logout','password','kontak','hunian','posts','post','link','search',
         'file','profile','statistik','program','berita','ehousing','back-office','hubungi-kami','informasi');
 
     public static function renderFront()
