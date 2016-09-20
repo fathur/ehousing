@@ -19,7 +19,7 @@ class SearchController extends \BaseController
     {
         $key = \Request::get('s');
 
-        if($key != '' || $key != null) {
+        if ($key != '' || $key != null) {
 
             $resultProfile = $this->resultProfile($key);
             $resultTeknologiRancangBangun = $this->resultTeknologiRancangBangun($key);
@@ -31,37 +31,34 @@ class SearchController extends \BaseController
             $resultPenelitian = $this->resultPenelitian($key);
             $resultInfoLink = $this->resultInfoLink($key);
 
-
             $results = [];
 
-
-            if(count($resultProfile) > 0)
+            if (count($resultProfile) > 0)
                 $results['Profile'] = $resultProfile;
 
-            if(count($resultTeknologiRancangBangun) > 0)
+            if (count($resultTeknologiRancangBangun) > 0)
                 $results['Teknologi Rancang Bangun'] = $resultTeknologiRancangBangun;
 
-            if(count($resultBahanBangunan) > 0)
-                $results['Daftar Bahan Bangunan'] = $resultBahanBangunan;
-
-            if(count($resultProdukHukum) > 0)
-                $results['Daftar Produk Hukum'] = $resultProdukHukum;
-
-            if(count($resultProgramKegiatan) > 0)
-                $results['Program dan Kegiatan'] = $resultProgramKegiatan;
-
-            if(count($resultInfoHunian) > 0)
-                $results['Informasi Hunian'] = $resultInfoHunian;
-
-            if(count($resultInfoPublik) > 0)
+            if (count($resultInfoPublik) > 0)
                 $results['Informasi Publik'] = $resultInfoPublik;
 
-            if(count($resultPenelitian) > 0)
+            if (count($resultProgramKegiatan) > 0)
+                $results['Program dan Kegiatan'] = $resultProgramKegiatan;
+
+            if (count($resultBahanBangunan) > 0)
+                $results['Daftar Bahan Bangunan'] = $resultBahanBangunan;
+
+            if (count($resultProdukHukum) > 0)
+                $results['Daftar Produk Hukum'] = $resultProdukHukum;
+
+            if (count($resultPenelitian) > 0)
                 $results['Daftar Hasil Penelitian/Kajian'] = $resultPenelitian;
 
-            if(count($resultInfoLink) > 0)
-                $results['Informasi Link'] = $resultInfoLink;
+            /*if (count($resultInfoHunian) > 0)
+                $results['Informasi Hunian'] = $resultInfoHunian;
 
+            if (count($resultInfoLink) > 0)
+                $results['Informasi Link'] = $resultInfoLink;*/
 
         }
 
@@ -70,7 +67,8 @@ class SearchController extends \BaseController
 
     private function resultProfile($key)
     {
-        $r = \KonfigurasiSitus::where('Nama','like',"%{$key}%")
+        $r = \KonfigurasiSitus::with('provinsi')
+            ->where('Nama', 'like', "%{$key}%")
             ->orWhere('Deskripsi', 'like', "%{$key}%")
             ->orWhere('tentang_kami', 'like', "%{$key}%")
             ->orWhere('Tagline', 'like', "%{$key}%")
@@ -95,8 +93,9 @@ class SearchController extends \BaseController
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-               'title'  => $item->Nama,
-                'description' => $item->Deskripsi
+                'title'       => $item->Nama,
+                'description' => $item->Deskripsi,
+                'link'        => route('front.provinsi.dashboard', $item->provinsi->slug)
             ]);
         }
 
@@ -105,11 +104,12 @@ class SearchController extends \BaseController
 
     private function resultTeknologiRancangBangun($key)
     {
-        $r = \Post::where('PostStatus','=', 1)
-            ->where('PublishDate','<', Carbon::now())
+        $r = \Post::with('provinsi')
+            ->where('PostStatus', '=', 1)
+            ->where('PublishDate', '<', Carbon::now())
             ->whereRaw(\DB::raw('post.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'))
-            ->whereIn('post.KategoriId', array(3))
-            ->where(function($q) use ($key) {
+            ->whereIn('post.KategoriId', [3])
+            ->where(function ($q) use ($key) {
                 $q->where('Judul', 'like', "%{$key}%");
                 $q->orWhere('IsiPost', 'like', "%{$key}%");
 
@@ -118,9 +118,17 @@ class SearchController extends \BaseController
 
         $format = [];
         foreach ($r as $item) {
+            if (is_null($item->provinsi)) {
+                // todo: punya nasional
+                $link = '#';
+            } else {
+                $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
+            }
+
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->IsiPost
+                'title'       => $item->Judul,
+                'description' => $item->IsiPost,
+                'link'        => $link
             ]);
         }
 
@@ -129,18 +137,17 @@ class SearchController extends \BaseController
 
     private function resultInfoLink($key)
     {
-        $r = \LinkInfo::where('linkinfo.ExpiryDate','>',Carbon::now())
-            ->where(function($q) use ($key) {
-                $q->where('Judul','like',"%{$key}%");
-                $q->orWhere('Deskripsi','like',"%{$key}%");
-                $q->orWhere('LinkInfo','like',"%{$key}%");
+        $r = \LinkInfo::where('linkinfo.ExpiryDate', '>', Carbon::now())
+            ->where(function ($q) use ($key) {
+                $q->where('Judul', 'like', "%{$key}%");
+                $q->orWhere('Deskripsi', 'like', "%{$key}%");
+                $q->orWhere('LinkInfo', 'like', "%{$key}%");
             })->get();
-
 
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-                'title'  => $item->Judul,
+                'title'       => $item->Judul,
                 'description' => $item->Deskripsi
             ]);
         }
@@ -152,20 +159,22 @@ class SearchController extends \BaseController
     {
         $r = \Berkas::where('file.ExpiryDate', '>', Carbon::now())
             ->where('file.categoryfile', \Berkas::PENELITIAN)
-            ->where(function($q) use ($key) {
-                $q->where('filename','like',"%{$key}%");
-                $q->orWhere('description','like',"%{$key}%");
-                $q->orWhere('Judul','like',"%{$key}%");
-                $q->orWhere('raw_name','like',"%{$key}%");
-                $q->orWhere('fileext','like',"%{$key}%");
+            ->where(function ($q) use ($key) {
+                $q->where('filename', 'like', "%{$key}%");
+                $q->orWhere('description', 'like', "%{$key}%");
+                $q->orWhere('Judul', 'like', "%{$key}%");
+                $q->orWhere('raw_name', 'like', "%{$key}%");
+                $q->orWhere('fileext', 'like', "%{$key}%");
 
             })->get();
 
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->description
+                'title'       => $item->Judul,
+                'description' => $item->description,
+                'link'        => route('front.file.download', $item->url)
+
             ]);
         }
 
@@ -174,11 +183,11 @@ class SearchController extends \BaseController
 
     private function resultInfoPublik($key)
     {
-        $r = \Post::where('PostStatus','=', 1)
-            ->where('PublishDate','<', Carbon::now())
+        $r = \Post::where('PostStatus', '=', 1)
+            ->where('PublishDate', '<', Carbon::now())
             ->whereRaw(\DB::raw('post.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'))
-            ->whereIn('post.KategoriId', array(1,2))
-            ->where(function($q) use ($key) {
+            ->whereIn('post.KategoriId', [1, 2])
+            ->where(function ($q) use ($key) {
                 $q->where('Judul', 'like', "%{$key}%");
                 $q->orWhere('IsiPost', 'like', "%{$key}%");
 
@@ -187,9 +196,17 @@ class SearchController extends \BaseController
 
         $format = [];
         foreach ($r as $item) {
+            if (is_null($item->provinsi)) {
+                // todo: punya nasional
+                $link = '#';
+            } else {
+                $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
+            }
+
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->IsiPost
+                'title'       => $item->Judul,
+                'description' => $item->IsiPost,
+                'link'        => $link
             ]);
         }
 
@@ -198,20 +215,20 @@ class SearchController extends \BaseController
 
     private function resultInfoHunian($key)
     {
-        $r = \Hunian::where('hunian.ExpiryDate','>',Carbon::now())
-            ->where(function($q) use ($key) {
-                $q->where('NamaHunian','like',"%{$key}%");
-                $q->orWhere('Alamat','like',"%{$key}%");
-                $q->orWhere('Koordinat','like',"%{$key}%");
-                $q->orWhere('Website','like',"%{$key}%");
-                $q->orWhere('nama_pengembang','like',"%{$key}%");
-                $q->orWhere('JenisHunian','like',"%{$key}%");
+        $r = \Hunian::where('hunian.ExpiryDate', '>', Carbon::now())
+            ->where(function ($q) use ($key) {
+                $q->where('NamaHunian', 'like', "%{$key}%");
+                $q->orWhere('Alamat', 'like', "%{$key}%");
+                $q->orWhere('Koordinat', 'like', "%{$key}%");
+                $q->orWhere('Website', 'like', "%{$key}%");
+                $q->orWhere('nama_pengembang', 'like', "%{$key}%");
+                $q->orWhere('JenisHunian', 'like', "%{$key}%");
             })->get();
 
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-                'title'  => $item->NamaHunian,
+                'title'       => $item->NamaHunian,
                 'description' => $item->Alamat
             ]);
         }
@@ -222,11 +239,11 @@ class SearchController extends \BaseController
 
     private function resultProgramKegiatan($key)
     {
-        $r = \Post::where('PostStatus','=', 1)
-            ->where('PublishDate','<', Carbon::now())
+        $r = \Post::where('PostStatus', '=', 1)
+            ->where('PublishDate', '<', Carbon::now())
             ->whereRaw(\DB::raw('post.ExpiryDate > DATE_ADD(NOW(), INTERVAL 7 HOUR)'))
-            ->whereIn('post.KategoriId', array(7))
-            ->where(function($q) use ($key) {
+            ->whereIn('post.KategoriId', [7])
+            ->where(function ($q) use ($key) {
                 $q->where('Judul', 'like', "%{$key}%");
                 $q->orWhere('IsiPost', 'like', "%{$key}%");
 
@@ -235,9 +252,17 @@ class SearchController extends \BaseController
 
         $format = [];
         foreach ($r as $item) {
+            if (is_null($item->provinsi)) {
+                // todo: punya nasional
+                $link = '#';
+            } else {
+                $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
+            }
+
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->IsiPost
+                'title'       => $item->Judul,
+                'description' => $item->IsiPost,
+                'link'        => $link
             ]);
         }
 
@@ -248,20 +273,22 @@ class SearchController extends \BaseController
     {
         $r = \Berkas::where('file.ExpiryDate', '>', Carbon::now())
             ->where('file.categoryfile', \Berkas::KEBIJAKAN)
-            ->where(function($q) use ($key) {
-                $q->where('filename','like',"%{$key}%");
-                $q->orWhere('description','like',"%{$key}%");
-                $q->orWhere('Judul','like',"%{$key}%");
-                $q->orWhere('raw_name','like',"%{$key}%");
-                $q->orWhere('fileext','like',"%{$key}%");
+            ->where(function ($q) use ($key) {
+                $q->where('filename', 'like', "%{$key}%");
+                $q->orWhere('description', 'like', "%{$key}%");
+                $q->orWhere('Judul', 'like', "%{$key}%");
+                $q->orWhere('raw_name', 'like', "%{$key}%");
+                $q->orWhere('fileext', 'like', "%{$key}%");
 
             })->get();
 
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->description
+                'title'       => $item->Judul,
+                'description' => $item->description,
+                'link'        => route('front.file.download', $item->url)
+
             ]);
         }
 
@@ -272,19 +299,20 @@ class SearchController extends \BaseController
     {
         $r = \Berkas::where('file.ExpiryDate', '>', Carbon::now())
             ->where('file.categoryfile', \Berkas::STANDAR_HARGA_MATERIAL)
-            ->where(function($q) use ($key) {
-                $q->where('filename','like',"%{$key}%");
-                $q->orWhere('description','like',"%{$key}%");
-                $q->orWhere('Judul','like',"%{$key}%");
-                $q->orWhere('raw_name','like',"%{$key}%");
-                $q->orWhere('fileext','like',"%{$key}%");
+            ->where(function ($q) use ($key) {
+                $q->where('filename', 'like', "%{$key}%");
+                $q->orWhere('description', 'like', "%{$key}%");
+                $q->orWhere('Judul', 'like', "%{$key}%");
+                $q->orWhere('raw_name', 'like', "%{$key}%");
+                $q->orWhere('fileext', 'like', "%{$key}%");
             })->get();
 
         $format = [];
         foreach ($r as $item) {
             array_push($format, [
-                'title'  => $item->Judul,
-                'description' => $item->description
+                'title'       => $item->Judul,
+                'description' => $item->description,
+                'link'        => route('front.file.download', $item->url)
             ]);
         }
 

@@ -24,7 +24,7 @@
                                 <ul>
                                     @foreach($result as $item)
                                         <li>
-                                            <a href="#"><strong>{{$item['title']}}</strong></a>
+                                            <a href="{{$item['link']}}"><strong>{{$item['title']}}</strong></a>
                                             <p>{{ Str::limit(strip_tags($item['description']), 200)}}</p>
                                         </li>
                                     @endforeach
