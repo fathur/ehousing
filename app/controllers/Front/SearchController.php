@@ -57,8 +57,8 @@ class SearchController extends \BaseController
             if (count($resultInfoHunian) > 0)
                 $results['Informasi Hunian'] = $resultInfoHunian;
 
-            /*if (count($resultInfoLink) > 0)
-                $results['Informasi Link'] = $resultInfoLink;*/
+            if (count($resultInfoLink) > 0)
+                $results['Informasi Link'] = $resultInfoLink;
 
         }
 
