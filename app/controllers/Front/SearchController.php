@@ -92,10 +92,17 @@ class SearchController extends \BaseController
 
         $format = [];
         foreach ($r as $item) {
+
+            if (is_null($item->provinsi)) {
+                $link = route('front.nasional.dashboard');
+            } else {
+                $link = route('front.provinsi.dashboard', $item->provinsi->slug);
+            }
+
             array_push($format, [
                 'title'       => $item->Nama,
                 'description' => $item->Deskripsi,
-                'link'        => route('front.provinsi.dashboard', $item->provinsi->slug)
+                'link'        => $link
             ]);
         }
 
@@ -119,8 +126,7 @@ class SearchController extends \BaseController
         $format = [];
         foreach ($r as $item) {
             if (is_null($item->provinsi)) {
-                // todo: punya nasional
-                $link = '#';
+                $link = route('front.nasional.post.show', $item->slug);
             } else {
                 $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
             }
@@ -198,8 +204,8 @@ class SearchController extends \BaseController
         $format = [];
         foreach ($r as $item) {
             if (is_null($item->provinsi)) {
-                // todo: punya nasional
-                $link = '#';
+                $link = route('front.nasional.post.show', [$item->slug]);
+
             } else {
                 $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
             }
@@ -231,8 +237,8 @@ class SearchController extends \BaseController
         foreach ($r as $item) {
 
             if (is_null($item->provinsi)) {
-                // todo: kasih logic nasional
-                $link = '#';
+                $link = route('front.nasional.hunian.show', [$item->slug]);
+
             } else {
 
                 $link = route('front.provinsi.hunian.show', [$item->provinsi->slug, $item->slug]);
@@ -265,8 +271,8 @@ class SearchController extends \BaseController
         $format = [];
         foreach ($r as $item) {
             if (is_null($item->provinsi)) {
-                // todo: punya nasional
-                $link = '#';
+                $link = route('front.nasional.post.show', [$item->slug]);
+
             } else {
                 $link = route('front.provinsi.post.show', [$item->provinsi->slug, $item->slug]);
             }
