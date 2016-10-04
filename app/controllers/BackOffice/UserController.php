@@ -72,7 +72,8 @@ class UserController extends AdminController {
 				'Email' => \Input::get('Email'),
 				'UserStatus' => \Input::get('UserStatus'),
 				'Region' => \Input::get('Region'),
-				'KodeProvinsi' => \Input::get('KodeProvinsi')
+				'KodeProvinsi' => \Input::get('KodeProvinsi'),
+				'ExpiryDate' => \EhousingModel::DEFAULT_EXPIRY_DATE
 
 			);
 
