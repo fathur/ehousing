@@ -24,20 +24,36 @@
                         <div class="carousel slide" id="carousel1">
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto7.jpg')}}">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Pic0.jpg')}}">
                                 </div>
                                 <div class="item">
-                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto2.jpg')}}">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic1.jpg')}}">
                                 </div>
                                 <div class="item ">
-                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto3.jpg')}}">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Pic2.jpg')}}">
                                 </div>
                                 <div class="item">
-                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Foto4.jpg')}}">
+                                    <img alt="image" class="img-responsive" src="{{url('/img/slider/Pic3.jpg')}}">
                                 </div>
                                 <div class="item">
-                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Foto6.jpg')}}">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic4.jpg')}}">
                                 </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic5.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic6.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic8.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic9.jpg')}}">
+                                </div>
+                                <div class="item">
+                                    <img alt="image"  class="img-responsive" src="{{url('/img/slider/Pic10.jpg')}}">
+                                </div>
+
                                
 
                             </div>
