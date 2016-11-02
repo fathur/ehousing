@@ -176,7 +176,7 @@ class UserController extends AdminController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return \User::destroy($id);
 	}
 
 	public function data()
