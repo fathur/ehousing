@@ -113,11 +113,11 @@
                                 {{Form::textarea('Alamat3', null, array('class' => 'form-control', 'id' => 'Alamat3', 'rows' => null))}}
 
                             </div>--}}
-                            <div class="form-group">
+                           {{-- <div class="form-group">
                                 <label for="VisiMisi">Visi Misi</label>
                                 {{Form::textarea('VisiMisi', null, array('class' => 'form-control', 'id' => 'VisiMisi', 'rows' => null))}}
 
-                            </div>
+                            </div>--}}
                             {{--<div class="form-group">
                                 <label for="StrukturOrg">Struktur Organisasi</label>
                                 {{Form::textarea('StrukturOrg', null, array('class' => 'form-control', 'id' => 'StrukturOrg', 'rows' => null))}}
