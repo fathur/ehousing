@@ -48,8 +48,8 @@
                             <div class="panel-heading">
                                 <div class="panel-options">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#tab-1" data-toggle="tab" aria-expanded="true">Visi-Misi</a></li>
-                                        <li class=""><a href="#tab-2" data-toggle="tab" aria-expanded="false">Struktur Organisasi</a></li>
+                                       {{-- <li class="active"><a href="#tab-1" data-toggle="tab" aria-expanded="true">Visi-Misi</a></li>--}}
+                                        <li class="active"><a href="#tab-2" data-toggle="tab" aria-expanded="false">Struktur Organisasi</a></li>
                                         {{--<li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="false">Mitra</a></li>--}}
                                         <li class=""><a href="#tab-4" data-toggle="tab" aria-expanded="false">Tentang Kami</a></li>
                                     </ul>
@@ -59,12 +59,11 @@
                             <div class="panel-body">
 
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="tab-1">
+                                   {{-- <div class="tab-pane active" id="tab-1">
                                         <p>{{ $data->VisiMisi }}</p>
-                                    </div>
-                                    <div class="tab-pane" id="tab-2">
-                                        <p>{{{ $data->StrukturOrg }}}</p>
-
+                                    </div>--}}
+                                    <div class="tab-pane active" id="tab-2">
+                                        <img src="{{ route('front.file.show', ['profile', $data->StrukturOrg]) }}" alt="{{{ $data->StrukturOrg }}}">
                                     </div>
                                     {{--<div class="tab-pane" id="tab-3">--}}
                                         {{--<p>-</p>--}}
