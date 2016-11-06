@@ -75,7 +75,7 @@
 
                                     </div>
                                     <div class="tab-pane" id="tab-5">
-                                        <p>{{{ $data->pendataan }}}</p>
+                                        <p>{{ $data->pendataan }}</p>
 
                                     </div>
                                 </div>
