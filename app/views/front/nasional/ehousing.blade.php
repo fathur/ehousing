@@ -18,7 +18,6 @@
                             <div>
                                 <h2 class="no-margins">e-Housing {{{ $data->Nama }}}</h2>
                                 <h4>Nasional</h4>
-                                <small>{{{ $data->Deskripsi }}}</small>
                             </div>
                         </div>
                     </div>
@@ -52,6 +51,9 @@
                                         <li class="active"><a href="#tab-2" data-toggle="tab" aria-expanded="false">Struktur Organisasi</a></li>
                                         {{--<li class=""><a href="#tab-3" data-toggle="tab" aria-expanded="false">Mitra</a></li>--}}
                                         <li class=""><a href="#tab-4" data-toggle="tab" aria-expanded="false">Tentang Kami</a></li>
+                                        @if(! is_null($data->pendataan))
+                                            <li class=""><a href="#tab-5" data-toggle="tab">Pendataan</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -70,6 +72,10 @@
                                     {{--</div>--}}
                                     <div class="tab-pane" id="tab-4">
                                         <p>{{{ $data->Deskripsi }}}</p>
+
+                                    </div>
+                                    <div class="tab-pane" id="tab-5">
+                                        <p>{{{ $data->pendataan }}}</p>
 
                                     </div>
                                 </div>
