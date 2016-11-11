@@ -68,7 +68,7 @@ class NasionalController extends \BaseController
                 ->with('tukang', $provinsiKontakTukang)
                 ->with('supplier', $provinsiKontakSupplier);
         } catch (\Exception $e) {
-
+            return $e->getMessage();
         }
     }
 
