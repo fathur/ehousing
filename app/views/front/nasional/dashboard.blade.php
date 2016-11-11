@@ -247,7 +247,7 @@
                             <div class="row">
                                 @foreach($feeds->get_items(0, 6) as $feed)
                                     <div class="col-sm-6 col-md-4">
-                                        <a href="{{{ $feed->get_link() }}}" class="btn-link" target="_blank"><h3>{{{ $feed->get_title() }}}</h3></a>
+                                        <a href="{{{ $feed->get_link() }}}" class="btn-link" target="_blank"><h3>{{{ strip_tags($feed->get_title()) }}}</h3></a>
                                         <div class="small m-b-xs">
                                             <strong>{{{ strip_tags($feeds->get_channel_tags('','title')[0]['data']) }}}</strong>
                                             <span class="text-muted">
