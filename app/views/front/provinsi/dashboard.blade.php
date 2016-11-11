@@ -25,47 +25,7 @@
                 </div>
             </div>
         </div>
-        {{--
-        <div class="col-md-6">
-            <table class="table small m-b-xs">
-                <tbody>
-                <tr>
-                    <td>
-                        <strong>{{{ number_format($provinsi->konfigurasi_situs->TotalLuas) }}}</strong> Luas Wilayah (Km²)
-                    </td>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->TotalPenduduk) }}}</strong> Total Penduduk
-                    </td>
-                    <td>
-                        <strong>{{{ $provinsi->profil[0]->PctPertumbuhanPenduduk }}} %</strong> Pertumbuhan Penduduk /Thn
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->TotalPendudukMiskinKota) }}}</strong> Penduduk Miskin Kota
-                    </td>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->PajakDaerah) }}}</strong> Pajak Daerah
-                    </td>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->TotalPendudukMiskinDesa) }}}</strong> Penduduk Miskin Desa
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->KepadatanPenduduk) }}}</strong> Kepadatan Penduduk (Jiwa Km²)
-                    </td>
-                    <td>
-                        <strong>{{{ number_format($provinsi->profil[0]->BacklogRumah) }}}</strong> Backlog Rumah (Unit)
-                    </td>
-                    <td>
-                        <a href="{{ route('front.provinsi.profile', array($provinsi->slug)) }}" class="btn btn-info btn-rounded btn-xs">More Detail</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        --}}
+
         <div class="col-md-6">
             <div class="row">
                 <div class="col-lg-4">
@@ -285,7 +245,7 @@
                             <div class="row">
                                 @foreach($feeds->get_items(0, 6) as $feed)
                                     <div class="col-sm-6 col-md-4">
-                                        <a href="{{{ $feed->get_link() }}}" class="btn-link" target="_blank"><h3>{{{ $feed->get_title() }}}</h3></a>
+                                        <a href="{{{ $feed->get_link() }}}" class="btn-link" target="_blank"><h3>{{ strip_tags(html_entity_decode($feed->get_title())) }}</h3></a>
                                         <div class="small m-b-xs">
                                             <strong>{{{ $feeds->get_channel_tags('','title')[0]['data'] }}}</strong>
                                             <span class="text-muted">
@@ -409,92 +369,6 @@
                     <span class="list-group-item">Tidak ditemukan data.</span>
                 @endif
             </div>
-
-            {{--<div class="list-group">
-                <a href="#" class="list-group-item active">
-                    <i class="fa fa-connectdevelop"></i> Developer
-                </a>
-                @if($developers->count() > 0)
-                    @foreach($developers as $item)
-                        <a href='#' class='list-group-item'>
-                            <span class='pull-right hidden'>
-                                <small>{{{ $item->CreateUid }}}</small>
-                            </span>{{{ $item->Nama }}}</a>
-                    @endforeach
-                @else
-                    <span class="list-group-item">Tidak ditemukan data.</span>
-                @endif
-            </div>
-
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    <i class="fa fa-object-group"></i> Desain &amp; Arsitek
-                </a>
-                @if($arsitek->count() > 0)
-                    @foreach($arsitek as $item)
-                        <a href='#' class='list-group-item'>
-                            <span class='pull-right hidden'>
-                                <small>{{{ $item->CreateUid }}}</small>
-                            </span>{{{ $item->Nama }}}</a>
-                    @endforeach
-                @else
-                    <span class="list-group-item">Tidak ditemukan data.</span>
-                @endif
-            </div>
-            <div class="list-group">
-                <a href="#" class="list-group-item active"><i class="fa fa-cogs"></i> Kontraktor</a>
-                @if($kontraktor->count() > 0)
-                    @foreach($kontraktor as $item)
-                        <a href='#' class='list-group-item'>
-                            <span class='pull-right hidden'>
-                                <small>{{{ $item->CreateUid }}}</small>
-                            </span>{{{ $item->Nama }}}</a>
-                    @endforeach
-                @else
-                    <span class="list-group-item">Tidak ditemukan data.</span>
-                @endif
-            </div>
-            <div class="list-group">
-                <a href="#" class="list-group-item active"><i class="fa fa-user"></i> Tukang</a>
-                @if($tukang->count() > 0)
-                    @foreach($tukang as $item)
-                        <a href='#' class='list-group-item'>
-                            <span class='pull-right hidden'>
-                                <small>{{{ $item->CreateUid }}}</small>
-                            </span>{{{ $item->Nama }}}</a>
-                    @endforeach
-                @else
-                    <span class="list-group-item">Tidak ditemukan data.</span>
-                @endif
-            </div>
-            <div class="list-group">
-                <a href="#" class="list-group-item active"> <i class="fa fa-support"></i> Suplier</a>
-                @if($supplier->count() > 0)
-                    @foreach($supplier as $item)
-                        <a href='#' class='list-group-item'>
-                            <span class='pull-right hidden'>
-                                <small>{{{ $item->CreateUid }}}</small>
-                            </span>{{{ $item->Nama }}}</a>
-                    @endforeach
-                @else
-                    <span class="list-group-item">Tidak ditemukan data.</span>
-                @endif
-            </div>--}}
-            {{--<div class="panel panel-info">--}}
-                {{--<div class="panel-heading">--}}
-                    {{--<a href="#" class="text-white"><i class="fa fa-download"></i> Unduh File</a>--}}
-                {{--</div>--}}
-                {{--<div class="panel-body list-group no-margins no-padding">--}}
-                    {{--@foreach($files as $item)--}}
-                    {{--<a title="{{{ $item->Judul }}}" href="{{ route('front.file.download', $item->url) }}" class="list-group-item">--}}
-                        {{--<span class="pull-right">--}}
-                            {{--<small>{{{ $item->downloadcounter }}} <i class="fa fa-download"></i></small>--}}
-                        {{--</span>{{{ Str::limit($item->Judul, 15) }}}.{{{ $item->fileext }}}--}}
-                    {{--</a>--}}
-                    {{--@endforeach--}}
-
-            {{--</div>--}}
-
         </div>
 
     </div>
