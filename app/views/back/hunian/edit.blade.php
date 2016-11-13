@@ -46,10 +46,7 @@
                                 <label for="jenishunian">Jenis Hunian *)</label>
                                 {{Form::select('JenisHunian', $listHunian, null, array('id' => 'jenishunian', 'class' => "form-control m-b"))}}
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--<label for="tahunpembangunan">Tahun Pembangunan</label>--}}
-                                {{--{{Form::text('TahunPembangunan', null, array('class' => 'form-control'))}}--}}
-                            {{--</div>--}}
+
                             <div class="form-group">
                                 <label for="jumlahunit">Jumlah Unit</label>
                                 {{Form::text('JumlahUnit', null, array('class' => 'form-control'))}}
@@ -60,15 +57,7 @@
                                 {{Form::text('JumlahLantai', null, array('class' => 'form-control'))}}
 
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--<label for="luaslahan">Luas Lahan</label>--}}
-                                {{--{{Form::text('LuasLahan', null, array('class' => 'form-control'))}}--}}
 
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label for="tingkathunian">Tingkat Hunian</label>--}}
-                                {{--{{Form::text('TingkatHunian', null, array('class' => 'form-control'))}}--}}
-                            {{--</div>--}}
 
                         </div>
 
@@ -87,7 +76,6 @@
                                         <div class="profile-image">
                                             @if(!is_null($data->picture))
                                                 <img src="{{ route('front.file.show', ['hunian', $data->picture]) }}" class="img-responsive" alt="{{$data->picture}}">
-                                                {{--{{Form::hidden('picture', null)}}--}}
                                             @endif
                                         </div>
                                     </div>
@@ -136,34 +124,13 @@
                         </div>
 
                         <div class="col-sm-4">
-                           {{-- <div class="form-group">
-                                <label for="kodepengembang">Nama Pengembang</label>
-                                <select class="form-control m-b" name="KodePengembang" id="kodepengembang">
-                                    @if(isset($data->kontak))
-                                        <option value="{{$data->KodePengembang}}" selected>{{$data->kontak->Nama}}</option>
-                                    @endif
-                                </select>
-                            </div>--}}
+
                             <div class="form-group">
                                 <label for="nama_pengembang">Nama Pengembang</label>
                                 {{Form::text('nama_pengembang', null, array('class' => 'form-control'))}}
 
                             </div>
-                            {{--<div class="form-group">
-                                <label for="pengelola">Pengelola</label>
-                                {{Form::text('Pengelola', null, array('class' => 'form-control'))}}
 
-                            </div>
-                            <div class="form-group">
-                                <label for="notelp">No Telp</label>
-                                {{Form::text('NoTelp', null, array('class' => 'form-control'))}}
-
-                            </div>
-                            <div class="form-group">
-                                <label for="teleponPIC">No Telp PIC</label>
-                                {{Form::text('NoHP_PIC', null, array('class' => 'form-control'))}}
-
-                            </div>--}}
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 {{Form::text('Email', null, array('class' => 'form-control'))}}

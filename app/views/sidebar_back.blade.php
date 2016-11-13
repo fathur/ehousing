@@ -28,13 +28,6 @@
     </ul>
 </li>
 
-{{--<li>--}}
-    {{--<a href="#"><i class="fa fa-phone"></i> <span class="nav-label">Kontak</span><span class="fa arrow"></span></a>--}}
-    {{--<ul class="nav nav-second-level collapse">--}}
-        {{--<li><a href="{{route('back-office.kontak.index')}}">Daftar Kontak</a></li>--}}
-        {{--<li><a href="{{route('back-office.kontak.create')}}">Tambah Kontak</a></li>--}}
-    {{--</ul>--}}
-{{--</li>--}}
 <li>
     <a href="#"><i class="fa fa-list"></i> <span class="nav-label">Link Informasi</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
@@ -56,12 +49,6 @@
         <li><a href="{{route('back-office.user.create')}}">Tambah User</a></li>
     </ul>
 </li>
-{{--<li>--}}
-    {{--<a href="#"><i class="fa fa-user"></i> <span class="nav-label">Pengajuan</span><span class="fa arrow"></span></a>--}}
-    {{--<ul class="nav nav-second-level collapse">--}}
-        {{--<li><a href="{{route('back-office.pengajuan.index')}}">Daftar Pengajuan</a></li>--}}
-    {{--</ul>--}}
-{{--</li>--}}
 
 @if(!$isNasional)
 <li>
@@ -76,33 +63,6 @@
     </a>
 </li>
 @endif
-{{--
-<li>
-    <a href="#">
-        <i class="fa fa-bar-chart"></i>
-        <span class="nav-label">Grafik</span>
-        <span class="fa arrow"></span>
-    </a>
-    <ul class="nav nav-second-level collapse">
-        <li><a href="{{route('back-office.chart.index', array('apbd'))}}">Total APBD</a></li>
-        <li><a href="{{route('back-office.chart.index', array('pad'))}}">Total PAD</a></li>
-        <li><a href="{{route('back-office.chart.index', array('pad-other'))}}">Lain-lain PAD yang Sah</a></li>
-        <li><a href="{{route('back-office.chart.index', array('sum-penduduk'))}}">Total Penduduk</a></li>
-        <li><a href="{{route('back-office.chart.index', array('sum-pria'))}}">Total Pria</a></li>
-        <li><a href="{{route('back-office.chart.index', array('sum-wanita'))}}">Total Wanita</a></li>
-        <li><a href="{{route('back-office.chart.index', array('pertumbuhan'))}}">Pct Pertumbuhan Penduduk</a></li>
-        <li><a href="{{route('back-office.chart.index', array('kepadatan'))}}">Kepadatan Penduduk</a></li>
-        <li><a href="{{route('back-office.chart.index', array('miskin-kota'))}}">Total Penduduk Miskin (Kota)</a></li>
-        <li><a href="{{route('back-office.chart.index', array('miskin-desa'))}}">Total Penduduk Miskin (Desa)</a></li>
-        <li><a href="{{route('back-office.chart.index', array('pajak'))}}">Pajak Daerah</a></li>
-        <li><a href="{{route('back-office.chart.index', array('retribusi'))}}">Retribusi Daerah</a></li>
-        <li><a href="{{route('back-office.chart.index', array('kekayaan'))}}">Kekayaan Daerah yang Dipisah</a></li>
-        <li><a href="{{route('back-office.chart.index', array('backlog'))}}">Backlog Rumah</a></li>
-        <li><a href="{{route('back-office.chart.index', array('sum-rt'))}}">Jumlah RT</a></li>
-        <li><a href="{{route('back-office.chart.index', array('anggaran'))}}">Anggaran Kemenpera</a></li>
-    </ul>
-</li>
-@endif--}}
 
 
 {{--//log aktifitas hanya berlaku untuk user role nasional saja --}}

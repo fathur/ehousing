@@ -11,17 +11,13 @@
 
     <link href="{{asset('vendor/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
-    {{--
-    <link href="{{asset("/assets/css/plugins/slick/slick.css")}}" rel="stylesheet">
-    <link href="{{asset("/assets/css/plugins/slick/slick-theme.css")}}" rel="stylesheet"> --}}
+
 
     <link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css?'.rand(1,10))}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap.css')}}">
 
-    {{--
 
-    <link href="{{asset("/assets/css/plugins/chartist/chartist.min.css")}}" rel="stylesheet"> --}}
 
     @yield('styles')
     @yield('style')

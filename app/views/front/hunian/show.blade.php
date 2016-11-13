@@ -51,11 +51,9 @@
                     <dt>Jenis Hunian:</dt> <dd><span class="label label-primary">{{{ ($hunian->referensi->Deskripsi) ? $hunian->referensi->Deskripsi : '-' }}}</span></dd>
                 </dl>
                 <dl class="dl-horizontal">
-                    {{--<dt>Deskripsi :</dt> <dd>{{{ ($hunian->referensi->Deskripsi) ? $hunian->referensi->Deskripsi : '-' }}}</dd>--}}
                     <dt>Alamat :</dt> <dd> {{{ ($hunian->Alamat) ? $hunian->Alamat : '-' }}}</dd>
                     <dt>Website :</dt> <dd> {{{ ($hunian->Website) ? $hunian->Website : '-' }}}</dd>
                     <dt>Email :</dt> <dd> {{{ ($hunian->Email) ? $hunian->Email : '-' }}}</dd>
-                    {{--<dt>Tgl Registrasi :</dt> <dd>07th Dec 2015 </dd>--}}
                     <dt>Nama Pengembang :</dt>
                     <dd>
                         @if(isset($hunian->nama_pengembang))
@@ -70,25 +68,15 @@
                         <dl class="dl-horizontal">
                             <dt>Jumlah Unit :</dt> <dd> {{{ ($hunian->JumlahUnit) ? $hunian->JumlahUnit : '-' }}}</dd>
                             <dt>Jumlah Lantai :</dt> <dd> {{{ ($hunian->JumlahLantai) ? $hunian->JumlahLantai : '-' }}}</dd>
-                            {{--<dt>Pengelola :</dt> <dd> {{{ ($hunian->Pengelola) ? $hunian->Pengelola : '-' }}}</dd>--}}
-                            {{--<dt>Telp Kantor :</dt> <dd>{{{ ($hunian->NoTelp) ? $hunian->NoTelp : '-'}}} </dd>--}}
-                            {{--<dt>Telp PIC :</dt> <dd> {{{ ($hunian->NoHP_PIC) ? $hunian->NoHP_PIC : '-' }}}</dd>--}}
-                            {{--<dt>Thn Pembangunan :</dt> <dd> {{{ ($hunian->TahunPembangunan) ? $hunian->TahunPembangunan : '-' }}}</dd>--}}
-                            {{--<dt>Thn Selesai :</dt> <dd> {{{ ($hunian->TahunSelesai) ? $hunian->TahunSelesai : '-' }}}</dd>--}}
+
                         </dl>
                     </div>
                     <div class="col-lg-7" id="cluster_info">
                         <dl class="dl-horizontal">
-
-{{--                            <dt>Luas Lahan :</dt> <dd> {{{ ($hunian->LuasLahan) ? $hunian->LuasLahan : '-' }}}</dd>--}}
-                            {{--<dt>Tingkat Hunian :</dt> <dd> {{{ ($hunian->TingkatHunian) ? $hunian->TingkatHunian : '-' }}}</dd>--}}
-{{--                            <dt>Status :</dt> <dd> {{{ ($hunian->Status) ? $hunian->Status : '-' }}}</dd>--}}
                         </dl>
                     </div>
                 </div>
-                {{--<dl class="dl-horizontal">--}}
-                    {{--<dt>Harga Mulai :</dt> <dd> {{{ ($hunian->Harga) ? "Rp.".number_format($hunian->Harga) : '-' }}}</dd>--}}
-                {{--</dl>--}}
+
                 <div class="row m-t-sm">
                     <div class="col-lg-12">
                         <div class="panel blank-panel">
@@ -129,22 +117,14 @@
                                     @if(!empty($hunian->LinkExternal2))
                                         <div class="tab-pane" id="tab2">
                                             {{ $hunian->LinkExternal2 }}
-                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
-                                                    {{--align="center"--}}
-                                                    {{--name="frame1"--}}
-                                                    {{--scrolling="auto"--}}
-                                                    {{--src=""></iframe>--}}
+
                                         </div>
                                     @endif
 
                                     @if(!empty($hunian->LinkExternal3))
                                         <div class="tab-pane" id="tab3">
                                            {{  $hunian->LinkExternal3 }}
-                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
-                                                    {{--align="center"--}}
-                                                    {{--name="frame1"--}}
-                                                    {{--scrolling="auto"--}}
-                                                    {{--src="{{{ $hunian->LinkExternal3 }}}"></iframe>--}}
+
                                         </div>
                                     @endif
 
@@ -152,11 +132,7 @@
 
                                         <div class="tab-pane" id="tab4">
                                             {{   $hunian->LinkExternal4 }}
-                                            {{--<iframe style="border:0;width:100%;height:500px;margin:0;padding:0;overflow-x: hidden;"--}}
-                                                    {{--align="center"--}}
-                                                    {{--name="frame1"--}}
-                                                    {{--scrolling="auto"--}}
-                                                    {{--src="{{{ $hunian->LinkExternal4 }}}"></iframe>--}}
+
                                         </div>
                                     @endif
                                 </div>

@@ -165,7 +165,6 @@
                                         <div class="profile-image">
                                             @if(!is_null($data->Picture))
                                                 <img src="{{ route('front.file.show', ['kontak', $data->Picture]) }}" class="img-responsive" alt="{{$data->Picture}}">
-                                                {{--{{Form::hidden('picture', null)}}--}}
                                             @endif
                                         </div>
                                     </div>

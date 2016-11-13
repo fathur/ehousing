@@ -24,31 +24,7 @@
                     </div>
                 </div>
             </div>
-            {{--
-            <div class="row">
-                <div class="col-lg-6">
-                    <dl class="dl-horizontal">
-                        <dt>{{{ number_format($provinsi->profil[0]->TotalPenduduk) }}}</dt> <dd>Total Penduduk (Jiwa)</dd>
-                        <dt>{{{ $provinsi->profil[0]->PctPertumbuhanPenduduk }}}</dt> <dd>Pertumbuhan Penduduk per Tahun (%)</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->KepadatanPenduduk) }}}</dt> <dd> Tingkat Kepadatan Penduduk (Jiwa Km²)</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->TotalPendudukMiskinKota) }}}</dt> <dd> Jml Penduduk Miskin Kota</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->TotalPendudukMiskinDesa) }}}</dt> <dd> Jml Penduduk Miskin Desa</dd>
-                    </dl>
-                </div>
-                <div class="col-lg-6" id="cluster_info">
-                    <dl class="dl-horizontal">
 
-                        <dt>{{{ number_format($provinsi->profil[0]->TotalAPBDProv) }}}</dt> <dd>Jml APBD Provinsi 2014 (Rp)</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->PajakDaerah) }}}</dt> <dd>Pajak Daerah</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->RetribusiDaerah) }}}</dt> <dd>Retribusi Daerah</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->KekayaanDaerahYgDipisah) }}}</dt> <dd>Pengelolaan Kekayaan Daerah yg Dipisahkan</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->LainLainPADYgSah) }}}</dt> <dd>Lain-lain PAD yg Sah</dd>
-                        <dt>{{{ number_format($provinsi->profil[0]->BacklogRumah) }}}</dt> <dd>Backlog Rumah Thn 2014 (Unit)</dd>
-
-                    </dl>
-                </div>
-            </div>
-            --}}
             <div class="row">
                 <div class="col-lg-6">
                     <div class="small">
@@ -74,7 +50,6 @@
                         <div class="panel-heading">
                             <div class="panel-options">
                                 <ul class="nav nav-tabs">
-                                    {{--<li class="active"><a href="#tab-2" data-toggle="tab">Statistik</a></li>--}}
                                     @if(! is_null($provinsi->konfigurasi_situs->Website))
                                     <li class="active"><a href="#tab-1" data-toggle="tab">Website</a></li>
                                     @endif
@@ -88,11 +63,7 @@
 
                         <div class="panel-body">
                             <div class="tab-content">
-                                {{--<div class="tab-pane active gray-bg p-md" id="tab-2">--}}
 
-                                    {{--@include('front.provinsi.chart')--}}
-
-                                {{--</div>--}}
 
                                 @if(! is_null($provinsi->konfigurasi_situs->Website))
                                 <div class="tab-pane active" id="tab-1">

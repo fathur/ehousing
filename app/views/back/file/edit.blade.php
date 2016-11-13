@@ -75,7 +75,6 @@
 
                                                 @if(!is_null($data->url))
                                                     <img src="{{ route('front.file.show', ['file', $data->url]) }}" class="img-responsive" alt="{{$data->url}}">
-                                                    {{--{{Form::hidden('picture', null)}}--}}
                                                 @endif
                                             @elseif($data->fileext == 'pdf' || $data->fileext == '.pdf')
                                                 <span style="font-size: 60px;">
@@ -100,32 +99,10 @@
 
                                 </div>
                             </div>
-                            {{--<div class="form-group">
-                                <label for="userfile">File</label>
-                                <input type="file" name="userfi.e" placeholder="Select file to upload ..">
-                                <p class="help-block">
-                                    File yang diizinkan di upload :
-                                    <br>.doc, .xls, .ppt, .zip, jpg
-                                    <br>Ukuran file maksimal : 2MB
-                                </p>
-                            </div>--}}
+
                             <div class="form-group">
                                 <label for="categoryfile">Kategori</label>
                                 {{Form::select('categoryfile', $categories, null, array('class' => 'form-control', 'id' =>'categoryfile'))}}
-                               {{-- <select class="form-control m-b" name="categoryfile" >
-                                    <option value="">- Jenis File - </option>
-                                    <option value="HPK">
-                                        Hasil Penelitian/Kajian</option>
-                                    <option value="INF">
-                                        Informasi</option>
-                                    <option value="KPU">
-                                        Kategori Publikasi</option>
-                                    <option value="PK" selected="">
-                                        Peraturan/Kebijakan</option>
-                                    <option value="SHM">
-                                        Standar Harga Material</option>
-                                </select>--}}
-
                             </div>
 
                             <button type="submit" value="upload" class="btn btn-sm btn-primary"> Update</button>
